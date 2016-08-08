@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/ices-tools-prod/icesSAG.svg?branch=master)](https://travis-ci.org/ices-tools-prod/icesSAG)
+[![codecov](https://codecov.io/gh/ices-tools-prod/icesSAG/branch/master/graph/badge.svg)](https://codecov.io/gh/ices-tools-prod/icesSAG)
+[![CRAN Status](http://www.r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)](https://cran.r-project.org/package=icesSAG)
 [![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 [<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://www.ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://www.ices.dk/Pages/default.aspx)
