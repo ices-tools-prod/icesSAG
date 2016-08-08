@@ -10,9 +10,7 @@ Imports: RCurl,
 XML,
 utils,
 dplyr
-Description: Functions that access the web services of the ICES (International
-                                                                 Council for the Exploration of the Sea) Stock Assessment Graphs
-database <https://datras.ices.dk/WebServices/Webservices.aspx>.
+Description: Functions that access the web services of the ICES (International Council for the Exploration of the Sea) Stock Assessment Graphs database <https://datras.ices.dk/WebServices/Webservices.aspx>.
 License: GPL (>= 2)
 URL: http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx
 RoxygenNote: 5.0.1
