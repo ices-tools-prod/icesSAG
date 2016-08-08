@@ -1,5 +1,6 @@
 ## load dependencies
 library(testthat)
+library(icesSAG)
 
 ## test package
-test_check('icesSAG')
+test_check("icesSAG")
