@@ -4,6 +4,7 @@ warnings_are_errors: false
 
 os:
   - linux
+  - osx
 
 language: r
 r:
@@ -31,4 +32,3 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'library(covr);codecov()'
-  
