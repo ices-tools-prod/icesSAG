@@ -8,7 +8,7 @@
 #' @return A data.frame.
 #'
 #' @seealso
-#' \code{\link{getListStocks}} returns data frame of fish stocks for a given year 
+#' \code{\link{getListStocks}} returns data frame of fish stocks for a given year
 #'
 #' \code{\link{getFishStockReferencePoints}} Returns the biological reference points for all published stocks in a year.
 #'
@@ -17,25 +17,25 @@
 #' @author Colin Millar and Scott Large
 #'
 #' @examples
-#' getSummaryTable(year = 2015)
+#' \dontrun{getSummaryTable(year = 2015)}
 #'
 #'
 #' @export
-#' 
+#'
 #' @importFrom dplyr bind_rows
 
 getSummaryTable <- function(year) {
-  
+
   # check websevices are running
   if (!checkSAGWebserviceOK()) return (FALSE)
-  
+
   # check year
   if (!checkYearOK(year)) return (FALSE)
-  
+
   # get keys for year
   all_years <- getListStocks(year = year)
   published_keys <- unique(all_years$key[!grepl("Not", all_years$Status)])
-  
+
   # read and parse XML from api
   url <-
     sprintf(
@@ -44,10 +44,10 @@ getSummaryTable <- function(year) {
 
 
   out <- do.call(bind_rows,
-                 lapply(url, 
+                 lapply(url,
                         function(x)
-                          parseSummary(curlSAG(url = x)))) 
-  
+                          parseSummary(curlSAG(url = x))))
+
   # return
   out
 }

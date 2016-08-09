@@ -17,17 +17,17 @@
 #' @author Colin Millar and Scott Large
 #'
 #' @examples
-#' getListStocks(year = 2015)
+#' \dontrun{getListStocks(year = 2015)}
 #'
 #'
 #' @export
 
 getListStocks <- function(year) {
   # get a list of survey names
-  
+
   # check websevices are running
   if (!checkSAGWebserviceOK()) return (FALSE)
-  
+
   # read and parse XML from api
   url <-
     sprintf(
@@ -35,7 +35,7 @@ getListStocks <- function(year) {
       year)
   out <- curlSAG(url = url)
   out <- parseSAG(out)
-  
+
   # return
   out
 }
