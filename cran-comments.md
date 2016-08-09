@@ -6,9 +6,8 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 3 notes
+0 errors | 0 warnings | 0 notes
 
-* 3 notes: "Examples with CPU or elapsed time >10s". These are appropriate lengths of time to query and parse XML from ICES servers.
 * This is a new release.
 
 ## Reverse dependencies
