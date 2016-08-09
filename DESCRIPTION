@@ -6,7 +6,7 @@ Authors@R: c(person("Colin", "Millar", role=c("aut"), email="colin.millar@ices.d
 Version: 1.0-0
 Description: Functions that access the web services of the ICES (International
              Council for the Exploration of the Sea) Stock Assessment Graphs
-             database <https://datras.ices.dk/WebServices/Webservices.aspx>.
+             database <http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx>.
 Depends:
     R (>= 3.3.1)
 License: GPL (>= 2)
