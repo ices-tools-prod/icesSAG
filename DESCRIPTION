@@ -3,7 +3,7 @@ Date: 2016-08-08
 Title: Stock Assessment Graphs Database Web Services
 Authors@R: c(person("Colin", "Millar", role=c("aut"), email="colin.millar@ices.dk"),
              person("Scott", "Large", role=c("aut","cre"), email="scott.large@ices.dk"))
-Version: 0.0.0.9000
+Version: 1.0
 Description: Functions that access the web services of the ICES (International
              Council for the Exploration of the Sea) Stock Assessment Graphs
              database <https://datras.ices.dk/WebServices/Webservices.aspx>.
