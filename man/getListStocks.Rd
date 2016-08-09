@@ -16,7 +16,7 @@ A data.frame.
 Returns data frame of fish stocks for a given year (or all years when getListStocks(year = 0))
 }
 \examples{
-getListStocks(year = 2015)
+\dontrun{getListStocks(year = 2015)}
 
 
 }

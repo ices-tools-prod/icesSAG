@@ -16,7 +16,7 @@ A data.frame.
 Returns stock assessment summary table of all published stocks for a given year
 }
 \examples{
-getSummaryTable(year = 2015)
+\dontrun{getSummaryTable(year = 2015)}
 
 
 }
@@ -24,7 +24,7 @@ getSummaryTable(year = 2015)
 Colin Millar and Scott Large
 }
 \seealso{
-\code{\link{getListStocks}} returns data frame of fish stocks for a given year 
+\code{\link{getListStocks}} returns data frame of fish stocks for a given year
 
 \code{\link{getFishStockReferencePoints}} Returns the biological reference points for all published stocks in a year.
 
