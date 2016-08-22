@@ -27,6 +27,10 @@ parseSAG <- function(x) {
   # clean trailing white space from text columns
   charcol <- which(sapply(x, is.character))
   x[charcol] <- lapply(x[charcol], function(x) gsub("[[:space:]]*$", "", x))
+
+  ## SAG uses "" and "NA" to indicate NA
+  x[x == ""] <- NA
+  x[x == "NA"] <- NA
   x
 }
 
@@ -59,14 +63,10 @@ parseSummary <- function(x) {
   xmlDat <- xmlSApply(summaryNames[["lines"]],
                       function(x) xmlSApply(x,
                                             xmlValue))
-
   xmlDat[sapply(xmlDat,
                 function(x) length(x) == 0)] <- NA
-  dimnames(xmlDat)[2] <- NULL
-
-  summaryInfo <- data.frame(lapply(data.frame(t(xmlDat)),
-                                   function(x) as.numeric(as.character(x))),
-                            stringsAsFactors = FALSE)
+  colnames(xmlDat) <- NULL
+  summaryInfo <- as.data.frame(t(xmlDat))
   #
   stockList <- names(summaryNames[names(summaryNames) != "lines"])
   stockValue <-  rbind(lapply(stockList,
@@ -74,14 +74,13 @@ parseSummary <- function(x) {
                                                     xmlValue)))
   stockValue[sapply(stockValue,
                     function(x) length(x) == 0)] <- NA
-  dimnames(stockValue)[2] <- NULL
-
-  stockValue <- data.frame(lapply(stockValue,
-                                  function(x) as.character(x)),
-                           stringsAsFactors = FALSE)
+  stockValue <- as.data.frame(lapply(stockValue,
+                                     function(x) as.character(x)))
   colnames(stockValue) <- stockList
   #
   summaryInfo <- cbind(summaryInfo, stockValue)
+  summaryInfo[summaryInfo == ""] <- NA
+  summaryInfo[summaryInfo == "NA"] <- NA
   summaryInfo
 }
 
