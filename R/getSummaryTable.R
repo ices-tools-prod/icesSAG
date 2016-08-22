@@ -49,5 +49,5 @@ getSummaryTable <- function(year) {
                           parseSummary(curlSAG(url = x))))
 
   # return
-  out
+  simplify(out)
 }

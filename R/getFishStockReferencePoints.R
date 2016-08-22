@@ -50,5 +50,5 @@ getFishStockReferencePoints <- function(year) {
 
 
   # return
-  out
+  simplify(out)
 }

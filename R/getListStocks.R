@@ -37,5 +37,5 @@ getListStocks <- function(year) {
   out <- parseSAG(out)
 
   # return
-  out
+  simplify(out)
 }
