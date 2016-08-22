@@ -1,33 +1,31 @@
-#' Query fish stock reference points for a stock
+#' Get Reference Points
 #'
-#' Returns the biological reference points for all published stocks in a year
+#' Get biological reference points for all stocks in a given assessment year.
 #'
-#' @param year the numeric year of the biological reference points output, e.g. 2010. All assessment years can be queried with 0.
+#' @param year the assessment year, e.g. 2010. All years can be queried with 0.
 #'
-#'
-#' @return A data.frame.
+#' @return A data frame.
 #'
 #' @seealso
-#' \code{\link{getListStocks}} returns data frame of fish stocks for a given year
+#' \code{\link{getListStocks}} gets a list of stocks.
 #'
-#' \code{\link{getSummaryTable}} returns stock assessment summary table of all published stocks for a given year.
+#' \code{\link{getSummaryTable}} gets a summary table of historical stock size.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Colin Millar and Scott Large
+#' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#'
-#' \dontrun{getFishStockReferencePoints(year = 2015)}
-#'
+#' \dontrun{
+#' refpts <- getFishStockReferencePoints(2015)
+#' }
 #'
 #' @export
 #'
 #' @importFrom dplyr bind_rows
 
 getFishStockReferencePoints <- function(year) {
-
-  # check websevices are running
+  # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
   # check year
@@ -37,7 +35,7 @@ getFishStockReferencePoints <- function(year) {
   all_years <- getListStocks(year = year)
   published_keys <- unique(all_years$key[!grepl("Not", all_years$Status)])
 
-  # read and parse XML from api
+  # read and parse XML from API
   url <-
     sprintf(
       "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
@@ -47,7 +45,6 @@ getFishStockReferencePoints <- function(year) {
                  lapply(url,
                         function(x)
                           parseSAG(curlSAG(url = x))))
-
 
   # return
   simplify(out)

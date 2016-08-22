@@ -5,7 +5,7 @@ Authors@R: c(person("Colin", "Millar", role=c("aut"), email="colin.millar@ices.d
              person("Scott", "Large", role=c("aut","cre"), email="scott.large@ices.dk"),
              person("Arni", "Magnusson", role=c("aut"), email="arni.magnusson@ices.dk"))
 Version: 1.1-0
-Description: Functions that access the web services of the ICES (International
+Description: R interface to access the web services of the ICES (International
              Council for the Exploration of the Sea) Stock Assessment Graphs
              database <http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx>.
 Depends: R (>= 3.3.1)

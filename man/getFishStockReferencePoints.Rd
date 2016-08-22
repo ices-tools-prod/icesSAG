@@ -2,32 +2,32 @@
 % Please edit documentation in R/getFishStockReferencePoints.R
 \name{getFishStockReferencePoints}
 \alias{getFishStockReferencePoints}
-\title{Query fish stock reference points for a stock}
+\title{Get Reference Points}
 \usage{
 getFishStockReferencePoints(year)
 }
 \arguments{
-\item{year}{the numeric year of the biological reference points output, e.g. 2010. All assessment years can be queried with 0.}
+\item{year}{the assessment year, e.g. 2010. All years can be queried with 0.}
 }
 \value{
-A data.frame.
+A data frame.
 }
 \description{
-Returns the biological reference points for all published stocks in a year
+Get biological reference points for all stocks in a given assessment year.
 }
 \examples{
-
-\dontrun{getFishStockReferencePoints(year = 2015)}
-
+\dontrun{
+refpts <- getFishStockReferencePoints(2015)
+}
 
 }
 \author{
-Colin Millar and Scott Large
+Colin Millar and Scott Large.
 }
 \seealso{
-\code{\link{getListStocks}} returns data frame of fish stocks for a given year
+\code{\link{getListStocks}} gets a list of stocks.
 
-\code{\link{getSummaryTable}} returns stock assessment summary table of all published stocks for a given year.
+\code{\link{getSummaryTable}} gets a summary table of historical stock size.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }

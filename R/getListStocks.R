@@ -1,40 +1,37 @@
-#' Query list of fish stocks in the database
+#' Get a List of Fish Stocks
 #'
-#' Returns data frame of fish stocks for a given year (or all years when getListStocks(year = 0))
+#' Get a list of fish stocks for a given assessment year.
 #'
-#' @param year the numeric year of the stock assessment output, e.g. 2010. All assessment years can be queried with 0.
+#' @param year the assessment year, e.g. 2010. All years can be queried with 0.
 #'
-#'
-#' @return A data.frame.
+#' @return A data frame.
 #'
 #' @seealso
-#' \code{\link{getFishStockReferencePoints}} returns the biological reference points for the stock.
+#' \code{\link{getFishStockReferencePoints}} gets biological reference points.
 #'
-#' \code{\link{getSummaryTable}} returns the summary table of the stock.
+#' \code{\link{getSummaryTable}} gets a summary table of historical stock size.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Colin Millar and Scott Large
+#' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' \dontrun{getListStocks(year = 2015)}
-#'
+#' \dontrun{
+#' stocks <- getListStocks(2015)
+#' }
 #'
 #' @export
 
 getListStocks <- function(year) {
-  # get a list of survey names
-
-  # check websevices are running
+  # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
-  # read and parse XML from api
+  # read and parse XML from API
   url <-
     sprintf(
-      "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%s",
+      "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
       year)
-  out <- curlSAG(url = url)
-  out <- parseSAG(out)
+  out <- parseSAG(curlSAG(url = url))
 
   # return
   simplify(out)

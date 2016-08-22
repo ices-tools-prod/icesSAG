@@ -4,23 +4,27 @@
 #'
 #' @aliases icesSAG
 #'
-#' @title Stock Assessment Graphs (SAG) database webservices
+#' @title Stock Assessment Graphs Database Web Services
 #'
 #' @description
-#' Functions that access the webservices of the ICES (International
-#' Council for the Exploration of the Sea) Stock Assessment Graphs (SAG) database.
+#' R interface to access the web services of the ICES (International Council
+#' for the Exploration of the Sea) Stock Assessment Graphs (SAG) database.
 #'
-#' @author  Colin Millar, Scott Large, and Arni Magnusson.
+#' @details
+#' \emph{Get dataset:}
+#' \tabular{ll}{
+#'   \code{\link{getFishStockReferencePoints}} \tab reference points\cr
+#'   \code{\link{getListStocks}}               \tab list of stocks\cr
+#'   \code{\link{getSummaryTable}}             \tab historical stock size
+#' }
+#'
+#' @author Colin Millar, Scott Large, and Arni Magnusson.
 #'
 #' @references
-#' Overview of the ICES advisory process:
-#' \url{http://ices.dk/community/advisory-process/Pages/default.aspx}.
+#' ICES Stock Assessment Graphs:
+#' \url{http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx}.
 #'
 #' ICES list of software applications:
 #' \url{http://ices.dk/marine-data/tools/Pages/Software.aspx}.
-#'
-#' ICES SAG Webservices:
-#' \url{http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx}.
-#'
 
 NA

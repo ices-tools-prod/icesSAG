@@ -57,7 +57,7 @@ checkSAGWebserviceOK <- function() {
 parseSummary <- function(x) {
   #
   # Extract data
-  summaryNames <-  xmlRoot(xmlParse(x))
+  summaryNames <- xmlRoot(xmlParse(x))
 
   # Parse XML data and convert into a data frame
   xmlDat <- xmlSApply(summaryNames[["lines"]],
@@ -69,7 +69,7 @@ parseSummary <- function(x) {
   summaryInfo <- as.data.frame(t(xmlDat))
   #
   stockList <- names(summaryNames[names(summaryNames) != "lines"])
-  stockValue <-  rbind(lapply(stockList,
+  stockValue <- rbind(lapply(stockList,
                               function(x) xmlSApply(summaryNames[[x]],
                                                     xmlValue)))
   stockValue[sapply(stockValue,
