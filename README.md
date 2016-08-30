@@ -36,7 +36,7 @@ library(icesSAG)
 References
 ----------
 
-Description of ICES Stock Assessment Graphs:
+ICES Stock Assessment Graphs:
 
 [http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx](http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx)
 
