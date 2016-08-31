@@ -40,7 +40,7 @@ ICES Stock Assessment Graphs:
 
 [http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx](http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx)
 
-ICES list of software applications:
+ICES software applications:
 
 [http://ices.dk/marine-data/tools/Pages/Software.aspx](http://ices.dk/marine-data/tools/Pages/Software.aspx).
 
