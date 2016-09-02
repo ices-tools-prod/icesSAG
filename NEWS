@@ -1,6 +1,8 @@
 --------------------------------------------------------------------------------
 icesSAG 1.1-0 (2016-08-21)
 --------------------------------------------------------------------------------
+o Improved XML parsing, so both leading and trailing white space is removed.
+
 o Improved XML parsing, so "" and "NA" is converted to NA.
 
 o Improved XML parsing, so data frame columns are automatically coerced to the
