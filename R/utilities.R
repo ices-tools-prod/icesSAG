@@ -26,7 +26,7 @@ parseSAG <- function(x) {
 
   # clean trailing white space from text columns
   charcol <- which(sapply(x, is.character))
-  x[charcol] <- lapply(x[charcol], function(x) gsub("[[:space:]]*$", "", x))
+  x[charcol] <- lapply(x[charcol], trimws)
 
   ## SAG uses "" and "NA" to indicate NA
   x[x == ""] <- NA
