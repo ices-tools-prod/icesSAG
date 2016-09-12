@@ -4,10 +4,12 @@
 \alias{getSummaryTable}
 \title{Get a Summary Table of Historical Stock Size}
 \usage{
-getSummaryTable(year)
+getSummaryTable(year, stock = NULL)
 }
 \arguments{
-\item{year}{the assessment year, e.g. 2010. All years can be queried with 0.}
+\item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
+
+\item{stock}{a stock name, e.g. cod-347d, or NULL to process all stocks.}
 }
 \value{
 A data frame.
@@ -16,9 +18,7 @@ A data frame.
 Get a summary table of historical stock size, recruitment, and fishing pressure.
 }
 \examples{
-\dontrun{
-sumtab <- getSummaryTable(2015)
-}
+sumtab <- getSummaryTable(2015, "cod-347d")
 
 }
 \author{

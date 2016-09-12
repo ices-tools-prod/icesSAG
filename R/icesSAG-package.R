@@ -13,9 +13,9 @@
 #' @details
 #' \emph{Get dataset:}
 #' \tabular{ll}{
-#'   \code{\link{getFishStockReferencePoints}} \tab reference points\cr
 #'   \code{\link{getListStocks}}               \tab list of stocks\cr
-#'   \code{\link{getSummaryTable}}             \tab historical stock size
+#'   \code{\link{getSummaryTable}}             \tab historical stock size\cr
+#'   \code{\link{getFishStockReferencePoints}} \tab reference points
 #' }
 #'
 #' @author Colin Millar, Scott Large, and Arni Magnusson.

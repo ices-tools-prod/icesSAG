@@ -4,10 +4,12 @@
 \alias{getListStocks}
 \title{Get a List of Fish Stocks}
 \usage{
-getListStocks(year)
+getListStocks(year, stock = NULL)
 }
 \arguments{
-\item{year}{the assessment year, e.g. 2010. All years can be queried with 0.}
+\item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
+
+\item{stock}{a stock name, e.g. cod-347d, or NULL to process all stocks.}
 }
 \value{
 A data frame.
@@ -17,15 +19,17 @@ Get a list of fish stocks for a given assessment year.
 }
 \examples{
 stocks <- getListStocks(2015)
+cod.347d <- getListStocks(2015, "cod-347d")
+print.simple.list(cod.347d)
 
 }
 \author{
-Colin Millar and Scott Large.
+Colin Millar, Scott Large, and Arni Magnusson.
 }
 \seealso{
-\code{\link{getFishStockReferencePoints}} gets biological reference points.
-
 \code{\link{getSummaryTable}} gets a summary table of historical stock size.
+
+\code{\link{getFishStockReferencePoints}} gets biological reference points.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }

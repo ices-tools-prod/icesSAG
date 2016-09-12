@@ -12,9 +12,9 @@ for the Exploration of the Sea) Stock Assessment Graphs (SAG) database.
 \details{
 \emph{Get dataset:}
 \tabular{ll}{
-  \code{\link{getFishStockReferencePoints}} \tab reference points\cr
   \code{\link{getListStocks}}               \tab list of stocks\cr
-  \code{\link{getSummaryTable}}             \tab historical stock size
+  \code{\link{getSummaryTable}}             \tab historical stock size\cr
+  \code{\link{getFishStockReferencePoints}} \tab reference points
 }
 }
 \author{

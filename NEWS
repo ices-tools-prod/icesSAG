@@ -1,6 +1,9 @@
 --------------------------------------------------------------------------------
 icesSAG 1.1-0 (2016-08-21)
 --------------------------------------------------------------------------------
+o New argument 'stock' in functions getListStocks(), getSummaryTable(), and
+  getFishStockReferencepoints().
+
 o Improved XML parsing, so both leading and trailing white space is removed.
 
 o Improved XML parsing, so "" and "NA" is converted to NA.
