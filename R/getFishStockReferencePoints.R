@@ -32,8 +32,8 @@ getFishStockReferencePoints <- function(year) {
   if (!checkYearOK(year)) return (FALSE)
 
   # get keys for year
-  all_years <- getListStocks(year = year)
-  published_keys <- unique(all_years$key[!grepl("Not", all_years$Status)])
+  stock_list <- getListStocks(year = year)
+  published_keys <- unique(stock_list$key[!grepl("Not", stock_list$Status)])
 
   # read and parse XML from API
   url <-
