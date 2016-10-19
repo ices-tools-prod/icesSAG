@@ -56,13 +56,16 @@ parseSummary <- function(x) {
 
   # read summary table
   out <- xmlToDataFrame(x[[xmlSize(x)]])
-  # add info as attribute
-  attributes(out)$notes <- info
 
   # tidy
   out[out == ""] <- NA
 
-  simplify(out)
+  # simplify
+  out <- simplify(out)
+
+  # add info as attribute
+  attr(out, "notes") <- info
+  out
 }
 
 

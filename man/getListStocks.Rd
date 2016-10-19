@@ -17,8 +17,6 @@ Get a list of fish stocks for a given assessment year.
 }
 \examples{
 stocks <- getListStocks(2015)
-cod.347d <- getListStocks(2015, "cod-347d")
-print.simple.list(cod.347d)
 
 }
 \author{

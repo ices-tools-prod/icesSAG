@@ -4,12 +4,10 @@
 \alias{getSummaryTable}
 \title{Get a Summary Table of Historical Stock Size}
 \usage{
-getSummaryTable(year, stock = NULL)
+getSummaryTable(key)
 }
 \arguments{
-\item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
-
-\item{stock}{a stock name, e.g. cod-347d, or NULL to process all stocks.}
+\item{key}{the unique identifier of the stock assessment}
 }
 \value{
 A data frame.
@@ -18,7 +16,13 @@ A data frame.
 Get a summary table of historical stock size, recruitment, and fishing pressure.
 }
 \examples{
-sumtab <- getSummaryTable(2015, "cod-347d")
+stocklist <- getListStocks(2016)
+id <- grep("cod-347d", stocklist$FishStockName)
+stocklist[id,]
+key <- stocklist$key[id]
+sumtab <- getSummaryTable(key)
+head(sumtab)
+attributes(sumtab)$notes
 
 }
 \author{

@@ -16,7 +16,13 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' sumtab <- getSummaryTable(2015, "cod-347d")
+#' stocklist <- getListStocks(2016)
+#' id <- grep("cod-347d", stocklist$FishStockName)
+#' stocklist[id,]
+#' key <- stocklist$key[id]
+#' sumtab <- getSummaryTable(key)
+#' head(sumtab)
+#' attributes(sumtab)$notes
 #'
 #' @export
 #'

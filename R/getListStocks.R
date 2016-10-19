@@ -17,8 +17,6 @@
 #'
 #' @examples
 #' stocks <- getListStocks(2015)
-#' cod.347d <- getListStocks(2015, "cod-347d")
-#' print.simple.list(cod.347d)
 #'
 #' @export
 
@@ -31,7 +29,8 @@ getListStocks <- function(year) {
     sprintf(
       "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
       year)
-  out <- parseSAG(curlSAG(url = url))
+  out <- curlSAG(url = url)
+  out <- parseSAG(out)
 
   # return
   simplify(out)
