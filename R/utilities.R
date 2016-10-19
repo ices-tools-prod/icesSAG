@@ -31,7 +31,9 @@ parseSAG <- function(x) {
   ## SAG uses "" and "NA" to indicate NA
   x[x == ""] <- NA
   x[x == "NA"] <- NA
-  x
+
+  # simplify and return
+  simplify(x)
 }
 
 
@@ -50,39 +52,33 @@ checkSAGWebserviceOK <- function() {
 
 #' @importFrom XML xmlRoot
 #' @importFrom XML xmlParse
-#' @importFrom XML xmlSApply
-#' @importFrom XML xmlParse
-#' @importFrom XML xmlValue
+#' @importFrom XML xmlSize
+#' @importFrom XML xmlToDataFrame
 
 parseSummary <- function(x) {
-  #
-  # Extract data
-  summaryNames <- xmlRoot(xmlParse(x))
 
-  # Parse XML data and convert into a data frame
-  xmlDat <- xmlSApply(summaryNames[["lines"]],
-                      function(x) xmlSApply(x,
-                                            xmlValue))
-  xmlDat[sapply(xmlDat,
-                function(x) length(x) == 0)] <- NA
-  colnames(xmlDat) <- NULL
-  summaryInfo <- as.data.frame(t(xmlDat))
-  #
-  stockList <- names(summaryNames[names(summaryNames) != "lines"])
-  stockValue <- rbind(lapply(stockList,
-                              function(x) xmlSApply(summaryNames[[x]],
-                                                    xmlValue)))
-  stockValue[sapply(stockValue,
-                    function(x) length(x) == 0)] <- NA
-  stockValue <- as.data.frame(lapply(stockValue,
-                                     function(x) as.character(x)))
-  colnames(stockValue) <- stockList
-  #
-  summaryInfo <- cbind(summaryInfo, stockValue)
-  summaryInfo[summaryInfo == ""] <- NA
-  summaryInfo[summaryInfo == "NA"] <- NA
-  summaryInfo
+  # Extract data
+  x <- xmlParse(x)
+  x <- xmlRoot(x)
+
+  # get auxilliary info
+  nhead <- xmlSize(x)-1
+  info <- c(xmlToDataFrame(x[1:nhead])$text)
+  names(info) <- names(x[1:nhead])
+
+  # read summary table
+  out <- xmlToDataFrame(x[[xmlSize(x)]])
+  # add info as attribute
+  attributes(out)$notes <- info
+
+  # tidy
+  out[out == ""] <- NA
+
+  simplify(out)
 }
+
+
+
 
 
 simplify <- function(x) {

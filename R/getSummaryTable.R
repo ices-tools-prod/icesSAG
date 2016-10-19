@@ -2,8 +2,7 @@
 #'
 #' Get a summary table of historical stock size, recruitment, and fishing pressure.
 #'
-#' @param year the assessment year, e.g. 2015, or 0 to process all years.
-#' @param stock a stock name, e.g. cod-347d, or NULL to process all stocks.
+#' @param key the unique identifier of the stock assessment
 #'
 #' @return A data frame.
 #'
@@ -23,28 +22,18 @@
 #'
 #' @importFrom dplyr bind_rows
 
-getSummaryTable <- function(year, stock = NULL) {
+getSummaryTable <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
-
-  # check year
-  if (!checkYearOK(year)) return (FALSE)
-
-  # get keys for year and stock
-  stock_list <- getListStocks(year = year, stock = stock)
-  published_keys <- unique(stock_list$key[!grepl("Not", stock_list$Status)])
 
   # read and parse XML from API
   url <-
     sprintf(
       "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
-      published_keys)
+      key)
 
-  out <- do.call(bind_rows,
-                 lapply(url,
-                        function(x)
-                          parseSummary(curlSAG(url = x))))
+  out <- curlSAG(url = url)
+  out <- parseSummary(out)
 
-  # return
-  simplify(out)
+  out
 }
