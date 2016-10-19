@@ -37,28 +37,16 @@ parseSAG <- function(x) {
 }
 
 
-checkSAGWebserviceOK <- function() {
-  # return TRUE if webservice server is good, FALSE otherwise
-  out <- curlSAG(url = "https://datras.ices.dk/WebServices/StandardGraphsWebServices.asmx")
-
-  # Check the server is not down by insepcting the XML response for internal server error message.
-  if(grepl("Internal Server Error", out)) {
-    warning("Web service failure: the server seems to be down, please try again later.")
-    FALSE
-  } else {
-    TRUE
-  }
-}
-
 #' @importFrom XML xmlRoot
 #' @importFrom XML xmlParse
 #' @importFrom XML xmlSize
 #' @importFrom XML xmlToDataFrame
-
 parseSummary <- function(x) {
 
   # Extract data
-  x <- xmlParse(x)
+  capture.output(x <- xmlParse(x))
+  # capture.output is used to stiffle the output message from xmlns:
+  #   "xmlns: URI ices.dk.local/SAG is not absolute"
   x <- xmlRoot(x)
 
   # get auxilliary info
@@ -78,6 +66,40 @@ parseSummary <- function(x) {
 }
 
 
+
+
+
+checkSAGWebserviceOK <- function() {
+  # return TRUE if webservice server is good, FALSE otherwise
+  out <- curlSAG(url = "https://datras.ices.dk/WebServices/StandardGraphsWebServices.asmx")
+
+  # Check the server is not down by insepcting the XML response for internal server error message.
+  if(grepl("Internal Server Error", out)) {
+    warning("Web service failure: the server seems to be down, please try again later.")
+    FALSE
+  } else {
+    TRUE
+  }
+}
+
+
+
+
+#' @importFrom utils capture.output
+
+checkYearOK <- function(year) {
+  # check year against available years
+  all_years <- getListStocks(year = 0)
+  published_years <- unique(as.numeric(all_years$AssessmentYear[!grepl("Not", all_years$Status)]))
+
+  if (!year %in% published_years) {
+    message("Supplied year (", year, ") is not available.\n  Available options are:\n",
+            paste(capture.output(print(sort(published_years))), collapse = "\n"))
+    FALSE
+  } else {
+    TRUE
+  }
+}
 
 
 
