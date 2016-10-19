@@ -4,12 +4,10 @@
 \alias{getListStocks}
 \title{Get a List of Fish Stocks}
 \usage{
-getListStocks(year, stock = NULL)
+getListStocks(year)
 }
 \arguments{
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
-
-\item{stock}{a stock name, e.g. cod-347d, or NULL to process all stocks.}
 }
 \value{
 A data frame.

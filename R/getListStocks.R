@@ -3,7 +3,6 @@
 #' Get a list of fish stocks for a given assessment year.
 #'
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
-#' @param stock a stock name, e.g. cod-347d, or NULL to process all stocks.
 #'
 #' @return A data frame.
 #'
@@ -23,7 +22,7 @@
 #'
 #' @export
 
-getListStocks <- function(year, stock = NULL) {
+getListStocks <- function(year) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
@@ -33,12 +32,6 @@ getListStocks <- function(year, stock = NULL) {
       "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
       year)
   out <- parseSAG(curlSAG(url = url))
-
-  # filter by stock
-  if (!is.null(stock)) {
-    out <- out[out$FishStockName == stock,]
-    row.names(out) <- NULL
-  }
 
   # return
   simplify(out)
