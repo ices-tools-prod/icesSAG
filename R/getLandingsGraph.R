@@ -1,6 +1,6 @@
-#' Get Reference Points
+#' Get a Summary Table of Historical Stock Size
 #'
-#' Get biological reference points for all stocks in a given assessment year.
+#' Get a summary table of historical stock size, recruitment, and fishing pressure.
 #'
 #' @param key the unique identifier of the stock assessment
 #'
@@ -9,7 +9,7 @@
 #' @seealso
 #' \code{\link{getListStocks}} gets a list of stocks.
 #'
-#' \code{\link{getSummaryTable}} gets a summary table of historical stock size.
+#' \code{\link{getFishStockReferencePoints}} gets biological reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
@@ -20,24 +20,24 @@
 #' id <- grep("cod-347d", stocklist$FishStockName)
 #' stocklist[id,]
 #' key <- stocklist$key[id]
-#' refpts <- getFishStockReferencePoints(key)
-#' refpts
+#' landings_img <- getLandingsGraph(key)
+#' plot.new()
+#' plot(landings_img)
 #'
 #' @export
 
-getFishStockReferencePoints <- function(key) {
+getLandingsGraph <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
   # read and parse XML from API
   url <-
     sprintf(
-      "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
+      "http://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getLandingsGraph?key=%i",
       key)
 
   out <- curlSAG(url = url)
-  out <- parseSAG(out)
+  out <- parseGraph(out)
 
-  # return
   out
 }

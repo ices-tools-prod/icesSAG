@@ -70,6 +70,34 @@ parseSummary <- function(x) {
 
 
 
+#' @importFrom XML xmlRoot
+#' @importFrom XML xmlParse
+#' @importFrom XML getChildrenStrings
+#' @importFrom png readPNG
+#' @importFrom utils download.file
+parseGraph <- function(x) {
+
+  x <- xmlParse(x)
+  x <- xmlRoot(x)
+  fileurl <- unname(XML::getChildrenStrings(x))
+
+  tmp <- tempfile(fileext = ".png")
+  download.file(fileurl, tmp, mode="wb", quiet=TRUE)
+
+  out <- readPNG(tmp)
+
+  class(out) <- c("ices_standardgraph", class(out))
+  out
+}
+
+
+#' @importFrom grid grid.raster
+#' @export
+plot.ices_standardgraph <- function(x, y = NULL, ...) {
+  grid::grid.raster(x)
+}
+
+
 
 
 checkSAGWebserviceOK <- function() {

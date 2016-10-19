@@ -17,4 +17,5 @@ Suggests: testthat
 Imports: RCurl,
          XML,
          utils,
-         dplyr
+         png,
+         grid

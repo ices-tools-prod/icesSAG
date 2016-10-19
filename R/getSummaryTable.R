@@ -25,8 +25,6 @@
 #' attributes(sumtab)$notes
 #'
 #' @export
-#'
-#' @importFrom dplyr bind_rows
 
 getSummaryTable <- function(key) {
   # check web services are running
