@@ -4,6 +4,8 @@
 #'
 #' @param key the unique identifier of the stock assessment
 #'
+#' @param type the type of plot requested, e.g. "Landings", "Recruitment", ...
+#'
 #' @return An array representing a png.
 #'
 #' @seealso
@@ -20,21 +22,28 @@
 #' id <- grep("cod-347d", stocklist$FishStockName)
 #' stocklist[id,]
 #' key <- stocklist$key[id]
-#' landings_img <- getLandingsGraph(key)
+#' rec_img <- getSAGGraph(key, type = "Recruitment")
 #' plot.new()
-#' plot(landings_img)
+#' plot(rec_img)
 #'
 #' @export
 
-getLandingsGraph <- function(key) {
+getSAGGraph <- function(key, type) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
+
+  # check graph type requested
+  type <- match.arg(type,
+                    c("Landings",
+                      "Recruitment",
+                      "FishingMortality",
+                      "SpawningStockBiomass"))
 
   # read and parse XML from API
   url <-
     sprintf(
-      "http://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getLandingsGraph?key=%i",
-      key)
+      "http://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/get%sGraph?key=%i",
+      type, key)
 
   out <- curlSAG(url = url)
   out <- parseGraph(out)
