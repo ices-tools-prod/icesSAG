@@ -16,7 +16,7 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' stocklist <- getListStocks(2016)
+#' stocklist <- getListStocks(2015)
 #' id <- grep("cod-347d", stocklist$FishStockName)
 #' stocklist[id,]
 #' key <- stocklist$key[id]

@@ -16,7 +16,7 @@ A data frame.
 Get a summary table of historical stock size, recruitment, and fishing pressure.
 }
 \examples{
-stocklist <- getListStocks(2016)
+stocklist <- getListStocks(2015)
 id <- grep("cod-347d", stocklist$FishStockName)
 stocklist[id,]
 key <- stocklist$key[id]

@@ -16,7 +16,7 @@ A data frame.
 Get biological reference points for all stocks in a given assessment year.
 }
 \examples{
-stocklist <- getListStocks(2016)
+stocklist <- getListStocks(2015)
 id <- grep("cod-347d", stocklist$FishStockName)
 stocklist[id,]
 key <- stocklist$key[id]
