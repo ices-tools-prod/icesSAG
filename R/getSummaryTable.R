@@ -1,15 +1,18 @@
 #' Get a Summary Table of Historical Stock Size
 #'
-#' Get a summary table of historical stock size, recruitment, and fishing pressure.
+#' Get summary results of historical stock size, recruitment, and fishing
+#' pressure.
 #'
 #' @param key the unique identifier of the stock assessment
 #'
 #' @return A data frame.
 #'
 #' @seealso
-#' \code{\link{getListStocks}} gets a list of stocks.
+#' \code{\link{getSAG}} supports querying many years and quarters in one
+#'   function call.
 #'
-#' \code{\link{getFishStockReferencePoints}} gets biological reference points.
+#' \code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
+#'   a list of stocks and reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'

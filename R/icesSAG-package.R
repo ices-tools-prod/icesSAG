@@ -13,9 +13,14 @@
 #' @details
 #' \emph{Get dataset:}
 #' \tabular{ll}{
-#'   \code{\link{getListStocks}}               \tab list of stocks\cr
-#'   \code{\link{getSummaryTable}}             \tab historical stock size\cr
-#'   \code{\link{getFishStockReferencePoints}} \tab reference points
+#'   \code{\link{getSummaryTable}}             \tab summary results\cr
+#'   \code{\link{getFishStockReferencePoints}} \tab reference points\cr
+#'   \code{\link{getSAG}}                      \tab any data
+#' }
+#' \emph{Look up codes:}
+#' \tabular{ll}{
+#'   \code{\link{findKey}}       \tab find key\cr
+#'   \code{\link{getListStocks}} \tab list of stocks
 #' }
 #'
 #' @author Colin Millar, Scott Large, and Arni Magnusson.

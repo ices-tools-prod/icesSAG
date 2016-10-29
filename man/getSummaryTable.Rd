@@ -13,7 +13,8 @@ getSummaryTable(key)
 A data frame.
 }
 \description{
-Get a summary table of historical stock size, recruitment, and fishing pressure.
+Get summary results of historical stock size, recruitment, and fishing
+pressure.
 }
 \examples{
 stocklist <- getListStocks(2015)
@@ -29,9 +30,11 @@ attributes(sumtab)$notes
 Colin Millar and Scott Large.
 }
 \seealso{
-\code{\link{getListStocks}} gets a list of stocks.
+\code{\link{getSAG}} supports querying many years and quarters in one
+  function call.
 
-\code{\link{getFishStockReferencePoints}} gets biological reference points.
+\code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
+  a list of stocks and reference points.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }

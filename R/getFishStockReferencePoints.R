@@ -7,9 +7,11 @@
 #' @return A data frame.
 #'
 #' @seealso
-#' \code{\link{getListStocks}} gets a list of stocks.
+#' \code{\link{getSAG}} supports querying many years and quarters in one
+#'   function call.
 #'
-#' \code{\link{getSummaryTable}} gets a summary table of historical stock size.
+#' \code{\link{getListStocks}} and \code{\link{getSummaryTable}} get a list of
+#'   stocks and summary results.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
