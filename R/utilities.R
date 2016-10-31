@@ -51,11 +51,11 @@ parseSummary <- function(x) {
 
   # get auxilliary info
   nhead <- xmlSize(x)-1
-  info <- c(xmlToDataFrame(x[1:nhead])$text)
+  info <- c(xmlToDataFrame(x[1:nhead])$text, stringsAsFactors = FALSE)
   names(info) <- names(x[1:nhead])
 
   # read summary table
-  out <- xmlToDataFrame(x[[xmlSize(x)]])
+  out <- xmlToDataFrame(x[[xmlSize(x)]], stringsAsFactors = FALSE)
 
   # tidy
   out[out == ""] <- NA
@@ -79,7 +79,7 @@ parseGraph <- function(x) {
 
   x <- xmlParse(x)
   x <- xmlRoot(x)
-  fileurl <- unname(XML::getChildrenStrings(x))
+  fileurl <- unname(getChildrenStrings(x))
 
   tmp <- tempfile(fileext = ".png")
   download.file(fileurl, tmp, mode="wb", quiet=TRUE)
@@ -94,7 +94,7 @@ parseGraph <- function(x) {
 #' @importFrom grid grid.raster
 #' @export
 plot.ices_standardgraph <- function(x, y = NULL, ...) {
-  grid::grid.raster(x)
+  grid.raster(x)
 }
 
 
