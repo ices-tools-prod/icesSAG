@@ -1,7 +1,7 @@
 #' @importFrom RCurl basicTextGatherer
 #' @importFrom RCurl curlPerform
 curlSAG <- function(url) {
-  # read only XML table and return as txt string
+  # read only XML table and return as string
   reader <- basicTextGatherer()
   curlPerform(url = url,
               httpheader = c('Content-Type' = "text/xml; charset=utf-8", SOAPAction=""),
@@ -10,17 +10,17 @@ curlSAG <- function(url) {
   reader$value()
 }
 
+
 #' @importFrom XML xmlParse
 #' @importFrom XML xmlToDataFrame
 #' @importFrom utils capture.output
 parseSAG <- function(x) {
-  # parse the xml text string suppplied by the SAG webservice
-  # returning a dataframe
+  # parse XML string to data frame
   capture.output(x <- xmlParse(x))
   # capture.output is used to stiffle the output message from xmlns:
   #   "xmlns: URI ices.dk.local/SAG is not absolute"
 
-  # convert xml to data frame
+  # convert XML to data frame
   x <- xmlToDataFrame(x, stringsAsFactors = FALSE)
 
   # clean trailing white space from text columns
@@ -99,7 +99,7 @@ checkSAGWebserviceOK <- function() {
   # return TRUE if webservice server is good, FALSE otherwise
   out <- curlSAG("https://datras.ices.dk/WebServices/StandardGraphsWebServices.asmx")
 
-  # Check the server is not down by insepcting the XML response for internal server error message.
+  # check server is not down by inspecting XML response for internal server error message
   if(grepl("Internal Server Error", out)) {
     warning("Web service failure: the server seems to be down, please try again later.")
     FALSE
