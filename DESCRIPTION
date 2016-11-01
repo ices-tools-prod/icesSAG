@@ -13,6 +13,6 @@ Imports: grid,
 Suggests: testthat
 Description: R interface to access the web services of the ICES (International
              Council for the Exploration of the Sea) Stock Assessment Graphs
-             database <http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx>.
+             database.
 License: GPL (>= 2)
 RoxygenNote: 5.0.1
