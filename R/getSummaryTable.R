@@ -36,7 +36,7 @@ getSummaryTable <- function(key) {
   # read XML string and parse to data frame
   url <-
     sprintf(
-      "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
+      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
       key)
   out <- curlSAG(url)
   out <- parseSummary(out)

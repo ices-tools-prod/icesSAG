@@ -27,7 +27,7 @@ getListStocks <- function(year) {
   # read XML string and parse to data frame
   url <-
     sprintf(
-      "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
+      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
       year)
   out <- curlSAG(url)
   out <- parseSAG(out)

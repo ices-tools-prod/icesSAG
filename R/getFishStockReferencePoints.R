@@ -34,7 +34,7 @@ getFishStockReferencePoints <- function(key) {
   # read XML string and parse to data frame
   url <-
     sprintf(
-      "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
+      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
       key)
   out <- curlSAG(url)
   out <- parseSAG(out)

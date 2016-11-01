@@ -96,8 +96,8 @@ plot.ices_standardgraph <- function(x, y = NULL, ...) {
 
 
 checkSAGWebserviceOK <- function() {
-  # return TRUE if webservice server is good, FALSE otherwise
-  out <- curlSAG("https://datras.ices.dk/WebServices/StandardGraphsWebServices.asmx")
+  # return TRUE if web service is active, FALSE otherwise
+  out <- curlSAG("https://sg.ices.dk/StandardGraphsWebServices.asmx")
 
   # check server is not down by inspecting XML response for internal server error message
   if(grepl("Internal Server Error", out)) {

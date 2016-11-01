@@ -33,7 +33,7 @@ getLandingsGraph <- function(key) {
   # read XML string and parse to data frame
   url <-
     sprintf(
-      "http://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getLandingsGraph?key=%i",
+      "http://sg.ices.dk/StandardGraphsWebServices.asmx/getLandingsGraph?key=%i",
       key)
   out <- curlSAG(url)
   out <- parseGraph(out)

@@ -30,7 +30,7 @@ findKey <- function(stock, year, published = TRUE, full = FALSE)
   # get stock list
   url <-
     sprintf(
-      "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
+      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
       year)
   out <- lapply(url,
                 function(u) {
