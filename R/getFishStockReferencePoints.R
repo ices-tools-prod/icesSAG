@@ -31,15 +31,13 @@ getFishStockReferencePoints <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
-  # read and parse XML from API
+  # read XML string and parse to data frame
   url <-
     sprintf(
       "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
       key)
-
-  out <- curlSAG(url = url)
+  out <- curlSAG(url)
   out <- parseSAG(out)
 
-  # return
   out
 }

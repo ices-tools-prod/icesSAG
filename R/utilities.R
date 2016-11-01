@@ -7,7 +7,6 @@ curlSAG <- function(url) {
               httpheader = c('Content-Type' = "text/xml; charset=utf-8", SOAPAction=""),
               writefunction = reader$update,
               verbose = FALSE)
-  # return
   reader$value()
 }
 
@@ -32,7 +31,6 @@ parseSAG <- function(x) {
   x[x == ""] <- NA
   x[x == "NA"] <- NA
 
-  # simplify and return
   simplify(x)
 }
 
@@ -69,7 +67,6 @@ parseSummary <- function(x) {
 }
 
 
-
 #' @importFrom XML xmlRoot
 #' @importFrom XML xmlParse
 #' @importFrom XML getChildrenStrings
@@ -98,11 +95,9 @@ plot.ices_standardgraph <- function(x, y = NULL, ...) {
 }
 
 
-
-
 checkSAGWebserviceOK <- function() {
   # return TRUE if webservice server is good, FALSE otherwise
-  out <- curlSAG(url = "https://datras.ices.dk/WebServices/StandardGraphsWebServices.asmx")
+  out <- curlSAG("https://datras.ices.dk/WebServices/StandardGraphsWebServices.asmx")
 
   # Check the server is not down by insepcting the XML response for internal server error message.
   if(grepl("Internal Server Error", out)) {
@@ -114,10 +109,7 @@ checkSAGWebserviceOK <- function() {
 }
 
 
-
-
 #' @importFrom utils capture.output
-
 checkYearOK <- function(year) {
   # check year against available years
   all_years <- getListStocks(year = 0)
@@ -131,7 +123,6 @@ checkYearOK <- function(year) {
     TRUE
   }
 }
-
 
 
 simplify <- function(x) {

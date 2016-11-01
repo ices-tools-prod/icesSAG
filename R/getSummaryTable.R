@@ -33,13 +33,12 @@ getSummaryTable <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
-  # read and parse XML from API
+  # read XML string and parse to data frame
   url <-
     sprintf(
       "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
       key)
-
-  out <- curlSAG(url = url)
+  out <- curlSAG(url)
   out <- parseSummary(out)
 
   out

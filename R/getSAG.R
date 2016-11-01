@@ -57,5 +57,6 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
                   parseFunction(out)
                 })
   if (combine) out <- do.call(rbind, out)
+
   out
 }
