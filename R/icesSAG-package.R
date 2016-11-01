@@ -26,7 +26,6 @@
 #' @author Colin Millar, Scott Large, and Arni Magnusson.
 #'
 #' @references
-#' ICES Stock Assessment Graphs database:
-#' \url{http://sg.ices.dk/}
+#' ICES Stock Assessment Graphs database: \url{http://sg.ices.dk/}.
 
 NA

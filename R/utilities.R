@@ -4,7 +4,7 @@ curlSAG <- function(url) {
   # read only XML table and return as string
   reader <- basicTextGatherer()
   curlPerform(url = url,
-              httpheader = c('Content-Type' = "text/xml; charset=utf-8", SOAPAction=""),
+              httpheader = c('Content-Type' = "text/xml; charset=utf-8", SOAPAction = ""),
               writefunction = reader$update,
               verbose = FALSE)
   reader$value()
