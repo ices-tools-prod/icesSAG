@@ -26,10 +26,7 @@
 #' @author Colin Millar, Scott Large, and Arni Magnusson.
 #'
 #' @references
-#' ICES Stock Assessment Graphs:
-#' \url{http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx}.
-#'
-#' ICES software applications:
-#' \url{http://ices.dk/marine-data/tools/Pages/Software.aspx}.
+#' ICES Stock Assessment Graphs database:
+#' \url{http://sg.ices.dk/}
 
 NA

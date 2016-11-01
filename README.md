@@ -40,13 +40,9 @@ library(icesSAG)
 References
 ----------
 
-ICES Stock Assessment Graphs:
+ICES Stock Assessment Graphs database:
 
-[http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx](http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx)
-
-ICES software applications:
-
-[http://ices.dk/marine-data/tools/Pages/Software.aspx](http://ices.dk/marine-data/tools/Pages/Software.aspx).
+[http://sg.ices.dk/](http://sg.ices.dk/)
 
 Development
 -----------
