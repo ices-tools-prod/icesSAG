@@ -57,14 +57,16 @@ parseSummary <- function(x) {
   # read summary table
   out <- xmlToDataFrame(x[[xmlSize(x)]])
 
+  # tag on info
+  out <- cbind(out, data.frame(t(info)))
+
   # tidy
   out[out == ""] <- NA
+  x[x == "NA"] <- NA
 
   # simplify
   out <- simplify(out)
 
-  # add info as attribute
-  attr(out, "notes") <- info
   out
 }
 
