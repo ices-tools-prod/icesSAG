@@ -1,27 +1,26 @@
 #' @importFrom RCurl basicTextGatherer
 #' @importFrom RCurl curlPerform
 curlSAG <- function(url) {
-  # read only XML table and return as txt string
+  # read only XML table and return as string
   reader <- basicTextGatherer()
   curlPerform(url = url,
-              httpheader = c('Content-Type' = "text/xml; charset=utf-8", SOAPAction=""),
+              httpheader = c('Content-Type' = "text/xml; charset=utf-8", SOAPAction = ""),
               writefunction = reader$update,
               verbose = FALSE)
-  # return
   reader$value()
 }
+
 
 #' @importFrom XML xmlParse
 #' @importFrom XML xmlToDataFrame
 #' @importFrom utils capture.output
 parseSAG <- function(x) {
-  # parse the xml text string suppplied by the SAG webservice
-  # returning a dataframe
+  # parse XML string to data frame
   capture.output(x <- xmlParse(x))
   # capture.output is used to stiffle the output message from xmlns:
   #   "xmlns: URI ices.dk.local/SAG is not absolute"
 
-  # convert xml to data frame
+  # convert XML to data frame
   x <- xmlToDataFrame(x, stringsAsFactors = FALSE)
 
   # clean trailing white space from text columns
@@ -32,7 +31,6 @@ parseSAG <- function(x) {
   x[x == ""] <- NA
   x[x == "NA"] <- NA
 
-  # simplify and return
   simplify(x)
 }
 
@@ -51,11 +49,11 @@ parseSummary <- function(x) {
 
   # get auxilliary info
   nhead <- xmlSize(x)-1
-  info <- c(xmlToDataFrame(x[1:nhead])$text)
+  info <- c(xmlToDataFrame(x[1:nhead])$text, stringsAsFactors = FALSE)
   names(info) <- names(x[1:nhead])
 
   # read summary table
-  out <- xmlToDataFrame(x[[xmlSize(x)]])
+  out <- xmlToDataFrame(x[[xmlSize(x)]], stringsAsFactors = FALSE)
 
   # tag on info
   out <- cbind(out, data.frame(t(info)))
@@ -71,7 +69,6 @@ parseSummary <- function(x) {
 }
 
 
-
 #' @importFrom XML xmlRoot
 #' @importFrom XML xmlParse
 #' @importFrom XML getChildrenStrings
@@ -81,7 +78,7 @@ parseGraph <- function(x) {
 
   x <- xmlParse(x)
   x <- xmlRoot(x)
-  fileurl <- unname(XML::getChildrenStrings(x))
+  fileurl <- unname(getChildrenStrings(x))
 
   tmp <- tempfile(fileext = ".png")
   download.file(fileurl, tmp, mode="wb", quiet=TRUE)
@@ -96,17 +93,15 @@ parseGraph <- function(x) {
 #' @importFrom grid grid.raster
 #' @export
 plot.ices_standardgraph <- function(x, y = NULL, ...) {
-  grid::grid.raster(x)
+  grid.raster(x)
 }
 
 
-
-
 checkSAGWebserviceOK <- function() {
-  # return TRUE if webservice server is good, FALSE otherwise
-  out <- curlSAG(url = "https://datras.ices.dk/WebServices/StandardGraphsWebServices.asmx")
+  # return TRUE if web service is active, FALSE otherwise
+  out <- curlSAG("https://sg.ices.dk/StandardGraphsWebServices.asmx")
 
-  # Check the server is not down by insepcting the XML response for internal server error message.
+  # check server is not down by inspecting XML response for internal server error message
   if(grepl("Internal Server Error", out)) {
     warning("Web service failure: the server seems to be down, please try again later.")
     FALSE
@@ -116,10 +111,7 @@ checkSAGWebserviceOK <- function() {
 }
 
 
-
-
 #' @importFrom utils capture.output
-
 checkYearOK <- function(year) {
   # check year against available years
   all_years <- getListStocks(year = 0)
@@ -133,7 +125,6 @@ checkYearOK <- function(year) {
     TRUE
   }
 }
-
 
 
 simplify <- function(x) {

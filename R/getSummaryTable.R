@@ -1,15 +1,18 @@
 #' Get a Summary Table of Historical Stock Size
 #'
-#' Get a summary table of historical stock size, recruitment, and fishing pressure.
+#' Get summary results of historical stock size, recruitment, and fishing
+#' pressure.
 #'
 #' @param key the unique identifier of the stock assessment
 #'
 #' @return A data frame.
 #'
 #' @seealso
-#' \code{\link{getListStocks}} gets a list of stocks.
+#' \code{\link{getSAG}} supports querying many years and quarters in one
+#'   function call.
 #'
-#' \code{\link{getFishStockReferencePoints}} gets biological reference points.
+#' \code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
+#'   a list of stocks and reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
@@ -30,13 +33,12 @@ getSummaryTable <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
-  # read and parse XML from API
+  # read XML string and parse to data frame
   url <-
     sprintf(
-      "https://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
+      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
       key)
-
-  out <- curlSAG(url = url)
+  out <- curlSAG(url)
   out <- parseSummary(out)
 
   out

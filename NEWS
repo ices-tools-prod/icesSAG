@@ -1,8 +1,13 @@
 --------------------------------------------------------------------------------
-icesSAG 1.1-0 (2016-08-21)
+icesSAG 1.1-0 (2016-10-29)
 --------------------------------------------------------------------------------
-o New argument 'stock' in functions getListStocks(), getSummaryTable(), and
-  getFishStockReferencepoints().
+o Added function findKey() to look up a unique stock list key.
+
+o Added function getSAG() to import summary results and reference points,
+  without finding a lookup key first.
+
+o Changed argument in functions getSummaryTable() and
+  getFishStockReferencepoints() from 'year' to 'key'.
 
 o Improved XML parsing, so both leading and trailing white space is removed.
 

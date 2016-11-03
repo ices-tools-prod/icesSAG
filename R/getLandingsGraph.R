@@ -30,13 +30,12 @@ getLandingsGraph <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
-  # read and parse XML from API
+  # read XML string and parse to data frame
   url <-
     sprintf(
-      "http://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/getLandingsGraph?key=%i",
+      "http://sg.ices.dk/StandardGraphsWebServices.asmx/getLandingsGraph?key=%i",
       key)
-
-  out <- curlSAG(url = url)
+  out <- curlSAG(url)
   out <- parseGraph(out)
 
   out
