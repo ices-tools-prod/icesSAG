@@ -17,7 +17,7 @@ Get a summary table of historical stock size, recruitment, and fishing pressure.
 }
 \examples{
 stocklist <- getListStocks(2016)
-id <- grep("cod-347d", stocklist$FishStockName)
+id <- grep("cod-2224", stocklist$FishStockName)
 stocklist[id,]
 key <- stocklist$key[id]
 landings_img <- getLandingsGraph(key)
