@@ -62,7 +62,7 @@ parseSummary <- function(x) {
 
   # tidy
   out[out == ""] <- NA
-  x[x == "NA"] <- NA
+  out[out == "NA"] <- NA
 
   # simplify
   out <- simplify(out)
