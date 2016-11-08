@@ -40,7 +40,6 @@ parseSAG <- function(x) {
 #' @importFrom XML xmlSize
 #' @importFrom XML xmlToDataFrame
 parseSummary <- function(x) {
-
   # Extract data
   capture.output(x <- xmlParse(x))
   # capture.output is used to stiffle the output message from xmlns:
@@ -62,10 +61,7 @@ parseSummary <- function(x) {
   out[out == ""] <- NA
   out[out == "NA"] <- NA
 
-  # simplify
-  out <- simplify(out)
-
-  out
+  simplify(out)
 }
 
 
@@ -90,8 +86,9 @@ parseGraph <- function(x) {
 }
 
 
-#' @importFrom grid grid.raster
 #' @export
+
+#' @importFrom grid grid.raster
 plot.ices_standardgraph <- function(x, y = NULL, ...) {
   grid.raster(x)
 }
@@ -134,13 +131,8 @@ simplify <- function(x) {
   on.exit(options(owarn))
   # list or data.frame
   if (is.list(x)) {
-    if (is.data.frame(x)) {
-      old.row.names <- attr(x, "row.names")
-      x <- lapply(x, simplify)
-      attributes(x) <- list(names = names(x), row.names = old.row.names, class = "data.frame")
-    }
-    else
-      x <- lapply(x, simplify)
+    for (i in seq_len(length(x)))
+      x[[i]] <- simplify(x[[i]])
   }
   # matrix
   else if (is.matrix(x))
