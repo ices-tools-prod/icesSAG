@@ -6,7 +6,7 @@
 #'
 #' @param stock a stock name, e.g. cod-347d, or NULL to process all stocks.
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
-#' @param data the data of interest, either "summary" or "refpts"
+#' @param data the data of interest, either "summary" or "refpts".
 #' @param combine whether to combine the list output to a data frame.
 #'
 #' @note Only years with "Published" status are returned.
