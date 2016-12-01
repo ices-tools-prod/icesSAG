@@ -56,7 +56,17 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
                   out <- curlSAG(u)
                   parseFunction(out)
                 })
-  if (combine) out <- do.call(rbind, out)
-
+  if (combine) {
+    outNames <- unique(unlist(c(sapply(out,
+                                        names))))
+    out <- as.data.frame(do.call(rbind,
+                                 lapply(lapply(out,
+                                               unlist), 
+                                        "[",
+                        unique(unlist(c(sapply(out,
+                                               names)))))))
+    names(out) <- outNames
+    out
+  }
   out
 }
