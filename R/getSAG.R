@@ -64,7 +64,8 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
                                                unlist), 
                                         "[",
                         unique(unlist(c(sapply(out,
-                                               names)))))))
+                                               names)))))),
+                        stringsAsFactors = FALSE)
     names(out) <- outNames
     out
   }
