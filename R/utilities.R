@@ -1,80 +1,100 @@
-#' @importFrom RCurl basicTextGatherer
-#' @importFrom RCurl curlPerform
+
+
+#' @importFrom utils download.file
 curlSAG <- function(url) {
-  # read only XML table and return as string
-  reader <- basicTextGatherer()
-  curlPerform(url = url,
-              httpheader = c('Content-Type' = "text/xml; charset=utf-8", SOAPAction = ""),
-              writefunction = reader$update,
-              verbose = FALSE)
-  reader$value()
+  # create file name
+  tmp <- tempfile()
+  # download file
+  download.file(url, destfile = tmp, quiet = TRUE)
+  on.exit(unlink(tmp))
+  # scan lines
+  out <- scan(tmp, what = "", sep = "\n", quiet = TRUE)
+
+  out
 }
 
 
-#' @importFrom XML xmlParse
-#' @importFrom XML xmlToDataFrame
-#' @importFrom utils capture.output
 parseSAG <- function(x) {
-  # parse XML string to data frame
-  capture.output(x <- xmlParse(x))
-  # capture.output is used to stiffle the output message from xmlns:
-  #   "xmlns: URI ices.dk.local/SAG is not absolute"
 
-  # convert XML to data frame
-  x <- xmlToDataFrame(x, stringsAsFactors = FALSE)
+  # simply parse using line and column separators
+  type <- gsub("*<ArrayOf(.*?) .*", "\\1", x[2])
+  starts <- grep(paste0("<", type, ">"), x)
+  ends <- grep(paste0("</", type, ">"), x)
+  ncol <- unique(ends[1] - starts[1]) - 1
+  # drop everything we don't need
+  x <- x[-c(1,2, starts, ends, length(x))]
 
-  # clean trailing white space from text columns
-  charcol <- which(sapply(x, is.character))
-  x[charcol] <- lapply(x[charcol], trimws)
+  # exit if no data is being returned
+  if (length(x) == 0) return(NULL)
 
-  ## SAG uses "" and "NA" to indicate NA
+  # match content of first <tag>
+  names_x <- gsub(" *<(.*?)>.*", "\\1", x[1:ncol])
+
+  # delete all <tags>
+  x <- gsub(" *<.*?>", "", x)
+  # trim white space
+  x <- trimws(x)
+
+  # SAG uses "" and "NA" to indicate NA
   x[x == ""] <- NA
   x[x == "NA"] <- NA
 
+  # make into a data.frame
+  dim(x) <- c(ncol, length(x)/ncol)
+  row.names(x) <- names_x
+  x <- as.data.frame(t(x), stringsAsFactors = FALSE)
+
+  # simplify and return
   simplify(x)
 }
 
 
-#' @importFrom XML xmlRoot
-#' @importFrom XML xmlParse
-#' @importFrom XML xmlSize
-#' @importFrom XML xmlToDataFrame
+
 parseSummary <- function(x) {
-  # Extract data
-  capture.output(x <- xmlParse(x))
-  # capture.output is used to stiffle the output message from xmlns:
-  #   "xmlns: URI ices.dk.local/SAG is not absolute"
-  x <- xmlRoot(x)
+  # Extract table size
+  type <- "SummaryTableLine"
+  starts <- grep(paste0("<", type, ">"), x)
+  ends <- grep(paste0("</", type, ">"), x)
+  ncol <- unique(ends[1] - starts[1]) - 1
 
   # get auxilliary info
-  nhead <- xmlSize(x)-1
-  info <- c(xmlToDataFrame(x[1:nhead])$text, stringsAsFactors = FALSE)
-  names(info) <- names(x[1:nhead])
+  info <- x[3:(starts[1]-2)]
+  # match content of first <tag>
+  names_info <- gsub(" *<(.*?)>.*", "\\1", info)
+  # delete all <tags>
+  info <- gsub(" *<.*?>", "", info)
+  names(info) <- names_info
 
   # read summary table
-  out <- xmlToDataFrame(x[[xmlSize(x)]], stringsAsFactors = FALSE)
+  x <- x[-c(1:(starts[1]-1), starts, ends, length(x) + -1:0)]
+
+  # match content of first <tag>
+  names_x <- gsub(" *<(.*?)>.*", "\\1", x[1:ncol])
+
+  # delete all <tags>
+  x <- gsub(" *<.*?>", "", x)
+
+  # make into a data.frame
+  dim(x) <- c(ncol, length(x)/ncol)
+  row.names(x) <- names_x
+  x <- as.data.frame(t(x), stringsAsFactors = FALSE)
 
   # tag on info
-  out <- cbind(out, data.frame(t(info)))
+  x <- cbind(x, data.frame(t(info)))
 
   # tidy
-  out[out == ""] <- NA
-  out[out == "NA"] <- NA
+  x[x == ""] <- NA
+  x[x == "NA"] <- NA
 
-  simplify(out)
+  # simplify
+  simplify(x)
 }
 
 
-#' @importFrom XML xmlRoot
-#' @importFrom XML xmlParse
-#' @importFrom XML getChildrenStrings
 #' @importFrom png readPNG
-#' @importFrom utils download.file
 parseGraph <- function(x) {
 
-  x <- xmlParse(x)
-  x <- xmlRoot(x)
-  fileurl <- unname(getChildrenStrings(x))
+  fileurl <- gsub(" *<.*?>", "", x[2])
 
   tmp <- tempfile(fileext = ".png")
   download.file(fileurl, tmp, mode="wb", quiet=TRUE)
