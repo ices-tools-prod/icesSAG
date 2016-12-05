@@ -42,7 +42,11 @@ References
 
 ICES Stock Assessment Graphs database:
 
-[http://sg.ices.dk/](http://sg.ices.dk/)
+[http://standardgraphs.ices.dk/](http://standardgraphs.ices.dk/)
+
+ICES Stock Assessment Graphs database web services:
+
+[http://standardgraphs.ices.dk/webservices.aspx](http://standardgraphs.ices.dk/webservices.aspx)
 
 Development
 -----------
