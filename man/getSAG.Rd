@@ -30,6 +30,7 @@ Only years with "Published" status are returned.
 summary <- getSAG("cod-347d", 2015)
 refpts <- getSAG("cod-347d", 2015, "refpts")
 
+cod_summary <- getSAG("cod", 2015)
 }
 \author{
 Arni Magnusson.

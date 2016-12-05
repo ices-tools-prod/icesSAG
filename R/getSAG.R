@@ -28,6 +28,7 @@
 #' summary <- getSAG("cod-347d", 2015)
 #' refpts <- getSAG("cod-347d", 2015, "refpts")
 #'
+#' cod_summary <- getSAG("cod", 2015)
 #' @export
 
 getSAG <- function(stock, year, data = "summary", combine = TRUE) {
@@ -52,9 +53,12 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
       "https://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
       operation, key)
   # read urls
-  out <- sapply(url, curlSAG)
+  out <- lapply(url, curlSAG)
   # parse
   out <- lapply(out, parseFunction)
+
+  # drop any null entries (happens when not published stock creep in)
+  out <- out[!sapply(out, is.null)]
 
   # combine tables
   if (combine) {
