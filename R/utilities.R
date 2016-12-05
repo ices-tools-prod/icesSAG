@@ -51,6 +51,15 @@ parseSAG <- function(x) {
 
 
 parseSummary <- function(x) {
+
+  # check for not published:
+  if ( gsub(" *<.*?>", "", x[3]) == "Stock not published") {
+    return(NULL)
+  }
+  if (gsub(" *<.*?>", "", x[3]) != "Stock published") {
+    stop("Something went wrong")
+  }
+
   # Extract table size
   type <- "SummaryTableLine"
   starts <- grep(paste0("<", type, ">"), x)
@@ -70,6 +79,8 @@ parseSummary <- function(x) {
 
   # match content of first <tag>
   names_x <- gsub(" *<(.*?)>.*", "\\1", x[1:ncol])
+  # also remove xsi:nil:
+  names_x <- gsub(" xsi:nil=\"true\" /", "", names_x)
 
   # delete all <tags>
   x <- gsub(" *<.*?>", "", x)
@@ -116,10 +127,10 @@ plot.ices_standardgraph <- function(x, y = NULL, ...) {
 
 checkSAGWebserviceOK <- function() {
   # return TRUE if web service is active, FALSE otherwise
-  out <- curlSAG("https://sg.ices.dk/StandardGraphsWebServices.asmx")
+  out <- curlSAG("https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=-1")
 
   # check server is not down by inspecting XML response for internal server error message
-  if(grepl("Internal Server Error", out)) {
+  if(!grepl("SummaryTable", out[2])) {
     warning("Web service failure: the server seems to be down, please try again later.")
     FALSE
   } else {
