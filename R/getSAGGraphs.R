@@ -4,8 +4,6 @@
 #'
 #' @param key the unique identifier of the stock assessment
 #'
-#' @param type the type of plot requested, e.g. "Landings", "Recruitment", ...
-#'
 #' @return An array representing a png.
 #'
 #' @seealso
@@ -18,35 +16,46 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' stocklist <- getListStocks(2016)
-#' id <- grep("cod-2224", stocklist$FishStockName)
-#' stocklist[id,]
-#' key <- stocklist$key[id]
-#' rec_img <- getSAGGraph(key, type = "Recruitment")
-#' plot.new()
-#' plot(rec_img)
+#' key <- findKey("cod", 2015)
+#' graphs <- getSAGGraphs(key[1])
+#' plot(graphs)
 #'
 #' @export
 
-getSAGGraph <- function(key, type) {
+getSAGGraphs <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
-  # check graph type requested
-  type <- match.arg(type,
-                    c("Landings",
-                      "Recruitment",
-                      "FishingMortality",
-                      "SpawningStockBiomass"))
+  # only 1 key can be used
+  if (length(key) > 1) {
+    key <- key[1]
+    warning("key has length > 1 and only the first element will be used")
+  }
 
-  # read and parse XML from API
+  # check graph type requested
+  types <- c("Landings",
+             "Recruitment",
+             "FishingMortality",
+             "SpawningStockBiomass")
+
+  # read and parse text from API
   url <-
     sprintf(
       "http://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/get%sGraph?key=%i",
-      type, key)
+      types, key)
 
-  out <- curlSAG(url = url)
-  out <- parseGraph(out)
+  # read urls
+  out <- lapply(url, curlSAG)
 
+  # parse text
+  out <- lapply(out, parseGraph)
+
+  # drop NULLS
+  out <- out[!sapply(out, is.null)]
+
+  # set class
+  class(out) <- c("ices_standardgraph_list", class(out))
+
+  # return
   out
 }
