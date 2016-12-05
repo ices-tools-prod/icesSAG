@@ -23,8 +23,12 @@
 #' landings_plots <- getLandingsGraph(keys)
 #' plot(landings_plots)
 #'
-#' @export
+#' @rdname getGraphs
+#' @name getStandardAssessmentGraps
+NULL
 
+#' @rdname getGraphs
+#' @export
 #' @importFrom utils tail
 getLandingsGraph <- function(key) {
   # check web services are running
@@ -56,30 +60,39 @@ getLandingsGraph <- function(key) {
   out
 }
 
+#' @rdname getGraphs
 #' @export
 getRecruitmentGraph <- getLandingsGraph
 
+#' @rdname getGraphs
 #' @export
 getFishingMortalityGraph <- getLandingsGraph
 
+#' @rdname getGraphs
 #' @export
 getSpawningStockBiomassGraph <- getLandingsGraph
 
+#' @rdname getGraphs
 #' @export
 getFishMortality <- getLandingsGraph
 
+#' @rdname getGraphs
 #' @export
 getstock_recruitment <- getLandingsGraph
 
+#' @rdname getGraphs
 #' @export
 getYSSB <- getLandingsGraph
 
+#' @rdname getGraphs
 #' @export
 getSSBHistoricalPerformance <- getLandingsGraph
 
+#' @rdname getGraphs
 #' @export
 getFishingMortalityHistoricalPerformance <- getLandingsGraph
 
+#' @rdname getGraphs
 #' @export
 getRecruitmentHistoricalPerformance <- getLandingsGraph
 
