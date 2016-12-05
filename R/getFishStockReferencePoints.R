@@ -31,6 +31,12 @@ getFishStockReferencePoints <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
+  # only 1 key can be used
+  if (length(key) > 1) {
+    key <- key[1]
+    warning("key has length > 1 and only the first element will be used")
+  }
+
   # read XML string and parse to data frame
   url <-
     sprintf(
