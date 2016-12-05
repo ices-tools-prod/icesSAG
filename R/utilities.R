@@ -114,6 +114,10 @@ parseGraph <- function(x) {
 
   fileurl <- gsub(" *<.*?>", "", x[2])
 
+  if (fileurl == "D:\\StandardGraphs\\Download\\notpublished.png") {
+    return(NULL)
+  }
+
   tmp <- tempfile(fileext = ".png")
   download.file(fileurl, tmp, mode="wb", quiet=TRUE)
 
@@ -125,11 +129,28 @@ parseGraph <- function(x) {
 
 
 #' @export
-
 #' @importFrom grid grid.raster
 plot.ices_standardgraph <- function(x, y = NULL, ...) {
   grid.raster(x)
 }
+
+#' @export
+plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
+  # find best plot layout
+  n.plots <- length(x)
+  c <- r <- trunc(sqrt(n.plots))
+  if (c < 1) r <- c <- 1
+  if (c * r < n.plots) c <- c + 1
+  if (c * r < n.plots) r <- r + 1
+  # calculate x and y locations for plots -
+  # plot like a table: from top to bottom and left to right
+  x_loc <- rep((1:r)/r - 1/(2*r), c)
+  y_loc <- rep((c:1)/c  - 1/(2*c), each = r)
+  for (i in seq_along(x)) {
+    grid.raster(x[[i]], x = x_loc[i], y = y_loc[i], width = 1/r, height = 1/c)
+  }
+}
+
 
 
 checkSAGWebserviceOK <- function() {
