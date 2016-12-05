@@ -53,7 +53,7 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
       "https://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
       operation, key)
   # read urls
-  out <- sapply(url, curlSAG)
+  out <- lapply(url, curlSAG)
   # parse
   out <- lapply(out, parseFunction)
 
