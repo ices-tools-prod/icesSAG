@@ -5,7 +5,14 @@ curlSAG <- function(url) {
   # create file name
   tmp <- tempfile()
   # download file
-  download.file(url, destfile = tmp, quiet = TRUE)
+  if (os.type("windows")) {
+    download.file(url, destfile = tmp, quiet = TRUE)
+  } else if (os.type("linux")) {
+    download.file(url, destfile = tmp, quiet = TRUE, method = "wget")
+  } else if (os.type("other")) {
+    warning("Untested downloading in this platform")
+    download.file(url, destfile = tmp, quiet = TRUE)
+  }
   on.exit(unlink(tmp))
   # scan lines
   out <- scan(tmp, what = "", sep = "\n", quiet = TRUE)
@@ -197,3 +204,17 @@ simplify <- function(x) {
   }
   x
 }
+
+
+
+# returns TRUE if correct operating system is passed as an argument
+os.type <- function (type = c("linux", "windows", "other"))
+{
+  type <- match.arg(type)
+  if (type %in% c("windows", "linux")) {
+    .Platform$OS.type == type
+  } else {
+    TRUE
+  }
+}
+
