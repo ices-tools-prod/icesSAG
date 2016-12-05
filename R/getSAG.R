@@ -4,7 +4,7 @@
 #' getFishStockReferencePoints, and getSummaryTable.
 #' It supports querying many years and quarters in one function call.
 #'
-#' @param stock a stock name, e.g. cod-347d, or NULL to process all stocks.
+#' @param stock a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
 #' @param data the data of interest, either "summary" or "refpts".
 #' @param combine whether to combine the list output to a data frame.
@@ -44,19 +44,41 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
   if (!checkSAGWebserviceOK()) return (FALSE)
 
   # find lookup key
-  key <- findKey(stock, year)
+  key <- findKey(stock, year, published = TRUE, regex = TRUE, full = FALSE)
 
   # get data requested by user
   url <-
     sprintf(
       "https://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
       operation, key)
-  out <- lapply(url,
-                function(u) {
-                  out <- curlSAG(u)
-                  parseFunction(out)
-                })
-  if (combine) out <- do.call(rbind, out)
+  # read urls
+  out <- sapply(url, curlSAG)
+  # parse
+  out <- lapply(out, parseFunction)
 
+  # combine tables
+  if (combine) {
+    # form new column names for combined data frame
+    outNames <- unique(unlist(lapply(out, names)))
+
+    # rbind, adding in missing columns as characters
+    out <-
+      do.call(rbind,
+        lapply(unname(out), function(x) {
+          # are any columns missing?
+          missing.cols <- !outNames %in% names(x)
+          if (any(missing.cols)) {
+            # add on missing columns as characters
+            x[outNames[missing.cols]] <- ""
+          }
+          # reorder columns
+          x[outNames]
+        }))
+
+    # finally resimplify
+    out <- simplify(out)
+  }
+
+  # return
   out
 }

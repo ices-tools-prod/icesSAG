@@ -4,14 +4,16 @@
 \alias{findKey}
 \title{Find a Key}
 \usage{
-findKey(stock, year, published = TRUE, full = FALSE)
+findKey(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
 }
 \arguments{
-\item{stock}{a stock name, e.g. cod-347d, or NULL to process all stocks.}
+\item{stock}{a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.}
 
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
 
 \item{published}{whether to include only years where status is "Published".}
+
+\item{regex}{whether to match the stock name as a regular expression.}
 
 \item{full}{whether to return a data frame with all stock list columns.}
 }
@@ -22,6 +24,7 @@ A vector of keys (default) or a data frame if full is TRUE.
 Find a lookup key corresponding to a stock in a given assessment year.
 }
 \examples{
+findKey("cod-347d", 2015, full = TRUE)
 summary <- getSAG("cod-347d", 2015)
 refpts <- getSAG("cod-347d", 2015, "refpts")
 
