@@ -18,13 +18,9 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' stocklist <- getListStocks(2016)
-#' id <- grep("cod-2224", stocklist$FishStockName)
-#' stocklist[id,]
-#' key <- stocklist$key[id]
-#' rec_img <- getSAGGraph(key, type = "Recruitment")
-#' plot.new()
-#' plot(rec_img)
+#' key <- findKey("cod", 2015)
+#' graphs <- getSAGGraphs(key[1])
+#' plot(graphs)
 #'
 #' @export
 
