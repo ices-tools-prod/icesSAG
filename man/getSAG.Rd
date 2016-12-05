@@ -7,7 +7,7 @@
 getSAG(stock, year, data = "summary", combine = TRUE)
 }
 \arguments{
-\item{stock}{a stock name, e.g. cod-347d, or NULL to process all stocks.}
+\item{stock}{a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.}
 
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
 
