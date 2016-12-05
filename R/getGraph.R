@@ -18,6 +18,11 @@
 #' landings_img <- getLandingsGraph(key)
 #' plot(landings_img)
 #'
+#' keys <- findKey("had", 2015)
+#'
+#' landings_plots <- getLandingsGraph(keys)
+#' plot(landings_plots)
+#'
 #' @export
 
 getLandingsGraph <- function(key) {
@@ -32,9 +37,20 @@ getLandingsGraph <- function(key) {
     sprintf(
       "http://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
       operation, key)
-  out <- curlSAG(url)
-  out <- parseGraph(out)
 
+  # read urls
+  out <- lapply(url, curlSAG)
+
+  # parse text
+  out <- lapply(out, parseGraph)
+
+  # drop any nulls
+  out <- out[!sapply(out, is.null)]
+
+  # set class
+  class(out) <- c("ices_standardgraph_list", class(out))
+
+  # return
   out
 }
 
