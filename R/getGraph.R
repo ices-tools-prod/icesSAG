@@ -25,11 +25,13 @@
 #'
 #' @export
 
+#' @importFrom utils tail
 getLandingsGraph <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
   # get function name as a character
+  # NOTE need tail(x, 1) here for when calling as icesSAG::get____(key)
   operation <- tail(as.character(match.call()[[1]]), 1)
 
   # read text string and parse to data frame
