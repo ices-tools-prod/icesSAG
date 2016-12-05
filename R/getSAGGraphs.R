@@ -4,8 +4,6 @@
 #'
 #' @param key the unique identifier of the stock assessment
 #'
-#' @param type the type of plot requested, e.g. "Landings", "Recruitment", ...
-#'
 #' @return An array representing a png.
 #'
 #' @seealso
@@ -28,6 +26,12 @@ getSAGGraphs <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
+  # only 1 key can be used
+  if (length(key) > 1) {
+    key <- key[1]
+    warning("key has length > 1 and only the first element will be used")
+  }
+
   # check graph type requested
   types <- c("Landings",
              "Recruitment",
@@ -45,6 +49,9 @@ getSAGGraphs <- function(key) {
 
   # parse text
   out <- lapply(out, parseGraph)
+
+  # drop NULLS
+  out <- out[!sapply(out, is.null)]
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))

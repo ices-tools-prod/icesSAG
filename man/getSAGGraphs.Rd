@@ -8,8 +8,6 @@ getSAGGraphs(key)
 }
 \arguments{
 \item{key}{the unique identifier of the stock assessment}
-
-\item{type}{the type of plot requested, e.g. "Landings", "Recruitment", ...}
 }
 \value{
 An array representing a png.
