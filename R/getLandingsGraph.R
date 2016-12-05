@@ -1,6 +1,6 @@
-#' Get a Summary Table of Historical Stock Size
+#' Get graphs of stock assessment output
 #'
-#' Get a summary table of historical stock size, recruitment, and fishing pressure.
+#' Get summary graphs of, e.g., historical stock size, recruitment, and fishing pressure.
 #'
 #' @param key the unique identifier of the stock assessment
 #'
@@ -13,15 +13,9 @@
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Colin Millar and Scott Large.
-#'
 #' @examples
-#' stocklist <- getListStocks(2016)
-#' id <- grep("cod-2224", stocklist$FishStockName)
-#' stocklist[id,]
-#' key <- stocklist$key[id]
+#' key <- findKey("cod-scow", 2015)
 #' landings_img <- getLandingsGraph(key)
-#' plot.new()
 #' plot(landings_img)
 #'
 #' @export
@@ -30,13 +24,44 @@ getLandingsGraph <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
-  # read XML string and parse to data frame
+  # get function name as a character
+  operation <- tail(as.character(match.call()[[1]]), 1)
+
+  # read text string and parse to data frame
   url <-
     sprintf(
-      "http://sg.ices.dk/StandardGraphsWebServices.asmx/getLandingsGraph?key=%i",
-      key)
+      "http://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
+      operation, key)
   out <- curlSAG(url)
   out <- parseGraph(out)
 
   out
 }
+
+#' @export
+getRecruitmentGraph <- getLandingsGraph
+
+#' @export
+getFishingMortalityGraph <- getLandingsGraph
+
+#' @export
+getSpawningStockBiomassGraph <- getLandingsGraph
+
+#' @export
+getFishMortality <- getLandingsGraph
+
+#' @export
+getstock_recruitment <- getLandingsGraph
+
+#' @export
+getYSSB <- getLandingsGraph
+
+#' @export
+getSSBHistoricalPerformance <- getLandingsGraph
+
+#' @export
+getFishingMortalityHistoricalPerformance <- getLandingsGraph
+
+#' @export
+getRecruitmentHistoricalPerformance <- getLandingsGraph
+

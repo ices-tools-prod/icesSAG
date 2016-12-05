@@ -2,7 +2,7 @@
 % Please edit documentation in R/getLandingsGraph.R
 \name{getLandingsGraph}
 \alias{getLandingsGraph}
-\title{Get a Summary Table of Historical Stock Size}
+\title{Get graphs of stock assessment output}
 \usage{
 getLandingsGraph(key)
 }
@@ -13,20 +13,13 @@ getLandingsGraph(key)
 An array representing a png.
 }
 \description{
-Get a summary table of historical stock size, recruitment, and fishing pressure.
+Get summary graphs of, e.g., historical stock size, recruitment, and fishing pressure.
 }
 \examples{
-stocklist <- getListStocks(2016)
-id <- grep("cod-2224", stocklist$FishStockName)
-stocklist[id,]
-key <- stocklist$key[id]
+key <- findKey("cod-scow", 2015)
 landings_img <- getLandingsGraph(key)
-plot.new()
 plot(landings_img)
 
-}
-\author{
-Colin Millar and Scott Large.
 }
 \seealso{
 \code{\link{getListStocks}} gets a list of stocks.
