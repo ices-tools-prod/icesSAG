@@ -25,8 +25,6 @@ Find a lookup key corresponding to a stock in a given assessment year.
 }
 \examples{
 findKey("cod-347d", 2015, full = TRUE)
-summary <- getSAG("cod-347d", 2015)
-refpts <- getSAG("cod-347d", 2015, "refpts")
 
 }
 \author{

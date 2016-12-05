@@ -14,11 +14,9 @@
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
 #' @examples
-#' key <- findKey("cod-scow", 2015)
-#' landings_img <- getLandingsGraph(key)
-#' plot(landings_img)
-#'
 #' keys <- findKey("had", 2015)
+#' landings_img <- getLandingsGraph(keys[1])
+#' plot(landings_img)
 #'
 #' landings_plots <- getLandingsGraph(keys)
 #' plot(landings_plots)

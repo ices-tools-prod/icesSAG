@@ -44,11 +44,9 @@ An array representing a png.
 Get summary graphs of, e.g., historical stock size, recruitment, and fishing pressure.
 }
 \examples{
-key <- findKey("cod-scow", 2015)
-landings_img <- getLandingsGraph(key)
-plot(landings_img)
-
 keys <- findKey("had", 2015)
+landings_img <- getLandingsGraph(keys[1])
+plot(landings_img)
 
 landings_plots <- getLandingsGraph(keys)
 plot(landings_plots)

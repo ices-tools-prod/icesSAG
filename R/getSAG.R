@@ -22,13 +22,13 @@
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Arni Magnusson.
-#'
 #' @examples
 #' summary <- getSAG("cod-347d", 2015)
 #' refpts <- getSAG("cod-347d", 2015, "refpts")
 #'
+#' \dontrun{
 #' cod_summary <- getSAG("cod", 2015)
+#' }
 #' @export
 
 getSAG <- function(stock, year, data = "summary", combine = TRUE) {

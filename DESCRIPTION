@@ -1,6 +1,6 @@
 Package: icesSAG
 Version: 1.2-0
-Date: 2016-08-21
+Date: 2016-12-05
 Title: Stock Assessment Graphs Database Web Services
 Authors@R: c(person("Colin", "Millar", role=c("aut"), email="colin.millar@ices.dk"),
              person("Scott", "Large", role=c("aut","cre"), email="scott.large@ices.dk"),
