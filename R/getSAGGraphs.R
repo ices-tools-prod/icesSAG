@@ -28,25 +28,31 @@
 #'
 #' @export
 
-getSAGGraph <- function(key, type) {
+getSAGGraphs <- function(key) {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
   # check graph type requested
-  type <- match.arg(type,
-                    c("Landings",
-                      "Recruitment",
-                      "FishingMortality",
-                      "SpawningStockBiomass"))
+  types <- c("Landings",
+             "Recruitment",
+             "FishingMortality",
+             "SpawningStockBiomass")
 
-  # read and parse XML from API
+  # read and parse text from API
   url <-
     sprintf(
       "http://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/get%sGraph?key=%i",
-      type, key)
+      types, key)
 
-  out <- curlSAG(url = url)
-  out <- parseGraph(out)
+  # read urls
+  out <- lapply(url, curlSAG)
 
+  # parse text
+  out <- lapply(out, parseGraph)
+
+  # set class
+  class(out) <- c("ices_standardgraph_list", class(out))
+
+  # return
   out
 }
