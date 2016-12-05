@@ -1,8 +1,16 @@
 --------------------------------------------------------------------------------
-icesSAG 1.2-0 (2016-10-29)
+icesSAG 1.2-0 (2016-12-05)
 --------------------------------------------------------------------------------
-o removed dependency on XML and RCurl by using text regex and download.file -> scan
+o removed dependency on XML and RCurl by using text regex and download.file -> scan.
 
+o Added ability to search for stocks using regex.
+
+o Added all graph web services which return a standard graph image (as a raster).
+
+o Added ploting methods for single and lists of standard graph images.
+
+o Fixed bug when different column names appear in stock summaries
+  add the user has requesed them to be combined.
 
 --------------------------------------------------------------------------------
 icesSAG 1.1-0 (2016-10-29)
