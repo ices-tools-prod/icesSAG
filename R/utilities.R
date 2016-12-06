@@ -1,7 +1,7 @@
 
 
 #' @importFrom utils download.file
-curlSAG <- function(url) {
+readSAG <- function(url) {
   # create file name
   tmp <- tempfile()
   # download file
@@ -155,7 +155,7 @@ plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
 
 checkSAGWebserviceOK <- function() {
   # return TRUE if web service is active, FALSE otherwise
-  out <- curlSAG("https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=-1")
+  out <- readSAG("https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=-1")
 
   # check server is not down by inspecting XML response for internal server error message
   if(!grepl("SummaryTable", out[2])) {
