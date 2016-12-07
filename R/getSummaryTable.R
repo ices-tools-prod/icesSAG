@@ -38,7 +38,7 @@ getSummaryTable <- function(key) {
     sprintf(
       "https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
       key)
-  out <- curlSAG(url)
+  out <- readSAG(url)
   out <- parseSummary(out)
 
   out

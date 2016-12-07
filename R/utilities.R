@@ -1,28 +1,44 @@
 
 
 #' @importFrom utils download.file
-curlSAG <- function(url) {
+readSAG <- function(url) {
+  # try downloading first:
   # create file name
   tmp <- tempfile()
-  # download file
-  if (os.type("windows")) {
-    download.file(url, destfile = tmp, quiet = TRUE)
-  } else if (os.type("unix")) {
-    download.file(url, destfile = tmp, quiet = TRUE, method = "wget")
-  } else if (os.type("other")) {
-    warning("Untested downloading in this platform")
-    download.file(url, destfile = tmp, quiet = TRUE)
-  }
   on.exit(unlink(tmp))
-  # scan lines
-  out <- scan(tmp, what = "", sep = "\n", quiet = TRUE)
 
-  out
+  # download file
+  ret <-
+    if (os.type("windows")) {
+      download.file(url, destfile = tmp, quiet = TRUE)
+    } else if (os.type("unix") & Sys.which("wget") != "") {
+      download.file(url, destfile = tmp, quiet = TRUE, method = "wget")
+    } else if (os.type("unix") & Sys.which("curl") != "") {
+      download.file(url, destfile = tmp, quiet = TRUE, method = "curl")
+    } else {
+      127
+    }
+
+  # check return value
+  if (ret == 0) {
+    # scan lines
+    scan(tmp, what = "", sep = "\n", quiet = TRUE)
+  } else {
+    message("Unable to download file so using slower method url().\n",
+            "Try setting an appropriate value via \n\toptions(download.file.method = ...)\n",
+            "see ?download.file for more information.")
+    # connect to url
+    con <- url(url)
+    on.exit(close(con))
+
+    # scan lines
+    scan(con, what = "", sep = "\n", quiet = TRUE)
+  }
 }
 
 
-parseSAG <- function(x) {
 
+parseSAG <- function(x) {
   # simply parse using line and column separators
   type <- gsub("*<ArrayOf(.*?) .*", "\\1", x[2])
   starts <- grep(paste0("<", type, ">"), x)
@@ -155,7 +171,7 @@ plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
 
 checkSAGWebserviceOK <- function() {
   # return TRUE if web service is active, FALSE otherwise
-  out <- curlSAG("https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=-1")
+  out <- readSAG("https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=-1")
 
   # check server is not down by inspecting XML response for internal server error message
   if(!grepl("SummaryTable", out[2])) {

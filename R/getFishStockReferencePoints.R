@@ -42,7 +42,7 @@ getFishStockReferencePoints <- function(key) {
     sprintf(
       "https://sg.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
       key)
-  out <- curlSAG(url)
+  out <- readSAG(url)
   out <- parseSAG(out)
 
   out
