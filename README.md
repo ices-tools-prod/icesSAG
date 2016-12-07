@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ices-tools-prod/icesSAG.svg?branch=master)](https://travis-ci.org/ices-tools-prod/icesSAG)
+[![Build Status](https://travis-ci.org/ices-tools-prod/icesSAG.svg?branch=development)](https://travis-ci.org/ices-tools-prod/icesSAG)
 [![codecov](https://codecov.io/gh/ices-tools-prod/icesSAG/branch/master/graph/badge.svg)](https://codecov.io/gh/ices-tools-prod/icesSAG)
 [![GitHub release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=2592000)](https://github.com/ices-tools-prod/icesSAG/tree/release)
 [![CRAN Status](http://www.r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)

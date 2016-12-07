@@ -29,7 +29,7 @@ getListStocks <- function(year) {
     sprintf(
       "https://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
       year)
-  out <- curlSAG(url)
+  out <- readSAG(url)
   out <- parseSAG(out)
 
   out

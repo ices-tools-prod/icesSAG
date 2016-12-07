@@ -45,7 +45,7 @@ getSAGGraphs <- function(key) {
       types, key)
 
   # read urls
-  out <- lapply(url, curlSAG)
+  out <- lapply(url, readSAG)
 
   # parse text
   out <- lapply(out, parseGraph)

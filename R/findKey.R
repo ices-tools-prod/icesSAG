@@ -34,7 +34,7 @@ findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALS
       year)
   out <- lapply(url,
                 function(u) {
-                  out <- curlSAG(u)
+                  out <- readSAG(u)
                   parseSAG(out)
                 })
   out <- do.call(rbind, out)
