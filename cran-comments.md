@@ -1,6 +1,7 @@
 ## Test environments
-* local Windows 7 x64 (build 7601) Service Pack 1, R 3.3.2
-* ubuntu 12.04 (on travis-ci), R 3.3.1
+* local Windows 10 install, R 3.3.2
+* ubuntu 12.04 (on travis-ci), (release and devel)
+* OS X 10.11.6 (on travis-ci), (release and devel)
 * win-builder (devel)
 
 ## R CMD check results
@@ -9,4 +10,5 @@
 
 ## Reverse dependencies
 
-There are no reverse dependencies.
+This is a new release, so there are no reverse dependencies.
+

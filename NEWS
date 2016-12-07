@@ -2,6 +2,7 @@
 icesSAG 1.2-0 (2016-12-05)
 --------------------------------------------------------------------------------
 o removed dependency on XML and RCurl by using text regex and download.file -> scan.
+  If download.file fails then url() is used to make the connection.
 
 o Added ability to search for stocks using regex.
 
