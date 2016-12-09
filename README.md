@@ -24,7 +24,7 @@ Installation
 icesSAG can be installed from CRAN using the `install.packages` command:
 
 ```R
-install.packages('icesSAG')
+install.packages("icesSAG")
 ```
 
 Usage
@@ -60,5 +60,6 @@ there if you encounter problems or have suggestions for future versions.
 The current development version can be installed using:
 
 ```R
-devtools::install_github('ices-tools-prod/icesSAG')
+library(devtools)
+install_github("ices-tools-prod/icesSAG")
 ```
