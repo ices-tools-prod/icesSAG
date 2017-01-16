@@ -51,7 +51,7 @@ parseSAG <- function(x) {
   if (length(x) == 0) return(NULL)
 
   # match content of first <tag>
-  names_x <- gsub(" *<(.*?)>.*", "\\1", x[1:ncol])
+  names_x <- gsub(" *<(.*?)(>| />).*", "\\1", x[1:ncol])
 
   # delete all <tags>
   x <- gsub(" *<.*?>", "", x)
