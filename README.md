@@ -12,8 +12,8 @@ icesSAG
 
 icesSAG provides R functions that access the
 [web services](https://datras.ices.dk/WebServices/Webservices.aspx) of the
-[ICES (International Council for the Exploration of the Sea)](http://www.ices.dk/Pages/default.aspx)
-[Stock Assessment Graphs Database](http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx).
+[ICES](http://www.ices.dk/Pages/default.aspx)
+[Stock Assessment Graphs](http://sg.ices.dk) database.
 
 icesSAG is implemented as an [R](https://www.r-project.org) package and
 available on [CRAN](https://cran.r-project.org/package=icesSAG).
@@ -24,7 +24,7 @@ Installation
 icesSAG can be installed from CRAN using the `install.packages` command:
 
 ```R
-install.packages('icesSAG')
+install.packages("icesSAG")
 ```
 
 Usage
@@ -42,11 +42,11 @@ References
 
 ICES Stock Assessment Graphs database:
 
-[http://standardgraphs.ices.dk/](http://standardgraphs.ices.dk/)
+[http://sg.ices.dk](http://sg.ices.dk)
 
 ICES Stock Assessment Graphs database web services:
 
-[http://standardgraphs.ices.dk/webservices.aspx](http://standardgraphs.ices.dk/webservices.aspx)
+[http://sg.ices.dk/webservices.aspx](http://sg.ices.dk/webservices.aspx)
 
 Development
 -----------
@@ -60,5 +60,6 @@ there if you encounter problems or have suggestions for future versions.
 The current development version can be installed using:
 
 ```R
-devtools::install_github('ices-tools-prod/icesSAG')
+library(devtools)
+install_github("ices-tools-prod/icesSAG")
 ```

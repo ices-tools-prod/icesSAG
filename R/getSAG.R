@@ -2,7 +2,7 @@
 #'
 #' This function combines the functionality of getListStocks,
 #' getFishStockReferencePoints, and getSummaryTable.
-#' It supports querying many years and quarters in one function call.
+#' It supports querying many years and stocks in one function call.
 #'
 #' @param stock a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
