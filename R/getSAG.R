@@ -57,7 +57,7 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
   # parse
   out <- lapply(out, parseFunction)
 
-  # drop any null entries (happens when not published stock creep in)
+  # drop any null entries (happens when not published stocks creep in)
   out <- out[!sapply(out, is.null)]
 
   # combine tables
