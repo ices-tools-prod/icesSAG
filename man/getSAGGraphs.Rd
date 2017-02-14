@@ -21,9 +21,6 @@ graphs <- getSAGGraphs(key[1])
 plot(graphs)
 
 }
-\author{
-Colin Millar and Scott Large.
-}
 \seealso{
 \code{\link{getListStocks}} gets a list of stocks.
 
@@ -31,4 +28,6 @@ Colin Millar and Scott Large.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
-
+\author{
+Colin Millar and Scott Large.
+}
