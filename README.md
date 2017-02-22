@@ -12,8 +12,7 @@ icesSAG
 
 icesSAG provides R functions that access the
 [web services](https://datras.ices.dk/WebServices/Webservices.aspx) of the
-[ICES](http://www.ices.dk/Pages/default.aspx)
-[Stock Assessment Graphs](http://sg.ices.dk) database.
+[ICES](http://ices.dk) [Stock Assessment Graphs](http://sg.ices.dk) database.
 
 icesSAG is implemented as an [R](https://www.r-project.org) package and
 available on [CRAN](https://cran.r-project.org/package=icesSAG).
@@ -41,10 +40,10 @@ References
 ----------
 
 ICES Stock Assessment Graphs database:
-[http://sg.ices.dk](http://sg.ices.dk)
+http://sg.ices.dk
 
 ICES Stock Assessment Graphs web services:
-[http://sg.ices.dk/webservices.aspx](http://sg.ices.dk/webservices.aspx)
+http://sg.ices.dk/webservices.aspx
 
 Development
 -----------
