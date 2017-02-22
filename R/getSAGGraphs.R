@@ -51,6 +51,7 @@ getSAGGraphs <- function(key) {
   # parse text
   out <- lapply(out, parseGraph)
 
+  # drop NULLs
   out <- out[!sapply(out, is.null)]
 
   # set class
