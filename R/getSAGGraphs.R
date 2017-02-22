@@ -42,7 +42,7 @@ getSAGGraphs <- function(key) {
   # read and parse text from API
   url <-
     sprintf(
-      "http://standardgraphs.ices.dk/StandardGraphsWebServices.asmx/get%sGraph?key=%i",
+      "http://sg.ices.dk/StandardGraphsWebServices.asmx/get%sGraph?key=%i",
       types, key)
 
   # read urls
