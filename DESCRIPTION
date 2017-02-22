@@ -14,4 +14,4 @@ Description: R interface to access the web services of the ICES (International
              database <http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx>.
 License: GPL (>= 2)
 URL: http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

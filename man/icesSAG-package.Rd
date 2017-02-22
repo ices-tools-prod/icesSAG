@@ -2,8 +2,8 @@
 % Please edit documentation in R/icesSAG-package.R
 \docType{package}
 \name{icesSAG-package}
-\alias{icesSAG}
 \alias{icesSAG-package}
+\alias{icesSAG}
 \title{Stock Assessment Graphs Database Web Services}
 \description{
 R interface to access the web services of the ICES (International Council
@@ -22,10 +22,9 @@ for the Exploration of the Sea) Stock Assessment Graphs (SAG) database.
   \code{\link{getListStocks}} \tab list of stocks
 }
 }
-\author{
-Colin Millar, Scott Large, and Arni Magnusson.
-}
 \references{
 ICES Stock Assessment Graphs database: \url{http://sg.ices.dk/}.
 }
-
+\author{
+Colin Millar, Scott Large, and Arni Magnusson.
+}
