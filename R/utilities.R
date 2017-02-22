@@ -1,7 +1,7 @@
 
 
 #url <- httr::modify_url("https://",
-#                        host = "sg.ices.dk/manage/StockAssessmentGraphsWithToken.asmx", 
+#                        host = "sg.ices.dk/manage/StockAssessmentGraphsWithToken.asmx",
 #                        path = "getListAvailableSAGSettingsPerChart",
 #                        query = list(SAGChartKey = 1, token = SAG_pat()))
 
@@ -13,6 +13,8 @@ readSAG <- function(url) {
   if (httr::http_type(resp) != "text/xml") {
     stop("API did not return xml", call. = FALSE)
   }
+
+  message("GETing ...", url)
 
   # return as list
   resp <-httr::content(resp)
@@ -32,14 +34,14 @@ parseSAG <- function(x) {
 
   # remove any html tags
   x <- gsub("<.*?>", "", x)
-  
+
   # trim white space
   x <- trimws(x)
-  
+
   # SAG uses "" and "NA" to indicate NA
   x[x == ""] <- NA
   x[x == "NA"] <- NA
-    
+
   # make into a data.frame
   x <- as.data.frame(x, stringsAsFactors = FALSE)
 
@@ -68,9 +70,9 @@ parseSummary <- function(x) {
     stop("Something went wrong")
   }
 
-  # parse summary table  
+  # parse summary table
   x <- parseSAG(x[["lines"]])
-  
+
   # tag on info and return
   cbind(x, info, stringsAsFactors = FALSE)
 }
@@ -78,12 +80,15 @@ parseSummary <- function(x) {
 
 parseGraph <- function(x) {
 
+  # get png file info
   fileurl <- unlist(x)
+  size <- 2^14
 
-  tmp <- tempfile(fileext = ".png")
-  utils::download.file(fileurl, tmp, mode="wb", quiet=TRUE)
+  # read raw data
+  out <- readBin(con = fn, what = raw(0), n = size)
 
-  out <- png::readPNG(tmp)
+  # read as png
+  out <- png::readPNG(out)
 
   class(out) <- c("ices_standardgraph", class(out))
   out
@@ -127,6 +132,7 @@ checkSAGWebserviceOK <- function() {
     TRUE
   }
 }
+
 
 
 checkYearOK <- function(year) {
@@ -185,18 +191,5 @@ simplify <- function(x) {
     }
   }
   x
-}
-
-
-
-# returns TRUE if correct operating system is passed as an argument
-os.type <- function (type = c("unix", "windows", "other"))
-{
-  type <- match.arg(type)
-  if (type %in% c("windows", "unix")) {
-    .Platform$OS.type == type
-  } else {
-    TRUE
-  }
 }
 
