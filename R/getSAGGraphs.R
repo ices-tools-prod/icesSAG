@@ -1,10 +1,11 @@
-#' Get a Summary Table of Historical Stock Size
+#' Get Summary Graphs of Stock Assessment Output
 #'
-#' Get a summary table of historical stock size, recruitment, and fishing pressure.
+#' Get summary graphs of catches, recruitment, fishing pressure, and spawning
+#' stock biomass.
 #'
 #' @param key the unique identifier of the stock assessment
 #'
-#' @return An array representing a png.
+#' @return An array representing a bitmap.
 #'
 #' @seealso
 #' \code{\link{getListStocks}} gets a list of stocks.
@@ -50,12 +51,11 @@ getSAGGraphs <- function(key) {
   # parse text
   out <- lapply(out, parseGraph)
 
-  # drop NULLS
+  # drop NULLs
   out <- out[!sapply(out, is.null)]
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))
 
-  # return
   out
 }
