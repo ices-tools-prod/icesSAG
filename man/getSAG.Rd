@@ -21,7 +21,7 @@ A data frame (default) or a list if \code{combine} is \code{TRUE}.
 \description{
 This function combines the functionality of getListStocks,
 getFishStockReferencePoints, and getSummaryTable.
-It supports querying many years and quarters in one function call.
+It supports querying many years and stocks in one function call.
 }
 \note{
 Only years with "Published" status are returned.
