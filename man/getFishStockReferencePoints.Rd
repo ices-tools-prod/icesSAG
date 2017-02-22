@@ -24,9 +24,6 @@ refpts <- getFishStockReferencePoints(key)
 refpts
 
 }
-\author{
-Colin Millar and Scott Large.
-}
 \seealso{
 \code{\link{getSAG}} supports querying many years and quarters in one
   function call.
@@ -36,4 +33,6 @@ Colin Millar and Scott Large.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
-
+\author{
+Colin Millar and Scott Large.
+}

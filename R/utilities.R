@@ -62,12 +62,11 @@ parseSAG <- function(x) {
   x[x == ""] <- NA
   x[x == "NA"] <- NA
 
-  # make into a data.frame
+  # convert to data frame
   dim(x) <- c(ncol, length(x)/ncol)
   row.names(x) <- names_x
   x <- as.data.frame(t(x), stringsAsFactors = FALSE)
 
-  # simplify and return
   simplify(x)
 }
 
@@ -75,7 +74,7 @@ parseSAG <- function(x) {
 
 parseSummary <- function(x) {
 
-  # check for not published:
+  # check for not published
   if ( gsub(" *<.*?>", "", x[3]) == "Stock not published") {
     return(NULL)
   }
@@ -108,7 +107,7 @@ parseSummary <- function(x) {
   # delete all <tags>
   x <- gsub(" *<.*?>", "", x)
 
-  # make into a data.frame
+  # convert to data frame
   dim(x) <- c(ncol, length(x)/ncol)
   row.names(x) <- names_x
   x <- as.data.frame(t(x), stringsAsFactors = FALSE)
@@ -120,7 +119,6 @@ parseSummary <- function(x) {
   x[x == ""] <- NA
   x[x == "NA"] <- NA
 
-  # simplify
   simplify(x)
 }
 

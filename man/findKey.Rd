@@ -27,12 +27,11 @@ Find a lookup key corresponding to a stock in a given assessment year.
 findKey("cod-347d", 2015, full = TRUE)
 
 }
-\author{
-Arni Magnusson.
-}
 \seealso{
 \code{\link{getListStocks}} gets a list of stocks.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
-
+\author{
+Arni Magnusson.
+}

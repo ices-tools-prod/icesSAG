@@ -3,15 +3,14 @@ Version: 1.2-0
 Date: 2016-12-07
 Title: Stock Assessment Graphs Database Web Services
 Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@ices.dk"),
-             person("Scott", "Large", role=c("aut"), email="scott.large@ices.dk"),
-             person("Arni", "Magnusson", role=c("aut"), email="arni.magnusson@ices.dk"))
+             person("Scott", "Large", role=c("aut")),
+             person("Arni", "Magnusson", role=c("aut")))
 Imports: grid,
          png,
          utils
 Suggests: testthat
-Description: R interface to access the web services of the ICES (International
-             Council for the Exploration of the Sea) Stock Assessment Graphs
-             database <http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx>.
+Description: R interface to access the web services of the ICES Stock Assessment
+             Graphs database.
 License: GPL (>= 2)
-URL: http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx
-RoxygenNote: 5.0.1
+URL: http://sg.ices.dk
+RoxygenNote: 6.0.1

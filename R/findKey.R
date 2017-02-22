@@ -51,7 +51,6 @@ findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALS
     out <- out[select,]
   }
 
-  # return
   if (full) {
     out
   } else {
