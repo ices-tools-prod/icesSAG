@@ -1,10 +1,11 @@
-#' Get graphs of stock assessment output
+#' Get a Graph of Stock Assessment Output
 #'
-#' Get summary graphs of, e.g., historical stock size, recruitment, and fishing pressure.
+#' Get a graph of stock assessment output, e.g., historical stock size,
+#' recruitment, and fishing pressure.
 #'
 #' @param key the unique identifier of the stock assessment
 #'
-#' @return An array representing a png.
+#' @return An array representing a bitmap.
 #'
 #' @seealso
 #' \code{\link{getListStocks}} gets a list of stocks.

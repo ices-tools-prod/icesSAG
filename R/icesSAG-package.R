@@ -7,8 +7,8 @@
 #' @title Stock Assessment Graphs Database Web Services
 #'
 #' @description
-#' R interface to access the web services of the ICES (International Council
-#' for the Exploration of the Sea) Stock Assessment Graphs (SAG) database.
+#' R interface to access the web services of the ICES Stock Assessment Graphs
+#' database.
 #'
 #' @details
 #' \emph{Get dataset:}
@@ -26,6 +26,9 @@
 #' @author Colin Millar, Scott Large, and Arni Magnusson.
 #'
 #' @references
-#' ICES Stock Assessment Graphs database: \url{http://sg.ices.dk/}.
+#' ICES Stock Assessment Graphs database: \url{http://sg.ices.dk}.
+#'
+#' ICES Stock Assessment Graphs web services:
+#' \url{http://sg.ices.dk/webservices.aspx}.
 
 NA

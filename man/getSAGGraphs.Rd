@@ -2,7 +2,7 @@
 % Please edit documentation in R/getSAGGraphs.R
 \name{getSAGGraphs}
 \alias{getSAGGraphs}
-\title{Get a Summary Table of Historical Stock Size}
+\title{Get Summary Graphs of Stock Assessment Output}
 \usage{
 getSAGGraphs(key)
 }
@@ -10,10 +10,11 @@ getSAGGraphs(key)
 \item{key}{the unique identifier of the stock assessment}
 }
 \value{
-An array representing a png.
+An array representing a bitmap.
 }
 \description{
-Get a summary table of historical stock size, recruitment, and fishing pressure.
+Get summary graphs of catches, recruitment, fishing pressure, and spawning
+stock biomass.
 }
 \examples{
 key <- findKey("cod", 2015)

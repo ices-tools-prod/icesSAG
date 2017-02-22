@@ -12,7 +12,7 @@
 \alias{getSSBHistoricalPerformance}
 \alias{getFishingMortalityHistoricalPerformance}
 \alias{getRecruitmentHistoricalPerformance}
-\title{Get graphs of stock assessment output}
+\title{Get a Graph of Stock Assessment Output}
 \usage{
 getLandingsGraph(key)
 
@@ -38,10 +38,11 @@ getRecruitmentHistoricalPerformance(key)
 \item{key}{the unique identifier of the stock assessment}
 }
 \value{
-An array representing a png.
+An array representing a bitmap.
 }
 \description{
-Get summary graphs of, e.g., historical stock size, recruitment, and fishing pressure.
+Get a graph of stock assessment output, e.g., historical stock size,
+recruitment, and fishing pressure.
 }
 \examples{
 keys <- findKey("had", 2015)

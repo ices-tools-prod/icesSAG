@@ -45,8 +45,6 @@ parseSAG <- function(x) {
   # make into a data.frame
   x <- as.data.frame(x, stringsAsFactors = FALSE)
 
-
-  # simplify and return
   simplify(x)
 }
 
@@ -82,10 +80,10 @@ parseGraph <- function(x) {
 
   # get png file info
   fileurl <- unlist(x)
-  size <- 2^14
+  size <- 2^16
 
   # read raw data
-  out <- readBin(con = fn, what = raw(0), n = size)
+  out <- readBin(con = fileurl, what = raw(0), n = size)
 
   # read as png
   out <- png::readPNG(out)
