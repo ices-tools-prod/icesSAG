@@ -28,22 +28,9 @@
 #' @export
 
 getFishStockReferencePoints <- function(key) {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
+  # call webservice for all supplied keys
+  out <- lapply(key, function(i) sag_webservice("getFishStockReferencePoints", key = i))
 
-  # only 1 key can be used
-  if (length(key) > 1) {
-    key <- key[1]
-    warning("key has length > 1 and only the first element will be used")
-  }
-
-  # read XML string and parse to data frame
-  url <-
-    sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
-      key)
-  out <- readSAG(url)
-  out <- parseSAG(out)
-
-  out
+  # parse output
+  lapply(out, sag_parse)
 }

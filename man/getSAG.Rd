@@ -32,6 +32,7 @@ refpts <- getSAG("cod-347d", 2015, "refpts")
 
 \dontrun{
 cod_summary <- getSAG("cod", 2015)
+cod_refpts <- getSAG("cod", 2015:2016, "refpts")
 }
 }
 \seealso{

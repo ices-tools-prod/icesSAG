@@ -30,16 +30,9 @@
 #' @export
 
 getSummaryTable <- function(key) {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
+  # call webservice for all supplied keys
+  out <- lapply(key, function(i) sag_webservice("getSummaryTable", key = i))
 
-  # read XML string and parse to data frame
-  url <-
-    sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
-      key)
-  out <- readSAG(url)
-  out <- parseSummary(out)
-
-  out
+  # parse output
+  lapply(out, sag_parseSummary)
 }

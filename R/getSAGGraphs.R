@@ -24,35 +24,24 @@
 #' @export
 
 getSAGGraphs <- function(key) {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
-
   # only 1 key can be used
   if (length(key) > 1) {
     key <- key[1]
-    warning("key has length > 1 and only the first element will be used")
+    warning("key has length > 1 and only the first key will be used")
   }
 
-  # check graph type requested
+  # which graph types to get
   types <- c("Landings",
              "Recruitment",
              "FishingMortality",
              "SpawningStockBiomass")
 
-  # read and parse text from API
-  url <-
-    sprintf(
-      "http://sg.ices.dk/StandardGraphsWebServices.asmx/get%sGraph?key=%i",
-      types, key)
-
-  # read urls
-  out <- lapply(url, readSAG)
-
-  # parse text
-  out <- lapply(out, parseGraph)
-
-  # drop NULLs
-  out <- out[!sapply(out, is.null)]
+  # call webservices, built as: get<types>Graph
+  out <-
+    sapply(types,
+           function(x)
+             do.call(sprintf("get%sGraph", x),
+                     args = list(key = key)))
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))
