@@ -29,24 +29,16 @@ NULL
 #' @rdname getGraphs
 #' @export
 getLandingsGraph <- function(key) {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
 
   # get function name as a character
   # NOTE need tail(x, 1) here for when calling as icesSAG::get____(key)
   operation <- utils::tail(as.character(match.call()[[1]]), 1)
 
-  # read text string and parse to data frame
-  url <-
-    sprintf(
-      "http://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
-      operation, key)
+  # call webservice for all supplied keys
+  out <- lapply(key, function(i) sag_webservice(operation, key = i))
 
-  # read urls
-  out <- lapply(url, readSAG)
-
-  # parse text
-  out <- lapply(out, parseGraph)
+  # parse output
+  out <- lapply(out, sag_parseGraph)
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))

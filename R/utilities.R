@@ -1,28 +1,86 @@
+# webservice utilities
 
+sag_webservice <- function(service, ..., check = TRUE) {
+  # check web services are running
+  if (check && !checkSAGWebserviceOK()) return (NULL)
 
-#url <- httr::modify_url("https://",
-#                        host = "sg.ices.dk/manage/StockAssessmentGraphsWithToken.asmx",
-#                        path = "getListAvailableSAGSettingsPerChart",
-#                        query = list(SAGChartKey = 1, token = SAG_pat()))
-
-#x <- readSAG(url)
-
-readSAG <- function(url) {
-  # read url contents
-  resp <- httr::GET(url)
-  if (httr::http_type(resp) != "text/xml") {
-    stop("API did not return xml", call. = FALSE)
+  # form uri of webservice
+  if (getOption("icesSAG.use_token")) {
+    uri <- sag_uri(service, ..., token = sg_pat())
+  } else {
+    uri <- sag_uri(service, ...)
   }
 
-  message("GETing ...", url)
+  # preform request
+  sag_get(uri)
+}
 
-  # return as list
-  resp <-httr::content(resp)
-  xml2::as_list(resp)
+checkSAGWebserviceOK <- function() {
+  # return TRUE if web service is active, FALSE otherwise
+  out <- try(httr::GET(sag_uri("getSummaryTable", key = -1)), silent = TRUE)
+
+  # if this errored then there is probably no internet connection
+  if (inherits(out, "try-error")) {
+    warning("Attempt to access webservice failed:\n", attr(out, "condition"))
+    FALSE
+  } else
+  # check server is not down by inspecting response for internal server error message
+  if(httr::http_error(out)) {
+    warning("Web service failure: the server seems to be down, please try again later.\n",
+            "http status message: ", httr::http_status(out)$message)
+    FALSE
+  } else {
+    TRUE
+  }
 }
 
 
-parseSAG <- function(x) {
+sag_uri <- function(service, ...) {
+  # set up api url
+  query <- list(...)
+
+  # which api are we using
+  if ("token" %in% names(query)) {
+    scheme <- "https"
+    api <- "Manage/StockAssessmentGraphsWithToken.asmx"
+    # keep for debuging
+    if (grepl("localhost", getOption("icesSAG.hostname"))) scheme <- "http"
+  } else {
+    scheme <- "http"
+    api <- "StandardGraphsWebServices.asmx"
+  }
+
+  path <- if (!missing(service)) paste(api, service, sep = "/") else api
+
+  # return url
+  httr::modify_url("",
+                   scheme = scheme,
+                   hostname = getOption("icesSAG.hostname"),
+                   path = path,
+                   query = if (length(query) == 0) NULL else query)
+}
+
+
+sag_get <- function(uri) {
+  if (getOption("icesSAG.messages"))
+    message("GETing ...", uri)
+
+  # read url contents
+  resp <- httr::GET(uri)
+
+  # return as list
+  if (httr::http_type(resp) == "text/xml") {
+    xml2::as_list(httr::content(resp))
+  } else {
+    warning("in SAG API - ", httr::content(resp), call. = FALSE)
+  }
+}
+
+
+
+
+
+sag_parse <- function(x) {
   # assume x is a table structure
   xrow <- structure(rep(NA, length(x[[1]])), names = names(x[[1]]))
   x <- lapply(unname(x), unlist)
@@ -50,102 +108,85 @@ parseSAG <- function(x) {
 
 
 
-parseSummary <- function(x) {
-
+sag_parseSummary <- function(x) {
   # get auxilliary info
   info <- as.data.frame(lapply(x[names(x) != "lines"], "[[", 1), stringsAsFactors = FALSE)
-  # tidy
+  # tidy info
   x[x == ""] <- NA
   x[x == "NA"] <- NA
   # simplify
   info <- simplify(info)
 
-  # check for not published:
-  if (info$StockPublishNote == "Stock not published") {
-    return(NULL)
-  }
-  if (info$StockPublishNote != "Stock published") {
-    stop("Something went wrong")
-  }
-
   # parse summary table
-  x <- parseSAG(x[["lines"]])
+  x <- sag_parse(x[["lines"]])
 
   # tag on info and return
   cbind(x, info, stringsAsFactors = FALSE)
 }
 
 
-parseGraph <- function(x) {
-
+sag_parseGraph <- function(x) {
   # get png file info
   fileurl <- unlist(x)
   size <- 2^16
 
-  # read raw data
-  out <- readBin(con = fileurl, what = raw(0), n = size)
+  # try read raw data
+  out <- try(readBin(con = fileurl, what = raw(0), n = size), silent = TRUE)
+  if (inherits(out, "try-error")) {
+    return(NULL)
+  }
 
   # read as png
-  out <- png::readPNG(out)
-
-  class(out) <- c("ices_standardgraph", class(out))
-  out
+  png::readPNG(out)
 }
 
 
-#' @export
-plot.ices_standardgraph <- function(x, y = NULL, ...) {
-  grid::grid.raster(x)
+sag_parseWSDL <- function(x) {
+  x <- x$types$schema[names(x$types$schema) == "element"]
+  types <- lapply(x, function(x) attributes(x)$names)
+  keep <- sapply(types, function(x) identical(x == "complexType", TRUE))
+  keep <- which(keep)[seq(1,sum(keep), by = 2)]
+
+  # strip out only webservice calls
+  x <- x[keep]
+  names(x) <- unname(sapply(x, function(x) attributes(x)$name))
+
+  # simplify a little
+  x <- lapply(x, function(x) x$complexType$sequence)
+
+  # extract parameter info
+  lapply(x,
+      function(x)
+          unname(sapply(x, function(y) attributes(y)$name))
+          )
 }
+
+
+
+
 
 #' @export
 plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
-  # find best plot layout
+  # clear the page
+  grid::grid.newpage()
+
+  # find best plot layout (stolen from Simon Wood!)
   n.plots <- length(x)
   c <- r <- trunc(sqrt(n.plots))
   if (c < 1) r <- c <- 1
   if (c * r < n.plots) c <- c + 1
   if (c * r < n.plots) r <- r + 1
+
   # calculate x and y locations for plots -
   # plot like a table: from top to bottom and left to right
   x_loc <- rep((1:r)/r - 1/(2*r), c)
   y_loc <- rep((c:1)/c  - 1/(2*c), each = r)
   for (i in seq_along(x)) {
-    grid::grid.raster(x[[i]], x = x_loc[i], y = y_loc[i], width = 1/r, height = 1/c)
+    if (!is.null(x[[i]]))
+      grid::grid.raster(x[[i]], x = x_loc[i], y = y_loc[i], width = 1/r, height = 1/c)
   }
 }
 
-
-
-checkSAGWebserviceOK <- function() {
-  # return TRUE if web service is active, FALSE otherwise
-  out <- httr::GET("https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=-1")
-
-  # check server is not down by inspecting XML response for internal server error message
-  if(httr::http_error(out)) {
-    warning("Web service failure: the server seems to be down, please try again later.\n",
-            "http status message: ", httr::http_status(out)$message)
-    FALSE
-  } else {
-    TRUE
-  }
-}
-
-
-
-checkYearOK <- function(year) {
-  # check year against available years
-  all_years <- getListStocks(year = 0)
-  published_years <- unique(as.numeric(all_years$AssessmentYear[!grepl("Not", all_years$Status)]))
-
-  if (!year %in% published_years) {
-    message("Supplied year (", year, ") is not available.\n  Available options are:\n",
-            paste(utils::capture.output(print(sort(published_years))), collapse = "\n"))
-    FALSE
-  } else {
-    TRUE
-  }
-}
 
 
 simplify <- function(x) {

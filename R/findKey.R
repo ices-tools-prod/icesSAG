@@ -24,30 +24,20 @@
 
 findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
 {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
-
-  # get stock list
-  url <-
-    sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
-      year)
-  out <- lapply(url,
-                function(u) {
-                  out <- readSAG(u)
-                  parseSAG(out)
-                })
-  out <- do.call(rbind, out)
+  # get list of all stocks for all supplied years
+  out <- do.call(rbind, lapply(year, getListStocks))
 
   # apply filters
   if (published) {
     out <- out[out$Status == "Published",]
   }
 
-  if (!is.null(stock)) {
+  if (!missing(stock)) {
     stock <- tolower(stock)
     if (!regex) stock <- paste0("^", stock, "$")
-    select <- unlist(lapply(stock, grep, tolower(out$FishStockName)))
+    select <- c(unlist(lapply(stock, grep, tolower(out$FishStockName))),
+                unlist(lapply(stock, grep, tolower(out$StockDescription))),
+                unlist(lapply(stock, grep, tolower(out$SpeciesName))))
     out <- out[select,]
   }
 
