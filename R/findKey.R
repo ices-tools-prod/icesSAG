@@ -4,7 +4,7 @@
 #'
 #' @param stock a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
-#' @param published whether to include only years where status is "Published".
+#' @param published whether to restrict output to where status is "Published".
 #' @param regex whether to match the stock name as a regular expression.
 #' @param full whether to return a data frame with all stock list columns.
 #'
@@ -22,7 +22,7 @@
 #'
 #' @export
 
-findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
+findKey <- function(stock, year = 0, published = FALSE, regex = TRUE, full = FALSE)
 {
   # get list of all stocks for all supplied years
   out <- do.call(rbind, lapply(year, getListStocks))
