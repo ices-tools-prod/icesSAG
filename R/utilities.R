@@ -2,7 +2,7 @@
 
 sag_webservice <- function(service, ..., check = TRUE) {
   # check web services are running
-  if (check && !checkSAGWebserviceOK()) return (NULL)
+  if (check && !sag_checkWebserviceOK()) return (NULL)
 
   # form uri of webservice
   if (getOption("icesSAG.use_token")) {
@@ -15,7 +15,7 @@ sag_webservice <- function(service, ..., check = TRUE) {
   sag_get(uri)
 }
 
-checkSAGWebserviceOK <- function() {
+sag_checkWebserviceOK <- function() {
   # return TRUE if web service is active, FALSE otherwise
   out <- try(httr::GET(sag_uri("getSummaryTable", key = -1)), silent = TRUE)
 
@@ -63,7 +63,7 @@ sag_uri <- function(service, ...) {
 
 sag_get <- function(uri) {
   if (getOption("icesSAG.messages"))
-    message("GETing ...", uri)
+    message("GETing ... ", uri)
 
   # read url contents
   resp <- httr::GET(uri)
@@ -110,12 +110,7 @@ sag_parse <- function(x) {
 
 sag_parseSummary <- function(x) {
   # get auxilliary info
-  info <- as.data.frame(lapply(x[names(x) != "lines"], "[[", 1), stringsAsFactors = FALSE)
-  # tidy info
-  x[x == ""] <- NA
-  x[x == "NA"] <- NA
-  # simplify
-  info <- simplify(info)
+  info <- sag_parse(list(x[names(x) != "lines"]))
 
   # parse summary table
   x <- sag_parse(x[["lines"]])
@@ -162,6 +157,16 @@ sag_parseWSDL <- function(x) {
 }
 
 
+
+sag_parseUpload <- function(x) {
+  # parse header information
+  info <- sag_parse(list(x[names(x) != "Fish_Data"]))
+
+  # tidy fish data
+  fishdata <- sag_parse(x[names(x) == "Fish_Data"])
+
+  list(info = info, fishdata = fishdata)
+}
 
 
 

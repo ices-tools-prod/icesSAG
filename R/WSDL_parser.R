@@ -3,7 +3,7 @@
 
 getWebServiceDescription <- function() {
   # check web services are running
-  if (!checkSAGWebserviceOK()) return (NULL)
+  if (!sag_checkWebserviceOK()) return (NULL)
 
   # get webservice descriptions
   out <- sag_get(httr::modify_url(sag_uri(), query = "WSDL"))
