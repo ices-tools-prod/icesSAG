@@ -83,3 +83,6 @@ getFishingMortalityHistoricalPerformance <- getLandingsGraph
 #' @export
 getRecruitmentHistoricalPerformance <- getLandingsGraph
 
+#' @rdname getGraphs
+#' @export
+getStockStatusTable <- getLandingsGraph

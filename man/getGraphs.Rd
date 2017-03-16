@@ -12,6 +12,7 @@
 \alias{getSSBHistoricalPerformance}
 \alias{getFishingMortalityHistoricalPerformance}
 \alias{getRecruitmentHistoricalPerformance}
+\alias{getStockStatusTable}
 \title{Get a Graph of Stock Assessment Output}
 \usage{
 getLandingsGraph(key)
@@ -33,6 +34,8 @@ getSSBHistoricalPerformance(key)
 getFishingMortalityHistoricalPerformance(key)
 
 getRecruitmentHistoricalPerformance(key)
+
+getStockStatusTable(key)
 }
 \arguments{
 \item{key}{the unique identifier of the stock assessment}
