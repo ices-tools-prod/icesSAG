@@ -2,7 +2,8 @@
 #'
 #' Get biological reference points for all stocks in a given assessment year.
 #'
-#' @param key the unique identifier of the stock assessment
+#' @param AssessmentKey the unique identifier of the stock assessment
+#' @param ... to allow scope for back compatability
 #'
 #' @return A data frame.
 #'
@@ -21,27 +22,36 @@
 #' stocklist <- getListStocks(2016)
 #' id <- grep("cod-2224", stocklist$FishStockName)
 #' stocklist[id,]
-#' key <- stocklist$key[id]
+#' key <- stocklist$AssessmentKey[id]
 #' refpts <- getFishStockReferencePoints(key)
 #' refpts
 #'
 #' @export
 
-getFishStockReferencePoints <- function(key) {
+getFishStockReferencePoints <- function(AssessmentKey, ...) {
+
+  if (missing(AssessmentKey)){
+    dots <- list(...)
+    if ("key" %in% names(dots)) {
+      AssessmentKey <- dots$key
+      warning("key argument is depreciated, use AssessmentKey instead.")
+    }
+  }
+
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
   # only 1 key can be used
-  if (length(key) > 1) {
-    key <- key[1]
-    warning("key has length > 1 and only the first element will be used")
+  if (length(AssessmentKey) > 1) {
+    AssessmentKey <- AssessmentKey[1]
+    warning("AssessmentKey has length > 1 and only the first element will be used")
   }
 
   # read XML string and parse to data frame
   url <-
     sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
-      key)
+      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?AssessmentKey=%s",
+      AssessmentKey)
   out <- readSAG(url)
   out <- parseSAG(out)
 

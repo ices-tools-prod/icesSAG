@@ -2,6 +2,7 @@
 
 S3method(plot,ices_standardgraph)
 S3method(plot,ices_standardgraph_list)
+export(findAssessmentKey)
 export(findKey)
 export(getFishMortality)
 export(getFishStockReferencePoints)

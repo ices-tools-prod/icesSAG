@@ -4,10 +4,12 @@
 \alias{getSummaryTable}
 \title{Get a Summary Table of Historical Stock Size}
 \usage{
-getSummaryTable(key)
+getSummaryTable(AssessmentKey, ...)
 }
 \arguments{
-\item{key}{the unique identifier of the stock assessment}
+\item{AssessmentKey}{the unique identifier of the stock assessment}
+
+\item{...}{to allow scope for back compatability}
 }
 \value{
 A data frame.
@@ -20,7 +22,7 @@ pressure.
 stocklist <- getListStocks(2016)
 id <- grep("cod-2224", stocklist$FishStockName)
 stocklist[id,]
-key <- stocklist$key[id]
+key <- stocklist$AssessmentKey[id]
 sumtab <- getSummaryTable(key)
 head(sumtab)
 attributes(sumtab)$notes

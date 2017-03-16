@@ -20,9 +20,13 @@
 #' @examples
 #' findKey("cod-347d", 2015, full = TRUE)
 #'
-#' @export
+#' @rdname findAssessmentKeydocs
+#' @name findAssessmentKey
+NULL
 
-findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
+#' @rdname findAssessmentKeydocs
+#' @export
+findAssessmentKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
 {
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
@@ -54,6 +58,13 @@ findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALS
   if (full) {
     out
   } else {
-    out$key
+    out$AssessmentKey
   }
+}
+
+#' @rdname findAssessmentKeydocs
+#' @export
+findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE) {
+  warning("findKey() is depreciated, please use findAssessmentKey() instead.")
+  findAssessmentKey(stock = stock, year = year, published = published, regex = regex, full = full)
 }

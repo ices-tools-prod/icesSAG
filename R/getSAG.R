@@ -18,7 +18,7 @@
 #'   \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
 #'   results, and reference points.
 #'
-#' \code{\link{findKey}} finds lookup keys.
+#' \code{\link{findAssessmentKey}} finds lookup keys.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
@@ -45,13 +45,13 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
   if (!checkSAGWebserviceOK()) return (FALSE)
 
   # find lookup key
-  key <- findKey(stock, year, published = TRUE, regex = TRUE, full = FALSE)
+  AssessmentKey <- findAssessmentKey(stock, year, published = TRUE, regex = TRUE, full = FALSE)
 
   # get data requested by user
   url <-
     sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
-      operation, key)
+      "https://sg.ices.dk/StandardGraphsWebServices.asmx/%s?AssessmentKey=%i",
+      operation, AssessmentKey)
   # read urls
   out <- lapply(url, readSAG)
   # parse

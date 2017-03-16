@@ -4,10 +4,12 @@
 \alias{getSAGGraphs}
 \title{Get Summary Graphs of Stock Assessment Output}
 \usage{
-getSAGGraphs(key)
+getSAGGraphs(AssessmentKey, ...)
 }
 \arguments{
-\item{key}{the unique identifier of the stock assessment}
+\item{AssessmentKey}{the unique identifier of the stock assessment}
+
+\item{...}{to allow scope for back compatability}
 }
 \value{
 An array representing a bitmap.
@@ -17,7 +19,7 @@ Get summary graphs of catches, recruitment, fishing pressure, and spawning
 stock biomass.
 }
 \examples{
-key <- findKey("cod", 2015)
+key <- findAssessmentKey("cod", 2015)
 graphs <- getSAGGraphs(key[1])
 plot(graphs)
 

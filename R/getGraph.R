@@ -3,7 +3,8 @@
 #' Get a graph of stock assessment output, e.g., historical stock size,
 #' recruitment, and fishing pressure.
 #'
-#' @param key the unique identifier of the stock assessment
+#' @param AssessmentKey the unique identifier of the stock assessment
+#' @param ... to allow scope for back compatability
 #'
 #' @return An array representing a bitmap.
 #'
@@ -15,7 +16,7 @@
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
 #' @examples
-#' keys <- findKey("had", 2015)
+#' keys <- findAssessmentKey("had", 2015)
 #' landings_img <- getLandingsGraph(keys[1])
 #' plot(landings_img)
 #'
@@ -23,13 +24,22 @@
 #' plot(landings_plots)
 #'
 #' @rdname getGraphs
-#' @name getStandardAssessmentGraps
+#' @name getStandardAssessmentGraphs
 NULL
 
 #' @rdname getGraphs
 #' @export
 #' @importFrom utils tail
-getLandingsGraph <- function(key) {
+getLandingsGraph <- function(AssessmentKey, ...) {
+
+  if (missing(AssessmentKey)){
+    dots <- list(...)
+    if ("key" %in% names(dots)) {
+      AssessmentKey <- dots$key
+      warning("key argument is depreciated, use AssessmentKey instead.")
+    }
+  }
+
   # check web services are running
   if (!checkSAGWebserviceOK()) return (FALSE)
 
@@ -40,8 +50,8 @@ getLandingsGraph <- function(key) {
   # read text string and parse to data frame
   url <-
     sprintf(
-      "http://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
-      operation, key)
+      "http://sg.ices.dk/StandardGraphsWebServices.asmx/%s?AssessmentKey=%i",
+      operation, AssessmentKey)
 
   # read urls
   out <- lapply(url, readSAG)
