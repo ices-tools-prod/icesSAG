@@ -65,9 +65,10 @@ uploadStock <- function(info, fishdata) {
   # call webservice for all supplied keys
   out <- sag_webservice("uploadStock", strSessionID = resp$SessionID)
 
-  if (out[[1]] == FALSE) {
-    stop("there was a problem uploading the file, please email...")
+  if (out[[1]] == 0) {
+    stop("there was a problem uploading the file, please do something ...")
   }
 
-  out
+  # parse and return
+  simplify(unlist(out))
 }
