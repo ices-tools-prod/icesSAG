@@ -19,7 +19,7 @@ Get biological reference points for all stocks in a given assessment year.
 stocklist <- getListStocks(2016)
 id <- grep("cod-2224", stocklist$FishStockName)
 stocklist[id,]
-key <- stocklist$key[id]
+key <- stocklist$AssessmentKey[id]
 refpts <- getFishStockReferencePoints(key)
 refpts
 

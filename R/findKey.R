@@ -54,6 +54,6 @@ findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALS
   if (full) {
     out
   } else {
-    out$key
+    out$AssessmentKey
   }
 }
