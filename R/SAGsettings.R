@@ -11,7 +11,8 @@ getSAGTypeGraphs <- function() {
 
 getSAGTypeSettings <- function(SAGChartKey) {
   # call webservice
-  out <- sag_webservice("getSAGTypeSettings", SAGChartKey = SAGChartKey)
+#  out <- sag_webservice("getSAGTypeSettings", SAGChartKey = SAGChartKey)
+  out <- sag_webservice("getListAvailableSAGSettingsPerChart", SAGChartKey = SAGChartKey)
 
   # parse output
   sag_parse(out)
