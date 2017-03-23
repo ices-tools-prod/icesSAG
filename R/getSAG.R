@@ -18,7 +18,7 @@
 #'   \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
 #'   results, and reference points.
 #'
-#' \code{\link{findKey}} finds lookup keys.
+#' \code{\link{findAssessmentKey}} finds lookup keys.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
@@ -40,10 +40,10 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
                     refpts = "getFishStockReferencePoints")
 
   # find lookup key
-  key <- findKey(stock, year, published = TRUE, regex = TRUE, full = FALSE)
+  assessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = FALSE)
 
   # get data requested by user
-  out <- do.call(service, list(key = key))
+  out <- do.call(service, list(assessmentKey = assessmentKey))
 
   # drop any null entries (happens when not published stocks creep in)
   out <- out[!sapply(out, is.null)]

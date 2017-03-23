@@ -3,7 +3,7 @@
 #' Get summary graphs of catches, recruitment, fishing pressure, and spawning
 #' stock biomass.
 #'
-#' @param key the unique identifier of the stock assessment
+#' @param assessmentKey the unique identifier of the stock assessment
 #'
 #' @return An array representing a bitmap.
 #'
@@ -17,17 +17,17 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' key <- findKey("cod", 2015)
-#' graphs <- getSAGGraphs(key[1])
+#' assessmentKey <- findAssessmentKey("cod", 2015)
+#' graphs <- getSAGGraphs(assessmentKey[1])
 #' plot(graphs)
 #'
 #' @export
 
-getSAGGraphs <- function(key) {
+getSAGGraphs <- function(assessmentKey) {
   # only 1 key can be used
-  if (length(key) > 1) {
-    key <- key[1]
-    warning("key has length > 1 and only the first key will be used")
+  if (length(assessmentKey) > 1) {
+    assessmentKey <- assessmentKey[1]
+    warning("assessmentKey has length > 1 and only the first key will be used")
   }
 
   # which graph types to get
@@ -41,7 +41,7 @@ getSAGGraphs <- function(key) {
     sapply(types,
            function(x)
              do.call(sprintf("get%sGraph", x),
-                     args = list(key = key)))
+                     args = list(assessmentKey = assessmentKey)))
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))

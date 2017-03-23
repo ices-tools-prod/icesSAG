@@ -40,7 +40,7 @@ cod_refpts <- getSAG("cod", 2015:2016, "refpts")
   \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
   results, and reference points.
 
-\code{\link{findKey}} finds lookup keys.
+\code{\link{findAssessmentKey}} finds lookup keys.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }

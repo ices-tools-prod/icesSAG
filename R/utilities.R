@@ -17,7 +17,7 @@ sag_webservice <- function(service, ..., check = TRUE) {
 
 sag_checkWebserviceOK <- function() {
   # return TRUE if web service is active, FALSE otherwise
-  out <- try(httr::GET(sag_uri("getSummaryTable", key = -1)), silent = TRUE)
+  out <- try(httr::GET(sag_uri("getSummaryTable", assessmentKey = -1)), silent = TRUE)
 
   # if this errored then there is probably no internet connection
   if (inherits(out, "try-error")) {
@@ -26,7 +26,7 @@ sag_checkWebserviceOK <- function() {
   } else
   # check server is not down by inspecting response for internal server error message
   if(httr::http_error(out)) {
-    warning("Web service failure: the server seems to be down, please try again later.\n",
+    warning("Web service failure: the server is not accessible, please try again later.\n",
             "http status message: ", httr::http_status(out)$message)
     FALSE
   } else {
@@ -44,7 +44,7 @@ sag_uri <- function(service, ...) {
     scheme <- "https"
     api <- "Manage/StockAssessmentGraphsWithToken.asmx"
     # keep for debuging
-    if (grepl("localhost", getOption("icesSAG.hostname"))) scheme <- "http"
+    if (grepl("localhost|iistest01", getOption("icesSAG.hostname"))) scheme <- "http"
   } else {
     scheme <- "http"
     api <- "StandardGraphsWebServices.asmx"

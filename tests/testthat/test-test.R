@@ -1,6 +1,8 @@
 context('webservice access')
 
 test_that('Webservice access is okay', {
+  options(icesSAG.messages = TRUE)
+  options(icesSAG.hostname = "iistest01/standardgraphs")
   expect_equal(sag_checkWebserviceOK(), TRUE)
 })
 

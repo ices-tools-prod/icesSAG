@@ -3,7 +3,7 @@
 #' Get a graph of stock assessment output, e.g., historical stock size,
 #' recruitment, and fishing pressure.
 #'
-#' @param key the unique identifier of the stock assessment
+#' @param assessmentKey the unique identifier of the stock assessment
 #'
 #' @return An array representing a bitmap.
 #'
@@ -15,27 +15,27 @@
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
 #' @examples
-#' keys <- findKey("had", 2015)
-#' landings_img <- getLandingsGraph(keys[1])
+#' assessmentKeys <- findAssessmentKey("had", 2015)
+#' landings_img <- getLandingsGraph(assessmentKeys[1])
 #' plot(landings_img)
 #'
-#' landings_plots <- getLandingsGraph(keys)
+#' landings_plots <- getLandingsGraph(assessmentKeys)
 #' plot(landings_plots)
 #'
 #' @rdname getGraphs
-#' @name getStandardAssessmentGraps
+#' @name getStandardAssessmentGraphs
 NULL
 
 #' @rdname getGraphs
 #' @export
-getLandingsGraph <- function(key) {
+getLandingsGraph <- function(assessmentKey) {
 
   # get function name as a character
-  # NOTE need tail(x, 1) here for when calling as icesSAG::get____(key)
+  # NOTE need tail(x, 1) here for when calling as icesSAG::get____(assessmentKey)
   operation <- utils::tail(as.character(match.call()[[1]]), 1)
 
   # call webservice for all supplied keys
-  out <- lapply(key, function(i) sag_webservice(operation, key = i))
+  out <- lapply(assessmentKey, function(i) sag_webservice(operation, assessmentKey = i))
 
   # parse output
   out <- lapply(out, sag_parseGraph)

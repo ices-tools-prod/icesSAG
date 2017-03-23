@@ -19,9 +19,9 @@ getSAGTypeSettings <- function(SAGChartKey) {
 }
 
 
-getSAGSettingsForAStock <- function(key) {
+getSAGSettingsForAStock <- function(assessmentKey) {
   # call webservice
-  out <- sag_webservice("getSAGSettingsForAStock", key = key)
+  out <- sag_webservice("getSAGSettingsForAStock", assessmentKey = assessmentKey)
 
   # parse output
   if (length(out) == 0) {
@@ -32,10 +32,11 @@ getSAGSettingsForAStock <- function(key) {
 }
 
 
-setSAGSettingForAStock <- function(key, chartKey, settingKey, settingValue, copyNextYear) {
+setSAGSettingForAStock <- function(assessmentKey, chartKey, settingKey, settingValue, copyNextYear) {
   # call webservice
   out <- sag_webservice("setSAGSettingForAStock",
-                        key = key, chartKey = chartKey, settingKey = settingKey,
+                        assessmentKey = assessmentKey,
+                        chartKey = chartKey, settingKey = settingKey,
                         settingValue = settingValue, copyNextYear = copyNextYear)
 
   # parse and return
