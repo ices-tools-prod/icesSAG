@@ -10,7 +10,7 @@ Imports: grid,
          utils
 Suggests: testthat
 Description: R interface to access the web services of the ICES Stock Assessment
-             Graphs database.
+             Graphs database <http://sg.ices.dk>
 License: GPL (>= 2)
 URL: http://sg.ices.dk
 RoxygenNote: 6.0.1
