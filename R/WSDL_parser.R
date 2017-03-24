@@ -17,11 +17,17 @@ getWebServiceDescription <- function() {
 
 checkWebServices <- function() {
   # check for new webservices
-  missing_services <- setdiff(names(getWebServiceDescription()), ls("package:icesSAG"))
+  services <- names(getWebServiceDescription())
+  missing_services <- setdiff(services, ls("package:icesSAG"))
+  linked_services <- intersect(services, ls("package:icesSAG"))
 
   if (length(missing_services)) {
-    message("The following webservices are not interfaced with:\n\t",
+    message("\nThe following webservices are not interfaced with:\n\t",
             paste(missing_services, collapse = "\n\t"))
+  }
+  if (length(linked_services)) {
+    message("\nThe following webservices *are* interfaced with:\n\t",
+            paste(linked_services, collapse = "\n\t"))
   }
 }
 

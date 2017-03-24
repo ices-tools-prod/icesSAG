@@ -3,6 +3,15 @@
 .sg_renviron <- "~/.Renviron_SG"
 
 
+getTokenExpiration <- function() {
+  # call webservice
+  out <- sag_webservice("getTokenExpiration")
+
+  # parse output
+  as.numeric(out[[1]])
+}
+
+
 sg_pat <- function() {
   # get value of environment variable SG_PAT
   pat <- Sys.getenv('SG_PAT')

@@ -73,6 +73,9 @@ sag_get <- function(uri) {
     xml2::as_list(httr::content(resp))
   } else {
     warning("in SAG API - ", httr::content(resp), call. = FALSE)
+    if (grepl("Web Service method name is not valid", httr::content(resp))) {
+      list(NA)
+    }
   }
 }
 
@@ -81,6 +84,9 @@ sag_get <- function(uri) {
 
 
 sag_parse <- function(x) {
+  if (length(x) == 0) {
+    return(NULL)
+  }
   # assume x is a table structure
   xrow <- structure(rep(NA, length(x[[1]])), names = names(x[[1]]))
   x <- lapply(unname(x), unlist)
