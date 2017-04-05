@@ -3,7 +3,7 @@
 #' Get summary results of historical stock size, recruitment, and fishing
 #' pressure.
 #'
-#' @param key the unique identifier of the stock assessment
+#' @param assessmentKey the unique identifier of the stock assessment
 #'
 #' @return A data frame.
 #'
@@ -19,27 +19,17 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' stocklist <- getListStocks(2016)
-#' id <- grep("cod-2224", stocklist$FishStockName)
-#' stocklist[id,]
-#' key <- stocklist$key[id]
-#' sumtab <- getSummaryTable(key)
+#' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
+#' sumtab <- getSummaryTable(assessmentKey)
 #' head(sumtab)
 #' attributes(sumtab)$notes
 #'
 #' @export
 
-getSummaryTable <- function(key) {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
+getSummaryTable <- function(assessmentKey) {
+  # call webservice for all supplied keys
+  out <- lapply(assessmentKey, function(i) sag_webservice("getSummaryTable", assessmentKey = i))
 
-  # read XML string and parse to data frame
-  url <-
-    sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getSummaryTable?key=%s",
-      key)
-  out <- readSAG(url)
-  out <- parseSummary(out)
-
-  out
+  # parse output
+  lapply(out, sag_parseSummary)
 }

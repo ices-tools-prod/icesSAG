@@ -2,7 +2,7 @@
 #'
 #' Get biological reference points for all stocks in a given assessment year.
 #'
-#' @param key the unique identifier of the stock assessment
+#' @param assessmentKey the unique identifier of the stock assessment
 #'
 #' @return A data frame.
 #'
@@ -18,32 +18,16 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' stocklist <- getListStocks(2016)
-#' id <- grep("cod-2224", stocklist$FishStockName)
-#' stocklist[id,]
-#' key <- stocklist$key[id]
-#' refpts <- getFishStockReferencePoints(key)
+#' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
+#' refpts <- getFishStockReferencePoints(assessmentKey)
 #' refpts
 #'
 #' @export
 
-getFishStockReferencePoints <- function(key) {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
+getFishStockReferencePoints <- function(assessmentKey) {
+  # call webservice for all supplied keys
+  out <- lapply(assessmentKey, function(i) sag_webservice("getFishStockReferencePoints", assessmentKey = i))
 
-  # only 1 key can be used
-  if (length(key) > 1) {
-    key <- key[1]
-    warning("key has length > 1 and only the first element will be used")
-  }
-
-  # read XML string and parse to data frame
-  url <-
-    sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getFishStockReferencePoints?key=%s",
-      key)
-  out <- readSAG(url)
-  out <- parseSAG(out)
-
-  out
+  # parse output
+  lapply(out, sag_parse)
 }

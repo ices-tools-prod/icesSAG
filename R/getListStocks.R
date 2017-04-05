@@ -21,16 +21,9 @@
 #' @export
 
 getListStocks <- function(year) {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
+  # call webservice for all supplied years
+  out <- lapply(year, function(i) sag_webservice("getListStocks", year = i))
 
-  # read XML string and parse to data frame
-  url <-
-    sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
-      year)
-  out <- readSAG(url)
-  out <- parseSAG(out)
-
-  out
+  # parse output
+  do.call(rbind, lapply(out, sag_parse))
 }
