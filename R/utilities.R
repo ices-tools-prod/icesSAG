@@ -81,8 +81,6 @@ sag_get <- function(uri) {
 
 
 
-
-
 sag_parse <- function(x) {
   if (length(x) == 0) {
     return(NULL)
