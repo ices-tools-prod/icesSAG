@@ -26,40 +26,31 @@ NULL
 
 #' @rdname findAssessmentKeydocs
 #' @export
-findAssessmentKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
-{
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
+findAssessmentKey <- function(stock, year = 0, regex = TRUE, full = FALSE) {
+    # get list of all stocks for all supplied years
+    out <- do.call(rbind, lapply(year, getListStocks))
 
-  # get stock list
-  url <-
-    sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=%i",
-      year)
-  out <- lapply(url,
-                function(u) {
-                  out <- readSAG(u)
-                  parseSAG(out)
-                })
-  out <- do.call(rbind, out)
+    # apply filters
+    if (!getOption("icesSAG.use_token")) {
+        # restrict output to only published stocks
+        out <- out[out$Status == "Published",]
+    }
 
-  # apply filters
-  if (published) {
-    out <- out[out$Status == "Published",]
-  }
+    if (!missing(stock)) {
+        stock <- tolower(stock)
+        if (!regex) stock <- paste0("^", stock, "$")
+        select <- c(unlist(lapply(stock, grep, tolower(out$FishStockName))),
+                unlist(lapply(stock, grep, tolower(out$StockDescription))),
+                unlist(lapply(stock, grep, tolower(out$SpeciesName))))
+        out <- out[select,]
+    }
 
-  if (!is.null(stock)) {
-    stock <- tolower(stock)
-    if (!regex) stock <- paste0("^", stock, "$")
-    select <- unlist(lapply(stock, grep, tolower(out$FishStockName)))
-    out <- out[select,]
-  }
-
-  if (full) {
-    out
-  } else {
-    out$AssessmentKey
-  }
+    # return
+    if (full) {
+        out
+    } else {
+        out$AssessmentKey
+    }
 }
 
 #' @rdname findAssessmentKeydocs
