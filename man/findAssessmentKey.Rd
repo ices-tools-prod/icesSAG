@@ -7,7 +7,8 @@
 findAssessmentKey(stock, year = 0, regex = TRUE, full = FALSE)
 }
 \arguments{
-\item{stock}{a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.}
+\item{stock}{a stock name, e.g. cod-347d, or cod to find all cod stocks, or
+NULL to process all stocks.}
 
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
 
@@ -31,5 +32,5 @@ findAssessmentKey("cod-347d", 2015, full = TRUE)
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
 \author{
-Arni Magnusson.
+Arni Magnusson and Colin Millar.
 }

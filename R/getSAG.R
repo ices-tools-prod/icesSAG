@@ -4,7 +4,8 @@
 #' getFishStockReferencePoints, and getSummaryTable.
 #' It supports querying many stocks and years in one function call.
 #'
-#' @param stock a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.
+#' @param stock a stock name, e.g. cod-347d, or cod to find all cod stocks, or
+#'        NULL to process all stocks.
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
 #' @param data the data of interest, either "summary" or "refpts".
 #' @param combine whether to combine the list output to a data frame.
@@ -21,6 +22,8 @@
 #' \code{\link{findAssessmentKey}} finds lookup keys.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
+#'
+#' @author Arni Magnusson and Colin Millar.
 #'
 #' @examples
 #' summary <- getSAG("cod-347d", 2015)
