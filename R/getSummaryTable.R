@@ -3,7 +3,7 @@
 #' Get summary results of historical stock size, recruitment, and fishing
 #' pressure.
 #'
-#' @param AssessmentKey the unique identifier of the stock assessment
+#' @param assessmentKey the unique identifier of the stock assessment
 #' @param ... to allow scope for back compatability
 #'
 #' @return A data frame.
@@ -27,13 +27,13 @@
 #'
 #' @export
 
-getSummaryTable <- function(assessmentKey) {
+getSummaryTable <- function(assessmentKey, ...) {
 
-  if (missing(AssessmentKey)) {
+  if (missing(assessmentKey)) {
     dots <- list(...)
     if ("key" %in% names(dots)) {
-      AssessmentKey <- dots$key
-      warning("key argument is depreciated, use AssessmentKey instead.")
+      assessmentKey <- dots$key
+      warning("key argument is depreciated, use assessmentKey instead.")
      }
   }
 

@@ -4,10 +4,10 @@
 \alias{getSummaryTable}
 \title{Get a Summary Table of Historical Stock Size}
 \usage{
-getSummaryTable(assessmentKey)
+getSummaryTable(assessmentKey, ...)
 }
 \arguments{
-\item{AssessmentKey}{the unique identifier of the stock assessment}
+\item{assessmentKey}{the unique identifier of the stock assessment}
 
 \item{...}{to allow scope for back compatability}
 }

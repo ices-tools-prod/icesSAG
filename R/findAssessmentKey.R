@@ -27,35 +27,35 @@ NULL
 #' @rdname findAssessmentKeydocs
 #' @export
 findAssessmentKey <- function(stock, year = 0, regex = TRUE, full = FALSE) {
-    # get list of all stocks for all supplied years
-    out <- do.call(rbind, lapply(year, getListStocks))
+  # get list of all stocks for all supplied years
+  out <- do.call(rbind, lapply(year, getListStocks))
 
-    # apply filters
-    if (!getOption("icesSAG.use_token")) {
-        # restrict output to only published stocks
-        out <- out[out$Status == "Published",]
-    }
+  # apply filters
+  if (!getOption("icesSAG.use_token")) {
+    # restrict output to only published stocks
+    out <- out[out$Status == "Published",]
+  }
 
-    if (!missing(stock)) {
-        stock <- tolower(stock)
-        if (!regex) stock <- paste0("^", stock, "$")
-        select <- c(unlist(lapply(stock, grep, tolower(out$FishStockName))),
+  if (!missing(stock)) {
+    stock <- tolower(stock)
+    if (!regex) stock <- paste0("^", stock, "$")
+    select <- c(unlist(lapply(stock, grep, tolower(out$StockKeyLabel))),
                 unlist(lapply(stock, grep, tolower(out$StockDescription))),
                 unlist(lapply(stock, grep, tolower(out$SpeciesName))))
-        out <- out[select,]
-    }
+    out <- out[select,]
+  }
 
-    # return
-    if (full) {
-        out
-    } else {
-        out$AssessmentKey
-    }
+  # return
+  if (full) {
+    out
+  } else {
+    out$AssessmentKey
+  }
 }
 
 #' @rdname findAssessmentKeydocs
 #' @export
 findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE) {
   warning("findKey() is depreciated, please use findAssessmentKey() instead.")
-  findAssessmentKey(stock = stock, year = year, published = published, regex = regex, full = full)
+  findAssessmentKey(stock = stock, year = year, regex = regex, full = full)
 }

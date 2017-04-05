@@ -1,6 +1,4 @@
-
-
-#' @export
+# #' @export
 readSAGUpload <- function(file) {
   # read in xml file, and convert to list
   out <- xml2::as_list(xml2::read_xml(file))
@@ -10,7 +8,7 @@ readSAGUpload <- function(file) {
 
 
 
-#' @export
+# #' @export
 writeSAGUpload <- function(info, fishdata) {
   # handy function to convert a list into an xml row
   list2xml <- function(x, xnames = NULL, sep = "") {
@@ -38,7 +36,7 @@ writeSAGUpload <- function(info, fishdata) {
          "</Assessment>\r\n")
 }
 
-#' @export
+# #' @export
 uploadStock <- function(info, fishdata) {
 
   # convert info and fishdata to xml format

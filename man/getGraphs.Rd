@@ -15,30 +15,30 @@
 \alias{getStockStatusTable}
 \title{Get a Graph of Stock Assessment Output}
 \usage{
-getLandingsGraph(AssessmentKey, ...)
+getLandingsGraph(assessmentKey, ...)
 
-getRecruitmentGraph(AssessmentKey, ...)
+getRecruitmentGraph(assessmentKey, ...)
 
-getFishingMortalityGraph(AssessmentKey, ...)
+getFishingMortalityGraph(assessmentKey, ...)
 
-getSpawningStockBiomassGraph(AssessmentKey, ...)
+getSpawningStockBiomassGraph(assessmentKey, ...)
 
-getFishMortality(AssessmentKey, ...)
+getFishMortality(assessmentKey, ...)
 
-getstock_recruitment(AssessmentKey, ...)
+getstock_recruitment(assessmentKey, ...)
 
-getYSSB(AssessmentKey, ...)
+getYSSB(assessmentKey, ...)
 
-getSSBHistoricalPerformance(AssessmentKey, ...)
+getSSBHistoricalPerformance(assessmentKey, ...)
 
-getFishingMortalityHistoricalPerformance(AssessmentKey, ...)
+getFishingMortalityHistoricalPerformance(assessmentKey, ...)
 
-getRecruitmentHistoricalPerformance(AssessmentKey, ...)
+getRecruitmentHistoricalPerformance(assessmentKey, ...)
 
-getStockStatusTable(AssessmentKey, ...)
+getStockStatusTable(assessmentKey, ...)
 }
 \arguments{
-\item{AssessmentKey}{the unique identifier of the stock assessment}
+\item{assessmentKey}{the unique identifier of the stock assessment}
 
 \item{...}{to allow scope for back compatability}
 }
