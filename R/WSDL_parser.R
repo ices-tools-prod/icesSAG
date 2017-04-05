@@ -1,33 +1,37 @@
 
 # get all available webservices and arguments
 
-getWebServiceDescription <- function() {
+getWebServiceDescription <- function(secure = FALSE) {
   # check web services are running
   if (!sag_checkWebserviceOK()) return (NULL)
 
   # get webservice descriptions
-  out <- sag_get(httr::modify_url(sag_uri(), query = "WSDL"))
-  sout <- sag_get(httr::modify_url(sag_uri(token = ""), query = "WSDL"))
+  if (!secure) {
+    out <- sag_get(httr::modify_url(sag_uri(), query = "WSDL"))
+  } else {
+    out <- sag_get(httr::modify_url(sag_uri(token = ""), query = "WSDL"))
+  }
 
   # parse output
-  c(sag_parseWSDL(out),
-    sag_parseWSDL(sout))
+  sag_parseWSDL(out)
 }
 
 
-checkWebServices <- function() {
+checkWebServices <- function(secure = FALSE, show = TRUE) {
   # check for new webservices
-  services <- names(getWebServiceDescription())
+  services <- names(getWebServiceDescription(secure = secure))
   missing_services <- setdiff(services, ls("package:icesSAG"))
   linked_services <- intersect(services, ls("package:icesSAG"))
 
-  if (length(missing_services)) {
+  if (length(missing_services) && show) {
     message("\nThe following webservices are not interfaced with:\n\t",
             paste(missing_services, collapse = "\n\t"))
   }
-  if (length(linked_services)) {
+  if (length(linked_services) && show) {
     message("\nThe following webservices *are* interfaced with:\n\t",
             paste(linked_services, collapse = "\n\t"))
   }
+
+  invisible(list(missing = missing_services, linked = linked_services))
 }
 
