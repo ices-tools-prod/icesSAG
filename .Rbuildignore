@@ -4,4 +4,6 @@ README.md
 ^\.Rproj\.user$
 ^cran-comments\.md$
 codecov.yml
-worksheet.R
+^.*\.sln$
+^.*\.rxproj$
+^\.vs*$

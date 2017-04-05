@@ -43,10 +43,10 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
                     refpts = "getFishStockReferencePoints")
 
   # find lookup key
-  assessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = FALSE)
+  AssessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = FALSE)
 
   # get data requested by user
-  out <- do.call(service, list(assessmentKey = assessmentKey))
+  out <- do.call(service, list(AssessmentKey = AssessmentKey))
 
   # drop any null entries (happens when not published stocks creep in)
   out <- out[!sapply(out, is.null)]

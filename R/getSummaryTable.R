@@ -3,7 +3,8 @@
 #' Get summary results of historical stock size, recruitment, and fishing
 #' pressure.
 #'
-#' @param assessmentKey the unique identifier of the stock assessment
+#' @param AssessmentKey the unique identifier of the stock assessment
+#' @param ... to allow scope for back compatability
 #'
 #' @return A data frame.
 #'
@@ -27,6 +28,15 @@
 #' @export
 
 getSummaryTable <- function(assessmentKey) {
+
+  if (missing(AssessmentKey)) {
+    dots <- list(...)
+    if ("key" %in% names(dots)) {
+      AssessmentKey <- dots$key
+      warning("key argument is depreciated, use AssessmentKey instead.")
+     }
+  }
+
   # call webservice for all supplied keys
   out <- lapply(assessmentKey, function(i) sag_webservice("getSummaryTable", assessmentKey = i))
 

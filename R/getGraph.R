@@ -3,7 +3,8 @@
 #' Get a graph of stock assessment output, e.g., historical stock size,
 #' recruitment, and fishing pressure.
 #'
-#' @param assessmentKey the unique identifier of the stock assessment
+#' @param AssessmentKey the unique identifier of the stock assessment
+#' @param ... to allow scope for back compatability
 #'
 #' @return An array representing a bitmap.
 #'
@@ -28,14 +29,22 @@ NULL
 
 #' @rdname getGraphs
 #' @export
-getLandingsGraph <- function(assessmentKey) {
+getLandingsGraph <- function(AssessmentKey, ...) {
+
+  if (missing(AssessmentKey)){
+    dots <- list(...)
+    if ("key" %in% names(dots)) {
+      AssessmentKey <- dots$key
+      warning("key argument is depreciated, use AssessmentKey instead.")
+    }
+  }
 
   # get function name as a character
   # NOTE need tail(x, 1) here for when calling as icesSAG::get____(assessmentKey)
   operation <- utils::tail(as.character(match.call()[[1]]), 1)
 
   # call webservice for all supplied keys
-  out <- lapply(assessmentKey, function(i) sag_webservice(operation, assessmentKey = i))
+  out <- lapply(AssessmentKey, function(i) sag_webservice(operation, AssessmentKey = i))
 
   # parse output
   out <- lapply(out, sag_parseGraph)

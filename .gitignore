@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 *.Rproj
-
-worksheet.R
+*.sln
+*.rxproj
+*.suo

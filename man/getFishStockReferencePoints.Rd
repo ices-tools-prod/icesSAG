@@ -7,7 +7,9 @@
 getFishStockReferencePoints(assessmentKey)
 }
 \arguments{
-\item{assessmentKey}{the unique identifier of the stock assessment}
+\item{AssessmentKey}{the unique identifier of the stock assessment}
+
+\item{...}{to allow scope for back compatability}
 }
 \value{
 A data frame.

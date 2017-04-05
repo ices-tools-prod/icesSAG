@@ -4,10 +4,12 @@
 \alias{getSAGGraphs}
 \title{Get Summary Graphs of Stock Assessment Output}
 \usage{
-getSAGGraphs(assessmentKey)
+getSAGGraphs(AssessmentKey, ...)
 }
 \arguments{
-\item{assessmentKey}{the unique identifier of the stock assessment}
+\item{AssessmentKey}{the unique identifier of the stock assessment}
+
+\item{...}{to allow scope for back compatability}
 }
 \value{
 An array representing a bitmap.

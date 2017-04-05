@@ -15,30 +15,32 @@
 \alias{getStockStatusTable}
 \title{Get a Graph of Stock Assessment Output}
 \usage{
-getLandingsGraph(assessmentKey)
+getLandingsGraph(AssessmentKey, ...)
 
-getRecruitmentGraph(assessmentKey)
+getRecruitmentGraph(AssessmentKey, ...)
 
-getFishingMortalityGraph(assessmentKey)
+getFishingMortalityGraph(AssessmentKey, ...)
 
-getSpawningStockBiomassGraph(assessmentKey)
+getSpawningStockBiomassGraph(AssessmentKey, ...)
 
-getFishMortality(assessmentKey)
+getFishMortality(AssessmentKey, ...)
 
-getstock_recruitment(assessmentKey)
+getstock_recruitment(AssessmentKey, ...)
 
-getYSSB(assessmentKey)
+getYSSB(AssessmentKey, ...)
 
-getSSBHistoricalPerformance(assessmentKey)
+getSSBHistoricalPerformance(AssessmentKey, ...)
 
-getFishingMortalityHistoricalPerformance(assessmentKey)
+getFishingMortalityHistoricalPerformance(AssessmentKey, ...)
 
-getRecruitmentHistoricalPerformance(assessmentKey)
+getRecruitmentHistoricalPerformance(AssessmentKey, ...)
 
-getStockStatusTable(assessmentKey)
+getStockStatusTable(AssessmentKey, ...)
 }
 \arguments{
-\item{assessmentKey}{the unique identifier of the stock assessment}
+\item{AssessmentKey}{the unique identifier of the stock assessment}
+
+\item{...}{to allow scope for back compatability}
 }
 \value{
 An array representing a bitmap.
