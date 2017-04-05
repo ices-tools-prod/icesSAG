@@ -74,6 +74,10 @@ parseSAG <- function(x) {
 
 parseSummary <- function(x) {
 
+  if (length(x) < 3) {
+    warning("A summary table was not downloaded")
+    return(NULL)
+  }
   # check for not published
   if ( gsub(" *<.*?>", "", x[3]) == "Stock not published") {
     return(NULL)
@@ -92,9 +96,13 @@ parseSummary <- function(x) {
   info <- x[3:(starts[1]-2)]
   # match content of first <tag>
   names_info <- gsub(" *<(.*?)>.*", "\\1", info)
+  # also remove xsi:nil:
+  names_info <- gsub(" xsi:nil=\"true\" /", "", names_info)
+  names_info <- gsub(" [/]", "", names_info)
   # delete all <tags>
   info <- gsub(" *<.*?>", "", info)
   names(info) <- names_info
+
 
   # read summary table
   x <- x[-c(1:(starts[1]-1), starts, ends, length(x) + -1:0)]
