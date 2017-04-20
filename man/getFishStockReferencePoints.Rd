@@ -4,7 +4,7 @@
 \alias{getFishStockReferencePoints}
 \title{Get Reference Points}
 \usage{
-getFishStockReferencePoints(assessmentKey)
+getFishStockReferencePoints(assessmentKey, ...)
 }
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}

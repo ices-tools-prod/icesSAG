@@ -4,7 +4,7 @@
 \alias{getSAGGraphs}
 \title{Get Summary Graphs of Stock Assessment Output}
 \usage{
-getSAGGraphs(assessmentKey)
+getSAGGraphs(assessmentKey, ...)
 }
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}

@@ -1,6 +1,8 @@
 
 
-getStockDownloadData <- function(assessmentKey) {
+getStockDownloadData <- function(assessmentKey, ...) {
+  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
+
   # call webservice
   out <- sag_webservice("getStockDownloadData", assessmentKey = assessmentKey)
 

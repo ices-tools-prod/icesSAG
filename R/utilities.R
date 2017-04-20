@@ -1,9 +1,7 @@
 # webservice utilities
 
-sag_webservice <- function(service, ..., check = TRUE) {
-  # check web services are running
-  if (check && !sag_checkWebserviceOK()) return (NULL)
-
+sag_webservice <- function(service, ...) {
+ 
   # form uri of webservice
   if (getOption("icesSAG.use_token")) {
     uri <- sag_uri(service, ..., token = sg_pat())
@@ -13,25 +11,6 @@ sag_webservice <- function(service, ..., check = TRUE) {
 
   # preform request
   sag_get(uri)
-}
-
-sag_checkWebserviceOK <- function() {
-  # return TRUE if web service is active, FALSE otherwise
-  out <- try(httr::GET(sag_uri("getSummaryTable", assessmentKey = -1)), silent = TRUE)
-
-  # if this errored then there is probably no internet connection
-  if (inherits(out, "try-error")) {
-    warning("Attempt to access webservice failed:\n", attr(out, "condition"))
-    FALSE
-  } else
-  # check server is not down by inspecting response for internal server error message
-  if(httr::http_error(out)) {
-    warning("Web service failure: the server is not accessible, please try again later.\n",
-            "http status message: ", httr::http_status(out)$message)
-    FALSE
-  } else {
-    TRUE
-  }
 }
 
 
@@ -66,7 +45,18 @@ sag_get <- function(uri) {
     message("GETing ... ", uri)
 
   # read url contents
-  resp <- httr::GET(uri)
+  resp <- try(httr::GET(uri))
+
+  # if this errored then there is probably no internet connection
+  if (inherits(resp, "try-error")) {
+    warning("Attempt to access webservice failed:\n", attr(resp, "condition"))
+    return(NULL)
+  } else
+  # check server is not down by inspecting response for internal server error message
+  if (httr::http_error(resp)) {
+    warning(#"Web service failure: the server is not accessible, please try again later.\n",
+            "http status message: ", httr::http_status(resp)$message, call. = FALSE)
+  } 
 
   # return as list
   if (httr::http_type(resp) == "text/xml") {
@@ -74,18 +64,31 @@ sag_get <- function(uri) {
   } else {
     warning("in SAG API - ", httr::content(resp), call. = FALSE)
     if (grepl("Web Service method name is not valid", httr::content(resp))) {
-      list(NA)
+      NULL
     }
   }
 }
 
 
-
-sag_parse <- function(x) {
-  if (length(x) == 0) {
+sag_parse <- function(x, type = "table", ...) {
+  # return NULL if empty or webservice fail
+  if (length(unlist(x)) == 0 || is.null(x)) {
     return(NULL)
   }
-  # assume x is a table structure
+
+  # otherwise parse x
+  type <- match.arg(type, c("table", "summary", "graph", "upload", "WSDL"))
+  switch(type,
+    table = sag_parseTable(x),
+    summary = sag_parseSummary(x),
+    graph = sag_parseGraph(x),
+    upload = sag_parseUpload(x),
+    WSDL = sag_parseWSDL(x))
+}
+
+
+sag_parseTable <- function(x) {
+  # x is a table structure
   xrow <- structure(rep(NA, length(x[[1]])), names = names(x[[1]]))
   x <- lapply(unname(x), unlist)
   # add NAs to empty columns
@@ -114,20 +117,19 @@ sag_parse <- function(x) {
 
 sag_parseSummary <- function(x) {
   # get auxilliary info
-  info <- sag_parse(list(x[names(x) != "lines"]))
+  info <- sag_parseTable(list(x[names(x) != "lines"]))
 
   # parse summary table
-  x <- sag_parse(x[["lines"]])
+  x <- sag_parseTable(x[["lines"]])
 
   # tag on info and return
   cbind(x, info, stringsAsFactors = FALSE)
 }
 
 
-sag_parseGraph <- function(x) {
+sag_parseGraph <- function(x, size = 2^16) {
   # get png file info
   fileurl <- unlist(x)
-  size <- 2^16
 
   # try read raw data
   out <- try(readBin(con = fileurl, what = raw(0), n = size), silent = TRUE)
@@ -164,7 +166,7 @@ sag_parseWSDL <- function(x) {
 
 sag_parseUpload <- function(x) {
   # parse header information
-  info <- sag_parse(list(x[names(x) != "Fish_Data"]))
+  info <- sag_parseTable(list(x[names(x) != "Fish_Data"]))
 
   # tidy fish data
   fishdata <- sag_parse(x[names(x) == "Fish_Data"])

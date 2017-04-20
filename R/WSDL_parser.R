@@ -1,9 +1,6 @@
 
 # get all available webservices and arguments
-
 getWebServiceDescription <- function(secure = FALSE) {
-  # check web services are running
-  if (!sag_checkWebserviceOK()) return (NULL)
 
   # get webservice descriptions
   if (!secure) {
@@ -13,7 +10,7 @@ getWebServiceDescription <- function(secure = FALSE) {
   }
 
   # parse output
-  sag_parseWSDL(out)
+  sag_parse(out, type = "WSDL")
 }
 
 

@@ -29,17 +29,11 @@
 
 getSummaryTable <- function(assessmentKey, ...) {
 
-  if (missing(assessmentKey)) {
-    dots <- list(...)
-    if ("key" %in% names(dots)) {
-      assessmentKey <- dots$key
-      warning("key argument is depreciated, use assessmentKey instead.")
-     }
-  }
+  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # call webservice for all supplied keys
   out <- lapply(assessmentKey, function(i) sag_webservice("getSummaryTable", assessmentKey = i))
 
   # parse output
-  lapply(out, sag_parseSummary)
+  lapply(out, sag_parse, type = "summary")
 }

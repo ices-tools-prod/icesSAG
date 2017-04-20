@@ -24,11 +24,7 @@ getSAGSettingsForAStock <- function(assessmentKey) {
   out <- sag_webservice("getSAGSettingsForAStock", assessmentKey = assessmentKey)
 
   # parse output
-  if (length(out) == 0) {
-    list()
-  } else {
-    sag_parse(out)
-  }
+  sag_parse(out)
 }
 
 

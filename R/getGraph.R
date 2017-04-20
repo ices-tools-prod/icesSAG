@@ -31,13 +31,7 @@ NULL
 #' @export
 getLandingsGraph <- function(assessmentKey, ...) {
 
-  if (missing(assessmentKey)){
-    dots <- list(...)
-    if ("key" %in% names(dots)) {
-      assessmentKey <- dots$key
-      warning("key argument is depreciated, use assessmentKey instead.")
-    }
-  }
+  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # get function name as a character
   # NOTE need tail(x, 1) here for when calling as icesSAG::get____(assessmentKey)
@@ -47,7 +41,7 @@ getLandingsGraph <- function(assessmentKey, ...) {
   out <- lapply(assessmentKey, function(i) sag_webservice(operation, assessmentKey = i))
 
   # parse output
-  out <- lapply(out, sag_parseGraph)
+  out <- lapply(out, sag_parse, type = "graph")
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))
