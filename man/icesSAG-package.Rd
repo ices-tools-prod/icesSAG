@@ -18,7 +18,7 @@ database.
 }
 \emph{Look up codes:}
 \tabular{ll}{
-  \code{\link{findKey}}       \tab find key\cr
+  \code{\link{findAssessmentKey}}       \tab find assessment key\cr
   \code{\link{getListStocks}} \tab list of stocks
 }
 }

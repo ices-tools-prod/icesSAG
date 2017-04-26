@@ -4,10 +4,12 @@
 \alias{getFishStockReferencePoints}
 \title{Get Reference Points}
 \usage{
-getFishStockReferencePoints(key)
+getFishStockReferencePoints(assessmentKey, ...)
 }
 \arguments{
-\item{key}{the unique identifier of the stock assessment}
+\item{assessmentKey}{the unique identifier of the stock assessment}
+
+\item{...}{to allow scope for back compatability}
 }
 \value{
 A data frame.
@@ -16,11 +18,8 @@ A data frame.
 Get biological reference points for all stocks in a given assessment year.
 }
 \examples{
-stocklist <- getListStocks(2016)
-id <- grep("cod-2224", stocklist$FishStockName)
-stocklist[id,]
-key <- stocklist$AssessmentKey[id]
-refpts <- getFishStockReferencePoints(key)
+assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
+refpts <- getFishStockReferencePoints(assessmentKey)
 refpts
 
 }
