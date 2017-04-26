@@ -1,7 +1,7 @@
 # webservice utilities
 
 sag_webservice <- function(service, ...) {
- 
+
   # form uri of webservice
   if (getOption("icesSAG.use_token")) {
     uri <- sag_uri(service, ..., token = sg_pat())
@@ -56,7 +56,7 @@ sag_get <- function(uri) {
   if (httr::http_error(resp)) {
     warning(#"Web service failure: the server is not accessible, please try again later.\n",
             "http status message: ", httr::http_status(resp)$message, call. = FALSE)
-  } 
+  }
 
   # return as list
   if (httr::http_type(resp) == "text/xml") {
@@ -77,10 +77,11 @@ sag_parse <- function(x, type = "table", ...) {
   }
 
   # otherwise parse x
-  type <- match.arg(type, c("table", "summary", "graph", "upload", "WSDL"))
+  type <- match.arg(type, c("table", "summary", "stockStatus", "graph", "upload", "WSDL"))
   switch(type,
     table = sag_parseTable(x),
     summary = sag_parseSummary(x),
+    stockStatus = sag_parseStockStatus(x),
     graph = sag_parseGraph(x),
     upload = sag_parseUpload(x),
     WSDL = sag_parseWSDL(x))
@@ -90,6 +91,7 @@ sag_parse <- function(x, type = "table", ...) {
 sag_parseTable <- function(x) {
   # x is a table structure
   xrow <- structure(rep(NA, length(x[[1]])), names = names(x[[1]]))
+
   x <- lapply(unname(x), unlist)
   # add NAs to empty columns
   bool <- sapply(x, length) < length(xrow)
@@ -98,10 +100,10 @@ sag_parseTable <- function(x) {
   x <- do.call(rbind, x)
 
   # remove any html tags
-  x <- gsub("<.*?>", "", x)
+  x[] <- gsub("<.*?>", "", x)
 
   # trim white space
-  x <- trimws(x)
+  x[] <- trimws(x)
 
   # SAG uses "" and "NA" to indicate NA
   x[x == ""] <- NA
@@ -124,6 +126,22 @@ sag_parseSummary <- function(x) {
 
   # tag on info and return
   cbind(x, info, stringsAsFactors = FALSE)
+}
+
+
+sag_parseStockStatus <- function(x) {
+
+  x <-
+    lapply(x, function(x) {
+        cbind(
+          sag_parseTable(x[["YearStatus"]]),
+          sag_parseTable(list(x[names(x) != "YearStatus"]))
+        )
+    })
+
+  out <- do.call(rbind, x)
+  rownames(out) <- NULL
+  out
 }
 
 

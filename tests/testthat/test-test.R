@@ -1,16 +1,21 @@
 context('webservice access')
 
-test_that('Webservice access is okay', {
-  options(icesSAG.messages = TRUE)
-  options(icesSAG.hostname = "iistest01/standardgraphs")
-  expect_equal(sag_checkWebserviceOK(), TRUE)
+options(icesSAG.messages = TRUE)
+#options(icesSAG.hostname = "iistest01/standardgraphs")
+
+test_that('SAG upload', {
+  stk <- readSAGxml("http://ecosystemdata.ices.dk/download/whb_comb_1999.xml")
+  stkxml <- createSAGxml(stk$info, stk$fishdata)
+  expect_equal(stk, readSAGxml(stkxml))
+  stk <- readSAGxml(stkxml)
+  expect_equal(stkxml, createSAGxml(stk$info, stk$fishdata))
 })
 
 
-test_that('SAG upload', {
-  stk <- readSAGUpload("http://ecosystemdata.ices.dk/download/whb_comb_1999.xml")
-  stkxml <- writeSAGUpload(stk$info, stk$fishdata)
-  expect_equal(stk, readSAGUpload(stkxml))
-  stk <- readSAGUpload(stkxml)
-  expect_equal(stkxml, writeSAGUpload(stk$info, stk$fishdata))
+test_that('getTokenExpiration',
+{
+  options(icesSAG.use_token = FALSE)
+  #expect_equal(getTokenExpiration(), NA)
+  options(icesSAG.use_token = TRUE)
+  expect_is(getTokenExpiration(), "numeric")
 })

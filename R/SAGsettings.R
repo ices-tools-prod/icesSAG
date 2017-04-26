@@ -1,6 +1,6 @@
 
 
-
+#' @export
 getSAGTypeGraphs <- function() {
   # call webservice
   out <- sag_webservice("getSAGTypeGraphs")
@@ -9,16 +9,16 @@ getSAGTypeGraphs <- function() {
   sag_parse(out)
 }
 
+#' @export
 getSAGTypeSettings <- function(SAGChartKey) {
   # call webservice
-#  out <- sag_webservice("getSAGTypeSettings", SAGChartKey = SAGChartKey)
-  out <- sag_webservice("getListAvailableSAGSettingsPerChart", SAGChartKey = SAGChartKey)
+  out <- sag_webservice("getSAGTypeSettings", SAGChartKey = SAGChartKey)
 
   # parse output
   sag_parse(out)
 }
 
-
+#' @export
 getSAGSettingsForAStock <- function(assessmentKey) {
   # call webservice
   out <- sag_webservice("getSAGSettingsForAStock", assessmentKey = assessmentKey)
@@ -27,7 +27,7 @@ getSAGSettingsForAStock <- function(assessmentKey) {
   sag_parse(out)
 }
 
-
+#' @export
 setSAGSettingForAStock <- function(assessmentKey, chartKey, settingKey, settingValue, copyNextYear) {
   # call webservice
   out <- sag_webservice("setSAGSettingForAStock",
@@ -36,7 +36,7 @@ setSAGSettingForAStock <- function(assessmentKey, chartKey, settingKey, settingV
                         settingValue = settingValue, copyNextYear = copyNextYear)
 
   # parse and return
-  simplify(unlist(out))
+  invisible(simplify(unlist(out)))
 }
 
 

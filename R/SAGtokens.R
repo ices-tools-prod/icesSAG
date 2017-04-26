@@ -4,6 +4,10 @@
 
 
 getTokenExpiration <- function() {
+  # only makes sense when tokens are set to true
+  opts <- options(icesSAG.use_token = TRUE)
+  on.exit(opts)
+
   # call webservice
   out <- sag_webservice("getTokenExpiration")
 
@@ -28,7 +32,7 @@ set_sg_pat <- function(pat = NULL) {
   # permanently set the SAG_PAT environment variable
 
   if (is.null(pat)) { # and is interactive?
-    cat("Please browse to:\n",
+    cat("Invalid or missing token. Please browse to:\n",
         "    https://standardgraphs.ices.dk/manage/CreateToken.aspx\n",
         "to create your personal access token and paste it below",
         sep = "")
@@ -48,7 +52,19 @@ set_sg_pat <- function(pat = NULL) {
       "SG_PAT=", pat, "\n",
       file = .sg_renviron, sep = "")
 
+  # check validity
+  check_sg_pat()
+}
+
+check_sg_pat <- function() {
   # read environment file
   readRenviron(.sg_renviron)
+
+  # check PAT
+  if (getTokenExpiration() <= 0) {
+    set_sg_pat()
+  }
+
+  invisible(TRUE)
 }
 
