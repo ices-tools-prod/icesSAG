@@ -7,9 +7,9 @@ getStockDownloadData <- function(assessmentKey, ...) {
 
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
-  # call webservice
-  out <- sag_webservice("getStockDownloadData", assessmentKey = assessmentKey)
+  # call webservice for all supplied keys
+  out <- lapply(assessmentKey, function(i) sag_webservice("getStockDownloadData", assessmentKey = i))
 
   # parse output
-  sag_parse(out)
+  lapply(out, sag_parse, type = "table")
 }
