@@ -18,6 +18,7 @@ getTokenExpiration <- function() {
 
 sg_pat <- function() {
   # get value of environment variable SG_PAT
+  if (file.exists(.sg_renviron)) readRenviron(.sg_renviron)
   pat <- Sys.getenv('SG_PAT')
   if (identical(pat, "")) {
     # SAG_PAT environment variable is not set
