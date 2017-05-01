@@ -48,3 +48,12 @@ test_that('getSAGTypeGraphs',
 
 
 })
+
+
+
+test_that('findAssessmentKey',
+{
+  options(icesSAG.use_token = FALSE)
+  keytab <- findAssessmentKey(stock = NULL, year = 2016, full = TRUE)
+  expect_is(keytab, "data.frame")
+})
