@@ -19,9 +19,6 @@ Get a list of fish stocks for a given assessment year.
 stocks <- getListStocks(2015)
 
 }
-\author{
-Colin Millar, Scott Large, and Arni Magnusson.
-}
 \seealso{
 \code{\link{getSummaryTable}} gets a summary table of historical stock size.
 
@@ -29,4 +26,6 @@ Colin Millar, Scott Large, and Arni Magnusson.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
-
+\author{
+Colin Millar, Scott Large, and Arni Magnusson.
+}

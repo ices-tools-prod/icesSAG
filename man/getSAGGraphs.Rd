@@ -2,27 +2,27 @@
 % Please edit documentation in R/getSAGGraphs.R
 \name{getSAGGraphs}
 \alias{getSAGGraphs}
-\title{Get a Summary Table of Historical Stock Size}
+\title{Get Summary Graphs of Stock Assessment Output}
 \usage{
-getSAGGraphs(key)
+getSAGGraphs(assessmentKey, ...)
 }
 \arguments{
-\item{key}{the unique identifier of the stock assessment}
+\item{assessmentKey}{the unique identifier of the stock assessment}
+
+\item{...}{to allow scope for back compatability}
 }
 \value{
-An array representing a png.
+An array representing a bitmap.
 }
 \description{
-Get a summary table of historical stock size, recruitment, and fishing pressure.
+Get summary graphs of catches, recruitment, fishing pressure, and spawning
+stock biomass.
 }
 \examples{
-key <- findKey("cod", 2015)
-graphs <- getSAGGraphs(key[1])
+assessmentKey <- findAssessmentKey("cod", 2015)
+graphs <- getSAGGraphs(assessmentKey[1])
 plot(graphs)
 
-}
-\author{
-Colin Millar and Scott Large.
 }
 \seealso{
 \code{\link{getListStocks}} gets a list of stocks.
@@ -31,4 +31,6 @@ Colin Millar and Scott Large.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
-
+\author{
+Colin Millar and Scott Large.
+}

@@ -1,6 +1,7 @@
-#' Get Reference Points
+#' Get the Values in a Stock Status Table
 #'
-#' Get biological reference points for all stocks in a given assessment year.
+#' Get summary results of historical stock size, recruitment, and fishing
+#' pressure.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
 #' @param ... to allow scope for back compatability
@@ -11,27 +12,27 @@
 #' \code{\link{getSAG}} supports querying many years and quarters in one
 #'   function call.
 #'
-#' \code{\link{getListStocks}} and \code{\link{getSummaryTable}} get a list of
-#'   stocks and summary results.
+#' \code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
+#'   a list of stocks and reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Colin Millar and Scott Large.
+#' @author Colin Millar.
 #'
 #' @examples
 #' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
-#' refpts <- getFishStockReferencePoints(assessmentKey)
-#' refpts
+#' status <- getStockStatusValues(assessmentKey)
+#' head(status)
 #'
 #' @export
 
-getFishStockReferencePoints <- function(assessmentKey, ...) {
+getStockStatusValues <- function(assessmentKey, ...) {
 
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # call webservice for all supplied keys
-  out <- lapply(assessmentKey, function(i) sag_webservice("getFishStockReferencePoints", assessmentKey = i))
+  out <- lapply(assessmentKey, function(i) sag_webservice("getStockStatusValues", assessmentKey = i))
 
   # parse output
-  lapply(out, sag_parse)
+  lapply(out, sag_parse, type = "stockStatus")
 }

@@ -1,10 +1,12 @@
-#' Get graphs of stock assessment output
+#' Get a Graph of Stock Assessment Output
 #'
-#' Get summary graphs of, e.g., historical stock size, recruitment, and fishing pressure.
+#' Get a graph of stock assessment output, e.g., historical stock size,
+#' recruitment, and fishing pressure.
 #'
-#' @param key the unique identifier of the stock assessment
+#' @param assessmentKey the unique identifier of the stock assessment
+#' @param ... to allow scope for back compatability
 #'
-#' @return An array representing a png.
+#' @return An array representing a bitmap.
 #'
 #' @seealso
 #' \code{\link{getListStocks}} gets a list of stocks.
@@ -14,42 +16,32 @@
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
 #' @examples
-#' keys <- findKey("had", 2015)
-#' landings_img <- getLandingsGraph(keys[1])
+#' assessmentKeys <- findAssessmentKey("had", 2015)
+#' landings_img <- getLandingsGraph(assessmentKeys[1])
 #' plot(landings_img)
 #'
-#' landings_plots <- getLandingsGraph(keys)
+#' landings_plots <- getLandingsGraph(assessmentKeys)
 #' plot(landings_plots)
 #'
 #' @rdname getGraphs
-#' @name getStandardAssessmentGraps
+#' @name getStandardAssessmentGraphs
 NULL
 
 #' @rdname getGraphs
 #' @export
-#' @importFrom utils tail
-getLandingsGraph <- function(key) {
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
+getLandingsGraph <- function(assessmentKey, ...) {
+
+  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # get function name as a character
-  # NOTE need tail(x, 1) here for when calling as icesSAG::get____(key)
-  operation <- tail(as.character(match.call()[[1]]), 1)
+  # NOTE need tail(x, 1) here for when calling as icesSAG::get____(assessmentKey)
+  operation <- utils::tail(as.character(match.call()[[1]]), 1)
 
-  # read text string and parse to data frame
-  url <-
-    sprintf(
-      "http://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
-      operation, key)
+  # call webservice for all supplied keys
+  out <- lapply(assessmentKey, function(i) sag_webservice(operation, assessmentKey = i))
 
-  # read urls
-  out <- lapply(url, readSAG)
-
-  # parse text
-  out <- lapply(out, parseGraph)
-
-  # drop any nulls
-  out <- out[!sapply(out, is.null)]
+  # parse output
+  out <- lapply(out, sag_parse, type = "graph")
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))
@@ -94,3 +86,6 @@ getFishingMortalityHistoricalPerformance <- getLandingsGraph
 #' @export
 getRecruitmentHistoricalPerformance <- getLandingsGraph
 
+#' @rdname getGraphs
+#' @export
+getStockStatusTable <- getLandingsGraph

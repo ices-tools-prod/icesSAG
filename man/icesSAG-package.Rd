@@ -2,12 +2,12 @@
 % Please edit documentation in R/icesSAG-package.R
 \docType{package}
 \name{icesSAG-package}
-\alias{icesSAG}
 \alias{icesSAG-package}
+\alias{icesSAG}
 \title{Stock Assessment Graphs Database Web Services}
 \description{
-R interface to access the web services of the ICES (International Council
-for the Exploration of the Sea) Stock Assessment Graphs (SAG) database.
+R interface to access the web services of the ICES Stock Assessment Graphs
+database.
 }
 \details{
 \emph{Get dataset:}
@@ -18,14 +18,16 @@ for the Exploration of the Sea) Stock Assessment Graphs (SAG) database.
 }
 \emph{Look up codes:}
 \tabular{ll}{
-  \code{\link{findKey}}       \tab find key\cr
+  \code{\link{findAssessmentKey}}       \tab find assessment key\cr
   \code{\link{getListStocks}} \tab list of stocks
 }
+}
+\references{
+ICES Stock Assessment Graphs database: \url{http://sg.ices.dk}.
+
+ICES Stock Assessment Graphs web services:
+\url{http://sg.ices.dk/webservices.aspx}.
 }
 \author{
 Colin Millar, Scott Large, and Arni Magnusson.
 }
-\references{
-ICES Stock Assessment Graphs database: \url{http://sg.ices.dk/}.
-}
-

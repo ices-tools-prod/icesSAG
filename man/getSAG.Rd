@@ -7,7 +7,8 @@
 getSAG(stock, year, data = "summary", combine = TRUE)
 }
 \arguments{
-\item{stock}{a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.}
+\item{stock}{a stock name, e.g. cod-347d, or cod to find all cod stocks, or
+NULL to process all stocks.}
 
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
 
@@ -21,7 +22,7 @@ A data frame (default) or a list if \code{combine} is \code{TRUE}.
 \description{
 This function combines the functionality of getListStocks,
 getFishStockReferencePoints, and getSummaryTable.
-It supports querying many years and quarters in one function call.
+It supports querying many stocks and years in one function call.
 }
 \note{
 Only years with "Published" status are returned.
@@ -32,6 +33,7 @@ refpts <- getSAG("cod-347d", 2015, "refpts")
 
 \dontrun{
 cod_summary <- getSAG("cod", 2015)
+cod_refpts <- getSAG("cod", 2015:2016, "refpts")
 }
 }
 \seealso{
@@ -39,8 +41,10 @@ cod_summary <- getSAG("cod", 2015)
   \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
   results, and reference points.
 
-\code{\link{findKey}} finds lookup keys.
+\code{\link{findAssessmentKey}} finds lookup keys.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
-
+\author{
+Arni Magnusson and Colin Millar.
+}

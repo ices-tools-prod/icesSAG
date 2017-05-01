@@ -2,9 +2,10 @@
 #'
 #' This function combines the functionality of getListStocks,
 #' getFishStockReferencePoints, and getSummaryTable.
-#' It supports querying many years and quarters in one function call.
+#' It supports querying many stocks and years in one function call.
 #'
-#' @param stock a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL to process all stocks.
+#' @param stock a stock name, e.g. cod-347d, or cod to find all cod stocks, or
+#'        NULL to process all stocks.
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
 #' @param data the data of interest, either "summary" or "refpts".
 #' @param combine whether to combine the list output to a data frame.
@@ -18,9 +19,11 @@
 #'   \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
 #'   results, and reference points.
 #'
-#' \code{\link{findKey}} finds lookup keys.
+#' \code{\link{findAssessmentKey}} finds lookup keys.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
+#'
+#' @author Arni Magnusson and Colin Millar.
 #'
 #' @examples
 #' summary <- getSAG("cod-347d", 2015)
@@ -28,40 +31,28 @@
 #'
 #' \dontrun{
 #' cod_summary <- getSAG("cod", 2015)
+#' cod_refpts <- getSAG("cod", 2015:2016, "refpts")
 #' }
 #' @export
 
 getSAG <- function(stock, year, data = "summary", combine = TRUE) {
   # select web service operation and parser
   data <- match.arg(data, c("summary", "refpts"))
-  operation <- switch(data,
-                      summary = "getSummaryTable",
-                      refpts = "getFishStockReferencePoints")
-  parseFunction <- switch(data,
-                          summary = parseSummary,
-                          refpts = parseSAG)
-
-  # check web services are running
-  if (!checkSAGWebserviceOK()) return (FALSE)
+  service <- switch(data,
+                    summary = "getSummaryTable",
+                    refpts = "getFishStockReferencePoints")
 
   # find lookup key
-  key <- findKey(stock, year, published = TRUE, regex = TRUE, full = FALSE)
+  assessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = FALSE)
 
   # get data requested by user
-  url <-
-    sprintf(
-      "https://sg.ices.dk/StandardGraphsWebServices.asmx/%s?key=%i",
-      operation, key)
-  # read urls
-  out <- lapply(url, readSAG)
-  # parse
-  out <- lapply(out, parseFunction)
+  out <- do.call(service, list(assessmentKey = assessmentKey))
 
-  # drop any null entries (happens when not published stock creep in)
+  # drop any null entries (happens when not published stocks creep in)
   out <- out[!sapply(out, is.null)]
 
   # combine tables
-  if (combine) {
+  if (length(out) > 1 && combine) {
     # form new column names for combined data frame
     outNames <- unique(unlist(lapply(out, names)))
 
@@ -81,6 +72,8 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE) {
 
     # finally resimplify
     out <- simplify(out)
+  } else if (length(out) == 1) {
+    out <- out[[1]]
   }
 
   # return

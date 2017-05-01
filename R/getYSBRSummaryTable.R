@@ -1,4 +1,4 @@
-#' Get a Summary Table of Historical Stock Size
+#' Get a Summary Table of Yield and Spawning Biomass Per Recruit
 #'
 #' Get summary results of historical stock size, recruitment, and fishing
 #' pressure.
@@ -20,19 +20,18 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
-#' sumtab <- getSummaryTable(assessmentKey)
+#' assessmentKey <- findAssessmentKey("cod-2224", year = 2015)
+#' sumtab <- getYSBRSummaryTable(assessmentKey)
 #' head(sumtab)
-#' attributes(sumtab)$notes
 #'
 #' @export
 
-getSummaryTable <- function(assessmentKey, ...) {
+getYSBRSummaryTable <- function(assessmentKey, ...) {
 
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # call webservice for all supplied keys
-  out <- lapply(assessmentKey, function(i) sag_webservice("getSummaryTable", assessmentKey = i))
+  out <- lapply(assessmentKey, function(i) sag_webservice("getYSBRSummaryTable", assessmentKey = i))
 
   # parse output
   lapply(out, sag_parse, type = "summary")

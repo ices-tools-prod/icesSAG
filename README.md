@@ -5,15 +5,14 @@
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)](https://cran.r-project.org/package=icesSAG)
 [![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-[<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://www.ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://www.ices.dk/Pages/default.aspx)
+[<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
 
 icesSAG
-======
+=======
 
 icesSAG provides R functions that access the
-[web services](https://datras.ices.dk/WebServices/Webservices.aspx) of the
-[ICES (International Council for the Exploration of the Sea)](http://www.ices.dk/Pages/default.aspx)
-[Stock Assessment Graphs Database](http://ices.dk/marine-data/tools/Pages/stock-assessment-graphs.aspx).
+[web services](http://sg.ices.dk/webservices.aspx) of the [ICES](http://ices.dk)
+[Stock Assessment Graphs](http://sg.ices.dk) database.
 
 icesSAG is implemented as an [R](https://www.r-project.org) package and
 available on [CRAN](https://cran.r-project.org/package=icesSAG).
@@ -24,7 +23,7 @@ Installation
 icesSAG can be installed from CRAN using the `install.packages` command:
 
 ```R
-install.packages('icesSAG')
+install.packages("icesSAG")
 ```
 
 Usage
@@ -41,12 +40,10 @@ References
 ----------
 
 ICES Stock Assessment Graphs database:
+http://sg.ices.dk
 
-[http://standardgraphs.ices.dk/](http://standardgraphs.ices.dk/)
-
-ICES Stock Assessment Graphs database web services:
-
-[http://standardgraphs.ices.dk/webservices.aspx](http://standardgraphs.ices.dk/webservices.aspx)
+ICES Stock Assessment Graphs web services:
+http://sg.ices.dk/webservices.aspx
 
 Development
 -----------
@@ -60,5 +57,12 @@ there if you encounter problems or have suggestions for future versions.
 The current development version can be installed using:
 
 ```R
-devtools::install_github('ices-tools-prod/icesSAG')
+library(devtools)
+install_github("ices-tools-prod/icesSAG")
 ```
+
+
+Dependencies graph (from [MRAN](https://mran.microsoft.com/package/icesSAG/#depend))
+-------------------
+
+[![dependencies](https://mran.microsoft.com/packagedata/graphs/icesSAG.png)](https://mran.microsoft.com/package/icesSAG/#depend)
