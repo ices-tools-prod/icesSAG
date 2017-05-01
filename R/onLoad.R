@@ -2,9 +2,6 @@
 
 .onLoad <- function(libname, pkgname) {
 
-  # read environ file
-  readRenviron(.sg_renviron)
-
   # set some default SG options
   opts <-
     c(icesSAG.messages = "TRUE",

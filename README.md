@@ -60,3 +60,9 @@ The current development version can be installed using:
 library(devtools)
 install_github("ices-tools-prod/icesSAG")
 ```
+
+
+Dependencies graph (from [MRAN](https://mran.microsoft.com/package/icesSAG/#depend))
+-------------------
+
+[![dependencies](https://mran.microsoft.com/packagedata/graphs/icesSAG.png)](https://mran.microsoft.com/package/icesSAG/#depend)
