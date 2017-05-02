@@ -31,6 +31,8 @@ library(icesSAG)
 Examples
 --------
 
+To download the summary data for all stocks published so far in 2017 use:
+
 ``` r
 summary_data <- getSAG(stock = NULL, year = 2017)
 head(summary_data)

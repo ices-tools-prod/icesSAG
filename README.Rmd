@@ -47,13 +47,17 @@ Examples
 
 ```{r, echo = FALSE}
 options(icesSAG.messages = FALSE)
+options(icesSAG.use_token = FALSE)
 library(icesSAG)
 ```
 
+To download the summary data for all stocks published so far in 2017 use:
 ```{r}
 summary_data <- getSAG(stock = NULL, year = 2017)
 head(summary_data)
 ```
+
+
 
 References
 ----------
