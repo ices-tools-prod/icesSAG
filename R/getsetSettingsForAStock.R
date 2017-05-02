@@ -29,6 +29,7 @@ getSAGSettingsForAStock <- function(assessmentKey) {
 }
 
 #' @rdname getsetStockSettings
+#' @export
 setSAGSettingForAStock <- function(assessmentKey, chartKey, settingKey, settingValue, copyNextYear) {
   # call webservice
   out <- sag_webservice("setSAGSettingForAStock",
