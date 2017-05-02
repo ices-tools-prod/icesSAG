@@ -48,6 +48,7 @@ findAssessmentKey <- function(stock = NULL, year = 0, regex = TRUE, full = FALSE
 
   # return
   if (full) {
+    row.names(out) <- NULL
     out
   } else {
     out$AssessmentKey

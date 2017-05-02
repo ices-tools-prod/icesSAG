@@ -3,7 +3,8 @@ uploadXMLFile <- function(txt) {
 
     uri <- sag_uri("uploadXMLFile", token = "test")
     uri <- gsub("[?]token=test", "", uri)
-    message("POSTing ... ", uri)
+    #if (getOption("icesSAG.messages"))
+    #  message("POSTing ... ", uri)
 
     body <- sprintf("f=%s&token=%s",
                     openssl::base64_encode(utils::URLencode(txt)),

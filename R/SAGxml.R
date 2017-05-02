@@ -49,7 +49,7 @@ createSAGxml <- function(info, fishdata) {
     }
     out <-
       paste(paste0("<", names(x), ">"),
-      paste0(x),
+      sapply(x, formatC, format = "fg"),
       paste0("</", names(x), ">"),
       collapse = "\r\n", sep = sep)
     gsub(">NA</", "></", out)
