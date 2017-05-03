@@ -182,18 +182,6 @@ sag_parseWSDL <- function(x) {
 
 
 
-sag_parseUpload <- function(x) {
-  # parse header information
-  info <- sag_parseTable(list(x[names(x) != "Fish_Data"]))
-
-  # tidy fish data
-  fishdata <- sag_parse(x[names(x) == "Fish_Data"])
-
-  list(info = info, fishdata = fishdata)
-}
-
-
-
 #' @export
 plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
   # clear the page

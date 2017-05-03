@@ -30,17 +30,6 @@ NULL
 
 #' @rdname readCreateSAGxml
 #' @export
-
-readSAGxml <- function(file) {
-  # read in xml file, and convert to list
-  out <- xml2::as_list(xml2::read_xml(file))
-
-  sag_parse(out, type = "upload")
-}
-
-
-#' @rdname readCreateSAGxml
-#' @export
 createSAGxml <- function(info, fishdata) {
   # handy function to convert a list into an xml row
   list2xml <- function(x, xnames = NULL, sep = "") {
@@ -61,6 +50,14 @@ createSAGxml <- function(info, fishdata) {
                   "<Assessment xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='ICES_Standard_Graphs.xsd'>",
                   sep = "\r\n")
 
+  info <- unclass(info)
+  info <- info[names(info) %in% validNames("stockInfo")]
+  info <- info[!sapply(info, is.na)]
+
+  fishdata <- as.data.frame(fishdata)
+  fishdata <- fishdata[names(fishdata) %in% validNames("stockFishdata")]
+  fishdata <- fishdata[sapply(fishdata, function(x) !all(is.na(x)))]
+
   # paste together and return as text
   paste0(header, "\r\n",
          list2xml(info), "\r\n",
@@ -69,6 +66,27 @@ createSAGxml <- function(info, fishdata) {
 }
 
 
+#' @rdname readCreateSAGxml
+#' @export
+readSAGxml <- function(file) {
+  # read in xml file, and convert to list
+  out <- xml2::as_list(xml2::read_xml(file))
+
+  sag_parse(out, type = "upload")
+}
+
+
+sag_parseUpload <- function(x) {
+  # parse header information
+  info <- sag_parseTable(list(x[names(x) != "Fish_Data"]))
+  info <- do.call(stockInfo, info)
+
+  # tidy fish data
+  fishdata <- sag_parse(x[names(x) == "Fish_Data"])
+  fishdata <- do.call(stockFishdata, fishdata)
+
+  list(info = info, fishdata = fishdata)
+}
 
 
 
@@ -108,11 +126,11 @@ stockInfo <- function(StockCode, AssessmentYear, ContactPerson, ...) {
            list(...))
   # warn about possibly misspelt names?
   if (any(!names(val) %in% validNames("stockInfo"))) {
-    stop("The following argument(s) are invalid:\n",
+    warning("The following argument(s) are invalid and will be ignored:\n",
          utils::capture.output(noquote(names(val))[!names(val) %in% validNames("stockInfo")]),
          "\n")
   }
-  val$NameSystemProducedFile <- paste("icesSAG R package version", packageVersion("icesSAG"))
+  val$NameSystemProducedFile <- paste("icesSAG R package version", utils::packageVersion("icesSAG"))
   val <- val[names(val) %in% validNames("stockInfo")]
   # add all relavent names to help with intelisense
   val[setdiff(validNames("stockInfo"), names(val))] <- NA
@@ -129,7 +147,7 @@ print.sag.list <- function(x, digits = NULL, quote = TRUE, right = FALSE, ...) {
          utils::capture.output(noquote(names(x))[!names(x) %in% validNames("stockInfo")]),
          "\n", call. = FALSE)
   }
-  x <- as.list(x)
+  x <- unclass(x)
   x <- x[names(x) %in% validNames("stockInfo")]
   x <- x[!sapply(x, is.na)]
   # call print.data.frame
@@ -161,7 +179,7 @@ stockFishdata <- function(Year, ...) {
   val <- c(list(Year = Year), list(...))
   # warn about possibly misspelt names?
   if (any(!names(val) %in% validNames("stockFishdata"))) {
-    stop("The following argument(s) are invalid:\n",
+    warning("The following argument(s) are invalid and will be ignored:\n",
          utils::capture.output(noquote(names(val))[!names(val) %in% validNames("stockFishdata")]),
          "\n")
   }
