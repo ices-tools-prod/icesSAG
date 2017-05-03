@@ -83,20 +83,118 @@ createSAGxml <- function(info, fishdata) {
 #' @param ContactPerson the email for the person responsible for uploading the stock data.
 #' @param ... additional information, e.g. BMGT, FMSY, RecruitmentAge, ...
 #'
-#' @return A named list, where all names are valid column names in the SAG database.
+#' @return A named sag.list, inheriting from a list, where all names are valid column names in the
+#'         SAG database.
 #'
 #' @author Colin Millar.
 #'
 #' @examples
-#' stockInfo(StockCode = "cod.27.347d",
-#'           AssessmentYear = 2017,
-#'           ContactPerson = "itsme@fisheries.com")
+#' info <-
+#'   stockInfo(StockCode = "cod.27.347d",
+#'             AssessmentYear = 2017,
+#'             ContactPerson = "itsme@fisheries.com")
+#'
+#'  info
+#'  info$mistake <- "oops"
+#'  info
+#'  # should have gotten a warning message
 #' @export
 
 stockInfo <- function(StockCode, AssessmentYear, ContactPerson, ...) {
   # create default info list
-  validNames <-
-    c("StockCode",
+  val <- c(list(StockCode = StockCode,
+                AssessmentYear = AssessmentYear,
+                ContactPerson = ContactPerson),
+           list(...))
+  # warn about possibly misspelt names?
+  if (any(!names(val) %in% validNames("stockInfo"))) {
+    stop("The following argument(s) are invalid:\n",
+         utils::capture.output(noquote(names(val))[!names(val) %in% validNames("stockInfo")]),
+         "\n")
+  }
+  val$NameSystemProducedFile <- paste("icesSAG R package version", packageVersion("icesSAG"))
+  val <- val[names(val) %in% validNames("stockInfo")]
+  # add all relavent names to help with intelisense
+  val[setdiff(validNames("stockInfo"), names(val))] <- NA
+  class(val) <- c("sag.list", class(val))
+  val
+}
+
+
+
+print.sag.list <- function(x, digits = NULL, quote = TRUE, right = FALSE, ...) {
+  # warn about possibly misspelt names?
+  if (any(!names(x) %in% validNames("stockInfo"))) {
+    warning("The following entries(s) are invalid and will be ignored on upload:\n",
+         utils::capture.output(noquote(names(x))[!names(x) %in% validNames("stockInfo")]),
+         "\n", call. = FALSE)
+  }
+  x <- as.list(x)
+  x <- x[names(x) %in% validNames("stockInfo")]
+  x <- x[!sapply(x, is.na)]
+  # call print.data.frame
+  print.default(x, digits = digits, quote = quote, right = right, ...)
+}
+
+
+
+#' Create a data.frame of fish stock data
+#'
+#' This function is a wrapper to \code{data.frame(...)} in which the names are forced to match with
+#' the names required for the SAG database.  See http://dome.ices.dk/datsu/selRep.aspx?Dataset=126
+#' for more details.
+#'
+#' @param Year a vector of years.
+#' @param ... additional information, e.g. Recruitment, StockSize, Landings, ...
+#'
+#'
+#' @return A data.frame, where all names are valid column names in the SAG database.
+#'
+#' @author Colin Millar.
+#'
+#' @examples
+#' stockFishdata(Year = 1990:2017, Catches = 100)
+#' @export
+
+stockFishdata <- function(Year, ...) {
+  # create default data.frame
+  val <- c(list(Year = Year), list(...))
+  # warn about possibly misspelt names?
+  if (any(!names(val) %in% validNames("stockFishdata"))) {
+    stop("The following argument(s) are invalid:\n",
+         utils::capture.output(noquote(names(val))[!names(val) %in% validNames("stockFishdata")]),
+         "\n")
+  }
+  val <- val[names(val) %in% validNames("stockFishdata")]
+  val$stringsAsFactors <- FALSE
+  val <- do.call(data.frame, val)
+  val[setdiff(validNames("stockFishdata"), names(val))] <- NA
+  class(val) <- c("sag.data.frame", class(val))
+  val
+}
+
+print.sag.data.frame <- function(x, ..., digits = NULL, quote = FALSE,
+                              right = TRUE, row.names = TRUE) {
+  # warn about possibly misspelt names?
+  if (any(!names(x) %in% validNames("stockFishdata"))) {
+    warning("The following column(s) are invalid and will be ignored on upload:\n",
+         utils::capture.output(noquote(names(x))[!names(x) %in% validNames("stockFishdata")]),
+         "\n", call. = FALSE)
+  }
+  x <- as.data.frame(x)
+  x <- x[names(x) %in% validNames("stockFishdata")]
+  x <- x[sapply(x, function(x) !all(is.na(x)))]
+  # call print.data.frame
+  print.data.frame(x, ..., digits = digits, quote = quote, right = right, row.names = row.names)
+}
+
+
+validNames <- function(type = c("stockInfo", "stockFishdata")) {
+  # taken from:
+  # http://dome.ices.dk/datsu/selRep.aspx?Dataset=126
+  switch(type,
+    stockInfo =
+      c("StockCode",
       "AssessmentYear",
       "StockCategory",
       "BMGT_lower",
@@ -129,83 +227,34 @@ stockInfo <- function(StockCode, AssessmentYear, ContactPerson, ...) {
       paste0("CustomLimitName", 1:5),
       paste0("CustomLimitNotes", 1:5),
       paste0("CustomSeriesName", 1:20),
-      paste0("CustomSeriesUnits", 1:20))
-
-  val <- c(list(StockCode = StockCode,
-                AssessmentYear = AssessmentYear,
-                ContactPerson = ContactPerson),
-           list(...))
-  # warn about possibly misspelt names?
-  if (any(!names(val) %in% validNames)) {
-    stop("The following argument(s) are invalid:\n",
-         utils::capture.output(noquote(names(val))[!names(val) %in% validNames]),
-         "\n")
-  }
-  val$NameSystemProducedFile <- "icesSAG R package"
-  val[names(val) %in% validNames]
-}
-
-
-
-#' Create a data.frame of fish stock data
-#'
-#' This function is a wrapper to \code{data.frame(...)} in which the names are forced to match with
-#' the names required for the SAG database.  See http://dome.ices.dk/datsu/selRep.aspx?Dataset=126
-#' for more details.
-#'
-#' @param Year a vector of years.
-#' @param ... additional information, e.g. Recruitment, StockSize, Landings, ...
-#'
-#'
-#' @return A data.frame, where all names are valid column names in the SAG database.
-#'
-#' @author Colin Millar.
-#'
-#' @examples
-#' stockFishdata(Year = 1990:2017, Catches = 100)
-#' @export
-
-stockFishdata <- function(Year, ...) {
-  # create default info list
-  # http://dome.ices.dk/datsu/selRep.aspx?Dataset=126
-  validnames <-
-    c("Year",
-      "Low_Recruitment",
-      "Recruitment",
-      "High_Recruitment",
-      "Low_TBiomass",
-      "TBiomass",
-      "High_TBiomass",
-      "Low_StockSize",
-      "StockSize",
-      "High_StockSize",
-      "Catches",
-      "Landings",
-      "LandingsBMS",
-      "Discards",
-      "LogbookRegisteredDiscards",
-      "IBC",
-      "Unallocated_Removals",
-      "Low_FishingPressure",
-      "FishingPressure",
-      "High_FishingPressure",
-      "FishingPressure_Landings",
-      "FishingPressure_Discards",
-      "FishingPressure_IBC",
-      "FishingPressure_Unallocated",
-      paste0("CustomSeries", 1:20)
-   )
-
-  val <- c(list(Year = Year), list(...))
-  # warn about possibly misspelt names?
-  if (any(!names(val) %in% validnames)) {
-    stop("The following argument(s) are invalid:\n",
-         utils::capture.output(noquote(names(val))[!names(val) %in% validnames]),
-         "\n")
-  }
-  val <- val[names(val) %in% validnames]
-  val$stringsAsFactors <- FALSE
-  do.call(data.frame, val)
+      paste0("CustomSeriesUnits", 1:20)),
+    stockFishdata =
+      c("Year",
+        "Low_Recruitment",
+        "Recruitment",
+        "High_Recruitment",
+        "Low_TBiomass",
+        "TBiomass",
+        "High_TBiomass",
+        "Low_StockSize",
+        "StockSize",
+        "High_StockSize",
+        "Catches",
+        "Landings",
+        "LandingsBMS",
+        "Discards",
+        "LogbookRegisteredDiscards",
+        "IBC",
+        "Unallocated_Removals",
+        "Low_FishingPressure",
+        "FishingPressure",
+        "High_FishingPressure",
+        "FishingPressure_Landings",
+        "FishingPressure_Discards",
+        "FishingPressure_IBC",
+        "FishingPressure_Unallocated",
+        paste0("CustomSeries", 1:20)
+      ))
 }
 
 
