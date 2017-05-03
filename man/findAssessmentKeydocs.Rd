@@ -6,7 +6,8 @@
 \alias{findKey}
 \title{Find a Key}
 \usage{
-findAssessmentKey(stock = NULL, year = 0, regex = TRUE, full = FALSE)
+findAssessmentKey(stock = NULL, year = 0, published = TRUE,
+  regex = TRUE, full = FALSE)
 
 findKey(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
 }
@@ -16,11 +17,11 @@ to process all stocks.}
 
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
 
+\item{published}{whether to include only years where status is "Published".}
+
 \item{regex}{whether to match the stock name as a regular expression.}
 
 \item{full}{whether to return a data frame with all stock list columns.}
-
-\item{published}{whether to include only years where status is "Published".}
 }
 \value{
 A vector of keys (default) or a data frame if full is TRUE.
