@@ -207,3 +207,46 @@ stockFishdata <- function(Year, ...) {
   val$stringsAsFactors <- FALSE
   do.call(data.frame, val)
 }
+
+
+checkStockInfo <- function(info) {
+  errors <- list()
+  # check Stock Code
+  x <- icesVocab::findCode("ICES_StockCode", info$StockCode, full = TRUE)
+  if (length(x) == 0) {
+    part1 <- paste(strsplit(info$StockCode, "[.]")[[1]][1:2], collapse = ".")
+    maybe <- icesVocab::findCode("ICES_StockCode", part1)$ICES_StockCode
+    maybe <- sapply(strsplit(maybe, "[.]"), "[", 3)
+    ending <- strsplit(info$StockCode, "[.]")[[1]][3]
+    ending <- strsplit(ending, "")[[1]]
+    loc1 <- grep("[1-9]", ending)
+    loc2 <- c(loc1[-1] - 1, length(ending))
+    ending <- sapply(1:length(loc1), function(i) paste(ending[loc1[i]:loc2[i]], collapse = ""))
+    maybeid <- unique(unlist(sapply(ending, grep, x = maybe)))
+    errors$StockCode <- paste0("non valid stock code (",  info$StockCode,"). Did you mean on of these: ", paste(part1, maybe[maybeid], sep = ".", collapse = ", "), "?")
+  }
+
+
+  # return
+  if (length(errors)) {
+    errors <- c(errors = length(errors), errors)
+  } else {
+    errors <- c(errors = 0, errors)
+  }
+  errors
+}
+
+checkStockFishdata <- function(fishdata) {
+  errors <- list()
+
+  # checks here
+  # None yet!
+
+  # return
+  if (length(errors)) {
+    errors <- c(errors = length(errors), errors)
+  } else {
+    errors <- c(errors = 0, errors)
+  }
+  errors
+}
