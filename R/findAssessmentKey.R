@@ -27,12 +27,13 @@ NULL
 
 #' @rdname findAssessmentKeydocs
 #' @export
-findAssessmentKey <- function(stock = NULL, year = 0, regex = TRUE, full = FALSE) {
+findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = TRUE, full = FALSE) {
   # get list of all stocks for all supplied years
   out <- do.call(rbind, lapply(year, getListStocks))
 
   # apply filters
-  if (!getOption("icesSAG.use_token")) {
+  #  if (!getOption("icesSAG.use_token")) {
+  if (published) {
     # restrict output to only published stocks
     out <- out[out$Status == "Published",]
   }

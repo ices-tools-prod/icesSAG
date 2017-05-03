@@ -8,7 +8,8 @@ Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@
 Imports: png,
          httr,
          xml2,
-         openssl
+         openssl,
+         icesVocab
 Suggests: testthat
 Description: R interface to access the web services of the ICES Stock Assessment
              Graphs database <http://sg.ices.dk>.
