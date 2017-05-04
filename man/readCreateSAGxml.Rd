@@ -2,20 +2,20 @@
 % Please edit documentation in R/SAGxml.R
 \name{convertSAGxml}
 \alias{convertSAGxml}
-\alias{readSAGxml}
 \alias{createSAGxml}
+\alias{readSAGxml}
 \title{Create and read the SAG XML data transfer file}
 \usage{
-readSAGxml(file)
-
 createSAGxml(info, fishdata)
+
+readSAGxml(file)
 }
 \arguments{
-\item{file}{an xml file name}
-
 \item{info}{a list of stock information}
 
 \item{fishdata}{a data.frame of fish data}
+
+\item{file}{an xml file name}
 }
 \value{
 either a list contating info and fshdata, or an string containing the xml file.

@@ -4,10 +4,6 @@
 
 
 getTokenExpiration <- function() {
-  # only makes sense when tokens are set to true
-  opts <- options(icesSAG.use_token = TRUE)
-  on.exit(opts)
-
   # call webservice
   out <- sag_webservice("getTokenExpiration")
 

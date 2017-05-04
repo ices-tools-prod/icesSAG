@@ -16,7 +16,8 @@ stockInfo(StockCode, AssessmentYear, ContactPerson, ...)
 \item{...}{additional information, e.g. BMGT, FMSY, RecruitmentAge, ...}
 }
 \value{
-A named list, where all names are valid column names in the SAG database.
+A named sag.list, inheriting from a list, where all names are valid column names in the
+        SAG database.
 }
 \description{
 This function is a wrapper to \code{list(...)} in which the names are forced to match with
@@ -24,9 +25,15 @@ the names required for the SAG database.  See http://dome.ices.dk/datsu/selRep.a
 for more details.
 }
 \examples{
-stockInfo(StockCode = "cod.27.347d",
-          AssessmentYear = 2017,
-          ContactPerson = "itsme@fisheries.com")
+info <-
+  stockInfo(StockCode = "cod.27.347d",
+            AssessmentYear = 2017,
+            ContactPerson = "itsme@fisheries.com")
+
+ info
+ info$mistake <- "oops"
+ info
+ # should have gotten a warning message
 }
 \author{
 Colin Millar.
