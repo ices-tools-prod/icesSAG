@@ -1,4 +1,12 @@
 --------------------------------------------------------------------------------
+icesSAG 1.3-1 (2017-05-04)
+--------------------------------------------------------------------------------
+o Bug fixes
+o Added checking of XML files
+o Added overloading of data.frame and list to allow checking of object contents
+  without going full S4
+
+--------------------------------------------------------------------------------
 icesSAG 1.3-0 (2017-04-05)
 --------------------------------------------------------------------------------
 o Major rewrite of internal webservice functions.
