@@ -17,4 +17,4 @@ alter function [dbo].[getRoundedValue]  (  @value float )
 returns float
 begin
   return cast([dbo].[getRoundedValueC] (@value) as float)
-  end
+ end
