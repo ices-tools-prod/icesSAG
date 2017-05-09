@@ -7,11 +7,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-alter function [dbo].[getRoundedValue]  (  @value float ) 
+alter function [dbo].[getRoundedValue]  (  @value float )
 
 returns float
- 
-begin 
+
+begin
 	return cast([dbo].[getRoundedValueC] (@value) as float)
 end
 

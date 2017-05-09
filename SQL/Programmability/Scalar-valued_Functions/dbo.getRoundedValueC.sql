@@ -7,15 +7,15 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 /* some tests
-select valueToRound, [dbo].[getRoundedValueC]  ( valueToRound ) as res from tblTempValuesToround 
+select valueToRound, [dbo].[getRoundedValueC]  ( valueToRound ) as res from tblTempValuesToround
 */
 
 
-alter function [dbo].[getRoundedValueC]  ( @value float ) 
+alter function [dbo].[getRoundedValueC]  ( @value float )
 
 returns nvarchar(20)
- 
-begin 
+
+begin
 	declare @firstDigit  as nvarchar(1)
 	declare @sf as int
 	declare @digits as int
