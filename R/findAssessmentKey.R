@@ -59,6 +59,6 @@ findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = 
 #' @rdname findAssessmentKeydocs
 #' @export
 findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE) {
-  warning("findKey() is depreciated, please use findAssessmentKey() instead.")
+  .Deprecated("findAssessmentKey")
   findAssessmentKey(stock = stock, year = year, regex = regex, full = full)
 }
