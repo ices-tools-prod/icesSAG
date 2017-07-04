@@ -99,7 +99,7 @@ sag_parseTable <- function(x) {
   # rbind into a matrix
   x <- do.call(rbind, x)
 
-  # remove any html tags
+  # remove any html tags - this can happen in the SAG graph settings entries!
   x[] <- gsub("<.*?>", "", x)
 
   # trim white space
