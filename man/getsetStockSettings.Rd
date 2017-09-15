@@ -29,7 +29,21 @@ a data.frame with SAG chart type IDs, settings IDs and setting values.
 details
 }
 \examples{
-key <- findAssessmentKey("cod.347d", 2016)
-getSAGSettingsForAStock(key)
+key <- findAssessmentKey("cod.21.1", 2017)
+graphs <- getSAGGraphs(key[1])
+plot(graphs)
+getSAGSettingsForAStock(key [1])
+chart1 <- getLandingsGraph(key [1])
+plot(chart1)
+setSAGSettingForAStock(key [2], 1, 1, "Catches of cod.21.1 in 2017",
+                       FALSE)
+setSAGSettingForAStock(key [2], 1, 11, 10,
+                       FALSE)
+plot(chart1)
+chart4 <- getSpawningStockBiomassGraph(key [1])
+plot(chart4)
+setSAGSettingForAStock(key [1], 4, 1, "SSB of cod.21.1 in 2017",
+                       FALSE)
+ plot(chart4)
 
 }
