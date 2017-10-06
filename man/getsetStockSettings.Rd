@@ -30,6 +30,7 @@ details
 }
 \examples{
 key <- findAssessmentKey("cod.347d", 2016)
+findAssessmentKey("cod.21.1", 2017)
 getSAGSettingsForAStock(key)
 
 }
