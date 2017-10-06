@@ -30,6 +30,21 @@ details
 }
 \examples{
 key <- findAssessmentKey("cod.347d", 2016)
+findAssessmentKey("cod.21.1", 2017)
+key <- 8603
 getSAGSettingsForAStock(key)
+
+chart1 <- getLandingsGraph(key)
+plot(chart1)
+setSAGSettingForAStock(key, 1, 1, "Catches of cod.21.1 in 2017",
+                       FALSE)
+setSAGSettingForAStock(key, 1, 11, 10,
+                       FALSE)
+plot(chart1)
+chart4 <- getSpawningStockBiomassGraph(key)
+plot(chart4)
+setSAGSettingForAStock(key, 4, 1, "SSB of cod.21.1 in 2017",
+                       FALSE)
+plot(chart4)
 
 }
