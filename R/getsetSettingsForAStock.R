@@ -27,7 +27,7 @@
 #' setSAGSettingForAStock(key, 4, 1, "SSB of cod.21.1 in 2017",
 #'                        FALSE)
 #' plot(chart4)
-#'
+#' 
 #' @rdname getsetStockSettings
 #' @name getsetSAGSettingsForAStock
 NULL
