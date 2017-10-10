@@ -1,4 +1,4 @@
-#' Upload new or updated fish stock assessment results
+#' Upload New or Updated Fish Stock Assessment Results
 #'
 #' Get summary results of historical stock size, recruitment, and fishing
 #' pressure.
@@ -7,7 +7,7 @@
 #' @param fishdata a data.frame of fish data
 #' @param verbose if TRUE more verbose messages are reported
 #'
-#' @return the database key of the new / updated stock, or 0 if there was an error.
+#' @return The database key of the new / updated stock, or 0 if there was an error.
 #'
 #' @seealso
 #' \code{\link{stockInfo}} creates a list of stock information.
