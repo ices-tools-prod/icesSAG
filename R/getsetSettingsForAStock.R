@@ -1,4 +1,4 @@
-#' Get and set SAG chart settings
+#' Get and Set SAG Chart Settings
 #'
 #' details
 #'
@@ -8,7 +8,7 @@
 #' @param settingValue the vale of the setting
 #' @param copyNextYear should the settings be copied to next year (TRUE) or not (FALSE)
 #'
-#' @return a data.frame with SAG chart type IDs, settings IDs and setting values.
+#' @return A data frame with SAG chart type IDs, settings IDs and setting values.
 #'
 #' @examples
 #' key <- findAssessmentKey("cod.21.1", 2017)
