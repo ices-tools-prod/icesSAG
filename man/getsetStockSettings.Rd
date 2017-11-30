@@ -31,7 +31,7 @@ details
 \examples{
 key <- findAssessmentKey("cod.347d", 2016)
 findAssessmentKey("cod.21.1", 2017)
-key <- 8603
+
 getSAGSettingsForAStock(key)
 
 chart1 <- getLandingsGraph(key)
