@@ -5,14 +5,14 @@
 #'
 #' @param file an xml file name
 #' @param info a list of stock information
-#' @param fishdata a data.frame of fish data
+#' @param fishdata a data frame of fish data
 #'
-#' @return either a list contating info and fshdata, or an string containing the xml file.
+#' @return Either a list contating info and fishdata, or an string containing the xml file.
 #'
 #' @seealso
 #' \code{\link{stockInfo}} creates a list of stock information.
 #'
-#' \code{\link{stockFishdata}} creates a data.frame of fish stock summary data.
+#' \code{\link{stockFishdata}} creates a data frame of fish stock summary data.
 #'
 #' @examples
 #'

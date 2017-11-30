@@ -4,7 +4,7 @@
 \alias{getsetSAGSettingsForAStock}
 \alias{getSAGSettingsForAStock}
 \alias{setSAGSettingForAStock}
-\title{Get and set SAG chart settings}
+\title{Get and Set SAG Chart Settings}
 \usage{
 getSAGSettingsForAStock(assessmentKey)
 
@@ -23,28 +23,26 @@ setSAGSettingForAStock(assessmentKey, chartKey, settingKey, settingValue,
 \item{copyNextYear}{should the settings be copied to next year (TRUE) or not (FALSE)}
 }
 \value{
-a data.frame with SAG chart type IDs, settings IDs and setting values.
+A data frame with SAG chart type IDs, settings IDs and setting values.
 }
 \description{
 details
 }
 \examples{
-key <- findAssessmentKey("cod.347d", 2016)
-findAssessmentKey("cod.21.1", 2017)
-
-getSAGSettingsForAStock(key)
-
-chart1 <- getLandingsGraph(key)
+key <- findAssessmentKey("cod.21.1", 2017)
+graphs <- getSAGGraphs(key[1])
+plot(graphs)
+getSAGSettingsForAStock(key [1])
+chart1 <- getLandingsGraph(key [1])
+setSAGSettingForAStock(key [2], 1, 1, "Catches of cod.21.1 in 2017",
+FALSE)
+setSAGSettingForAStock(key [2], 1, 11, 10,
+FALSE)
 plot(chart1)
-setSAGSettingForAStock(key, 1, 1, "Catches of cod.21.1 in 2017",
-                       FALSE)
-setSAGSettingForAStock(key, 1, 11, 10,
-                       FALSE)
-plot(chart1)
-chart4 <- getSpawningStockBiomassGraph(key)
-plot(chart4)
-setSAGSettingForAStock(key, 4, 1, "SSB of cod.21.1 in 2017",
-                       FALSE)
-plot(chart4)
+chart2 <- getSpawningStockBiomassGraph(key [1])
+plot(chart2)
+setSAGSettingForAStock(key [1], 4, 1, "SSB of cod.21.1 in 2017",
+FALSE)
+plot(chart2)
 
 }
