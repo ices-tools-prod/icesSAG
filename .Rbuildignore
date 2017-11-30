@@ -8,3 +8,4 @@ codecov.yml
 ^.*\.sln$
 ^.*\.rxproj$
 ^\.vs*$
+SQL/*
