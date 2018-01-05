@@ -70,7 +70,7 @@ createSAGxml <- function(info, fishdata) {
 #' @export
 readSAGxml <- function(file) {
   # read in xml file, and convert to list
-  out <- xml2::as_list(xml2::read_xml(file))
+  out <- xml2::as_list(xml2::read_xml(file))[[1L]]
 
   sag_parse(out, type = "upload")
 }

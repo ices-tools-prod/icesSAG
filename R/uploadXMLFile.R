@@ -15,6 +15,6 @@ uploadXMLFile <- function(txt) {
                     httr::content_type("application/x-www-form-urlencoded"),
                     `Content-Length` = nchar(body))
     message(httr::http_status(x)$message)
-    unlist(xml2::as_list(httr::content(x)))
+    unlist(xml2::as_list(httr::content(x))[[1L]])
 }
 

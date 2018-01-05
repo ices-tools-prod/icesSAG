@@ -60,7 +60,7 @@ sag_get <- function(uri) {
 
   # return as list
   if (httr::http_type(resp) == "text/xml") {
-    xml2::as_list(httr::content(resp))
+    xml2::as_list(httr::content(resp))[[1L]]
   } else {
     warning("in SAG API - ", httr::content(resp), call. = FALSE)
     if (grepl("Web Service method name is not valid", httr::content(resp))) {

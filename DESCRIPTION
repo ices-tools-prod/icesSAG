@@ -8,7 +8,7 @@ Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@
              person("Carlos", "Pinto", role=c("aut")))
 Imports: png,
          httr,
-         xml2,
+         xml2 (>= 1.2.0),
          openssl,
          icesVocab
 Suggests: testthat
@@ -17,3 +17,4 @@ Description: R interface to access the web services of the ICES Stock Assessment
 License: GPL (>= 2)
 URL: http://sg.ices.dk
 RoxygenNote: 6.0.1
+Remotes: hadley/xml2
