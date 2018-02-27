@@ -9,9 +9,6 @@
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
 #' @param data the data of interest, either "summary" or "refpts".
 #' @param combine whether to combine the list output to a data frame.
-#' @param purpose an optional vector specifing what kind of assessments
-#'        to return (see ... ref). Default is "Advice" to return data used
-#'        in advice.
 #'
 #' @note Only years with "Published" status are returned.
 #'
@@ -38,8 +35,7 @@
 #' }
 #' @export
 
-getSAG <- function(stock, year, data = "summary", combine = TRUE,
-                   purpose = "Advice") {
+getSAG <- function(stock, year, data = "summary", combine = TRUE) {
   # select web service operation and parser
   data <- match.arg(data, c("summary", "refpts"))
   service <- switch(data,
@@ -79,10 +75,6 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE,
   } else if (length(out) == 1) {
     out <- out[[1]]
   }
-
-  # subset based on purpose
-  if (!is.null(purpose))
-    out <- out[,Purpose %in% purpose]
 
   # return
   out
