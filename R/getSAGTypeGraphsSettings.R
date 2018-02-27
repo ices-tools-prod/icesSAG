@@ -1,10 +1,10 @@
-#' Get details on SAG charts and settings
+#' Get Details on SAG Charts and Settings
 #'
 #' List all possible chart settings for each chart type (0 = general, 1 = Landings etc.).
 #'
 #' @param SAGChartKey the type identifier of the SAG chart, e.g. 0, 1, 2, ...
 #'
-#' @return a data.frame with SAG chart type IDs and settings IDs.
+#' @return a data frame with SAG chart type IDs and settings IDs.
 #'
 #' @examples
 #' getSAGTypeGraphs()

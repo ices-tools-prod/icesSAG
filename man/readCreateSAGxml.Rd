@@ -13,12 +13,12 @@ readSAGxml(file)
 \arguments{
 \item{info}{a list of stock information}
 
-\item{fishdata}{a data.frame of fish data}
+\item{fishdata}{a data frame of fish data}
 
 \item{file}{an xml file name}
 }
 \value{
-either a list contating info and fshdata, or an string containing the xml file.
+Either a list contating info and fishdata, or an string containing the xml file.
 }
 \description{
 Convert between R data (a list and a data.frame) and the XML format required for uploading
@@ -38,5 +38,5 @@ out <- readSAGxml(xmlfile)
 \seealso{
 \code{\link{stockInfo}} creates a list of stock information.
 
-\code{\link{stockFishdata}} creates a data.frame of fish stock summary data.
+\code{\link{stockFishdata}} creates a data frame of fish stock summary data.
 }
