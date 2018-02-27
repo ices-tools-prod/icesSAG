@@ -1,16 +1,20 @@
 # .travis.yml for ices-tools packages
 
+# Header
+language: r
+sudo: false
+cache: packages
 warnings_are_errors: false
 
-os:
-  - linux
-
-language: r
-r:
-  - release
-  - devel
-
-sudo: false
+# matrix: 3x Linux, 1x OS X
+matrix:
+  include:
+  - r: release
+  - r: oldrel
+  - r: devel
+  - os: osx
+    r: release
+    latex: false
 
 repos:
   CRAN: https://cloud.r-project.org
@@ -20,8 +24,6 @@ r_packages:
   - covr
   - testthat
   - png
-
-cache: packages
 
 notifications:
   email:
