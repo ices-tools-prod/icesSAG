@@ -76,7 +76,8 @@ sag_parse <- function(x, type = "table", ...) {
     return(NULL)
   }
 
-  # otherwise parse x
+  # otherwise parse x, first drop the root node
+  x <- x[[1]]
   type <- match.arg(type, c("table", "summary", "stockStatus", "graph", "upload", "WSDL"))
   switch(type,
     table = sag_parseTable(x),
