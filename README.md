@@ -2,15 +2,13 @@
 
 [<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
 
-icesSAG
-=======
+### icesSAG
 
 icesSAG provides R functions that access the [web services](http://sg.ices.dk/webservices.aspx) of the [ICES](http://ices.dk) [Stock Assessment Graphs](http://sg.ices.dk) database.
 
 icesSAG is implemented as an [R](https://www.r-project.org) package and available on [CRAN](https://cran.r-project.org/package=icesSAG).
 
-Installation
-------------
+### Installation
 
 icesSAG can be installed from CRAN using the `install.packages` command:
 
@@ -18,8 +16,7 @@ icesSAG can be installed from CRAN using the `install.packages` command:
 install.packages("icesSAG")
 ```
 
-Usage
------
+### Usage
 
 For a summary of the package:
 
@@ -28,37 +25,36 @@ library(icesSAG)
 ?icesSAG
 ```
 
-Examples
---------
+### Examples
 
 To download the summary data for all stocks published so far in 2017 use:
 
 ``` r
-summary_data <- getSAG(stock = NULL, year = 2017)
+summary_data <- getSAG(stock = NULL, year = 2018)
 head(summary_data)
 ```
 
-    ##   Year recruitment high_recruitment low_recruitment low_SSB     SSB
-    ## 1 1983   363882257        500964928       264310512  344716  485730
-    ## 2 1984    98645782        135843627        71633764  156369  212220
-    ## 3 1985   717818846        969399186       531529119  356604  484960
-    ## 4 1986   108025739        149248399        78188848  244355  310240
-    ## 5 1987    67748200         95561249        48030124  851024 1135900
-    ## 6 1988   274136290        372843269       201561116  473496  625020
-    ##   high_SSB   catches  landings discards low_F     F high_F
-    ## 1   684429 378795000 378795000       NA 0.462 0.577  0.692
-    ## 2   288020 498626000 498626000       NA 0.524 0.654  0.784
-    ## 3   659516 437114000 437114000       NA 0.563 0.702  0.841
-    ## 4   393889 382844000 382844000       NA 0.399 0.497  0.595
-    ## 5  1516137 373021000 373021000       NA 0.298 0.372  0.447
-    ## 6   825034 413646000 413646000       NA 0.437 0.543  0.649
-    ##   StockPublishNote Fage fishstock recruitment_age AssessmentYear  units
-    ## 1  Stock published  1-2 san.sa.1r               0           2017 tonnes
-    ## 2  Stock published  1-2 san.sa.1r               0           2017 tonnes
-    ## 3  Stock published  1-2 san.sa.1r               0           2017 tonnes
-    ## 4  Stock published  1-2 san.sa.1r               0           2017 tonnes
-    ## 5  Stock published  1-2 san.sa.1r               0           2017 tonnes
-    ## 6  Stock published  1-2 san.sa.1r               0           2017 tonnes
+    ##   Year recruitment high_recruitment low_recruitment low_SSB    SSB
+    ## 1 1983   305664912        419413371       222765998  333683 475442
+    ## 2 1984    76515202        105588421        55447142  146691 204638
+    ## 3 1985   520343641        705099201       383999166  338797 460469
+    ## 4 1986    77593949        107332767        56094900  214789 277618
+    ## 5 1987    47157329         66359796        33511461  742378 995500
+    ## 6 1988   204279559        279162440       149483355  443526 595407
+    ##   high_SSB catches landings discards low_F     F high_F StockPublishNote
+    ## 1   677425  378795   378795       NA 0.473 0.583  0.719  Stock published
+    ## 2   285477  498626   498626       NA 0.535 0.659  0.811  Stock published
+    ## 3   625836  437114   437114       NA 0.571 0.704  0.867  Stock published
+    ## 4   358824  382844   382844       NA 0.385 0.472  0.578  Stock published
+    ## 5  1334927  373021   373021       NA 0.299 0.369  0.455  Stock published
+    ## 6   799298  413646   413646       NA 0.417 0.511  0.625  Stock published
+    ##   Fage fishstock recruitment_age AssessmentYear  units
+    ## 1  1-2 san.sa.1r               0           2018 tonnes
+    ## 2  1-2 san.sa.1r               0           2018 tonnes
+    ## 3  1-2 san.sa.1r               0           2018 tonnes
+    ## 4  1-2 san.sa.1r               0           2018 tonnes
+    ## 5  1-2 san.sa.1r               0           2018 tonnes
+    ## 6  1-2 san.sa.1r               0           2018 tonnes
     ##   stockSizeDescription stockSizeUnits fishingPressureDescription
     ## 1                  SSB         tonnes                          F
     ## 2                  SSB         tonnes                          F
@@ -67,22 +63,20 @@ head(summary_data)
     ## 5                  SSB         tonnes                          F
     ## 6                  SSB         tonnes                          F
     ##   fishingPressureUnits
-    ## 1             per year
-    ## 2             per year
-    ## 3             per year
-    ## 4             per year
-    ## 5             per year
-    ## 6             per year
+    ## 1               Year-1
+    ## 2               Year-1
+    ## 3               Year-1
+    ## 4               Year-1
+    ## 5               Year-1
+    ## 6               Year-1
 
-References
-----------
+### References
 
 ICES Stock Assessment Graphs database: <http://sg.ices.dk>
 
 ICES Stock Assessment Graphs web services: <http://sg.ices.dk/webservices.aspx>
 
-Development
------------
+### Development
 
 icesSAG is developed openly on [GitHub](https://github.com/ices-tools-prod/icesSAG).
 
@@ -94,8 +88,3 @@ The current development version can be installed using:
 library(devtools)
 install_github("ices-tools-prod/icesSAG")
 ```
-
-Dependencies graph (from [MRAN](https://mran.microsoft.com/package/icesSAG/#depend))
-------------------------------------------------------------------------------------
-
-[![dependencies](https://mran.microsoft.com/packagedata/graphs/icesSAG.png)](https://mran.microsoft.com/package/icesSAG/#depend)

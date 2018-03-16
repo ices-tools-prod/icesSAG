@@ -13,8 +13,7 @@ output:
 
 [<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
 
-icesSAG
-=======
+### icesSAG
 
 icesSAG provides R functions that access the
 [web services](http://sg.ices.dk/webservices.aspx) of the [ICES](http://ices.dk)
@@ -23,27 +22,26 @@ icesSAG provides R functions that access the
 icesSAG is implemented as an [R](https://www.r-project.org) package and
 available on [CRAN](https://cran.r-project.org/package=icesSAG).
 
-Installation
-------------
+### Installation
+
 
 icesSAG can be installed from CRAN using the `install.packages` command:
 
-```R
+```r
 install.packages("icesSAG")
 ```
 
-Usage
------
+### Usage
+
 
 For a summary of the package:
 
-```R
+```r
 library(icesSAG)
 ?icesSAG
 ```
 
-Examples
---------
+### Examples
 
 ```{r, echo = FALSE}
 options(icesSAG.messages = FALSE)
@@ -53,14 +51,13 @@ library(icesSAG)
 
 To download the summary data for all stocks published so far in 2017 use:
 ```{r}
-summary_data <- getSAG(stock = NULL, year = 2017)
+summary_data <- getSAG(stock = NULL, year = 2018)
 head(summary_data)
 ```
 
 
 
-References
-----------
+### References
 
 ICES Stock Assessment Graphs database:
 http://sg.ices.dk
@@ -68,8 +65,7 @@ http://sg.ices.dk
 ICES Stock Assessment Graphs web services:
 http://sg.ices.dk/webservices.aspx
 
-Development
------------
+### Development
 
 icesSAG is developed openly on
 [GitHub](https://github.com/ices-tools-prod/icesSAG).
@@ -83,9 +79,3 @@ The current development version can be installed using:
 library(devtools)
 install_github("ices-tools-prod/icesSAG")
 ```
-
-
-Dependencies graph (from [MRAN](https://mran.microsoft.com/package/icesSAG/#depend))
--------------------
-
-[![dependencies](https://mran.microsoft.com/packagedata/graphs/icesSAG.png)](https://mran.microsoft.com/package/icesSAG/#depend)
