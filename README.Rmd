@@ -73,8 +73,9 @@ this should be saved in your home directory in a file called `.Renviron_SG`.
 A quick way to do this from R is
 
 ```r
-pat <- "e9351534-20ac-4ad4-9752-98923e011213"
-cat("# Standard Graphs personal access token\nSG_PAT=", pat, sep = "", 
+cat("# Standard Graphs personal access token",
+    "SG_PAT=e9351534-20ac-4ad4-9752-98923e011213",
+    sep = "\n",
     file = "~/.Renviron_SG_")
 ```
 
