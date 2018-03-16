@@ -55,6 +55,28 @@ summary_data <- getSAG(stock = NULL, year = 2018)
 head(summary_data)
 ```
 
+#### Authorised access via tokens
+
+ICES provides public access to the results of published stock assessments.  If you are an ICES stock assessor and wish to access unpublished results, or to upload your results, this can be done using token authentication.
+
+You can generate a token from [sg.ices.dk/manage/CreateToken.aspx](https://sg.ices.dk/manage/CreateToken.aspx), which will be something like 'e9351534-20ac-4ad4-9752-98923e011213'
+
+Then create a file with the following contents (substitute the access token with your own)
+
+```
+# Standard Graphs personal access token
+SG_PAT=e9351534-20ac-4ad4-9752-98923e011213
+```
+
+this should be saved in your home directory in a file called `.Renviron_SG`. 
+
+A quick way to do this from R is
+
+```r
+pat <- "e9351534-20ac-4ad4-9752-98923e011213"
+cat("# Standard Graphs personal access token\nSG_PAT=", pat, sep = "", 
+    file = "~/.Renviron_SG_")
+```
 
 
 ### References
