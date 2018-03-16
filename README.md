@@ -147,13 +147,10 @@ key <- icesSAG::uploadStock(info, fishdata)
 ```
 
     ## Converting to XML format ... Done
-    ## Uploading                ... GETing ... https://sg.ices.dk/Manage/StockAssessmentGraphsWithToken.asmx/getTokenExpiration?token=2f2c707c-d1ae-4923-8ad7-bb32043db45e
-    ## Success: (200) OK
+    ## Uploading                ... Success: (200) OK
     ## Screening file           ... Success: (200) OK
-    ## Importing to database    ... 
-    ## GETing ... https://sg.ices.dk/Manage/StockAssessmentGraphsWithToken.asmx/uploadStock?strSessionID=14429&token=2f2c707c-d1ae-4923-8ad7-bb32043db45e
-    ##                          ... Done
-    ## Upload complete! New assessmentKey is: 9317
+    ## Importing to database    ... Done
+    ## Upload complete! New assessmentKey is: 9319
     ## To check upload run (with 'options(icesSAG.use_token = TRUE)'): 
     ##   findAssessmentKey('whb-comb', 1996, full = TRUE)
 
@@ -161,28 +158,23 @@ You can check that the data was uploaded by searching for our stock. Note you wi
 
 ``` r
 options(icesSAG.use_token = TRUE)
-options(icesSAG.messages = TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
-    ## GETing ... https://sg.ices.dk/Manage/StockAssessmentGraphsWithToken.asmx/getListStocks?year=1996&token=2f2c707c-d1ae-4923-8ad7-bb32043db45e
-
     ##   AssessmentKey StockKeyLabel StockDatabaseID StockKey
-    ## 1          9317      whb-comb              NA   136737
+    ## 1          9319      whb-comb              NA   136737
     ##                                              StockDescription
     ## 1 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
     ##          Status AssessmentYear              SpeciesName ModifiedDate
-    ## 1 Not Published           1996 Micromesistius poutassou   16/03/2018
+    ## 1 Not Published           1996 Micromesistius poutassou   17/03/2018
     ##                           SAGStamp
-    ## 1 whb-comb_1996_9317_2018316235547
+    ## 1 whb-comb_1996_9319_2018317000546
 
 We can also look at the landings graph created from the data that were uploaded:
 
 ``` r
 plot(getLandingsGraph(key))
 ```
-
-    ## GETing ... https://sg.ices.dk/Manage/StockAssessmentGraphsWithToken.asmx/getLandingsGraph?assessmentKey=9317&token=2f2c707c-d1ae-4923-8ad7-bb32043db45e
 
 ![](README_files/figure-markdown_github/landings-plot-1.png)
 

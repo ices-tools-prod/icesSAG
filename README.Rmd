@@ -122,6 +122,10 @@ returns a `data.frame` (it requires year as default) with the correctly named co
 
 For example a simple, minimal example is:
 
+```{r echo = FALSE}
+options(icesSAG.messages = FALSE)
+```
+
 ```{r}
 info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk")
 fishdata <- 
@@ -138,7 +142,6 @@ You can check that the data was uploaded by searching for our stock. Note you wi
 
 ```{r}
 options(icesSAG.use_token = TRUE)
-options(icesSAG.messages = TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
