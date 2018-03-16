@@ -120,7 +120,7 @@ stockFishdata()
 
 returns a `data.frame` (it requires year as default) with the correctly named columns
 
-For example a simple, minimal example is:
+A simple (almost) minimal example is:
 
 ```{r echo = FALSE}
 options(icesSAG.messages = FALSE)
@@ -128,8 +128,7 @@ options(icesSAG.messages = FALSE)
 
 ```{r}
 info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk")
-fishdata <- 
-  stockFishdata(1950:1996)
+fishdata <- stockFishdata(1950:1996)
 
 # simulate some landings for something a bit intesting
 set.seed(1232)
@@ -138,14 +137,14 @@ fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
 key <- icesSAG::uploadStock(info, fishdata)
 ```
 
-You can check that the data was uploaded by searching for our stock. Note you will need to make sure use_token is TRUE - I am also switching off messages so as not to show my token ;)
+You can check that the data was uploaded by searching for our stock. Note you will need to make sure the icesSAG.use_token option is set to TRUE
 
 ```{r}
 options(icesSAG.use_token = TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
-We can also look at the landings graph created from the data that were uploaded:
+We can also look at the landings graph created from the data that were uploaded
 
 ```{r, landings-plot}
 plot(getLandingsGraph(key))

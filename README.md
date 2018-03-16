@@ -132,12 +132,11 @@ stockFishdata()
 
 returns a `data.frame` (it requires year as default) with the correctly named columns
 
-For example a simple, minimal example is:
+A simple (almost) minimal example is:
 
 ``` r
 info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk")
-fishdata <- 
-  stockFishdata(1950:1996)
+fishdata <- stockFishdata(1950:1996)
 
 # simulate some landings for something a bit intesting
 set.seed(1232)
@@ -150,11 +149,11 @@ key <- icesSAG::uploadStock(info, fishdata)
     ## Uploading                ... Success: (200) OK
     ## Screening file           ... Success: (200) OK
     ## Importing to database    ... Done
-    ## Upload complete! New assessmentKey is: 9319
+    ## Upload complete! New assessmentKey is: 9320
     ## To check upload run (with 'options(icesSAG.use_token = TRUE)'): 
     ##   findAssessmentKey('whb-comb', 1996, full = TRUE)
 
-You can check that the data was uploaded by searching for our stock. Note you will need to make sure use\_token is TRUE - I am also switching off messages so as not to show my token ;)
+You can check that the data was uploaded by searching for our stock. Note you will need to make sure the icesSAG.use\_token option is set to TRUE
 
 ``` r
 options(icesSAG.use_token = TRUE)
@@ -162,15 +161,15 @@ findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
     ##   AssessmentKey StockKeyLabel StockDatabaseID StockKey
-    ## 1          9319      whb-comb              NA   136737
+    ## 1          9320      whb-comb              NA   136737
     ##                                              StockDescription
     ## 1 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
     ##          Status AssessmentYear              SpeciesName ModifiedDate
     ## 1 Not Published           1996 Micromesistius poutassou   17/03/2018
     ##                           SAGStamp
-    ## 1 whb-comb_1996_9319_2018317000546
+    ## 1 whb-comb_1996_9320_2018317001718
 
-We can also look at the landings graph created from the data that were uploaded:
+We can also look at the landings graph created from the data that were uploaded
 
 ``` r
 plot(getLandingsGraph(key))
