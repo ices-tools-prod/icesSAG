@@ -74,7 +74,7 @@ head(summary_data)
 
 ICES provides public access to the results of published stock assessments. If you are an ICES stock assessor and wish to access unpublished results, or to upload your results, this can be done using token authentication.
 
-You can generate a token from [sg.ices.dk/manage/CreateToken.aspx](https://sg.ices.dk/manage/CreateToken.aspx), which will be something like 'e9351534-20ac-4ad4-9752-98923e011213'
+You can generate a token from [sg.ices.dk/manage/CreateToken.aspx](https://sg.ices.dk/manage/CreateToken.aspx), which will be something like `e9351534-20ac-4ad4-9752-98923e011213`
 
 Then create a file with the following contents (substitute the access token with your own)
 
@@ -90,6 +90,28 @@ pat <- "e9351534-20ac-4ad4-9752-98923e011213"
 cat("# Standard Graphs personal access token\nSG_PAT=", pat, sep = "", 
     file = "~/.Renviron_SG_")
 ```
+
+Once you have created this file, you should be able to access unpublished results and upload data to the SAG database. To switch to using authorised access run set the following flag
+
+``` r
+options(icesSAG.use_token = TRUE)
+```
+
+#### verbose web service calls
+
+If you want to see all the web service calls being made set this option
+
+``` r
+options(icesSAG.messages = TRUE)
+```
+
+The result will be
+
+``` r
+codKeys <- findAssessmentKey("cod", year = 2017)
+```
+
+    ## GETing ... http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017
 
 ### References
 
