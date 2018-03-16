@@ -69,7 +69,7 @@ uploadStock <- function(info, fishdata, verbose = FALSE) {
     stop(" Errors were found in the upload.  See\n\t http://", datsu_resp$ScreenResultURL, "\n\tfor details")
   }
 
-  # call webservice for all supplied keys
+  # call webservice
   message("Importing to database    ... ", appendLF = getOption("icesSAG.messages"))
   out <- sag_webservice("uploadStock", strSessionID = datsu_resp$SessionID)
 
