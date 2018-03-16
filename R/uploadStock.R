@@ -65,7 +65,7 @@ uploadStock <- function(info, fishdata, verbose = FALSE) {
   if (verbose)
     message("\tResults: http://", datsu_resp$ScreenResultURL)
 
-  if (datsu_resp$NoErrors != -1) {
+  if (datsu_resp$NumberOfErrors > 0) {
     stop(" Errors were found in the upload.  See\n\t http://", datsu_resp$ScreenResultURL, "\n\tfor details")
   }
 
