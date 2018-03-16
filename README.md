@@ -70,6 +70,24 @@ head(summary_data)
     ## 5               Year-1
     ## 6               Year-1
 
+#### verbose web service calls
+
+If you want to see all the web service calls being made set this option
+
+``` r
+options(icesSAG.messages = TRUE)
+```
+
+The result will be
+
+``` r
+codKeys <- findAssessmentKey("cod", year = 2017)
+```
+
+    ## GETing ... http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017
+
+which allows you to investigate the actual web service data if you are interested: <http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017>
+
 #### Authorised access via tokens
 
 ICES provides public access to the results of published stock assessments. If you are an ICES stock assessor and wish to access unpublished results, or to upload your results, this can be done using token authentication.
@@ -86,8 +104,9 @@ this should be saved in your home directory in a file called `.Renviron_SG`.
 A quick way to do this from R is
 
 ``` r
-pat <- "e9351534-20ac-4ad4-9752-98923e011213"
-cat("# Standard Graphs personal access token\nSG_PAT=", pat, sep = "", 
+cat("# Standard Graphs personal access token",
+    "SG_PAT=e9351534-20ac-4ad4-9752-98923e011213",
+    sep = "\n",
     file = "~/.Renviron_SG_")
 ```
 
@@ -96,22 +115,6 @@ Once you have created this file, you should be able to access unpublished result
 ``` r
 options(icesSAG.use_token = TRUE)
 ```
-
-#### verbose web service calls
-
-If you want to see all the web service calls being made set this option
-
-``` r
-options(icesSAG.messages = TRUE)
-```
-
-The result will be
-
-``` r
-codKeys <- findAssessmentKey("cod", year = 2017)
-```
-
-    ## GETing ... http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017
 
 ### References
 
