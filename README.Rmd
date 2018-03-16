@@ -95,7 +95,7 @@ A quick way to do this from R is
 cat("# Standard Graphs personal access token",
     "SG_PAT=e9351534-20ac-4ad4-9752-98923e011213",
     sep = "\n",
-    file = "~/.Renviron_SG_")
+    file = "~/.Renviron_SG")
 ```
 
 Once you have created this file, you should be able to access unpublished results and upload data to the SAG database.  To switch to using authorised access run set the following flag
