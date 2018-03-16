@@ -116,6 +116,76 @@ Once you have created this file, you should be able to access unpublished result
 options(icesSAG.use_token = TRUE)
 ```
 
+#### uploading data
+
+To upload the results of a stock assessment to SAG you must provide two peiced of information, Stock information, such as stock code, assessment year and reference points, and yearly results, such as landings and estimated fishing mortality. There are two helper functions to create the required objects.
+
+``` r
+stockInfo()
+```
+
+returns a `list` (it requires a stock code, assessment year and contact email as a minimum), with the correctly named elements. And,
+
+``` r
+stockFishdata()
+```
+
+returns a `data.frame` (it requires year as default) with the correctly named columns
+
+For example a simple, minimal example is:
+
+``` r
+info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk")
+fishdata <- 
+  stockFishdata(1950:1996)
+
+# simulate some landings for something a bit intesting
+set.seed(1232)
+fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
+
+key <- icesSAG::uploadStock(info, fishdata)
+```
+
+    ## Converting to XML format ... Done
+    ## Uploading                ... GETing ... https://sg.ices.dk/Manage/StockAssessmentGraphsWithToken.asmx/getTokenExpiration?token=2f2c707c-d1ae-4923-8ad7-bb32043db45e
+    ## Success: (200) OK
+    ## Screening file           ... Success: (200) OK
+    ## Importing to database    ... 
+    ## GETing ... https://sg.ices.dk/Manage/StockAssessmentGraphsWithToken.asmx/uploadStock?strSessionID=14429&token=2f2c707c-d1ae-4923-8ad7-bb32043db45e
+    ##                          ... Done
+    ## Upload complete! New assessmentKey is: 9317
+    ## To check upload run (with 'options(icesSAG.use_token = TRUE)'): 
+    ##   findAssessmentKey('whb-comb', 1996, full = TRUE)
+
+You can check that the data was uploaded by searching for our stock. Note you will need to make sure use\_token is TRUE - I am also switching off messages so as not to show my token ;)
+
+``` r
+options(icesSAG.use_token = TRUE)
+options(icesSAG.messages = TRUE)
+findAssessmentKey('whb-comb', 1996, full = TRUE)
+```
+
+    ## GETing ... https://sg.ices.dk/Manage/StockAssessmentGraphsWithToken.asmx/getListStocks?year=1996&token=2f2c707c-d1ae-4923-8ad7-bb32043db45e
+
+    ##   AssessmentKey StockKeyLabel StockDatabaseID StockKey
+    ## 1          9317      whb-comb              NA   136737
+    ##                                              StockDescription
+    ## 1 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
+    ##          Status AssessmentYear              SpeciesName ModifiedDate
+    ## 1 Not Published           1996 Micromesistius poutassou   16/03/2018
+    ##                           SAGStamp
+    ## 1 whb-comb_1996_9317_2018316235547
+
+We can also look at the landings graph created from the data that were uploaded:
+
+``` r
+plot(getLandingsGraph(key))
+```
+
+    ## GETing ... https://sg.ices.dk/Manage/StockAssessmentGraphsWithToken.asmx/getLandingsGraph?assessmentKey=9317&token=2f2c707c-d1ae-4923-8ad7-bb32043db45e
+
+![](README_files/figure-markdown_github/landings-plot-1.png)
+
 ### References
 
 ICES Stock Assessment Graphs database: <http://sg.ices.dk>

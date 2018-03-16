@@ -9,3 +9,4 @@ codecov.yml
 ^.*\.rxproj$
 ^\.vs*$
 SQL/*
+README_files
