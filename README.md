@@ -138,6 +138,10 @@ A simple (almost) minimal example is:
 info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk")
 fishdata <- stockFishdata(1950:1996)
 
+# add the purpose of the assessment (typically Advice)
+# see http://vocab.ices.dk/?ref=1516, for options
+info$Purpose <- "Advice"
+
 # simulate some landings for something a bit intesting
 set.seed(1232)
 fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
@@ -149,7 +153,7 @@ key <- icesSAG::uploadStock(info, fishdata)
     ## Uploading                ... Success: (200) OK
     ## Screening file           ... Success: (200) OK
     ## Importing to database    ... Done
-    ## Upload complete! New assessmentKey is: 9320
+    ## Upload complete! New assessmentKey is: 9331
     ## To check upload run (with 'options(icesSAG.use_token = TRUE)'): 
     ##   findAssessmentKey('whb-comb', 1996, full = TRUE)
 
@@ -161,13 +165,13 @@ findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
     ##   AssessmentKey StockKeyLabel StockDatabaseID StockKey
-    ## 1          9320      whb-comb              NA   136737
+    ## 1          9331      whb-comb              NA   136737
     ##                                              StockDescription
     ## 1 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
     ##          Status AssessmentYear              SpeciesName ModifiedDate
-    ## 1 Not Published           1996 Micromesistius poutassou   17/03/2018
+    ## 1 Not Published           1996 Micromesistius poutassou   18/03/2018
     ##                           SAGStamp
-    ## 1 whb-comb_1996_9320_2018317001718
+    ## 1 whb-comb_1996_9331_2018318083544
 
 We can also look at the landings graph created from the data that were uploaded
 
