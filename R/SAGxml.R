@@ -31,6 +31,10 @@ NULL
 #' @rdname readCreateSAGxml
 #' @export
 createSAGxml <- function(info, fishdata) {
+
+  # quick fix! Purpose must always be supplied
+  if (is.na(info$Purpose)) info$Purpose <- "Advice"
+
   # handy function to convert a list into an xml row
   list2xml <- function(x, xnames = NULL, sep = "") {
     if (!is.null(xnames)) {
@@ -118,11 +122,12 @@ sag_parseUpload <- function(x) {
 #'  # should have gotten a warning message
 #' @export
 
-stockInfo <- function(StockCode, AssessmentYear, ContactPerson, ...) {
+stockInfo <- function(StockCode, AssessmentYear, ContactPerson, Purpose = "Advice", ...) {
   # create default info list
   val <- c(list(StockCode = StockCode,
                 AssessmentYear = AssessmentYear,
-                ContactPerson = ContactPerson),
+                ContactPerson = ContactPerson,
+                Purpose = Purpose),
            list(...))
   # warn about possibly misspelt names?
   if (any(!names(val) %in% validNames("stockInfo"))) {
