@@ -245,7 +245,8 @@ validNames <- function(type = c("stockInfo", "stockFishdata")) {
       paste0("CustomLimitName", 1:5),
       paste0("CustomLimitNotes", 1:5),
       paste0("CustomSeriesName", 1:20),
-      paste0("CustomSeriesUnits", 1:20)),
+      paste0("CustomSeriesUnits", 1:20),
+      "Purpose"),
     stockFishdata =
       c("Year",
         "Low_Recruitment",
