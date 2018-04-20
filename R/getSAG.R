@@ -9,6 +9,8 @@
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
 #' @param data the data of interest, either "summary" or "refpts".
 #' @param combine whether to combine the list output to a data frame.
+#' @param purpose the purpose of the entry, options are "Advive", "Benchmark",
+#'                "InitialAdvice", default is "Advice".
 #'
 #' @note Only years with "Published" status are returned.
 #'
@@ -35,7 +37,7 @@
 #' }
 #' @export
 
-getSAG <- function(stock, year, data = "summary", combine = TRUE) {
+getSAG <- function(stock, year, data = "summary", combine = TRUE, purpose = "Advice") {
   # select web service operation and parser
   data <- match.arg(data, c("summary", "refpts"))
   service <- switch(data,
