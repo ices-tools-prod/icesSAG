@@ -31,11 +31,12 @@ It supports querying many stocks and years in one function call.
 Only years with "Published" status are returned.
 }
 \examples{
+\dontrun{
 summary <- getSAG("cod-347d", 2015)
 refpts <- getSAG("cod-347d", 2015, "refpts")
 
 getSAG("her.27.3a47d", 2017, "refpts", purpose = "Benchmark")
-\dontrun{
+
 cod_summary <- getSAG("cod", 2015)
 cod_refpts <- getSAG("cod", 2015:2016, "refpts")
 }

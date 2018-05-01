@@ -16,12 +16,14 @@
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
 #' @examples
+#' \dontrun{
 #' assessmentKeys <- findAssessmentKey("had", 2015)
 #' landings_img <- getLandingsGraph(assessmentKeys[1])
 #' plot(landings_img)
 #'
 #' landings_plots <- getLandingsGraph(assessmentKeys)
 #' plot(landings_plots)
+#'}
 #'
 #' @rdname getGraphs
 #' @name getStandardAssessmentGraphs
