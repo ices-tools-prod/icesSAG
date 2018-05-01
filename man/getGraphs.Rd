@@ -40,7 +40,7 @@ getStockStatusTable(assessmentKey, ...)
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
 
-\item{...}{to allow scope for back compatability}
+\item{...}{to allow scope for back compatibility}
 }
 \value{
 An array representing a bitmap.

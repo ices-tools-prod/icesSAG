@@ -18,7 +18,7 @@ to process all stocks.}
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
 
 \item{published}{whether to include only years where status is "Published" (applies only
-when non-secure webservices are in use, secure webservice always
+when non-secure web services are in use, secure web service always
 returns unpublished stocks).}
 
 \item{regex}{whether to match the stock name as a regular expression.}

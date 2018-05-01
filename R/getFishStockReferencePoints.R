@@ -3,7 +3,7 @@
 #' Get biological reference points for all stocks in a given assessment year.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... to allow scope for back compatability
+#' @param ... to allow scope for back compatibility
 #'
 #' @return A data frame.
 #'

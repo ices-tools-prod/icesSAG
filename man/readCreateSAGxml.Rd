@@ -18,7 +18,7 @@ readSAGxml(file)
 \item{file}{an xml file name}
 }
 \value{
-Either a list contating info and fishdata, or an string containing the xml file.
+Either a list containing info and fishdata, or a string containing the xml file.
 }
 \description{
 Convert between R data (a list and a data.frame) and the XML format required for uploading

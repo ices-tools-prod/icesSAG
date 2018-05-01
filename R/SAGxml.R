@@ -7,7 +7,7 @@
 #' @param info a list of stock information
 #' @param fishdata a data frame of fish data
 #'
-#' @return Either a list contating info and fishdata, or an string containing the xml file.
+#' @return Either a list containing info and fishdata, or a string containing the xml file.
 #'
 #' @seealso
 #' \code{\link{stockInfo}} creates a list of stock information.
@@ -117,14 +117,14 @@ sag_parseUpload <- function(x) {
 #' @author Colin Millar.
 #'
 #' @seealso
-#' Links to the relavent ICES vocabularies list are here
+#' Links to the relevant ICES vocabularies list are here
 #' StockCode: \url{http://vocab.ices.dk/?ref=357}
 #' StockCategory: \url{http://vocab.ices.dk/?ref=1526}
 #' Purpose: \url{http://vocab.ices.dk/?ref=1516}
 #' ModelType: \url{http://vocab.ices.dk/?ref=1524}
 #' ModelName: \url{http://vocab.ices.dk/?ref=1525}
 #'
-#' Link to the relavent format description is \url{http://datsu.ices.dk/web/selRep.aspx?Dataset=126}
+#' Link to the relevant format description is \url{http://datsu.ices.dk/web/selRep.aspx?Dataset=126}
 #'
 #' @examples
 #' info <-
