@@ -12,7 +12,7 @@ NULL to process all stocks.}
 
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
 
-\item{data}{the data of interest, either "summary" or "refpts".}
+\item{data}{the data of interest, either "summary", "refpts" or "source".}
 
 \item{combine}{whether to combine the list output to a data frame.}
 

@@ -1,8 +1,30 @@
-getStockDownloadData <- function(assessmentKey, ...) {
-  warning("Use with caution!\n",
-          "  getStockDownloadData accesses a table that is updated every 12 hours and may\n",
-          "  not reflect the current state of the database.")
+#' Get Source Data
+#'
+#' Get a copy of the source data for the specified stocks.
+#'
+#' @param assessmentKey the unique identifier of the stock assessment
+#' @param ... to allow scope for back compatibility
+#'
+#' @return A data frame.
+#'
+#' @seealso
+#' \code{\link{getSAG}} supports querying many years in one function call.
+#'
+#' \code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
+#'   a list of stocks and reference points.
+#'
+#' \code{\link{icesSAG-package}} gives an overview of the package.
+#'
+#' @author Colin Millar.
+#'
+#' @examples
+#' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
+#' sourcedat <- getStockDownloadData(assessmentKey)
+#' head(sourcedat[[1]])
+#'
+#' @export
 
+getStockDownloadData <- function(assessmentKey, ...) {
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # call web service for all supplied keys
