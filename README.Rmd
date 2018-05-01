@@ -130,10 +130,6 @@ options(icesSAG.messages = FALSE)
 info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk")
 fishdata <- stockFishdata(1950:1996)
 
-# add the purpose of the assessment (typically Advice)
-# see http://vocab.ices.dk/?ref=1516, for options
-info$Purpose <- "Advice"
-
 # simulate some landings for something a bit intesting
 set.seed(1232)
 fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))

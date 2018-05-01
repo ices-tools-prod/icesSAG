@@ -48,13 +48,13 @@ head(summary_data)
     ## 4   358824  382844   382844       NA 0.385 0.472  0.578  Stock published
     ## 5  1334927  373021   373021       NA 0.299 0.369  0.455  Stock published
     ## 6   799298  413646   413646       NA 0.417 0.511  0.625  Stock published
-    ##   Fage fishstock recruitment_age AssessmentYear  units
-    ## 1  1-2 san.sa.1r               0           2018 tonnes
-    ## 2  1-2 san.sa.1r               0           2018 tonnes
-    ## 3  1-2 san.sa.1r               0           2018 tonnes
-    ## 4  1-2 san.sa.1r               0           2018 tonnes
-    ## 5  1-2 san.sa.1r               0           2018 tonnes
-    ## 6  1-2 san.sa.1r               0           2018 tonnes
+    ##   Purpose Fage fishstock recruitment_age AssessmentYear  units
+    ## 1  Advice  1-2 san.sa.1r               0           2018 tonnes
+    ## 2  Advice  1-2 san.sa.1r               0           2018 tonnes
+    ## 3  Advice  1-2 san.sa.1r               0           2018 tonnes
+    ## 4  Advice  1-2 san.sa.1r               0           2018 tonnes
+    ## 5  Advice  1-2 san.sa.1r               0           2018 tonnes
+    ## 6  Advice  1-2 san.sa.1r               0           2018 tonnes
     ##   stockSizeDescription stockSizeUnits fishingPressureDescription
     ## 1                  SSB         tonnes                          F
     ## 2                  SSB         tonnes                          F
@@ -153,7 +153,7 @@ key <- icesSAG::uploadStock(info, fishdata)
     ## Uploading                ... Success: (200) OK
     ## Screening file           ... Success: (200) OK
     ## Importing to database    ... Done
-    ## Upload complete! New assessmentKey is: 9331
+    ## Upload complete! New assessmentKey is: 9660
     ## To check upload run (with 'options(icesSAG.use_token = TRUE)'): 
     ##   findAssessmentKey('whb-comb', 1996, full = TRUE)
 
@@ -164,14 +164,22 @@ options(icesSAG.use_token = TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
-    ##   AssessmentKey StockKeyLabel StockDatabaseID StockKey
-    ## 1          9331      whb-comb              NA   136737
+    ##   AssessmentKey StockKeyLabel        Purpose StockDatabaseID StockKey
+    ## 1          9331      whb-comb Initial Advice              NA   136737
+    ## 2          9660      whb-comb         Advice              NA   136737
+    ## 3          9344      whb-comb      Benchmark              NA   136737
     ##                                              StockDescription
     ## 1 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
+    ## 2 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
+    ## 3 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
     ##          Status AssessmentYear              SpeciesName ModifiedDate
-    ## 1 Not Published           1996 Micromesistius poutassou   18/03/2018
-    ##                           SAGStamp
-    ## 1 whb-comb_1996_9331_2018318083544
+    ## 1 Not Published           1996 Micromesistius poutassou   01/05/2018
+    ## 2 Not Published           1996 Micromesistius poutassou   01/05/2018
+    ## 3 Not Published           1996 Micromesistius poutassou   01/05/2018
+    ##                          SAGStamp
+    ## 1 whb-comb_1996_9331_201851105335
+    ## 2 whb-comb_1996_9660_201851105335
+    ## 3 whb-comb_1996_9344_201851105335
 
 We can also look at the landings graph created from the data that were uploaded
 

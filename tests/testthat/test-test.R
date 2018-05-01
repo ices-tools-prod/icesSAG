@@ -48,8 +48,6 @@ test_that('getSAGTypeGraphs',
 #  options(icesSAG.use_token = TRUE)
   x <- getSAGTypeGraphs()
   expect_is(x, "data.frame")
-
-
 })
 
 

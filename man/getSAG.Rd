@@ -16,8 +16,8 @@ NULL to process all stocks.}
 
 \item{combine}{whether to combine the list output to a data frame.}
 
-\item{purpose}{the purpose of the entry, options are "Advive", "Benchmark",
-"InitialAdvice", default is "Advice".}
+\item{purpose}{the purpose of the entry, options are "Advice", "Bench",
+"InitAdvice", default is "Advice".}
 }
 \value{
 A data frame (default) or a list if \code{combine} is \code{TRUE}.
@@ -34,6 +34,7 @@ Only years with "Published" status are returned.
 summary <- getSAG("cod-347d", 2015)
 refpts <- getSAG("cod-347d", 2015, "refpts")
 
+getSAG("her.27.3a47d", 2017, "refpts", purpose = "Benchmark")
 \dontrun{
 cod_summary <- getSAG("cod", 2015)
 cod_refpts <- getSAG("cod", 2015:2016, "refpts")

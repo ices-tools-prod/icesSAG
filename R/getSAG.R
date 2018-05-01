@@ -9,8 +9,8 @@
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
 #' @param data the data of interest, either "summary" or "refpts".
 #' @param combine whether to combine the list output to a data frame.
-#' @param purpose the purpose of the entry, options are "Advive", "Benchmark",
-#'                "InitialAdvice", default is "Advice".
+#' @param purpose the purpose of the entry, options are "Advice", "Bench",
+#'                "InitAdvice", default is "Advice".
 #'
 #' @note Only years with "Published" status are returned.
 #'
@@ -31,6 +31,7 @@
 #' summary <- getSAG("cod-347d", 2015)
 #' refpts <- getSAG("cod-347d", 2015, "refpts")
 #'
+#' getSAG("her.27.3a47d", 2017, "refpts", purpose = "Benchmark")
 #' \dontrun{
 #' cod_summary <- getSAG("cod", 2015)
 #' cod_refpts <- getSAG("cod", 2015:2016, "refpts")
