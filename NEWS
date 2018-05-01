@@ -1,7 +1,15 @@
 --------------------------------------------------------------------------------
-icesSAG 1.3-3 (2017-05-06)
+icesSAG 1.3-4 (2018-05-01)
 --------------------------------------------------------------------------------
-
+o added function getLatestStockAdviceList()
+o export print methods for sag.list and sag.data.frame for fishdata and fishinfo
+  objects used to upload data.
+o improved personal access token logic
+o improved help documentation
+o Added StockCategory, Purpose, ModelType, ModelName to upload functions
+o Added filter for assessment Purpose in getSAG()
+o fixed bugs arising from changes to xml2 package
+o fixed bug arsing from change in ICES Datsu web service
 
 --------------------------------------------------------------------------------
 icesSAG 1.3-2 (2017-05-06)
