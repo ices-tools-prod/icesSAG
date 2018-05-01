@@ -234,7 +234,7 @@ simplify <- function(x) {
       x <- as.character(x)
     if (is.character(x))
     {
-      if (!any(grepl("[a-z|A-Z|//]", x))) {
+      if (any(grepl("[^[a-z|A-Z]]", x))) {
         y <- as.numeric(x)
         if (sum(is.na(y)) == sum(is.na(x)))
           x <- y
