@@ -91,7 +91,8 @@ sag_parse <- function(x, type = "table", ...) {
 
 sag_parseTable <- function(x) {
   # x is a table structure
-  xrow <- structure(rep(NA, length(x[[1]])), names = names(x[[1]]))
+  xnames <- unique(unlist(lapply(x, names)))
+  xrow <- structure(rep(NA, length(xnames)), names = xnames)
 
   x <- lapply(unname(x), unlist)
   # add NAs to empty columns
