@@ -1,34 +1,15 @@
 ## Test environments
-* local Windows 10 install, R 3.4.0
-* ubuntu 12.04 (on travis-ci), (release and devel)
-* win-builder (devel)
+* local Windows 10 install, R 3.5.0
+* ubuntu 14.05 (on travis-ci), 2018-05-01 r74675, R 3.5.0 and R 3.3.3
+* macOS Sierra 10.12.6 (on travis-ci), R 3.5.0
+* win-builder, 2018-04-30 r74674
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+Status: OK
 
 Maintainer: 'Colin Millar <colin.millar@ices.dk>'
-
-1.
-New submission
-
-Package was archived on CRAN
-
-CRAN repository db overrides:
-  X-CRAN-Comment: Archived on 2017-05-06 for policy violation.
-
-
-2.
-Examples with CPU or elapsed time > 5s
-          user system elapsed
-getGraphs 1.46   0.14    5.42
 
 ## Reverse dependencies
 
 There are no reverse dependencies yet.
-
-## Other comments
-
-Package previously created a file .Renviron_SG in the users home directory.  This behavious was
-against CRAN policy.  In this version of the package the user must create this file
-themselves.
