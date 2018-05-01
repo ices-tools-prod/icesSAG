@@ -15,12 +15,12 @@ getStockDownloadData(assessmentKey, ...)
 A data frame.
 }
 \description{
-.
+Get a copy of the source data for the specified stocks.
 }
 \examples{
 assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 sourcedat <- getStockDownloadData(assessmentKey)
-head(sourcedat)
+head(sourcedat[[1]])
 
 }
 \seealso{

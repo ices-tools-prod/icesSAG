@@ -39,6 +39,7 @@ getSAG("her.27.3a47d", 2017, "refpts", purpose = "Benchmark")
 
 cod_summary <- getSAG("cod", 2015)
 cod_refpts <- getSAG("cod", 2015:2016, "refpts")
+cod_data <- getSAG("cod", 2017, "source-data")
 }
 }
 \seealso{
