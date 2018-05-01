@@ -76,7 +76,8 @@ sag_parse <- function(x, type = "table", ...) {
     return(NULL)
   }
 
-  # otherwise parse x
+  # otherwise parse x, first drop the root node
+  x <- x[[1]]
   type <- match.arg(type, c("table", "summary", "stockStatus", "graph", "upload", "WSDL"))
   switch(type,
     table = sag_parseTable(x),
@@ -99,7 +100,7 @@ sag_parseTable <- function(x) {
   # rbind into a matrix
   x <- do.call(rbind, x)
 
-  # remove any html tags
+  # remove any html tags - this can happen in the SAG graph settings entries!
   x[] <- gsub("<.*?>", "", x)
 
   # trim white space
@@ -182,18 +183,6 @@ sag_parseWSDL <- function(x) {
 
 
 
-sag_parseUpload <- function(x) {
-  # parse header information
-  info <- sag_parseTable(list(x[names(x) != "Fish_Data"]))
-
-  # tidy fish data
-  fishdata <- sag_parse(x[names(x) == "Fish_Data"])
-
-  list(info = info, fishdata = fishdata)
-}
-
-
-
 #' @export
 plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
   # clear the page
@@ -221,8 +210,6 @@ plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
 simplify <- function(x) {
   # from Arni's toolbox
   # coerce object to simplest storage mode: factor > character > numeric > integer
-  owarn <- options(warn = -1)
-  on.exit(options(owarn))
   # list or data.frame
   if (is.list(x)) {
     for (i in seq_len(length(x)))
@@ -247,9 +234,11 @@ simplify <- function(x) {
       x <- as.character(x)
     if (is.character(x))
     {
-      y <- as.numeric(x)
-      if (sum(is.na(y)) == sum(is.na(x)))
-        x <- y
+      if (!any(grepl("[a-z|A-Z|//]", x))) {
+        y <- as.numeric(x)
+        if (sum(is.na(y)) == sum(is.na(x)))
+          x <- y
+      }
     }
     if (is.numeric(x))
     {

@@ -4,7 +4,8 @@
 \alias{stockInfo}
 \title{Create a list of fish stock information}
 \usage{
-stockInfo(StockCode, AssessmentYear, ContactPerson, ...)
+stockInfo(StockCode, AssessmentYear, ContactPerson, StockCategory,
+  Purpose = "Advice", ModelType, ModelName, ...)
 }
 \arguments{
 \item{StockCode}{a stock name, e.g. cod-347d.}
@@ -13,10 +14,21 @@ stockInfo(StockCode, AssessmentYear, ContactPerson, ...)
 
 \item{ContactPerson}{the email for the person responsible for uploading the stock data.}
 
+\item{StockCategory}{Category of the assessment used (see below)}
+
+\item{Purpose}{the purpose of the entry, options are "Advice", "Bench",
+"InitAdvice", default is "Advice".}
+
+\item{ModelType}{the type of the model used (see below for links to more information)}
+
+\item{ModelName}{the name (acronym) of the model used if available
+(see below for links to more information)}
+
 \item{...}{additional information, e.g. BMGT, FMSY, RecruitmentAge, ...}
 }
 \value{
-A named list, where all names are valid column names in the SAG database.
+A named sag.list, inheriting from a list, where all names are valid column names in the
+        SAG database.
 }
 \description{
 This function is a wrapper to \code{list(...)} in which the names are forced to match with
@@ -24,9 +36,43 @@ the names required for the SAG database.  See http://dome.ices.dk/datsu/selRep.a
 for more details.
 }
 \examples{
-stockInfo(StockCode = "cod.27.347d",
-          AssessmentYear = 2017,
-          ContactPerson = "itsme@fisheries.com")
+info <-
+  stockInfo(StockCode = "cod.27.47d20",
+            AssessmentYear = 2017,
+            StockCategory = 1,
+            ModelType = "A",
+            ModelName = "SCA",
+            ContactPerson = "itsme@fisheries.com")
+
+ info
+ info$mistake <- "oops"
+ info
+ # should have gotten a warning message
+
+ # use icesVocab to list valid codes etc.
+ library(icesVocab)
+ # print the list of valid stock codes
+ stock.codes <- getCodeList("ICES_StockCode")
+ stock.codes[1:10,1:2]
+
+ # print the list of assessment model types in the ICES vocabulary
+ model.types <- getCodeList("AssessmentModelType")
+ model.types[1:2]
+
+ # print the list of assessment model names in the ICES vocabulary
+ model.names <- getCodeList("AssessmentModelName")
+ model.names$Key
+
+}
+\seealso{
+Links to the relevant ICES vocabularies list are here
+StockCode: \url{http://vocab.ices.dk/?ref=357}
+StockCategory: \url{http://vocab.ices.dk/?ref=1526}
+Purpose: \url{http://vocab.ices.dk/?ref=1516}
+ModelType: \url{http://vocab.ices.dk/?ref=1524}
+ModelName: \url{http://vocab.ices.dk/?ref=1525}
+
+Link to the relevant format description is \url{http://datsu.ices.dk/web/selRep.aspx?Dataset=126}
 }
 \author{
 Colin Millar.

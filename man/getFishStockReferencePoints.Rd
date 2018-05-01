@@ -9,7 +9,7 @@ getFishStockReferencePoints(assessmentKey, ...)
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
 
-\item{...}{to allow scope for back compatability}
+\item{...}{to allow scope for back compatibility}
 }
 \value{
 A data frame.
@@ -18,10 +18,16 @@ A data frame.
 Get biological reference points for all stocks in a given assessment year.
 }
 \examples{
+\dontrun{
 assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 refpts <- getFishStockReferencePoints(assessmentKey)
 refpts
 
+#To get all reference points in a given assessment year:
+keys2016 <- findAssessmentKey(year = 2016)
+refpts2016 <- getFishStockReferencePoints(keys2016)
+refpts2016
+}
 }
 \seealso{
 \code{\link{getSAG}} supports querying many years and quarters in one

@@ -2,17 +2,19 @@
 % Please edit documentation in R/uploadStock.R
 \name{uploadStock}
 \alias{uploadStock}
-\title{Upload new or updated fish stock assessment results}
+\title{Upload New or Updated Fish Stock Assessment Results}
 \usage{
-uploadStock(info, fishdata)
+uploadStock(info, fishdata, verbose = FALSE)
 }
 \arguments{
 \item{info}{a list of stock information}
 
 \item{fishdata}{a data.frame of fish data}
+
+\item{verbose}{if TRUE more verbose messages are reported}
 }
 \value{
-the database key of the new / updated stock, or 0 if there was an error.
+The database key of the new / updated stock, or 0 if there was an error.
 }
 \description{
 Get summary results of historical stock size, recruitment, and fishing

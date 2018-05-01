@@ -1,0 +1,174 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+[![Build Status](https://travis-ci.org/ices-tools-prod/icesSAG.svg?branch=release)](https://travis-ci.org/ices-tools-prod/icesSAG) 
+[![codecov](https://codecov.io/gh/ices-tools-prod/icesSAG/branch/master/graph/badge.svg)](https://codecov.io/gh/ices-tools-prod/icesSAG)
+[![GitHub release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=6000)]()
+[![CRAN Status](http://r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/icesSAG)](https://cran.r-project.org/package=icesSAG)
+[![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+[<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
+
+### icesSAG
+
+icesSAG provides R functions that access the
+[web services](http://sg.ices.dk/webservices.aspx) of the [ICES](http://ices.dk)
+[Stock Assessment Graphs](http://sg.ices.dk) database.
+
+icesSAG is implemented as an [R](https://www.r-project.org) package and
+available on [CRAN](https://cran.r-project.org/package=icesSAG).
+
+### Installation
+
+
+icesSAG can be installed from CRAN using the `install.packages` command:
+
+```r
+install.packages("icesSAG")
+```
+
+### Usage
+
+
+For a summary of the package:
+
+```r
+library(icesSAG)
+?icesSAG
+```
+
+### Examples
+
+```{r, echo = FALSE}
+options(icesSAG.messages = FALSE)
+options(icesSAG.use_token = FALSE)
+library(icesSAG)
+```
+
+To download the summary data for all stocks published so far in 2017 use:
+```{r}
+summary_data <- getSAG(stock = NULL, year = 2018)
+head(summary_data)
+```
+
+
+#### verbose web service calls
+
+If you want to see all the web service calls being made set this option
+
+```{r echo = TRUE}
+options(icesSAG.messages = TRUE)
+```
+
+The result will be
+
+```{r}
+codKeys <- findAssessmentKey("cod", year = 2017)
+```
+
+which allows you to investigate the actual web service data if you are interested:
+[http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017](http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017)
+
+
+#### Authorised access via tokens
+
+ICES provides public access to the results of published stock assessments.  If you are an ICES stock assessor and wish to access unpublished results, or to upload your results, this can be done using token authentication.
+
+You can generate a token from [sg.ices.dk/manage/CreateToken.aspx](https://sg.ices.dk/manage/CreateToken.aspx), which will be something like `e9351534-20ac-4ad4-9752-98923e011213`
+
+Then create a file with the following contents (substitute the access token with your own)
+
+```
+# Standard Graphs personal access token
+SG_PAT=e9351534-20ac-4ad4-9752-98923e011213
+```
+
+this should be saved in your home directory in a file called `.Renviron_SG`. 
+
+A quick way to do this from R is
+
+```r
+cat("# Standard Graphs personal access token",
+    "SG_PAT=e9351534-20ac-4ad4-9752-98923e011213",
+    sep = "\n",
+    file = "~/.Renviron_SG")
+```
+
+Once you have created this file, you should be able to access unpublished results and upload data to the SAG database.  To switch to using authorised access run set the following flag
+
+```r
+options(icesSAG.use_token = TRUE)
+```
+
+#### uploading data
+
+To upload the results of a stock assessment to SAG you must provide two peiced of information, Stock information, such as stock code, assessment year and reference points, and yearly results, such as landings and estimated fishing mortality.  There are two helper functions to create the required objects.
+
+```r
+stockInfo()
+```
+
+returns a `list` (it requires a stock code, assessment year and contact email as a minimum), with the correctly named elements.  And,
+
+```r
+stockFishdata()
+```
+
+returns a `data.frame` (it requires year as default) with the correctly named columns
+
+A simple (almost) minimal example is:
+
+```{r echo = FALSE}
+options(icesSAG.messages = FALSE)
+```
+
+```{r}
+info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk")
+fishdata <- stockFishdata(1950:1996)
+
+# simulate some landings for something a bit intesting
+set.seed(1232)
+fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
+
+key <- icesSAG::uploadStock(info, fishdata)
+```
+
+You can check that the data was uploaded by searching for our stock. Note you will need to make sure the icesSAG.use_token option is set to TRUE
+
+```{r}
+options(icesSAG.use_token = TRUE)
+findAssessmentKey('whb-comb', 1996, full = TRUE)
+```
+
+We can also look at the landings graph created from the data that were uploaded
+
+```{r, landings-plot}
+plot(getLandingsGraph(key))
+```
+
+### References
+
+ICES Stock Assessment Graphs database:
+http://sg.ices.dk
+
+ICES Stock Assessment Graphs web services:
+http://sg.ices.dk/webservices.aspx
+
+### Development
+
+icesSAG is developed openly on
+[GitHub](https://github.com/ices-tools-prod/icesSAG).
+
+Feel free to open an [issue](https://github.com/ices-tools-prod/icesSAG/issues)
+there if you encounter problems or have suggestions for future versions.
+
+The current development version can be installed using:
+
+```R
+library(devtools)
+install_github("ices-tools-prod/icesSAG")
+```

@@ -3,7 +3,7 @@
 #' Get biological reference points for all stocks in a given assessment year.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... to allow scope for back compatability
+#' @param ... to allow scope for back compatibility
 #'
 #' @return A data frame.
 #'
@@ -19,10 +19,16 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
+#' \dontrun{
 #' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 #' refpts <- getFishStockReferencePoints(assessmentKey)
 #' refpts
 #'
+#' #To get all reference points in a given assessment year:
+#' keys2016 <- findAssessmentKey(year = 2016)
+#' refpts2016 <- getFishStockReferencePoints(keys2016)
+#' refpts2016
+#' }
 #' @export
 
 getFishStockReferencePoints <- function(assessmentKey, ...) {

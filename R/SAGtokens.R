@@ -1,15 +1,14 @@
 
 # the sag personal access togen
 .sg_renviron <- "~/.Renviron_SG"
-
+.sg_envir <- new.env()
+.sg_envir$.sg_tokenOK <- NA
 
 getTokenExpiration <- function() {
-  # only makes sense when tokens are set to true
-  opts <- options(icesSAG.use_token = TRUE)
-  on.exit(opts)
-
   # call webservice
-  out <- sag_webservice("getTokenExpiration")
+  if (file.exists(.sg_renviron)) readRenviron(.sg_renviron)
+  uri <- sag_uri("getTokenExpiration", token = Sys.getenv('SG_PAT'))
+  out <- sag_get(uri)
 
   # parse output
   as.numeric(out[[1]])
@@ -17,55 +16,24 @@ getTokenExpiration <- function() {
 
 
 sg_pat <- function() {
-  # get value of environment variable SG_PAT
-  if (file.exists(.sg_renviron)) readRenviron(.sg_renviron)
-  pat <- Sys.getenv('SG_PAT')
-  if (identical(pat, "")) {
-    # SAG_PAT environment variable is not set
-    set_sg_pat()
-    pat <- Sys.getenv('SG_PAT')
+
+  if (is.na(.sg_envir$.sg_tokenOK)) {
+    assign(".sg_tokenOK", getTokenExpiration() > 0, envir = .sg_envir)
   }
-
-  pat
-}
-
-set_sg_pat <- function(pat = NULL) {
-  # permanently set the SAG_PAT environment variable
-
-  if (is.null(pat)) { # and is interactive?
+  while(!.sg_envir$.sg_tokenOK) {
     cat("Invalid or missing token. Please browse to:\n",
-        "    https://standardgraphs.ices.dk/manage/CreateToken.aspx\n",
-        "to create your personal access token and paste it below",
-        sep = "")
-    pat <- readline("Token : ")
+         "    https://standardgraphs.ices.dk/manage/CreateToken.aspx\n",
+         "to create your personal access token.\n",
+         "Then create/modify the file:\n\t",
+             path.expand(.sg_renviron),
+         "\nwith contents:\n\n",
+         "# Standard Graphs personal access token\n",
+         "SG_PAT=blahblahblahblahblah\n\n",
+         sep = "")
+    tmp <- readline("Press return when this is done ...")
+    assign(".sg_tokenOK", getTokenExpiration() > 0, envir = .sg_envir)
   }
 
-  #
-  if (!file.exists(.sg_renviron)) {
-    message("Creating file:\n\t",
-            path.expand(.sg_renviron))
-    file.create(.sg_renviron)
-  }
-  # add SG_PAT to .Renviron_SG
-  message("Adding SG_PAT environment variable to:\n\t",
-          path.expand(.sg_renviron))
-  cat("# Standard Graphs personal access token\n",
-      "SG_PAT=", pat, "\n",
-      file = .sg_renviron, sep = "")
-
-  # check validity
-  check_sg_pat()
-}
-
-check_sg_pat <- function() {
-  # read environment file
-  readRenviron(.sg_renviron)
-
-  # check PAT
-  if (getTokenExpiration() <= 0) {
-    set_sg_pat()
-  }
-
-  invisible(TRUE)
+  Sys.getenv('SG_PAT')
 }
 

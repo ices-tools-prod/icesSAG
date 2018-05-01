@@ -40,7 +40,7 @@ getStockStatusTable(assessmentKey, ...)
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
 
-\item{...}{to allow scope for back compatability}
+\item{...}{to allow scope for back compatibility}
 }
 \value{
 An array representing a bitmap.
@@ -50,12 +50,14 @@ Get a graph of stock assessment output, e.g., historical stock size,
 recruitment, and fishing pressure.
 }
 \examples{
+\dontrun{
 assessmentKeys <- findAssessmentKey("had", 2015)
 landings_img <- getLandingsGraph(assessmentKeys[1])
 plot(landings_img)
 
 landings_plots <- getLandingsGraph(assessmentKeys)
 plot(landings_plots)
+}
 
 }
 \seealso{
