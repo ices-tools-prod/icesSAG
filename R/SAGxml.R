@@ -86,7 +86,7 @@ sag_parseUpload <- function(x) {
   info <- do.call(stockInfo, info)
 
   # tidy fish data
-  fishdata <- sag_parseTable(x[names(x) == "Fish_Data"])
+  fishdata <- sag_parseTable(unname(x[names(x) == "Fish_Data"]))
   fishdata <- do.call(stockFishdata, fishdata)
 
   list(info = info, fishdata = fishdata)

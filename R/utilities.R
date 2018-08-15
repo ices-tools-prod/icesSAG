@@ -94,26 +94,33 @@ sag_parse <- function(x, type = "table", ...) {
 
   # otherwise parse x, first drop the root node
   x <- x[[1]]
-  type <- match.arg(type, c("table", "summary", "stockStatus", "graph", "upload", "WSDL"))
+  type <- match.arg(type, c("table", "summary", "graph", "upload", "WSDL"))
   switch(type,
     table = sag_parseTable(x),
     summary = sag_parseSummary(x),
-    stockStatus = sag_parseStockStatus(x),
     graph = sag_parseGraph(x),
     upload = sag_parseUpload(x),
     WSDL = sag_parseWSDL(x))
 }
 
 
+
+
 sag_parseTable <- function(x) {
   # x is a table structure
-  xnames <- unique(unlist(lapply(x, names)))
-  xrow <- structure(rep(NA, length(xnames)), names = xnames)
+  # get column names
+  if (is.null(names(x[1]))) {
+    xnames <- unique(unlist(unname(lapply(x, names))))
+  } else {
+    xnames <- sag_getXmlDataType(names(x[1]))
+    returned_names <- unique(unlist(unname(lapply(x, names))))
+    xnames <- xnames[xnames %in% returned_names]
+  }
 
+  # convert to DF
   x <- lapply(unname(x), unlist)
-  # add NAs to empty columns
-  bool <- sapply(x, length) < length(xrow)
-  x[bool] <- lapply(x[bool], function(y) {out <- xrow; out[names(y)] <- y; out})
+  # expand missing entries columns
+  x <- lapply(x, function(x) { x <- x[xnames]; names(x) <- xnames; x })
   # rbind into a matrix
   x <- do.call(rbind, x)
 
@@ -124,8 +131,7 @@ sag_parseTable <- function(x) {
   x[] <- trimws(x)
 
   # SAG uses "" and "NA" to indicate NA
-  x[x == ""] <- NA
-  x[x == "NA"] <- NA
+  x[x %in% c("", "NA")] <- NA
 
   # make into a data.frame
   x <- as.data.frame(x, stringsAsFactors = FALSE)
@@ -137,7 +143,7 @@ sag_parseTable <- function(x) {
 
 sag_parseSummary <- function(x) {
   # get auxilliary info
-  info <- sag_parseTable(list(x[names(x) != "lines"]))
+  info <- sag_parseTable(list(SummaryTable = x[which(names(x) != "lines")]))
 
   # parse summary table
   x <- sag_parseTable(x[["lines"]])
@@ -146,21 +152,6 @@ sag_parseSummary <- function(x) {
   cbind(x, info, stringsAsFactors = FALSE)
 }
 
-
-sag_parseStockStatus <- function(x) {
-
-  x <-
-    lapply(x, function(x) {
-        cbind(
-          sag_parseTable(x[["YearStatus"]]),
-          sag_parseTable(list(x[names(x) != "YearStatus"]))
-        )
-    })
-
-  out <- do.call(rbind, x)
-  rownames(out) <- NULL
-  out
-}
 
 
 sag_parseGraph <- function(x, size = 2^16) {

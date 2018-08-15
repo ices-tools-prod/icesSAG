@@ -21,7 +21,7 @@ pressure.
 \examples{
 assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 status <- getStockStatusValues(assessmentKey)
-head(status)
+status
 
 }
 \seealso{
