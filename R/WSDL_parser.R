@@ -14,23 +14,9 @@ getWebServiceDescription <- function(secure = FALSE) {
 }
 
 
-sag_getXmlDataType <- function(which, secure = FALSE) {
-  # get webservice descriptions
-  if (!secure) {
-    out <- sag_get(httr::modify_url(sag_uri(), query = "WSDL"))
-  } else {
-    out <- sag_get(httr::modify_url(sag_uri(token = ""), query = "WSDL"))
-  }
-
-  # extract schema information
-  schema <- out[[1]]$types$schema
-  names(schema) <- unname(sapply(schema, function(x) attr(x, "name")))
-
+sag_getXmlDataType <- function(which) {
   # select one data-type
-  sequence <- schema[[which]]$sequence
-
-  # assume table structure and return
-  unname(sapply(sequence, function(x) attr(x, "name")))
+  schema[[which]]
 }
 
 

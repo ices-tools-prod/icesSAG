@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
-icesSAG 1.3-6 (2018-08-15)
+icesSAG 1.3-6 (2018-08-17)
 --------------------------------------------------------------------------------
-o Fixed bug in parsing of XML tables.  Function now reads the WSDL page to get
-  the up to date data-type definition and uses the column names given there.
+o Fixed bug in parsing of XML tables.  Function now reads the WSDL data that is
+  included as an internal data set (list of variable names)
 
 
 --------------------------------------------------------------------------------
