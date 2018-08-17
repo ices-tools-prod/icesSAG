@@ -31,3 +31,5 @@ r_github_packages:
 after_success:
   - Rscript -e 'library(covr);codecov()'
   - Rscript -e 'lintr::lint_package()'
+  - Rscript -e 'dir(all.files=TRUE)'
+  - Rscript -e 'lintr:::find_config(".")'
