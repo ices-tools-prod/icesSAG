@@ -7,10 +7,11 @@
 #' @return a data frame with SAG chart type IDs and settings IDs.
 #'
 #' @examples
+#' \dontrun{
 #' getSAGTypeGraphs()
 #'
 #' getSAGTypeSettings(0)[-4]
-#'
+#' }
 #' @rdname getSAGSettings
 #' @name getSAGGTypegraphsandSettings
 NULL

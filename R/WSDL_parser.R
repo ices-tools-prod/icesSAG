@@ -37,4 +37,3 @@ checkWebServices <- function(secure = FALSE, show = TRUE) {
 
   invisible(list(missing = missing_services, linked = linked_services))
 }
-

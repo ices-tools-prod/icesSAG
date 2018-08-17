@@ -49,6 +49,7 @@ info <-
  info
  # should have gotten a warning message
 
+ \dontrun{
  # use icesVocab to list valid codes etc.
  library(icesVocab)
  # print the list of valid stock codes
@@ -62,7 +63,7 @@ info <-
  # print the list of assessment model names in the ICES vocabulary
  model.names <- getCodeList("AssessmentModelName")
  model.names$Key
-
+ }
 }
 \seealso{
 Links to the relevant ICES vocabularies list are here

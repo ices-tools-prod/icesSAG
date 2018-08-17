@@ -22,9 +22,11 @@ A data frame.
 Get a copy of the source data for the specified stocks.
 }
 \examples{
+\dontrun{
 assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 sourcedat <- getStockDownloadData(assessmentKey)
 head(sourcedat[[1]])
+}
 
 }
 \seealso{

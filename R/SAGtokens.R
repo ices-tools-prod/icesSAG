@@ -30,7 +30,7 @@
 getTokenExpiration <- function() {
   # call webservice
   if (file.exists(.sg_renviron)) readRenviron(.sg_renviron)
-  uri <- sag_uri("getTokenExpiration", token = Sys.getenv('SG_PAT'))
+  uri <- sag_uri("getTokenExpiration", token = Sys.getenv("SG_PAT"))
   out <- sag_get(uri)
 
   # parse output
@@ -43,7 +43,7 @@ sg_pat <- function() {
   if (is.na(.sg_envir$.sg_tokenOK)) {
     assign(".sg_tokenOK", getTokenExpiration() > 0, envir = .sg_envir)
   }
-  while(!.sg_envir$.sg_tokenOK) {
+  while (!.sg_envir$.sg_tokenOK) {
     cat("Invalid or missing token. Please browse to:\n",
          "    https://standardgraphs.ices.dk/manage/CreateToken.aspx\n",
          "to create your personal access token.\n",
@@ -53,10 +53,9 @@ sg_pat <- function() {
          "# Standard Graphs personal access token\n",
          "SG_PAT=blahblahblahblahblah\n\n",
          sep = "")
-    tmp <- readline("Press return when this is done ...")
+    readline("Press return when this is done ...")
     assign(".sg_tokenOK", getTokenExpiration() > 0, envir = .sg_envir)
   }
 
-  Sys.getenv('SG_PAT')
+  Sys.getenv("SG_PAT")
 }
-

@@ -140,6 +140,7 @@ sag_parseUpload <- function(x) {
 #'  info
 #'  # should have gotten a warning message
 #'
+#'  \dontrun{
 #'  # use icesVocab to list valid codes etc.
 #'  library(icesVocab)
 #'  # print the list of valid stock codes
@@ -153,7 +154,7 @@ sag_parseUpload <- function(x) {
 #'  # print the list of assessment model names in the ICES vocabulary
 #'  model.names <- getCodeList("AssessmentModelName")
 #'  model.names$Key
-#'
+#'  }
 #' @export
 
 stockInfo <- function(StockCode, AssessmentYear, ContactPerson, StockCategory,
@@ -347,7 +348,11 @@ checkStockInfo <- function(info) {
     loc2 <- c(loc1[-1] - 1, length(ending))
     ending <- sapply(1:length(loc1), function(i) paste(ending[loc1[i]:loc2[i]], collapse = ""))
     maybeid <- unique(unlist(sapply(ending, grep, x = maybe)))
-    errors$StockCode <- paste0("non valid stock code (",  info$StockCode,"). Did you mean on of these: ", paste(part1, maybe[maybeid], sep = ".", collapse = ", "), "?")
+    errors$StockCode <-
+      paste0("non valid stock code (",
+             info$StockCode,
+             "). Did you mean on of these: ",
+             paste(part1, maybe[maybeid], sep = ".", collapse = ", "), "?")
   }
 
 

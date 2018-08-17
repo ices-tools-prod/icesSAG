@@ -120,7 +120,11 @@ sag_parseTable <- function(x) {
   # convert to DF
   x <- lapply(unname(x), unlist)
   # expand missing entries columns
-  x <- lapply(x, function(x) { x <- x[xnames]; names(x) <- xnames; x })
+  x <- lapply(x, function(x) {
+                   x <- x[xnames]
+                   names(x) <- xnames
+                   x
+                 })
   # rbind into a matrix
   x <- do.call(rbind, x)
 
@@ -173,7 +177,7 @@ sag_parseWSDL <- function(x) {
   x <- x$types$schema[names(x$types$schema) == "element"]
   types <- lapply(x, function(x) attributes(x)$names)
   keep <- sapply(types, function(x) identical(x == "complexType", TRUE))
-  keep <- which(keep)[seq(1,sum(keep), by = 2)]
+  keep <- which(keep)[seq(1, sum(keep), by = 2)]
 
   # strip out only webservice calls
   x <- x[keep]
@@ -205,11 +209,11 @@ plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
 
   # calculate x and y locations for plots -
   # plot like a table: from top to bottom and left to right
-  x_loc <- rep((1:r)/r - 1/(2*r), c)
-  y_loc <- rep((c:1)/c  - 1/(2*c), each = r)
+  x_loc <- rep((1:r) / r - 1 / (2 * r), c)
+  y_loc <- rep((c:1) / c  - 1 / (2 * c), each = r)
   for (i in seq_along(x)) {
     if (!is.null(x[[i]]))
-      grid::grid.raster(x[[i]], x = x_loc[i], y = y_loc[i], width = 1/r, height = 1/c)
+      grid::grid.raster(x[[i]], x = x_loc[i], y = y_loc[i], width = 1 / r, height = 1 / c)
   }
 }
 
@@ -224,32 +228,27 @@ simplify <- function(x) {
       x[[i]] <- simplify(x[[i]])
   }
   # matrix
-  else if (is.matrix(x))
-  {
+  else if (is.matrix(x)) {
     if (is.character(x) && sum(is.na(as.numeric(x))) == sum(is.na(x)))
       mode(x) <- "numeric"
-    if (is.numeric(x))
-    {
+    if (is.numeric(x)) {
       y <- as.integer(x)
       if (sum(is.na(x)) == sum(is.na(y)) && all(x == y, na.rm = TRUE))
         mode(x) <- "integer"
     }
   }
   # vector
-  else
-  {
+  else {
     if (is.factor(x))
       x <- as.character(x)
-    if (is.character(x))
-    {
+    if (is.character(x)) {
       if (!any(grepl("[^0-9.]", x))) {
         y <- as.numeric(x)
         if (sum(is.na(y)) == sum(is.na(x)))
           x <- y
       }
     }
-    if (is.numeric(x))
-    {
+    if (is.numeric(x)) {
       y <- as.integer(x)
       if (sum(is.na(x)) == sum(is.na(y)) && all(x == y, na.rm = TRUE))
         x <- y
@@ -257,4 +256,3 @@ simplify <- function(x) {
   }
   x
 }
-

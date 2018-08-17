@@ -3,8 +3,6 @@ uploadXMLFile <- function(txt) {
 
     uri <- sag_uri("uploadXMLFile", token = "test")
     uri <- gsub("[?]token=test", "", uri)
-    #if (getOption("icesSAG.messages"))
-    #  message("POSTing ... ", uri)
 
     body <- sprintf("f=%s&token=%s",
                     openssl::base64_encode(utils::URLencode(txt)),
@@ -17,4 +15,3 @@ uploadXMLFile <- function(txt) {
     message(httr::http_status(x)$message)
     unlist(xml2::as_list(httr::content(x)))
 }
-

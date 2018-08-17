@@ -19,11 +19,12 @@ Get summary results of historical stock size, recruitment, and fishing
 pressure.
 }
 \examples{
+\dontrun{
 assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 sumtab <- getSummaryTable(assessmentKey)
 head(sumtab)
 attributes(sumtab)$notes
-
+}
 }
 \seealso{
 \code{\link{getSAG}} supports querying many years and quarters in one
