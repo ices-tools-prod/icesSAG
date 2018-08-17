@@ -348,7 +348,11 @@ checkStockInfo <- function(info) {
     loc2 <- c(loc1[-1] - 1, length(ending))
     ending <- sapply(1:length(loc1), function(i) paste(ending[loc1[i]:loc2[i]], collapse = ""))
     maybeid <- unique(unlist(sapply(ending, grep, x = maybe)))
-    errors$StockCode <- paste0("non valid stock code (",  info$StockCode,"). Did you mean on of these: ", paste(part1, maybe[maybeid], sep = ".", collapse = ", "), "?")
+    errors$StockCode <-
+      paste0("non valid stock code (",
+             info$StockCode,
+             "). Did you mean on of these: ",
+             paste(part1, maybe[maybeid], sep = ".", collapse = ", "), "?")
   }
 
 

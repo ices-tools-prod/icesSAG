@@ -84,9 +84,11 @@ uploadStock <- function(info, fishdata, verbose = FALSE) {
 
   assessmentKey <- simplify(unlist(out))
   message("Upload complete! New assessmentKey is: ", assessmentKey)
-  message(sprintf("To check upload run (with 'options(icesSAG.use_token = TRUE)'): \n  findAssessmentKey('%s', %s, full = TRUE)", info$StockCode, info$AssessmentYear))
-  #res <- capture.output(findAssessmentKey(info$StockCode, info$AssessmentYear, full = TRUE))
-  #message("\n", paste(res, collapse = "\n"))
+  message(
+    sprintf(
+      "To check upload run (with 'options(icesSAG.use_token = TRUE)'): \n  findAssessmentKey('%s', %s, full = TRUE)",
+      info$StockCode,
+      info$AssessmentYear))
 
   assessmentKey
 }

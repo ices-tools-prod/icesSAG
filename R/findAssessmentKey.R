@@ -38,7 +38,7 @@ findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = 
   #  if (!getOption("icesSAG.use_token")) {
   if (published && !getOption("icesSAG.use_token")) {
     # restrict output to only published stocks
-    out <- out[out$Status == "Published",]
+    out <- out[out$Status == "Published", ]
   }
 
   if (!is.null(stock)) {
@@ -47,7 +47,7 @@ findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = 
     select <- c(unlist(lapply(stock, grep, tolower(out$StockKeyLabel))),
                 unlist(lapply(stock, grep, tolower(out$StockDescription))),
                 unlist(lapply(stock, grep, tolower(out$SpeciesName))))
-    out <- out[select,]
+    out <- out[select, ]
   }
 
   # return
