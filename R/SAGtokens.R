@@ -4,6 +4,29 @@
 .sg_envir <- new.env()
 .sg_envir$.sg_tokenOK <- NA
 
+
+
+
+
+#' Get the expiration time of a Standard Graphs token.
+#'
+#' Get the number of days remaining for a standard graphs
+#' personal access token.
+#'
+#' @return An integer.
+#'
+#'
+#' @author Colin Millar.
+#'
+#' @examples
+#' \dontrun{
+#' getTokenExpiration()
+#' }
+#'
+#' # tell icesSAG to use the SG token
+#' options(icesSAG.use_token = TRUE)
+#'
+#' @export
 getTokenExpiration <- function() {
   # call webservice
   if (file.exists(.sg_renviron)) readRenviron(.sg_renviron)

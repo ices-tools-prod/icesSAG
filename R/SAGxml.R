@@ -86,7 +86,7 @@ sag_parseUpload <- function(x) {
   info <- do.call(stockInfo, info)
 
   # tidy fish data
-  fishdata <- sag_parseTable(x[names(x) == "Fish_Data"])
+  fishdata <- sag_parseTable(unname(x[names(x) == "Fish_Data"]))
   fishdata <- do.call(stockFishdata, fishdata)
 
   list(info = info, fishdata = fishdata)
@@ -264,6 +264,10 @@ validNames <- function(type = c("stockInfo", "stockFishdata")) {
       "BMGT_lower",
       "BMGT",
       "BMGT_upper",
+      "BMGTrange_low",
+      "BMGTrange_high",
+      "FMGTrange_low",
+      "FMGTrange_high",
       "FMGT_lower",
       "FMGT",
       "FMGT_upper",
@@ -277,6 +281,10 @@ validNames <- function(type = c("stockInfo", "stockFishdata")) {
       "Flim",
       "Fpa",
       "Fage",
+      "Flength",
+      "RecruitmentLength",
+      "CatchesLadingsUnits",
+      "ConfidenceIntervalDefinition",
       "RecruitmentAge",
       "CatchesLandingsUnits",
       "RecruitmentDescription",
