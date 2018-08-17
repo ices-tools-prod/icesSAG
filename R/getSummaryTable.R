@@ -20,11 +20,12 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
+#' \dontrun{
 #' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 #' sumtab <- getSummaryTable(assessmentKey)
 #' head(sumtab)
 #' attributes(sumtab)$notes
-#'
+#' }
 #' @export
 
 getSummaryTable <- function(assessmentKey, ...) {

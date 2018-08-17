@@ -29,6 +29,7 @@ A data frame with SAG chart type IDs, settings IDs and setting values.
 details
 }
 \examples{
+\dontrun{
 key <- findAssessmentKey("cod.21.1", 2017)
 graphs <- getSAGGraphs(key[1])
 plot(graphs)
@@ -44,5 +45,6 @@ plot(chart2)
 setSAGSettingForAStock(key [1], 4, 1, "SSB of cod.21.1 in 2017",
 FALSE)
 plot(chart2)
+}
 
 }

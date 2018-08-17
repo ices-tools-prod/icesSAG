@@ -16,8 +16,9 @@ A data frame.
 Get a list of fish stocks for a given assessment year.
 }
 \examples{
+\dontrun{
 stocks <- getListStocks(2015)
-
+}
 }
 \seealso{
 \code{\link{getSummaryTable}} gets a summary table of historical stock size.

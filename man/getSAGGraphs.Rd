@@ -19,12 +19,13 @@ Get summary graphs of catches, recruitment, fishing pressure, and spawning
 stock biomass.
 }
 \examples{
+\dontrun{
 assessmentKey <- findAssessmentKey("cod", 2015)
 graphs <- getSAGGraphs(assessmentKey[1])
 plot(graphs)
 # note this stock only has one graph see:
 # http://standardgraphs.ices.dk/ViewCharts.aspx?key=8309
-
+}
 }
 \seealso{
 \code{\link{getListStocks}} gets a list of stocks.

@@ -16,8 +16,9 @@
 #' @author Colin Millar, Scott Large, and Arni Magnusson.
 #'
 #' @examples
+#' \dontrun{
 #' stocks <- getListStocks(2015)
-#'
+#' }
 #' @export
 
 getListStocks <- function(year) {

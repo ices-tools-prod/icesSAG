@@ -140,6 +140,7 @@ sag_parseUpload <- function(x) {
 #'  info
 #'  # should have gotten a warning message
 #'
+#'  \dontrun{
 #'  # use icesVocab to list valid codes etc.
 #'  library(icesVocab)
 #'  # print the list of valid stock codes
@@ -153,7 +154,7 @@ sag_parseUpload <- function(x) {
 #'  # print the list of assessment model names in the ICES vocabulary
 #'  model.names <- getCodeList("AssessmentModelName")
 #'  model.names$Key
-#'
+#'  }
 #' @export
 
 stockInfo <- function(StockCode, AssessmentYear, ContactPerson, StockCategory,
