@@ -2,14 +2,14 @@
 % Please edit documentation in R/findAssessmentKey.R
 \name{findAssessmentKey}
 \alias{findAssessmentKey}
-\alias{findAssessmentKey}
 \alias{findKey}
 \title{Find a Key}
 \usage{
 findAssessmentKey(stock = NULL, year = 0, published = TRUE,
   regex = TRUE, full = FALSE)
 
-findKey(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
+findKey(stock, year = 0, published = TRUE, regex = TRUE,
+  full = FALSE)
 }
 \arguments{
 \item{stock}{a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL (default)

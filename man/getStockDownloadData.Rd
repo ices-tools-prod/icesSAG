@@ -3,7 +3,6 @@
 \name{getStockSourceData}
 \alias{getStockSourceData}
 \alias{getStockDownloadData}
-\alias{getStockSourceData}
 \title{Get Source Data}
 \usage{
 getStockDownloadData(assessmentKey, ...)

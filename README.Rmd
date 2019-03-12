@@ -1,7 +1,7 @@
 ---
 output:
   md_document:
-    variant: markdown_github
+    variant: gfm
 ---
 
 [![Build Status](https://travis-ci.org/ices-tools-prod/icesSAG.svg?branch=release)](https://travis-ci.org/ices-tools-prod/icesSAG) 
@@ -48,12 +48,16 @@ library(icesSAG)
 options(icesSAG.messages = FALSE)
 options(icesSAG.use_token = FALSE)
 library(icesSAG)
+library(ggplot2)
 ```
 
-To download the summary data for all stocks published so far in 2017 use:
+To download the summary data for all sandeel stocks published in 2018 use:
 ```{r}
-summary_data <- getSAG(stock = NULL, year = 2018)
+summary_data <- getSAG(stock = "sandeel", year = 2018)
 head(summary_data)
+ggplot(summary_data[complete.cases(summary_data[c("Year", "recruitment")]),], 
+       aes(x=Year, y=recruitment, group = fishstock, colour = fishstock)) +
+    geom_line()
 ```
 
 
@@ -98,7 +102,6 @@ cat("# Standard Graphs personal access token",
     sep = "\n",
     file = "~/.Renviron_SG")
 ```
-
 Once you have created this file, you should be able to access unpublished results and upload data to the SAG database.  To switch to using authorised access run set the following flag
 
 ```r
@@ -107,7 +110,7 @@ options(icesSAG.use_token = TRUE)
 
 #### uploading data
 
-To upload the results of a stock assessment to SAG you must provide two peiced of information, Stock information, such as stock code, assessment year and reference points, and yearly results, such as landings and estimated fishing mortality.  There are two helper functions to create the required objects.
+To upload the results of a stock assessment to SAG you must provide two pieces of information, Stock information, such as stock code, assessment year and reference points, and yearly results, such as landings and estimated fishing mortality.  There are two helper functions to create the required objects.
 
 ```r
 stockInfo()
@@ -127,8 +130,8 @@ A simple (almost) minimal example is:
 options(icesSAG.messages = FALSE)
 ```
 
-```{r}
-info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk")
+```{r, eval = FALSE}
+info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk", Purpose = "")
 fishdata <- stockFishdata(1950:1996)
 
 # simulate some landings for something a bit intesting
@@ -136,6 +139,10 @@ set.seed(1232)
 fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
 
 key <- icesSAG::uploadStock(info, fishdata)
+```
+
+```{r echo = FALSE}
+key <- 10081
 ```
 
 You can check that the data was uploaded by searching for our stock. Note you will need to make sure the icesSAG.use_token option is set to TRUE
