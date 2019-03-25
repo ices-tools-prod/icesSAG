@@ -10,24 +10,34 @@ warnings_are_errors: false
 matrix:
   include:
   - r: release
+  - r: oldrel
+  - r: devel
+  - os: osx
+    r: release
+    latex: false
 
-repos:
-  CRAN: https://cloud.r-project.org
-
-r_packages:
-  - rmarkdown
-  - covr
-  - testthat
-  - png
-
+# notifications
 notifications:
   email:
     on_success: change
     on_failure: change
 
+# repository
+repos:
+  CRAN: https://cloud.r-project.org
+
+# r_packages
+r_packages:
+  - icesVocab
+  - rmarkdown
+  - covr
+  - testthat
+  - png
+
 r_github_packages:
   - jimhester/lintr
 
+# after_success
 after_success:
-  - Rscript -e 'library(covr);codecov()'
+  - Rscript -e 'covr::codecov()'
   - Rscript -e 'lintr::lint_package()'
