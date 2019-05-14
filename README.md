@@ -199,13 +199,13 @@ findAssessmentKey('whb-comb', 1996, full = TRUE)
     ## 2 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
     ## 3 Blue whiting in Subareas I-IX, XII and XIV (Combined stock)
     ##          Status AssessmentYear              SpeciesName ModifiedDate
-    ## 1 Not Published           1996 Micromesistius poutassou   12/03/2019
-    ## 2 Not Published           1996 Micromesistius poutassou   12/03/2019
-    ## 3 Not Published           1996 Micromesistius poutassou   12/03/2019
+    ## 1 Not Published           1996 Micromesistius poutassou   30/04/2019
+    ## 2 Not Published           1996 Micromesistius poutassou   30/04/2019
+    ## 3 Not Published           1996 Micromesistius poutassou   30/04/2019
     ##                            SAGStamp
-    ## 1  whb-comb_1996_9331_2019312010643
-    ## 2  whb-comb_1996_9344_2019312010643
-    ## 3 whb-comb_1996_10081_2019312010643
+    ## 1  whb-comb_1996_9331_2019430010623
+    ## 2  whb-comb_1996_9344_2019430010623
+    ## 3 whb-comb_1996_10081_2019430010623
 
 We can also look at the landings graph created from the data that were
 uploaded

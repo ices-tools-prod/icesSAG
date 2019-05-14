@@ -94,12 +94,13 @@ sag_parse <- function(x, type = "table", ...) {
 
   # otherwise parse x, first drop the root node
   x <- x[[1]]
-  type <- match.arg(type, c("table", "summary", "graph", "upload", "WSDL"))
+  type <- match.arg(type, c("table", "summary", "graph", "upload", "stockStatus", "WSDL"))
   switch(type,
     table = sag_parseTable(x),
     summary = sag_parseSummary(x),
     graph = sag_parseGraph(x),
     upload = sag_parseUpload(x),
+    stockStatus = sag_parseStockStatus(x),
     WSDL = sag_parseWSDL(x))
 }
 
@@ -173,6 +174,29 @@ sag_parseGraph <- function(x, size = 2^16) {
 }
 
 
+sag_parseStockStatus <- function(x) {
+  out <-
+    do.call(
+      rbind,
+      lapply(x, sag_parseStockStatusLine)
+    )
+
+  rownames(out) <- NULL
+
+  out
+}
+
+
+sag_parseStockStatusLine <- function(x) {
+  line <- as.data.frame(sapply(x[which(names(x) != "YearStatus")], c), stringsAsFactors = FALSE)
+  years <- sag_parseTable(x$YearStatus)
+
+  cbind(line, years)
+}
+
+
+
+
 sag_parseWSDL <- function(x) {
   x <- x$types$schema[names(x$types$schema) == "element"]
   types <- lapply(x, function(x) attributes(x)$names)
@@ -192,6 +216,8 @@ sag_parseWSDL <- function(x) {
           unname(sapply(x, function(y) attributes(y)$name))
           )
 }
+
+
 
 
 

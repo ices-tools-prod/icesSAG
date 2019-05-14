@@ -36,5 +36,5 @@ getStockStatusValues <- function(assessmentKey, ...) {
   out <- lapply(assessmentKey, function(i) sag_webservice("getStockStatusValues", assessmentKey = i))
 
   # parse output
-  lapply(out, sag_parse, type = "table")
+  lapply(out, sag_parse, type = "stockStatus")
 }
