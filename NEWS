@@ -1,4 +1,11 @@
 --------------------------------------------------------------------------------
+icesSAG 1.3-7 (2019-05-14)
+--------------------------------------------------------------------------------
+o Allow upload to contiue if errors found by DATSU - gives warning, not error
+o Add function to parse stock status table values due to change in web service
+  XML data structure
+
+--------------------------------------------------------------------------------
 icesSAG 1.3-6 (2019-03-13)
 --------------------------------------------------------------------------------
 o Fixed bug in parsing of XML tables.  Function now reads the WSDL data that is
