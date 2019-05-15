@@ -284,7 +284,7 @@ validNames <- function(type = c("stockInfo", "stockFishdata")) {
       "Fage",
       "Flength",
       "RecruitmentLength",
-      "CatchesLadingsUnits",
+      "CatchesLandingsUnits",
       "ConfidenceIntervalDefinition",
       "RecruitmentAge",
       "CatchesLandingsUnits",
