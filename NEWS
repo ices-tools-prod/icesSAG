@@ -1,9 +1,16 @@
 --------------------------------------------------------------------------------
+icesSAG 1.3-8 (2019-10-29)
+--------------------------------------------------------------------------------
+o Display warning if stock name contains – and not -, and quietly fix.
+
+
+--------------------------------------------------------------------------------
 icesSAG 1.3-7 (2019-05-14)
 --------------------------------------------------------------------------------
 o Allow upload to contiue if errors found by DATSU - gives warning, not error
 o Add function to parse stock status table values due to change in web service
   XML data structure
+o Fix name in upload format specification CatchLandingsUnits
 
 --------------------------------------------------------------------------------
 icesSAG 1.3-6 (2019-03-13)
