@@ -15,7 +15,7 @@ getCustomColumns(assessmentKey, ...)
 A data frame.
 }
 \description{
-Get custom columns, such as alternative biomass series or Fproxy 
+Get custom columns, such as alternative biomass series or Fproxy
   reference points for a record in the SAG database.
 }
 \examples{
