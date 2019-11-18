@@ -42,10 +42,10 @@ getCustomColumns <- function(assessmentKey, ...) {
 
           # get stock level stuff
           out <- as.list(x[1, c("AssessmentKey", "AssessmentYear", "StockKeyLabel", "Purpose")])
-                  
+
           customIds <- as.numeric(gsub("CustomName", "", names(x)[id]))
 
-          customs <- 
+          customs <-
             do.call(rbind,
               lapply(customIds, function(i) {
                 data.frame(
