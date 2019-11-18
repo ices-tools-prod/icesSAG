@@ -175,7 +175,7 @@ stockInfo <- function(StockCode, AssessmentYear, ContactPerson, StockCategory,
   val <- val[names(val) %in% validNames("stockInfo")]
   # add all relavent names to help with intelisense
   extra_cols <- setdiff(validNames("stockInfo"), names(val))
-  val_extra <- lapply(1:length(extra_cols), function(x) NA)
+  val_extra <- lapply(seq_len(length(extra_cols)), function(x) NA)
   names(val_extra) <- extra_cols
   val <- c(val, val_extra)
   # reorder
@@ -346,7 +346,7 @@ checkStockInfo <- function(info) {
     ending <- strsplit(ending, "")[[1]]
     loc1 <- grep("[1-9]", ending)
     loc2 <- c(loc1[-1] - 1, length(ending))
-    ending <- sapply(1:length(loc1), function(i) paste(ending[loc1[i]:loc2[i]], collapse = ""))
+    ending <- sapply(seq_len(length(loc1)), function(i) paste(ending[loc1[i]:loc2[i]], collapse = ""))
     maybeid <- unique(unlist(sapply(ending, grep, x = maybe)))
     errors$StockCode <-
       paste0("non valid stock code (",

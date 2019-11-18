@@ -34,7 +34,7 @@ findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = 
   # check stock names for long dashes:
   EmDash <- rawToChar(as.raw(150))
   if (any(grepl(EmDash, stock))) {
-    warning("Please check stock names for 'long dash' ", EmDash," and replace with -")
+    warning("Please check stock names for 'long dash' ", EmDash, " and replace with -")
     stock <- gsub(EmDash, "-", stock)
   }
 
