@@ -53,7 +53,8 @@ getCustomColumns <- function(assessmentKey, ...) {
                   customValue = x[[paste0("Custom", i)]],
                   customName = x[[paste0("CustomName", i)]],
                   #customType = x[[paste0("CustomType", i)]], # include when available
-                  customUnit = x[[paste0("CustomUnits", i)]]
+                  customUnit = x[[paste0("CustomUnits", i)]],
+                  customColumnId = i
                 )
               })
             )
