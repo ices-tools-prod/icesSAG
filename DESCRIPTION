@@ -17,5 +17,5 @@ Description: R interface to access the web services of the ICES Stock Assessment
              Graphs database <http://sg.ices.dk>.
 License: GPL (>= 2)
 URL: http://sg.ices.dk
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Encoding: UTF-8
