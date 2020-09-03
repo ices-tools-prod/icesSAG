@@ -4,8 +4,16 @@
 \alias{stockInfo}
 \title{Create a list of fish stock information}
 \usage{
-stockInfo(StockCode, AssessmentYear, ContactPerson, StockCategory,
-  Purpose = "Advice", ModelType, ModelName, ...)
+stockInfo(
+  StockCode,
+  AssessmentYear,
+  ContactPerson,
+  StockCategory,
+  Purpose = "Advice",
+  ModelType,
+  ModelName,
+  ...
+)
 }
 \arguments{
 \item{StockCode}{a stock name, e.g. cod-347d.}
