@@ -8,8 +8,13 @@
 \usage{
 getSAGSettingsForAStock(assessmentKey)
 
-setSAGSettingForAStock(assessmentKey, chartKey, settingKey, settingValue,
-  copyNextYear)
+setSAGSettingForAStock(
+  assessmentKey,
+  chartKey,
+  settingKey,
+  settingValue,
+  copyNextYear
+)
 }
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
