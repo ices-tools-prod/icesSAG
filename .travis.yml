@@ -25,7 +25,6 @@ repos:
 
 # r_packages
 r_packages:
-  - icesVocab
   - rmarkdown
   - covr
   - testthat
@@ -33,6 +32,7 @@ r_packages:
 
 r_github_packages:
   - jimhester/lintr
+  - ices-tools-prod/icesVocab
 
 # after_success
 after_success:
