@@ -32,9 +32,11 @@ NULL
 #' @export
 findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = TRUE, full = FALSE) {
   # check stock names for long dashes:
-  if (any(grepl("\\x96", stock))) {
-    warning("Please check stock names for 'long dash' ", "\x96", " and replace with -")
-    stock <- gsub("\\x96", "-", stock)
+  EmDash <- "\x96"
+  EmDash <- "\u2013"
+  if (any(grepl(EmDash, stock))) {
+    warning("Please check stock names for 'long dash' ", EmDash, " and replace with -")
+    #stock <- gsub(EmDash, "-", stock)
   }
 
   # get list of all stocks for all supplied years
