@@ -1,16 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# icesSAG 1.4.0
+
+- Same as previous version.
+
+
 # icesSAG 1.3.9
-
-- Same as previous version.
-
-
-# icesSAG 1.3.8.9001
-
-- Same as previous version.
-
-
-# icesSAG 1.3.8.9000
 
 * add new function getCustomColumns()
 
