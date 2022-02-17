@@ -13,8 +13,9 @@ Imports: png,
          icesVocab
 Suggests: testthat
 Description: R interface to access the web services of the ICES Stock Assessment
-             Graphs database <http://sg.ices.dk>.
+             Graphs database <https://sg.ices.dk>.
 License: GPL (>= 2)
-URL: http://sg.ices.dk
+URL: https://sg.ices.dk, https://github.com/ices-tools-prod/icesSAG
+BugReports: https://github.com/ices-tools-prod/icesSAG/issues
 RoxygenNote: 7.1.2
 Encoding: UTF-8
