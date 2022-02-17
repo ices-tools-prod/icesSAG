@@ -13,3 +13,4 @@ codecov.yml
 SQL/*
 README_files
 ^data-raw$
+^CRAN-SUBMISSION$
