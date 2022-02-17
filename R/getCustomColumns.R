@@ -20,7 +20,7 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' assessmentKey <- findAssessmentKey("bli.27.5a14")
 #' customs <- getCustomColumns(assessmentKey)
 #' head(customs)

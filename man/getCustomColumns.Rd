@@ -19,7 +19,7 @@ Get custom columns, such as alternative biomass series or Fproxy
   reference points for a record in the SAG database.
 }
 \examples{
-\donttest{
+\dontrun{
 assessmentKey <- findAssessmentKey("bli.27.5a14")
 customs <- getCustomColumns(assessmentKey)
 head(customs)

@@ -20,7 +20,7 @@ a data frame with SAG chart type IDs and settings IDs.
 List all possible chart settings for each chart type (0 = general, 1 = Landings etc.).
 }
 \examples{
-\donttest{
+\dontrun{
 getSAGTypeGraphs()
 
 getSAGTypeSettings(0)[-4]

@@ -20,7 +20,7 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' assessmentKey <- findAssessmentKey("cod-2224", year = 2015)
 #' sumtab <- getYSBRSummaryTable(assessmentKey)
 #' head(sumtab)

@@ -18,7 +18,7 @@ A data frame.
 Get biological reference points for all stocks in a given assessment year.
 }
 \examples{
-\donttest{
+\dontrun{
 assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 refpts <- getFishStockReferencePoints(assessmentKey)
 refpts

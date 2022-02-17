@@ -21,7 +21,7 @@
 #' @author Arni Magnusson and Colin Millar.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' findAssessmentKey("cod-347d", 2015, full = TRUE)
 #' }
 #' @rdname findAssessmentKeydocs

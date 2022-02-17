@@ -16,7 +16,7 @@
 #' @author Colin Millar, Scott Large, and Arni Magnusson.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stocks <- getListStocks(2015)
 #' }
 #' @export

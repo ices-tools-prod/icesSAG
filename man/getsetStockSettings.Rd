@@ -34,7 +34,7 @@ A data frame with SAG chart type IDs, settings IDs and setting values.
 details
 }
 \examples{
-\donttest{
+\dontrun{
 key <- findAssessmentKey("cod.21.1", 2017)
 graphs <- getSAGGraphs(key[1])
 plot(graphs)

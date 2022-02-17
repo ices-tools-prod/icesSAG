@@ -7,7 +7,7 @@
 #' @return a data frame with SAG chart type IDs and settings IDs.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' getSAGTypeGraphs()
 #'
 #' getSAGTypeSettings(0)[-4]

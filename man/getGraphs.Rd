@@ -50,7 +50,7 @@ Get a graph of stock assessment output, e.g., historical stock size,
 recruitment, and fishing pressure.
 }
 \examples{
-\donttest{
+\dontrun{
 assessmentKeys <- findAssessmentKey("had", 2015)
 landings_img <- getLandingsGraph(assessmentKeys[1])
 plot(landings_img)

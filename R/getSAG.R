@@ -28,7 +28,7 @@
 #' @author Arni Magnusson and Colin Millar.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' summary <- getSAG("cod-347d", 2015)
 #' refpts <- getSAG("cod-347d", 2015, "refpts")
 #'
