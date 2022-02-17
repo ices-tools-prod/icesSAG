@@ -19,7 +19,7 @@ Get summary results of historical stock size, recruitment, and fishing
 pressure.
 }
 \examples{
-\dontrun{
+\donttest{
 assessmentKey <- findAssessmentKey("cod-2224", year = 2015)
 sumtab <- getYSBRSummaryTable(assessmentKey)
 head(sumtab)

@@ -20,7 +20,7 @@
 #' @author Colin Millar.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 #' status <- getStockStatusValues(assessmentKey)
 #' status

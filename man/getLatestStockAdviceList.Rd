@@ -13,7 +13,7 @@ A data frame.
 Get a list of the most recent advice for all fish stocks.
 }
 \examples{
-\dontrun{
+\donttest{
 stocks <- getLatestStockAdviceList()
 }
 }

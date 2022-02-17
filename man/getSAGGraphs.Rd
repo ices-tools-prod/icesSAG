@@ -19,7 +19,7 @@ Get summary graphs of catches, recruitment, fishing pressure, and spawning
 stock biomass.
 }
 \examples{
-\dontrun{
+\donttest{
 assessmentKey <- findAssessmentKey("cod", 2015)
 graphs <- getSAGGraphs(assessmentKey[1])
 plot(graphs)

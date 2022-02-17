@@ -16,7 +16,7 @@ A data frame.
 Get a list of fish stocks for a given assessment year.
 }
 \examples{
-\dontrun{
+\donttest{
 stocks <- getListStocks(2015)
 }
 }

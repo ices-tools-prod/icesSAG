@@ -15,7 +15,7 @@
 #' @author Colin Millar, Scott Large, and Arni Magnusson.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' stocks <- getLatestStockAdviceList()
 #'}
 #' @export

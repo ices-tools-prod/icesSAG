@@ -21,7 +21,7 @@ A data frame.
 Get a copy of the source data for the specified stocks.
 }
 \examples{
-\dontrun{
+\donttest{
 assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 sourcedat <- getStockDownloadData(assessmentKey)
 head(sourcedat[[1]])

@@ -18,7 +18,7 @@
 #' @author Colin Millar.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
 #' sourcedat <- getStockDownloadData(assessmentKey)
 #' head(sourcedat[[1]])

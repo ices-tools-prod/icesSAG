@@ -18,7 +18,7 @@
 #' @author Colin Millar and Scott Large.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' assessmentKey <- findAssessmentKey("cod", 2015)
 #' graphs <- getSAGGraphs(assessmentKey[1])
 #' plot(graphs)

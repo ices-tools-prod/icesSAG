@@ -36,7 +36,7 @@ A vector of keys (default) or a data frame if full is TRUE.
 Find a lookup key corresponding to a stock in a given assessment year.
 }
 \examples{
-\dontrun{
+\donttest{
 findAssessmentKey("cod-347d", 2015, full = TRUE)
 }
 }
