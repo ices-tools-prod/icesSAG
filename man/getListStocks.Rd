@@ -28,5 +28,5 @@ stocks <- getListStocks(2015)
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
 \author{
-Colin Millar, Scott Large, and Arni Magnusson.
+Colin Millar.
 }

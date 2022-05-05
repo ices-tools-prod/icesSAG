@@ -1,5 +1,5 @@
 Package: icesSAG
-Version: 1.4.0
+Version: 1.9.991
 Title: Stock Assessment Graphs Database Web Services
 Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@ices.dk"),
              person("Scott", "Large", role=c("aut")),
@@ -7,10 +7,12 @@ Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@
              person("Carlos", "Pinto", role=c("aut")))
 Depends: R (>= 2.10)
 Imports: png,
-         httr,
          xml2,
          openssl,
-         icesVocab
+         icesVocab,
+         icesConnect (>= 1.0.0),
+         httr,
+         jsonlite
 Suggests: testthat
 Description: R interface to access the web services of the ICES Stock Assessment
              Graphs database <https://sg.ices.dk>.

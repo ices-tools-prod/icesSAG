@@ -13,7 +13,7 @@
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Colin Millar, Scott Large, and Arni Magnusson.
+#' @author Colin Millar.
 #'
 #' @examples
 #' \dontrun{
@@ -23,8 +23,12 @@
 
 getListStocks <- function(year) {
   # call webservice for all supplied years
-  out <- lapply(year, function(i) sag_webservice("getListStocks", year = i))
+  out <-
+    lapply(
+      year,
+      function(i) ices_get(sag_api("StockList", year = i))
+    )
 
-  # parse output
-  do.call(rbind, lapply(out, sag_parse))
+  # combine output
+  do.call(rbind, out)
 }
