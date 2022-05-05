@@ -36,6 +36,11 @@ NULL
 #' @rdname getsetStockSettings
 #' @export
 getSAGSettingsForAStock <- function(assessmentKey) {
+
+  # check that token is set
+  opts <- options(icesSAG.use_token = TRUE)
+  on.exit(options(opts))
+
   # call webservice
   out <- sag_webservice("getSAGSettingsForAStock", assessmentKey = assessmentKey)
 
