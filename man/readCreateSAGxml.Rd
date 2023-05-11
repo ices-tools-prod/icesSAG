@@ -28,6 +28,9 @@ data to the SAG database.
 
 info <- stockInfo(StockCode = "cod.27.347d",
                   AssessmentYear = 2017,
+                  StockCategory = 1,
+                  ModelType = "A",
+                  ModelName = "SCA",
                   ContactPerson = "itsme@fisheries.com")
 fishdata <- stockFishdata(Year = 1990:2017, Catches = 100)
 xmlfile <- createSAGxml(info, fishdata)
