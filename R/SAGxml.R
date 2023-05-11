@@ -118,13 +118,13 @@ sag_parseUpload <- function(x) {
 #'
 #' @seealso
 #' Links to the relevant ICES vocabularies list are here
-#' StockCode: \url{http://vocab.ices.dk/?ref=357}
-#' StockCategory: \url{http://vocab.ices.dk/?ref=1526}
-#' Purpose: \url{http://vocab.ices.dk/?ref=1516}
-#' ModelType: \url{http://vocab.ices.dk/?ref=1524}
-#' ModelName: \url{http://vocab.ices.dk/?ref=1525}
+#' StockCode: \url{https://vocab.ices.dk/?ref=357}
+#' StockCategory: \url{https://vocab.ices.dk/?ref=1526}
+#' Purpose: \url{https://vocab.ices.dk/?ref=1516}
+#' ModelType: \url{https://vocab.ices.dk/?ref=1524}
+#' ModelName: \url{https://vocab.ices.dk/?ref=1525}
 #'
-#' Link to the relevant format description is \url{http://datsu.ices.dk/web/selRep.aspx?Dataset=126}
+#' Link to the relevant format description is \url{https://datsu.ices.dk/web/selRep.aspx?Dataset=126}
 #'
 #' @examples
 #' info <-
@@ -163,7 +163,11 @@ stockInfo <- function(StockCode, AssessmentYear, ContactPerson, StockCategory,
   val <- c(list(StockCode = StockCode,
                 AssessmentYear = AssessmentYear,
                 ContactPerson = ContactPerson,
-                Purpose = Purpose),
+                StockCategory = StockCategory,
+                Purpose = Purpose,
+                ModelType = ModelType,
+                ModelName = ModelName
+                ),
            list(...))
   # warn about possibly misspelt names?
   if (any(!names(val) %in% validNames("stockInfo"))) {

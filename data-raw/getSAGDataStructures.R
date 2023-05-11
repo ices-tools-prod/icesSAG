@@ -18,4 +18,4 @@ schema <-
 # drop functions?
 schema <- schema[sapply(schema, length) > 0]
 
-devtools::use_data(schema, internal = TRUE)
+usethis::use_data(schema, internal = TRUE, overwrite = TRUE)
