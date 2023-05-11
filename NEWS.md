@@ -1,3 +1,8 @@
+
+# icesSAG 1.4.1 (2023-05-11)
+
+* bug fix for stockInfo() and documentation
+
 # icesSAG 1.4.0 (2022-02-17)
 
 * add new function getCustomColumns()
