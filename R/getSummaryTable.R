@@ -30,8 +30,6 @@
 
 getSummaryTable <- function(assessmentKey, ...) {
 
-  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
-
   # call webservice for all supplied keys
   out <- lapply(assessmentKey, function(i) sag_webservice("getSummaryTable", assessmentKey = i))
 

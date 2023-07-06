@@ -33,8 +33,6 @@ NULL
 #' @export
 getLandingsGraph <- function(assessmentKey, ...) {
 
-  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
-
   # get function name as a character
   # NOTE need tail(x, 1) here for when calling as icesSAG::get____(assessmentKey)
   operation <- utils::tail(as.character(match.call()[[1]]), 1)

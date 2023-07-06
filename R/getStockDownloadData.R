@@ -31,7 +31,6 @@ NULL
 #' @rdname getStockDownloadData
 #' @export
 getStockDownloadData <- function(assessmentKey, ...) {
-  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # call web service for all supplied keys
   out <- lapply(assessmentKey, function(i) sag_webservice("getStockDownloadData", assessmentKey = i))
@@ -43,7 +42,6 @@ getStockDownloadData <- function(assessmentKey, ...) {
 #' @rdname getStockDownloadData
 #' @export
 getStockSourceData <- function(assessmentKey, ...) {
-  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # must use token for this service
   # check that token is set
