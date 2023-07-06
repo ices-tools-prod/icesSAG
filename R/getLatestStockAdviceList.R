@@ -2,6 +2,8 @@
 #'
 #' Get a list of the most recent advice for all fish stocks.
 #'
+#' @param camel.case should the column names be capitalized like previous
+#'                versions of icesSAG, or use the new camelCase.
 #'
 #' @return A data frame.
 #'
@@ -20,10 +22,14 @@
 #'}
 #' @export
 
-getLatestStockAdviceList <- function() {
-  # call webservice
-  out <- sag_webservice("getLatestStockAdviceList")
+getLatestStockAdviceList <- function(camel.case = getOption("icesSAG.camelCase")) {
 
-  # parse output
-  sag_parse(x = out, type = "table")
+  out <- ices_get(sag_api("LatestStockAdviceList"), use_token = getOption("icesSAG.use_token"))
+
+  if (!camel.case) {
+    # change case of output
+    names(out) <- firstCap(names(out))
+  }
+
+  out
 }

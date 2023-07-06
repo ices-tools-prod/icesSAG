@@ -4,7 +4,11 @@
 \alias{getLatestStockAdviceList}
 \title{Get List of Most Recent Advice}
 \usage{
-getLatestStockAdviceList()
+getLatestStockAdviceList(camel.case = getOption("icesSAG.camelCase"))
+}
+\arguments{
+\item{camel.case}{should the column names be capitalized like previous
+versions of icesSAG, or use the new camelCase.}
 }
 \value{
 A data frame.
