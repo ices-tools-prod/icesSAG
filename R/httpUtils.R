@@ -1,7 +1,7 @@
 
 api_url <- function() {
   # make an option?
-  "http://iisdev.ices.local/SAG_API/api"
+  "https://sag.ices.dk/SAG_API/api"
 }
 
 #' @importFrom icesConnect ices_get_jwt
