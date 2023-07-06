@@ -9,7 +9,8 @@ findAssessmentKey(
   year = 0,
   published = TRUE,
   regex = TRUE,
-  full = FALSE
+  full = FALSE,
+  camel.case = getOption("icesSAG.camelCase")
 )
 }
 \arguments{
@@ -25,6 +26,9 @@ returns unpublished stocks).}
 \item{regex}{whether to match the stock name as a regular expression.}
 
 \item{full}{whether to return a data frame with all stock list columns.}
+
+\item{camel.case}{should the column names be capitalized like previous
+versions of icesSAG, or use the new camelCase.}
 }
 \value{
 A vector of keys (default) or a data frame if full is TRUE.

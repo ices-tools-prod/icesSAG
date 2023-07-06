@@ -4,10 +4,13 @@
 \alias{getListStocks}
 \title{Get a List of Fish Stocks}
 \usage{
-getListStocks(year, camel.case = FALSE)
+getListStocks(year, published = TRUE, camel.case = FALSE)
 }
 \arguments{
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
+
+\item{published}{whether to include only years where status is "Published",
+published = FALSE returns all records (requires authorization).}
 
 \item{camel.case}{should the column names be capitalized like previous
 versions of icesSAG, or use the new camelCase.}

@@ -10,6 +10,8 @@
 #'                  returns unpublished stocks).
 #' @param regex whether to match the stock name as a regular expression.
 #' @param full whether to return a data frame with all stock list columns.
+#' @param camel.case should the column names be capitalized like previous
+#'                versions of icesSAG, or use the new camelCase.
 #'
 #' @return A vector of keys (default) or a data frame if full is TRUE.
 #'
@@ -30,7 +32,7 @@ NULL
 
 #' @rdname findAssessmentKeydocs
 #' @export
-findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = TRUE, full = FALSE) {
+findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = TRUE, full = FALSE, camel.case = getOption("icesSAG.camelCase")) {
   # check stock names for long dashes:
   EmDash <- "\u2013"
   if (any(grepl(EmDash, stock))) {
@@ -39,29 +41,28 @@ findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = 
   }
 
   # get list of all stocks for all supplied years
-  out <- do.call(rbind, lapply(year, getListStocks))
-
-  # apply filters
-  #  if (!getOption("icesSAG.use_token")) {
-  if (published && !getOption("icesSAG.use_token")) {
-    # restrict output to only published stocks
-    out <- out[out$Status == "Published", ]
-  }
+  out <- do.call(rbind, lapply(year, getListStocks, published = published, camel.case = TRUE))
 
   if (!is.null(stock)) {
     stock <- tolower(stock)
     if (!regex) stock <- paste0("^", stock, "$")
-    select <- c(unlist(lapply(stock, grep, tolower(out$StockKeyLabel))),
-                unlist(lapply(stock, grep, tolower(out$StockDescription))),
-                unlist(lapply(stock, grep, tolower(out$SpeciesName))))
+    select <- c(unlist(lapply(stock, grep, tolower(out$stockKeyLabel))),
+                unlist(lapply(stock, grep, tolower(out$stockDescription))),
+                unlist(lapply(stock, grep, tolower(out$speciesName))))
     out <- out[select, ]
   }
 
   # return
   if (full) {
     row.names(out) <- NULL
+
+    if (!camel.case) {
+      # change case of output
+      names(out) <- firstCap(names(out))
+    }
+
     out
   } else {
-    out$AssessmentKey
+    out$assessmentKey
   }
 }

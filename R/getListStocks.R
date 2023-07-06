@@ -3,6 +3,8 @@
 #' Get a list of fish stocks for a given assessment year.
 #'
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
+#' @param published whether to include only years where status is "Published",
+#'                  published = FALSE returns all records (requires authorization).
 #' @param camel.case should the column names be capitalized like previous
 #'                versions of icesSAG, or use the new camelCase.
 #'
@@ -23,12 +25,12 @@
 #' }
 #' @export
 
-getListStocks <- function(year, camel.case = FALSE) {
+getListStocks <- function(year, published = TRUE, camel.case = FALSE) {
   # call webservice for all supplied years
   out <-
     lapply(
       year,
-      function(i) ices_get(sag_api("StockList", year = i))
+      function(i) ices_get(sag_api("StockList", year = i), use_token = !published)
     )
 
   # combine output
