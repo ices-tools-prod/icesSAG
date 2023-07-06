@@ -3,6 +3,8 @@
 #' Get a list of fish stocks for a given assessment year.
 #'
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
+#' @param camel.case should the column names be capitalized like previous
+#'                versions of icesSAG, or use the new camelCase.
 #'
 #' @return A data frame.
 #'
@@ -21,7 +23,7 @@
 #' }
 #' @export
 
-getListStocks <- function(year) {
+getListStocks <- function(year, camel.case = FALSE) {
   # call webservice for all supplied years
   out <-
     lapply(
@@ -30,5 +32,12 @@ getListStocks <- function(year) {
     )
 
   # combine output
-  do.call(rbind, out)
+  out <- do.call(rbind, out)
+
+  if (!camel.case) {
+    # change case of output
+    names(out) <- firstCap(names(out))
+  }
+
+  out
 }
