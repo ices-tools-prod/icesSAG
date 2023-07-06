@@ -3,7 +3,8 @@
 #' Get biological reference points for all stocks in a given assessment year.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... to allow scope for back compatibility
+#' @param camel.case should the column names be capitalized like previous
+#'                versions of icesSAG, or use the new camelCase.
 #'
 #' @return A data frame.
 #'
@@ -16,7 +17,7 @@
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Colin Millar and Scott Large.
+#' @author Colin Millar.
 #'
 #' @examples
 #' \dontrun{
@@ -31,11 +32,27 @@
 #' }
 #' @export
 
-getFishStockReferencePoints <- function(assessmentKey, ...) {
+getFishStockReferencePoints <- function(assessmentKey, camel.case = getOption("icesSAG.camelCase")) {
 
-  # call webservice for all supplied keys
-  out <- lapply(assessmentKey, function(i) sag_webservice("getFishStockReferencePoints", assessmentKey = i))
+  # call webservice for all supplied years
+  out <-
+    lapply(
+      assessmentKey,
+      function(i) {
+        ices_get(
+          sag_api("FishStockReferencePoints", assessmentKey = i),
+          use_token = getOption("icesSAG.use_token")
+        )
+      }
+    )
 
-  # parse output
-  lapply(out, sag_parse)
+  # combine output
+  out <- do.call(rbind, out)
+
+  if (!camel.case) {
+    # change case of output
+    names(out) <- firstCap(names(out))
+  }
+
+  out
 }

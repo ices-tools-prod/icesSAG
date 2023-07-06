@@ -4,12 +4,16 @@
 \alias{getFishStockReferencePoints}
 \title{Get Reference Points}
 \usage{
-getFishStockReferencePoints(assessmentKey, ...)
+getFishStockReferencePoints(
+  assessmentKey,
+  camel.case = getOption("icesSAG.camelCase")
+)
 }
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
 
-\item{...}{to allow scope for back compatibility}
+\item{camel.case}{should the column names be capitalized like previous
+versions of icesSAG, or use the new camelCase.}
 }
 \value{
 A data frame.
@@ -39,5 +43,5 @@ refpts2016
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
 \author{
-Colin Millar and Scott Large.
+Colin Millar.
 }
