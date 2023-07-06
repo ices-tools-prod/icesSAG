@@ -7,11 +7,14 @@
 \alias{getSAGTypeSettings}
 \title{Find Details on SAG Charts and Settings}
 \usage{
-getSAGTypeGraphs()
+getSAGTypeGraphs(camel.case = getOption("icesSAG.camelCase"))
 
-getSAGTypeSettings(SAGChartKey)
+getSAGTypeSettings(SAGChartKey, camel.case = getOption("icesSAG.camelCase"))
 }
 \arguments{
+\item{camel.case}{should the column names be capitalized like previous
+versions of icesSAG, or use the new camelCase.}
+
 \item{SAGChartKey}{the type identifier of the SAG chart, e.g. 0, 1, 2, ...}
 }
 \value{
