@@ -65,10 +65,3 @@ findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = 
     out$AssessmentKey
   }
 }
-
-#' @rdname findAssessmentKeydocs
-#' @export
-findKey <- function(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE) {
-  .Deprecated("findAssessmentKey")
-  findAssessmentKey(stock = stock, year = year, regex = regex, full = full)
-}
