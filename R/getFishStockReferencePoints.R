@@ -32,6 +32,7 @@
 #' @export
 
 getFishStockReferencePoints <- function(assessmentKey, ...) {
+  .Deprecated("FishStockReferencePoints")
 
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
