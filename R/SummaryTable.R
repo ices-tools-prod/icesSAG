@@ -34,14 +34,18 @@ SummaryTable <- function(assessmentKey, ...) {
     lapply(
       assessmentKey,
       function(i) {
-        ices_get(
-          sag_api("SummaryTable", assessmentKey = i), ...
-        )
+        x <-
+          ices_get(
+            sag_api("SummaryTable", assessmentKey = i), ...
+          )
+        # format into a data.frame
+        cbind(
+          lapply(x[names(x) != "Lines"], function(y) if (is.null(y)) NA else y),
+          x$Lines
+          )
       }
     )
 
   # rbind output
-  # do.call(rbind, out)
-  warning("output requires formatting still")
-  out
+  do.call(rbind, out)
 }
