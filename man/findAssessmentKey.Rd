@@ -2,7 +2,6 @@
 % Please edit documentation in R/findAssessmentKey.R
 \name{findAssessmentKey}
 \alias{findAssessmentKey}
-\alias{findKey}
 \title{Find a Key}
 \usage{
 findAssessmentKey(
@@ -12,8 +11,6 @@ findAssessmentKey(
   regex = TRUE,
   full = FALSE
 )
-
-findKey(stock, year = 0, published = TRUE, regex = TRUE, full = FALSE)
 }
 \arguments{
 \item{stock}{a stock name, e.g. cod-347d, or cod to find all cod stocks, or NULL (default)
@@ -37,11 +34,11 @@ Find a lookup key corresponding to a stock in a given assessment year.
 }
 \examples{
 \dontrun{
-findAssessmentKey("cod-347d", 2015, full = TRUE)
+findAssessmentKey("had.27.46a20", 2023, full = TRUE)
 }
 }
 \seealso{
-\code{\link{getListStocks}} gets a list of stocks.
+\code{\link{StockList}} gets a list of stocks.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
