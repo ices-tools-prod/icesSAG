@@ -22,6 +22,7 @@
 #' @export
 
 getListStocks <- function(year) {
+  .Deprecated("StockList")
   # call webservice for all supplied years
   out <- lapply(year, function(i) sag_webservice("getListStocks", year = i))
 
