@@ -17,71 +17,39 @@
 #' @return A data frame (default) or a list if \code{combine} is \code{TRUE}.
 #'
 #' @seealso
-#' \code{\link{getListStocks}}, \code{\link{getSummaryTable}}, and
-#'   \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
+#' \code{\link{StockList}}, \code{\link{SummaryTable}}, and
+#'   \code{\link{FishStockReferencePoints}} get a list of stocks, summary
 #'   results, and reference points.
 #'
 #' \code{\link{findAssessmentKey}} finds lookup keys.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Arni Magnusson and Colin Millar.
+#' @author Colin Millar.
 #'
 #' @examples
 #' \dontrun{
-#' summary <- getSAG("cod-347d", 2015)
-#' refpts <- getSAG("cod-347d", 2015, "refpts")
+#' summary <- getSAG("had.27.46a20", 2022)
+#' refpts <- getSAG("had.27.46a20", 2022, "refpts")
 #'
-#' getSAG("her.27.3a47d", 2017, "refpts", purpose = "Benchmark")
-#'
-#' cod_summary <- getSAG("cod", 2015)
+#' cod_summary <- getSAG("cod", 2022)
 #' cod_refpts <- getSAG("cod", 2015:2016, "refpts")
 #' cod_data <- getSAG("cod", 2017, "source-data")
 #' }
 #' @export
 
 getSAG <- function(stock, year, data = "summary", combine = TRUE, purpose = "Advice") {
-  # select web service operation and parser
+  # select web service operation
   data <- match.arg(data, c("summary", "refpts", "source-data"))
   service <- switch(data,
-                    summary = "getSummaryTable",
-                    refpts = "getFishStockReferencePoints",
-                    `source-data` = "getStockDownloadData")
+                    summary = "SummaryTable",
+                    refpts = "FishStockReferencePoints",
+                    `source-data` = "StockDownload")
 
   # find lookup key
-  assessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = FALSE)
+  assessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = TRUE)
+  assessmentKey <- assessmentKey[assessmentKey$Purpose == purpose,"AssessmentKey"]
 
   # get data requested by user
-  out <- do.call(service, list(assessmentKey = assessmentKey))
-
-  # drop any null entries (happens when not published stocks creep in)
-  out <- out[!sapply(out, is.null)]
-
-  # combine tables
-  if (length(out) > 1 && combine) {
-    # form new column names for combined data frame
-    outNames <- unique(unlist(lapply(out, names)))
-
-    # rbind, adding in missing columns as characters
-    out <-
-      do.call(rbind,
-        lapply(unname(out), function(x) {
-          # are any columns missing?
-          missing.cols <- !outNames %in% names(x)
-          if (any(missing.cols)) {
-            # add on missing columns as characters
-            x[outNames[missing.cols]] <- ""
-          }
-          # reorder columns
-          x[outNames]
-        }))
-
-    # finally resimplify
-    out <- simplify(out)
-  } else if (length(out) == 1) {
-    out <- out[[1]]
-  }
-
-  # return
-  out
+  do.call(service, list(assessmentKey = assessmentKey))
 }

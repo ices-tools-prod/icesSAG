@@ -32,19 +32,17 @@ Only years with "Published" status are returned.
 }
 \examples{
 \dontrun{
-summary <- getSAG("cod-347d", 2015)
-refpts <- getSAG("cod-347d", 2015, "refpts")
+summary <- getSAG("had.27.46a20", 2022)
+refpts <- getSAG("had.27.46a20", 2022, "refpts")
 
-getSAG("her.27.3a47d", 2017, "refpts", purpose = "Benchmark")
-
-cod_summary <- getSAG("cod", 2015)
+cod_summary <- getSAG("cod", 2022)
 cod_refpts <- getSAG("cod", 2015:2016, "refpts")
 cod_data <- getSAG("cod", 2017, "source-data")
 }
 }
 \seealso{
-\code{\link{getListStocks}}, \code{\link{getSummaryTable}}, and
-  \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
+\code{\link{StockList}}, \code{\link{SummaryTable}}, and
+  \code{\link{FishStockReferencePoints}} get a list of stocks, summary
   results, and reference points.
 
 \code{\link{findAssessmentKey}} finds lookup keys.
@@ -52,5 +50,5 @@ cod_data <- getSAG("cod", 2017, "source-data")
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
 \author{
-Arni Magnusson and Colin Millar.
+Colin Millar.
 }
