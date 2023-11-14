@@ -11,7 +11,7 @@
 #' @param content should content be returned, or the full http reponse?
 #'   default TRUE, i.e. content is returned by default.
 #' @param use_token should an authentication token be sent with the
-#'   request? default FALSE.
+#'   request? default is the value of the option icesSAG.use_token.
 #'
 #' @return content or an http response.
 #'
@@ -28,7 +28,7 @@
 #'
 #' @importFrom icesConnect ices_get_jwt
 #' @importFrom httr content
-ices_get <- function(url, retry = TRUE, quiet = FALSE, verbose = FALSE, content = TRUE, use_token = FALSE) {
+ices_get <- function(url, retry = TRUE, quiet = FALSE, verbose = FALSE, content = TRUE, use_token = getOption("icesSAG.use_token")) {
   resp <-
     ices_get_jwt(
       url,

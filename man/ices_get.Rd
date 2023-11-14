@@ -11,7 +11,7 @@ ices_get(
   quiet = FALSE,
   verbose = FALSE,
   content = TRUE,
-  use_token = FALSE
+  use_token = getOption("icesSAG.use_token")
 )
 
 ices_get_cached(
@@ -20,7 +20,7 @@ ices_get_cached(
   quiet = FALSE,
   verbose = FALSE,
   content = TRUE,
-  use_token = FALSE
+  use_token = getOption("icesSAG.use_token")
 )
 }
 \arguments{
@@ -38,7 +38,7 @@ returned? default FALSE.}
 default TRUE, i.e. content is returned by default.}
 
 \item{use_token}{should an authentication token be sent with the
-request? default FALSE.}
+request? default is the value of the option icesSAG.use_token.}
 }
 \value{
 content or an http response.
