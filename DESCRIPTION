@@ -11,7 +11,10 @@ Imports: png,
          xml2,
          openssl,
          icesVocab,
-         icesConnect
+         icesConnect,
+         memoise,
+         cachem,
+         rlang
 Suggests: testthat
 Description: R interface to access the web services of the ICES Stock Assessment
              Graphs database <https://sg.ices.dk>.

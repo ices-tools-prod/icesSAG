@@ -1,4 +1,4 @@
-#' Build a DATSU web service url
+#' Build a SAG web service url
 #'
 #' utility to build a url with optional query arguments
 #'

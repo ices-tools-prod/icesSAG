@@ -2,7 +2,7 @@
 % Please edit documentation in R/sag_api.R
 \name{sag_api}
 \alias{sag_api}
-\title{Build a DATSU web service url}
+\title{Build a SAG web service url}
 \usage{
 sag_api(service, ...)
 }
