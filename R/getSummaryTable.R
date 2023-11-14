@@ -29,7 +29,7 @@
 #' @export
 
 getSummaryTable <- function(assessmentKey, ...) {
-
+  .Deprecated("SummaryTable")
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # call webservice for all supplied keys
