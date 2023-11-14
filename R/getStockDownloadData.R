@@ -31,6 +31,7 @@ NULL
 #' @rdname getStockDownloadData
 #' @export
 getStockDownloadData <- function(assessmentKey, ...) {
+  .Deprecated("StockDownload")
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # call web service for all supplied keys
