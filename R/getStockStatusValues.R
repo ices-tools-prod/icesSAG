@@ -29,7 +29,7 @@
 #' @export
 
 getStockStatusValues <- function(assessmentKey, ...) {
-
+  .Deprecated("StockStatusValues")
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # call webservice for all supplied keys
