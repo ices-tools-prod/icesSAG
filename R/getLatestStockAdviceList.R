@@ -21,6 +21,7 @@
 #' @export
 
 getLatestStockAdviceList <- function() {
+  .Deprecated("LatestStockAdviceList")
   # call webservice
   out <- sag_webservice("getLatestStockAdviceList")
 
