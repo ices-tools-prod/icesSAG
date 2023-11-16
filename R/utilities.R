@@ -100,12 +100,14 @@ sag_parse <- function(x, type = "table", ...) {
     summary = sag_parseSummary(x),
     graph = sag_parseGraph(x),
     upload = sag_parseUpload(x),
-    stockStatus = sag_parseStockStatus(x),
-    WSDL = sag_parseWSDL(x))
+    stockStatus = sag_parseStockStatus(x)
+  )
 }
 
-
-
+sag_getXmlDataType <- function(which) {
+  # select one data-type - schema is package data
+  schema[[which]]
+}
 
 sag_parseTable <- function(x) {
   # x is a table structure
@@ -193,32 +195,6 @@ sag_parseStockStatusLine <- function(x) {
 
   cbind(line, years)
 }
-
-
-
-
-sag_parseWSDL <- function(x) {
-  x <- x$types$schema[names(x$types$schema) == "element"]
-  types <- lapply(x, function(x) attributes(x)$names)
-  keep <- sapply(types, function(x) identical(x == "complexType", TRUE))
-  keep <- which(keep)[seq(1, sum(keep), by = 2)]
-
-  # strip out only webservice calls
-  x <- x[keep]
-  names(x) <- unname(sapply(x, function(x) attributes(x)$name))
-
-  # simplify a little
-  x <- lapply(x, function(x) x$complexType$sequence)
-
-  # extract parameter info
-  lapply(x,
-      function(x)
-          unname(sapply(x, function(y) attributes(y)$name))
-          )
-}
-
-
-
 
 
 #' @export
