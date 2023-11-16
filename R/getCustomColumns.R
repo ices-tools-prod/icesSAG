@@ -1,10 +1,10 @@
 #' Get the Custom Columns for SAG records
 #'
 #' Get custom columns, such as alternative biomass series or Fproxy
-#'   reference points for a record in the SAG database.
+#'   reference points for records in the SAG database.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... to allow scope for back compatibility
+#' @param ... arguments passed to \code{\link{ices_get}}.
 #'
 #' @return A data frame.
 #'
@@ -12,12 +12,12 @@
 #' \code{\link{getSAG}} supports querying many years and quarters in one
 #'   function call.
 #'
-#' \code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
+#' \code{\link{StockList}} and \code{\link{FishStockReferencePoints}} get
 #'   a list of stocks and reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Colin Millar and Scott Large.
+#' @author Colin Millar.
 #'
 #' @examples
 #' \dontrun{
@@ -29,13 +29,16 @@
 
 getCustomColumns <- function(assessmentKey, ...) {
 
-  df <- getStockDownloadData(assessmentKey, ...)
+  df <- StockDownload(assessmentKey, ...)
+  df <- by(df, df$AssessmentKey, function(x) x)
 
-  do.call(rbind,
-    lapply(df,
-      function(x) {
+  out <-
+      lapply(
+        df,
+        function(x) {
           id <- grep("CustomName*", names(x))
 
+          id <- id[apply(x[, id], 2, function(y) all(y != ""))]
           if (!length(id)) {
             return(NULL)
           }
@@ -46,13 +49,14 @@ getCustomColumns <- function(assessmentKey, ...) {
           customIds <- as.numeric(gsub("CustomName", "", names(x)[id]))
 
           customs <-
-            do.call(rbind,
+            do.call(
+              rbind,
               lapply(customIds, function(i) {
                 data.frame(
                   Year = x$Year,
                   customValue = x[[paste0("Custom", i)]],
                   customName = x[[paste0("CustomName", i)]],
-                  #customType = x[[paste0("CustomType", i)]], # include when available
+                  # customType = x[[paste0("CustomType", i)]],
                   customUnit = x[[paste0("CustomUnits", i)]],
                   customColumnId = i
                 )
@@ -62,5 +66,13 @@ getCustomColumns <- function(assessmentKey, ...) {
           cbind(out, customs)
         }
       )
-  )
+
+  out <-
+    do.call(
+      rbind,
+      out
+    )
+  rownames(out) <- NULL
+
+  out
 }

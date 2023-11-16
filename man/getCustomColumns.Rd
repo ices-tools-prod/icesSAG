@@ -9,14 +9,14 @@ getCustomColumns(assessmentKey, ...)
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
 
-\item{...}{to allow scope for back compatibility}
+\item{...}{arguments passed to \code{\link{ices_get}}.}
 }
 \value{
 A data frame.
 }
 \description{
 Get custom columns, such as alternative biomass series or Fproxy
-  reference points for a record in the SAG database.
+  reference points for records in the SAG database.
 }
 \examples{
 \dontrun{
@@ -29,11 +29,11 @@ head(customs)
 \code{\link{getSAG}} supports querying many years and quarters in one
   function call.
 
-\code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
+\code{\link{StockList}} and \code{\link{FishStockReferencePoints}} get
   a list of stocks and reference points.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
 \author{
-Colin Millar and Scott Large.
+Colin Millar.
 }
