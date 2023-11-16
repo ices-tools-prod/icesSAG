@@ -196,31 +196,6 @@ sag_parseStockStatusLine <- function(x) {
   cbind(line, years)
 }
 
-
-#' @export
-plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
-  # clear the page
-  grid::grid.newpage()
-
-  # find best plot layout (stolen from Simon Wood!)
-  n.plots <- length(x)
-  c <- r <- trunc(sqrt(n.plots))
-  if (c < 1) r <- c <- 1
-  if (c * r < n.plots) c <- c + 1
-  if (c * r < n.plots) r <- r + 1
-
-  # calculate x and y locations for plots -
-  # plot like a table: from top to bottom and left to right
-  x_loc <- rep((1:r) / r - 1 / (2 * r), c)
-  y_loc <- rep((c:1) / c  - 1 / (2 * c), each = r)
-  for (i in seq_along(x)) {
-    if (!is.null(x[[i]]))
-      grid::grid.raster(x[[i]], x = x_loc[i], y = y_loc[i], width = 1 / r, height = 1 / c)
-  }
-}
-
-
-
 simplify <- function(x) {
   # from Arni's toolbox
   # coerce object to simplest storage mode: factor > character > numeric > integer

@@ -32,7 +32,7 @@ NULL
 #' @rdname getGraphs
 #' @export
 getLandingsGraph <- function(assessmentKey, ...) {
-
+  .Deprecated("get_image")
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # get function name as a character
