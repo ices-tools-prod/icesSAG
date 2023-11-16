@@ -16,3 +16,10 @@ ices_post <- function(url, body = list(), retry = TRUE, verbose = FALSE, use_tok
 
   return(out)
 }
+
+sag_use_token <- function(value) {
+  old_value <- getOption("icesSAG.use_token")
+  options(icesSAG.use_token = identical(value, TRUE))
+
+  invisible(old_value)
+}
