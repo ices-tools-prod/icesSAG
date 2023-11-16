@@ -19,6 +19,7 @@ NULL
 #' @rdname getSAGSettings
 #' @export
 getSAGTypeGraphs <- function() {
+  .Deprecated("SAGTypeCharts")
   # call webservice
   out <- sag_webservice("getSAGTypeGraphs")
 
@@ -29,6 +30,7 @@ getSAGTypeGraphs <- function() {
 #' @rdname getSAGSettings
 #' @export
 getSAGTypeSettings <- function(SAGChartKey) {
+  .Deprecated("SettingsForChartType")
   # call webservice
   out <- sag_webservice("getSAGTypeSettings", SAGChartKey = SAGChartKey)
 
