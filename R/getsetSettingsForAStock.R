@@ -36,6 +36,7 @@ NULL
 #' @rdname getsetStockSettings
 #' @export
 getSAGSettingsForAStock <- function(assessmentKey) {
+  .Deprecated("StockSettings")
   # call webservice
   out <- sag_webservice("getSAGSettingsForAStock", assessmentKey = assessmentKey)
 
@@ -46,6 +47,7 @@ getSAGSettingsForAStock <- function(assessmentKey) {
 #' @rdname getsetStockSettings
 #' @export
 setSAGSettingForAStock <- function(assessmentKey, chartKey, settingKey, settingValue, copyNextYear) {
+  .Deprecated("setStockSettings")
   # call webservice
   out <- sag_webservice("setSAGSettingForAStock",
                         assessmentKey = assessmentKey,
