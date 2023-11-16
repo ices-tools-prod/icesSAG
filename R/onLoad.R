@@ -13,7 +13,7 @@ getcache <- cachem::cache_mem(max_age = 15 * 60)
     memoise::memoise(
       ices_get_cached,
       cache = getcache,
-      hash = function(x) rlang::hash(x$url)
+      hash = function(x) rlang::hash(paste0(x$url, options("icesSAG.use_token")$icesSAG.use_token))
     )
 
 
