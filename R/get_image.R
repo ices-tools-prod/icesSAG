@@ -13,15 +13,15 @@
 #' @return An array representing a bitmap.
 #'
 #' @seealso
-#' \code{\link{getListStocks}} gets a list of stocks.
+#' \code{\link{StockList}} gets a list of stocks.
 #'
-#' \code{\link{getFishStockReferencePoints}} gets biological reference points.
+#' \code{\link{FishStockReferencePoints}} gets biological reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
 #' @examples
 #' \dontrun{
-#' assessmentKey <- findAssessmentKey("cod.27.21", year = 2023)
+#' assessmentKey <- findAssessmentKey("cod.27.21", year = 2022:2023)
 #' landings_img <- get_image(assessmentKey[1], "landings")
 #'
 #' plot(landings_img)
@@ -36,6 +36,54 @@ get_image <- function(assessmentKey, type = c("landings", "recruitment", "ssb", 
 
   type <- match.arg(type)
 
+  get_image_internal(assessmentKey = assessmentKey, type = type, width = width, ...)
+}
+
+#' Get a Custom Graph of Stock Assessment Output
+#'
+#' Get a custom graph of stock assessment output.
+#'
+#' @param assessmentKey the unique identifier of the stock assessment
+#' @param type The type of plot: values can be 15, 16, 17, or 18.
+#' @param width width of the image in pixels
+#' @param ... to allow scope for back compatibility
+#'
+#' @return An array representing a bitmap.
+#'
+#' @seealso
+#' \code{\link{StockList}} gets a list of stocks.
+#'
+#' \code{\link{FishStockReferencePoints}} gets biological reference points.
+#'
+#' \code{\link{icesSAG-package}} gives an overview of the package.
+#'
+#' @examples
+#' \dontrun{
+#' assessmentKey <- findAssessmentKey("ane.27.9a", year = 2022)
+#' landings_img <- get_custom_plot(assessmentKey, "15")
+#'
+#' plot(landings_img)
+#'
+#' landings_plots <- get_image(assessmentKey, "landings")
+#' plot(landings_plots)
+#' }
+#'
+#' @export
+get_custom_plot <- function(assessmentKey, type = c(15, 16, 17, 18), width = 800, ...) {
+  type <- match.arg(type)
+
+  get_image_internal(assessmentKey = assessmentKey, type = type, width = width, ...)
+}
+
+
+get_image_internal <- function(assessmentKey, type, width = 800, ...) {
+
+  if (is.numeric(type)) {
+    service <- "get_custom_plot"
+  } else {
+    service <- "get_image"
+  }
+
   # call webservice for all supplied keys
   old_value <- sag_use_token(TRUE)
   out <-
@@ -43,7 +91,7 @@ get_image <- function(assessmentKey, type = c("landings", "recruitment", "ssb", 
       assessmentKey,
       function(i) {
         ices_get(
-          sag_api("get_image", assesmentKey = i, type = type, width = width), ...
+          sag_api(service, assesmentKey = i, type = type, sgKey = type, width = width), ...
         )
       }
     )
