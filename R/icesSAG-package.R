@@ -1,5 +1,3 @@
-#' @docType package
-#'
 #' @name icesSAG-package
 #'
 #' @aliases icesSAG
@@ -23,12 +21,11 @@
 #'   \code{\link{getListStocks}} \tab list of stocks
 #' }
 #'
-#' @author Colin Millar, Scott Large, and Arni Magnusson.
+#' @author Colin Millar, Scott Large, Arni Magnusson, Carlos Pinto and Laura Andreea Petre.
 #'
 #' @references
 #' ICES Stock Assessment Graphs database: \url{http://sg.ices.dk}.
 #'
 #' ICES Stock Assessment Graphs web services:
 #' \url{http://sg.ices.dk/webservices.aspx}.
-
-NA
+"_PACKAGE"

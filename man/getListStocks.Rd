@@ -4,10 +4,17 @@
 \alias{getListStocks}
 \title{Get a List of Fish Stocks}
 \usage{
-getListStocks(year)
+getListStocks(year, stock = NULL, modifiedAfter = NULL, ...)
 }
 \arguments{
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
+
+\item{stock}{a stock name, e.g. lin.27.5a.}
+
+\item{modifiedAfter}{date-time parameter in the format "YYYY/MM/DD". If set
+will only return stocks assessments modified after the provided date.}
+
+\item{...}{arguments passed to \code{\link{ices_get}}.}
 }
 \value{
 A data frame.
@@ -17,7 +24,8 @@ Get a list of fish stocks for a given assessment year.
 }
 \examples{
 \dontrun{
-stocks <- getListStocks(2015)
+stocks <- getListStocks(2023)
+nshad <- getListStocks(stock = "had.27.46a20")
 }
 }
 \seealso{
@@ -28,5 +36,5 @@ stocks <- getListStocks(2015)
 \code{\link{icesSAG-package}} gives an overview of the package.
 }
 \author{
-Colin Millar, Scott Large, and Arni Magnusson.
+Colin Millar.
 }

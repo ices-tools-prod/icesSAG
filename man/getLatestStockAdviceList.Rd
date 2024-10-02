@@ -4,7 +4,10 @@
 \alias{getLatestStockAdviceList}
 \title{Get List of Most Recent Advice}
 \usage{
-getLatestStockAdviceList()
+getLatestStockAdviceList(...)
+}
+\arguments{
+\item{...}{arguments passed to \code{\link{ices_get}}.}
 }
 \value{
 A data frame.

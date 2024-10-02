@@ -2,8 +2,9 @@
 #'
 #' Get a copy of the source data for the specified stocks.
 #'
-#' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... to allow scope for back compatibility
+#' @param assessmentKey the unique identifier of the stock assessment,
+#' can be a vector
+#' @param ... arguments passed to \code{\link{ices_get}}.
 #'
 #' @return A data frame.
 #'
@@ -31,14 +32,20 @@ NULL
 #' @rdname getStockDownloadData
 #' @export
 getStockDownloadData <- function(assessmentKey, ...) {
-  .Deprecated("StockDownload")
-  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
-
   # call web service for all supplied keys
-  out <- lapply(assessmentKey, function(i) sag_webservice("getStockDownloadData", assessmentKey = i))
 
-  # parse output
-  lapply(out, sag_parse, type = "table")
+  out <-
+    lapply(
+      assessmentKey,
+      function(i) {
+        ices_get(
+          sag_api("StockDownload", assessmentKey = i), ...
+        )
+      }
+    )
+
+  # rbind output
+  do.call(rbind, out)
 }
 
 #' @rdname getStockDownloadData

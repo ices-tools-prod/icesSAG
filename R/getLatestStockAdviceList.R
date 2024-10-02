@@ -2,6 +2,7 @@
 #'
 #' Get a list of the most recent advice for all fish stocks.
 #'
+#' @param ... arguments passed to \code{\link{ices_get}}.
 #'
 #' @return A data frame.
 #'
@@ -20,11 +21,6 @@
 #'}
 #' @export
 
-getLatestStockAdviceList <- function() {
-  .Deprecated("LatestStockAdviceList")
-  # call webservice
-  out <- sag_webservice("getLatestStockAdviceList")
-
-  # parse output
-  sag_parse(x = out, type = "table")
+getLatestStockAdviceList <- function(...) {
+  ices_get_cached(sag_api("LatestStockAdviceList"), ...)
 }

@@ -28,6 +28,15 @@ ICES Stock Assessment Graphs database: \url{http://sg.ices.dk}.
 ICES Stock Assessment Graphs web services:
 \url{http://sg.ices.dk/webservices.aspx}.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://sg.ices.dk}
+  \item \url{https://github.com/ices-tools-prod/icesSAG}
+  \item Report bugs at \url{https://github.com/ices-tools-prod/icesSAG/issues}
+}
+
+}
 \author{
-Colin Millar, Scott Large, and Arni Magnusson.
+Colin Millar, Scott Large, Arni Magnusson, Carlos Pinto and Laura Andreea Petre.
 }
