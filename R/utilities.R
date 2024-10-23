@@ -14,22 +14,6 @@ sag_webservice <- function(service, ...) {
 }
 
 
-sag_documentService_uri <- function(service, ...) {
-
-  # form uri of webservice
-  if (getOption("icesSAG.use_token")) {
-    uri <- sag_uri(service, ..., token = sg_pat())
-  } else {
-    uri <- sag_uri(service, ...)
-  }
-
-  # modify url
-  uri <- httr::modify_url(uri, path = paste0("download/", service, ".ashx"))
-
-  # return uri
-  uri
-}
-
 sag_uri <- function(service, ...) {
   # set up api url
   query <- list(...)

@@ -6,8 +6,6 @@
 \title{Get Source Data}
 \usage{
 getStockDownloadData(assessmentKey, ...)
-
-getStockSourceData(assessmentKey, ...)
 }
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment,
