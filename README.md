@@ -1,7 +1,8 @@
 ![Project Status](https://www.repostatus.org/badges/latest/active.svg)
 [![r-universe
-name](https://ices-tools-prod.r-universe.dev/badges/:name)](https://ices-tools-prod.r-universe.dev/icesSAG)
-![version number](https://ices-tools-prod.r-universe.dev/badges/icesSAG)
+name](https://ices-tools-prod.r-universe.dev/badges/:name)](https://ices-tools-prod.r-universe.dev)
+[![version
+number](https://ices-tools-prod.r-universe.dev/badges/icesSAG)](https://ices-tools-prod.r-universe.dev/icesSAG)
 [![GitHub
 release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=6000)]()
 [![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
