@@ -14,3 +14,4 @@ SQL/*
 README_files
 ^data-raw$
 ^CRAN-SUBMISSION$
+^R-broken$
