@@ -28,7 +28,7 @@
 #'
 #' @importFrom icesConnect ices_get_jwt
 #' @importFrom httr content
-ices_get <- function(url, retry = TRUE, quiet = FALSE, verbose = FALSE, content = TRUE, use_token = getOption("icesSAG.use_token")) {
+ices_get <- function(url, retry = TRUE, quiet = !getOption("icesSAG.messages"), verbose = FALSE, content = TRUE, use_token = getOption("icesSAG.use_token")) {
   resp <-
     ices_get_jwt(
       url,

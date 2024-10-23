@@ -47,63 +47,30 @@ use:
 
 ``` r
 summary_data <- getSAG(stock = "sandeel", year = 2023)
-```
-
-    ## GETing ... https://sag.ices.dk/SAG_API/api/SummaryTable?assessmentKey=17718
-
-    ## no token used
-
-    ## OK (HTTP 200).
-    ## 
-    ## GETing ... https://sag.ices.dk/SAG_API/api/SummaryTable?assessmentKey=17712
-    ## no token used
-    ## OK (HTTP 200).
-    ## 
-    ## GETing ... https://sag.ices.dk/SAG_API/api/SummaryTable?assessmentKey=17713
-    ## no token used
-    ## OK (HTTP 200).
-    ## 
-    ## GETing ... https://sag.ices.dk/SAG_API/api/SummaryTable?assessmentKey=17714
-    ## no token used
-    ## OK (HTTP 200).
-    ## 
-    ## GETing ... https://sag.ices.dk/SAG_API/api/SummaryTable?assessmentKey=17720
-    ## no token used
-    ## OK (HTTP 200).
-    ## 
-    ## GETing ... https://sag.ices.dk/SAG_API/api/SummaryTable?assessmentKey=17719
-    ## no token used
-    ## OK (HTTP 200).
-    ## 
-    ## GETing ... https://sag.ices.dk/SAG_API/api/SummaryTable?assessmentKey=17717
-    ## no token used
-    ## OK (HTTP 200).
-
-``` r
 head(summary_data)
 ```
 
-    ##   Year recruitment high_recruitment low_recruitment low_SSB    SSB high_SSB low_F     F high_F catches landings discards IBC Unallocated_Removals LandingsBMS TBiomass
-    ## 1 1983   285000075        404690458       200709063  307520 452254   665108 0.478 0.596  0.744  382629       NA       NA  NA                   NA          NA       NA
-    ## 2 1984    75526942        108094090        52771793  136696 194269   276092 0.540 0.674  0.840  498671       NA       NA  NA                   NA          NA       NA
-    ## 3 1985   518266424        723794791       371099778  307364 431059   604534 0.577 0.720  0.898  460057       NA       NA  NA                   NA          NA       NA
-    ## 4 1986    75376039        107979318        52616996  202400 265402   348014 0.389 0.484  0.602  382844       NA       NA  NA                   NA          NA       NA
-    ## 5 1987    49081856         72043445        33438554  708828 977741  1348673 0.302 0.377  0.471  373021       NA       NA  NA                   NA          NA       NA
-    ## 6 1988   201037095        284748295       141935577  420971 577810   793081 0.421 0.523  0.651  422805       NA       NA  NA                   NA          NA       NA
-    ##   LogbookRegisteredDiscards StockPublishNote Purpose Fage fishstock recruitment_age AssessmentYear  units stockSizeDescription stockSizeUnits fishingPressureDescription
-    ## 1                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023 tonnes                  SSB         tonnes                      FALSE
-    ## 2                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023 tonnes                  SSB         tonnes                      FALSE
-    ## 3                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023 tonnes                  SSB         tonnes                      FALSE
-    ## 4                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023 tonnes                  SSB         tonnes                      FALSE
-    ## 5                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023 tonnes                  SSB         tonnes                      FALSE
-    ## 6                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023 tonnes                  SSB         tonnes                      FALSE
-    ##   fishingPressureUnits AssessmentKey AssessmentComponent
-    ## 1                   NA         17718                   0
-    ## 2                   NA         17718                   0
-    ## 3                   NA         17718                   0
-    ## 4                   NA         17718                   0
-    ## 5                   NA         17718                   0
-    ## 6                   NA         17718                   0
+    ##   Year recruitment high_recruitment low_recruitment low_SSB    SSB high_SSB low_F     F high_F catches landings discards IBC
+    ## 1 1983   285000075        404690458       200709063  307520 452254   665108 0.478 0.596  0.744  382629       NA       NA  NA
+    ## 2 1984    75526942        108094090        52771793  136696 194269   276092 0.540 0.674  0.840  498671       NA       NA  NA
+    ## 3 1985   518266424        723794791       371099778  307364 431059   604534 0.577 0.720  0.898  460057       NA       NA  NA
+    ## 4 1986    75376039        107979318        52616996  202400 265402   348014 0.389 0.484  0.602  382844       NA       NA  NA
+    ## 5 1987    49081856         72043445        33438554  708828 977741  1348673 0.302 0.377  0.471  373021       NA       NA  NA
+    ## 6 1988   201037095        284748295       141935577  420971 577810   793081 0.421 0.523  0.651  422805       NA       NA  NA
+    ##   Unallocated_Removals LandingsBMS TBiomass LogbookRegisteredDiscards StockPublishNote Purpose Fage fishstock recruitment_age AssessmentYear
+    ## 1                   NA          NA       NA                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 2                   NA          NA       NA                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 3                   NA          NA       NA                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 4                   NA          NA       NA                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 5                   NA          NA       NA                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 6                   NA          NA       NA                        NA  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ##    units stockSizeDescription stockSizeUnits fishingPressureDescription fishingPressureUnits AssessmentKey AssessmentComponent
+    ## 1 tonnes                  SSB         tonnes                      FALSE                   NA         17718                   0
+    ## 2 tonnes                  SSB         tonnes                      FALSE                   NA         17718                   0
+    ## 3 tonnes                  SSB         tonnes                      FALSE                   NA         17718                   0
+    ## 4 tonnes                  SSB         tonnes                      FALSE                   NA         17718                   0
+    ## 5 tonnes                  SSB         tonnes                      FALSE                   NA         17718                   0
+    ## 6 tonnes                  SSB         tonnes                      FALSE                   NA         17718                   0
 
 ``` r
 ggplot(summary_data[complete.cases(summary_data[c("Year", "recruitment")]),],
@@ -126,6 +93,12 @@ The result will be
 ``` r
 codKeys <- findAssessmentKey("cod", year = 2017)
 ```
+
+    ## GETing ... https://sag.ices.dk/SAG_API/api/StockList?year=2017
+
+    ## no token used
+
+    ## OK (HTTP 200).
 
 which allows you to investigate the actual web service data if you are
 interested:
@@ -212,18 +185,18 @@ options(icesSAG.use_token = TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
-    ##   AssessmentKey StockKeyLabel    Purpose StockDatabaseID StockKey                                            StockDescription        Status AssessmentYear              SpeciesName
-    ## 1          9331      whb-comb InitAdvice              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published           1996 Micromesistius poutassou
-    ## 2          9344      whb-comb      Bench              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published           1996 Micromesistius poutassou
-    ## 3         11559      whb-comb       <NA>              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published           1996 Micromesistius poutassou
-    ## 4         11560      whb-comb       <NA>              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published           1996 Micromesistius poutassou
-    ## 5         11561      whb-comb       <NA>              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published           1996 Micromesistius poutassou
-    ##          ModifiedDate                          SAGStamp LinkToAdvice AssessmentComponent
-    ## 1 31/05/2024 11:13:05  whb-comb_1996_9331_2024531111305           NA                  NA
-    ## 2 31/05/2024 11:13:05  whb-comb_1996_9344_2024531111305           NA                  NA
-    ## 3 31/05/2024 11:13:05 whb-comb_1996_11559_2024531111305           NA                  NA
-    ## 4 31/05/2024 11:13:05 whb-comb_1996_11560_2024531111305           NA                  NA
-    ## 5 31/05/2024 11:13:05 whb-comb_1996_11561_2024531111305           NA                  NA
+    ##   AssessmentKey StockKeyLabel    Purpose StockDatabaseID StockKey                                            StockDescription        Status
+    ## 1          9331      whb-comb InitAdvice              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
+    ## 2          9344      whb-comb      Bench              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
+    ## 3         11559      whb-comb       <NA>              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
+    ## 4         11560      whb-comb       <NA>              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
+    ## 5         11561      whb-comb       <NA>              NA   136737 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
+    ##   AssessmentYear              SpeciesName        ModifiedDate                          SAGStamp LinkToAdvice AssessmentComponent
+    ## 1           1996 Micromesistius poutassou 31/05/2024 11:13:05  whb-comb_1996_9331_2024531111305           NA                  NA
+    ## 2           1996 Micromesistius poutassou 31/05/2024 11:13:05  whb-comb_1996_9344_2024531111305           NA                  NA
+    ## 3           1996 Micromesistius poutassou 31/05/2024 11:13:05 whb-comb_1996_11559_2024531111305           NA                  NA
+    ## 4           1996 Micromesistius poutassou 31/05/2024 11:13:05 whb-comb_1996_11560_2024531111305           NA                  NA
+    ## 5           1996 Micromesistius poutassou 31/05/2024 11:13:05 whb-comb_1996_11561_2024531111305           NA                  NA
 
 ## THIS IS CURRENTLY BROKEN
 
