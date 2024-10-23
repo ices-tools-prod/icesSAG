@@ -18,27 +18,26 @@ NULL
 
 #' @rdname getSAGSettings
 #' @export
-getSAGTypeGraphs <- function() {
-  .Deprecated("SAGTypeCharts")
+getSAGTypeGraphs <- function(...) {
   # call webservice
-  out <- sag_webservice("getSAGTypeGraphs")
+  old_value <- sag_use_token(TRUE)
+  out <-
+    ices_get_cached(
+      sag_api("SAGTypeCharts"), ...
+    )
 
-  # parse output
-  sag_parse(out)
+  sag_use_token(old_value)
+  out
 }
 
 #' @rdname getSAGSettings
 #' @export
-getSAGTypeSettings <- function(SAGChartKey) {
-  .Deprecated("SettingsForChartType")
+getSAGTypeSettings <- function(SAGChartKey, ...) {
   # call webservice
-  out <- sag_webservice("getSAGTypeSettings", SAGChartKey = SAGChartKey)
+  out <-
+    ices_get_cached(
+      sag_api("SettingsForChartType", SAGChartKey = SAGChartKey), ...
+    )
 
-  # parse output
-  sag_parse(out)
+  out
 }
-
-
-
-
-#findChartKey <- function()

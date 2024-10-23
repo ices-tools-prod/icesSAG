@@ -6,9 +6,9 @@
 \alias{getSAGTypeSettings}
 \title{Get Details on SAG Charts and Settings}
 \usage{
-getSAGTypeGraphs()
+getSAGTypeGraphs(...)
 
-getSAGTypeSettings(SAGChartKey)
+getSAGTypeSettings(SAGChartKey, ...)
 }
 \arguments{
 \item{SAGChartKey}{the type identifier of the SAG chart, e.g. 0, 1, 2, ...}
