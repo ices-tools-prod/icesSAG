@@ -142,7 +142,7 @@ key <- icesSAG::uploadStock(info, fishdata)
 ```
 
 ```{r echo = FALSE}
-key <- 10081
+key <- 19014
 ```
 
 You can check that the data was uploaded by searching for our stock. Note you will need to make sure the icesSAG.use_token option is set to TRUE
@@ -152,13 +152,21 @@ options(icesSAG.use_token = TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
-## THIS IS CURRENTLY BROKEN
+### Displaying graphs
 
 We can also look at the landings graph created from the data that were uploaded
 
-```{r, landings-plot, eval = FALSE}
+```{r, landings-plot, eval = TRUE}
 plot(getLandingsGraph(key))
 ```
+
+or download all four summary graphs and display them in a 2x2 grid.
+
+```{r, summary-plot, eval = TRUE}
+graphs <- getSAGGraphs(key)
+plot(graphs)
+```
+
 
 ### References
 
