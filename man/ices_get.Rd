@@ -8,7 +8,7 @@
 ices_get(
   url,
   retry = TRUE,
-  quiet = FALSE,
+  quiet = !getOption("icesSAG.messages"),
   verbose = FALSE,
   content = TRUE,
   use_token = getOption("icesSAG.use_token")
@@ -17,7 +17,7 @@ ices_get(
 ices_get_cached(
   url,
   retry = TRUE,
-  quiet = FALSE,
+  quiet = !getOption("icesSAG.messages"),
   verbose = FALSE,
   content = TRUE,
   use_token = getOption("icesSAG.use_token")
