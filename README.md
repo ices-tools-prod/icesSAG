@@ -1,5 +1,6 @@
 ![Project Status](https://www.repostatus.org/badges/latest/active.svg)
-![r-universe name](https://ices-tools-prod.r-universe.dev/badges/:name)
+[![r-universe
+name](https://ices-tools-prod.r-universe.dev/badges/:name)](https://ices-tools-prod.r-universe.dev/icesSAG)
 ![version number](https://ices-tools-prod.r-universe.dev/badges/icesSAG)
 [![GitHub
 release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=6000)]()
