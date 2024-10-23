@@ -92,7 +92,7 @@ ggplot(summary_data[complete.cases(summary_data[c("Year", "recruitment")]),],
 If you want to see all the web service calls being made set this option
 
 ``` r
-options(icesSAG.messages = TRUE)
+sag_messages(TRUE)
 ```
 
 The result will be
@@ -101,9 +101,14 @@ The result will be
 codKeys <- findAssessmentKey("cod", year = 2017)
 ```
 
+    ## GETing ... https://sag.ices.dk/SAG_API/api/StockList?year=2017
+
+    ## no token used
+
+    ## OK (HTTP 200).
+
 which allows you to investigate the actual web service data if you are
-interested:
-<http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017>
+interested: <https://sag.ices.dk/SAG_API/api/StockList?year=2017>
 
 #### Authorised access via tokens
 
@@ -112,34 +117,11 @@ assessments. If you are an ICES stock assessor and wish to access
 unpublished results, or to upload your results, this can be done using
 token authentication.
 
-You can generate a token from
-[sg.ices.dk/manage/CreateToken.aspx](https://sg.ices.dk/manage/CreateToken.aspx),
-which will be something like `e9351534-20ac-4ad4-9752-98923e011213`
-
-Then create a file with the following contents (substitute the access
-token with your own)
-
-    # Standard Graphs personal access token
-    SG_PAT=e9351534-20ac-4ad4-9752-98923e011213
-
-this should be saved in your home directory in a file called
-`.Renviron_SG`.
-
-A quick way to do this from R is
+This is easy to set up, simply run the following line and all future
+requests to the SAG database will be authenticated.
 
 ``` r
-cat("# Standard Graphs personal access token",
-    "SG_PAT=e9351534-20ac-4ad4-9752-98923e011213",
-    sep = "\n",
-    file = "~/.Renviron_SG")
-```
-
-Once you have created this file, you should be able to access
-unpublished results and upload data to the SAG database. To switch to
-using authorised access run set the following flag
-
-``` r
-options(icesSAG.use_token = TRUE)
+sag_use_token(TRUE)
 ```
 
 #### uploading data
@@ -167,14 +149,27 @@ named columns
 A simple (almost) minimal example is:
 
 ``` r
-info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk", Purpose = "")
+info <-
+  stockInfo(
+    StockCode = "whb-comb",
+    AssessmentYear = 1996,
+    ContactPerson = "its_me@somewhere.gov",
+    StockCategory = 3,
+    Purpose = "",
+    ModelType = "A",
+    ModelName = "XSA"
+  )
 fishdata <- stockFishdata(1950:1996)
 
 # simulate some landings for something a bit intesting
 set.seed(1232)
 fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
 
-key <- icesSAG::uploadStock(info, fishdata)
+# you can create an XML file to upload yourself
+xml <- createSAGxml(info, fishdata)
+
+# or upload directly - not currently working...
+# key <- uploadStock(info, fishdata)
 ```
 
 You can check that the data was uploaded by searching for our stock.
@@ -182,7 +177,7 @@ Note you will need to make sure the icesSAG.use_token option is set to
 TRUE
 
 ``` r
-options(icesSAG.use_token = TRUE)
+sag_use_token(TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 

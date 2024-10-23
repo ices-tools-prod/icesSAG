@@ -1,4 +1,20 @@
 
+#' export
+sag_use_token <- function(value) {
+  old_value <- getOption("icesSAG.use_token")
+  options(icesSAG.use_token = identical(value, TRUE))
+
+  invisible(old_value)
+}
+
+#' export
+sag_messages <- function(value) {
+  old_value <- getOption("icesSAG.messages")
+  options(icesSAG.messages = identical(value, TRUE))
+
+  invisible(old_value)
+}
+
 
 #' @importFrom utils type.convert
 sag_clean <- function(x, keep_html = FALSE) {

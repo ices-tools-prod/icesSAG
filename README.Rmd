@@ -66,7 +66,7 @@ ggplot(summary_data[complete.cases(summary_data[c("Year", "recruitment")]),],
 If you want to see all the web service calls being made set this option
 
 ```{r echo = TRUE}
-options(icesSAG.messages = TRUE)
+sag_messages(TRUE)
 ```
 
 The result will be
@@ -76,36 +76,17 @@ codKeys <- findAssessmentKey("cod", year = 2017)
 ```
 
 which allows you to investigate the actual web service data if you are interested:
-[http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017](http://sg.ices.dk/StandardGraphsWebServices.asmx/getListStocks?year=2017)
+[https://sag.ices.dk/SAG_API/api/StockList?year=2017](https://sag.ices.dk/SAG_API/api/StockList?year=2017)
 
 
 #### Authorised access via tokens
 
 ICES provides public access to the results of published stock assessments.  If you are an ICES stock assessor and wish to access unpublished results, or to upload your results, this can be done using token authentication.
 
-You can generate a token from [sg.ices.dk/manage/CreateToken.aspx](https://sg.ices.dk/manage/CreateToken.aspx), which will be something like `e9351534-20ac-4ad4-9752-98923e011213`
-
-Then create a file with the following contents (substitute the access token with your own)
-
-```
-# Standard Graphs personal access token
-SG_PAT=e9351534-20ac-4ad4-9752-98923e011213
-```
-
-this should be saved in your home directory in a file called `.Renviron_SG`.
-
-A quick way to do this from R is
+This is easy to set up, simply run the following line and all future requests to the SAG database will be authenticated.
 
 ```r
-cat("# Standard Graphs personal access token",
-    "SG_PAT=e9351534-20ac-4ad4-9752-98923e011213",
-    sep = "\n",
-    file = "~/.Renviron_SG")
-```
-Once you have created this file, you should be able to access unpublished results and upload data to the SAG database.  To switch to using authorised access run set the following flag
-
-```r
-options(icesSAG.use_token = TRUE)
+sag_use_token(TRUE)
 ```
 
 #### uploading data
@@ -127,18 +108,31 @@ returns a `data.frame` (it requires year as default) with the correctly named co
 A simple (almost) minimal example is:
 
 ```{r echo = FALSE}
-options(icesSAG.messages = FALSE)
+sag_messages(FALSE)
 ```
 
-```{r, eval = FALSE}
-info <- stockInfo("whb-comb", 1996, "colin.millar@ices.dk", Purpose = "")
+```{r}
+info <-
+  stockInfo(
+    StockCode = "whb-comb",
+    AssessmentYear = 1996,
+    ContactPerson = "its_me@somewhere.gov",
+    StockCategory = 3,
+    Purpose = "",
+    ModelType = "A",
+    ModelName = "XSA"
+  )
 fishdata <- stockFishdata(1950:1996)
 
 # simulate some landings for something a bit intesting
 set.seed(1232)
 fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
 
-key <- icesSAG::uploadStock(info, fishdata)
+# you can create an XML file to upload yourself
+xml <- createSAGxml(info, fishdata)
+
+# or upload directly - not currently working...
+# key <- uploadStock(info, fishdata)
 ```
 
 ```{r echo = FALSE}
@@ -148,7 +142,7 @@ key <- 19014
 You can check that the data was uploaded by searching for our stock. Note you will need to make sure the icesSAG.use_token option is set to TRUE
 
 ```{r}
-options(icesSAG.use_token = TRUE)
+sag_use_token(TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
@@ -156,13 +150,13 @@ findAssessmentKey('whb-comb', 1996, full = TRUE)
 
 We can also look at the landings graph created from the data that were uploaded
 
-```{r, landings-plot, eval = TRUE}
+```{r, landings-plot}
 plot(getLandingsGraph(key))
 ```
 
 or download all four summary graphs and display them in a 2x2 grid.
 
-```{r, summary-plot, eval = TRUE}
+```{r, summary-plot}
 graphs <- getSAGGraphs(key)
 plot(graphs)
 ```
