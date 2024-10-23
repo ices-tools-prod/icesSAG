@@ -22,3 +22,7 @@ sag_api <- function(service, ...) {
 
   url
 }
+
+api_url <- function() {
+  "https://sag.ices.dk/SAG_API/api"
+}
