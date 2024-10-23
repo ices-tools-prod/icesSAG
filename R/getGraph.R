@@ -32,21 +32,32 @@ NULL
 #' @rdname getGraphs
 #' @export
 getLandingsGraph <- function(assessmentKey, ...) {
-  .Deprecated("get_image")
   assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # get function name as a character
   # NOTE need tail(x, 1) here for when calling as icesSAG::get____(assessmentKey)
   operation <- utils::tail(as.character(match.call()[[1]]), 1)
+  #type_char <- gsub("get([a-zA-Z]+)Graph", "\\1", operation)
 
-  # call webservice for all supplied keys
-  out <- lapply(assessmentKey, function(i) sag_webservice(operation, assessmentKey = i))
+  types <- c(
+    getLandingsGraph = 1, getRecruitmentGraph = 2,
+    getFishingMortalityGraph = 3, getSpawningStockBiomassGraph = 4,
+    getSSBHistoricalPerformance = 10, getFishingMortalityHistoricalPerformance = 11,
+    getRecruitmentHistoricalPerformance = 12
+  )
 
-  # parse output
-  out <- lapply(out, sag_parse, type = "graph")
+  type <- types[operation]
 
-  # set class
-  class(out) <- c("ices_standardgraph_list", class(out))
+  if (is.na(type)) {
+    .Deprecated("contact the package maintainer")
+    return(NULL)
+  }
+
+  # get file paths for all assessmentKeys
+  paths <- get_plot_path(assessmentKey, type)
+
+  # download pngs
+  out <- get_image_internal(paths)
 
   # return
   out
