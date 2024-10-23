@@ -92,3 +92,23 @@ uploadStock <- function(info, fishdata, verbose = FALSE) {
 
   assessmentKey
 }
+
+
+#' @importFrom icesConnect decode_token
+uploadDatsuFileFireAndForget <- function(
+    fileToUpload, emailAddress = NULL, sendEmail = TRUE,
+    errorLimit = 30000, verbose = FALSE) {
+  if (is.null(emailAddress)) {
+    emailAddress <- decode_token()$email
+  }
+  body <- list(fileToUpload = upload_file(fileToUpload))
+  resp <- datsu_post(
+    datsu_api("UploadDATSUFileFireAndForget",
+      EmailAddress = emailAddress, DataSetVerID = 126,
+      SendEmail = sendEmail, ErrorLimit = errorLimit
+    ),
+    body = body,
+    retry = TRUE, verbose = verbose, use_token = TRUE
+  )
+  content(resp)
+}
