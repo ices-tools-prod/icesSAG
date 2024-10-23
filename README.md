@@ -3,6 +3,8 @@
 name](https://ices-tools-prod.r-universe.dev/badges/:name)](https://ices-tools-prod.r-universe.dev)
 [![version
 number](https://ices-tools-prod.r-universe.dev/badges/icesSAG)](https://ices-tools-prod.r-universe.dev/icesSAG)
+![branch version
+number](https://img.shields.io/badge/branch_version-1.4.9.003-blue)
 [![GitHub
 release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=6000)]()
 [![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
@@ -109,6 +111,12 @@ The result will be
 ``` r
 codKeys <- findAssessmentKey("cod", year = 2017)
 ```
+
+    ## GETing ... https://sag.ices.dk/SAG_API/api/StockList?year=2017
+
+    ## no token used
+
+    ## OK (HTTP 200).
 
 which allows you to investigate the actual web service data if you are
 interested: <https://sag.ices.dk/SAG_API/api/StockList?year=2017>
