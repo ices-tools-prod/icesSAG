@@ -42,9 +42,9 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE, purpose = "Adv
   # select web service operation
   data <- match.arg(data, c("summary", "refpts", "source-data"))
   service <- switch(data,
-                    summary = "SummaryTable",
-                    refpts = "FishStockReferencePoints",
-                    `source-data` = "StockDownload")
+                    summary = "getSummaryTable",
+                    refpts = "getFishStockReferencePoints",
+                    `source-data` = "getStockDownload")
 
   # find lookup key
   assessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = TRUE)
