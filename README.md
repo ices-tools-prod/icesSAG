@@ -3,12 +3,11 @@ Status](https://travis-ci.org/ices-tools-prod/icesSAG.svg?branch=release)](https
 [![codecov](https://codecov.io/gh/ices-tools-prod/icesSAG/branch/master/graph/badge.svg)](https://codecov.io/gh/ices-tools-prod/icesSAG)
 [![GitHub
 release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=6000)]()
-[![CRAN
-Status](http://r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)
-[![CRAN
-Monthly](http://cranlogs.r-pkg.org/badges/icesSAG)](https://cran.r-project.org/package=icesSAG)
-[![CRAN
-Total](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)](https://cran.r-project.org/package=icesSAG)
+<!---
+[![CRAN Status](http://r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)
+[![CRAN Monthly](http://cranlogs.r-pkg.org/badges/icesSAG)](https://cran.r-project.org/package=icesSAG)
+[![CRAN Total](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)](https://cran.r-project.org/package=icesSAG)
+--->
 [![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 [<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
@@ -21,14 +20,21 @@ services](http://sg.ices.dk/webservices.aspx) of the
 database.
 
 icesSAG is implemented as an [R](https://www.r-project.org) package and
+is currently hosted on
+[r-universe](https://ices-tools-prod.r-universe.dev)
+
+We plan to submit icesSAG to CRAN in the near future.
+
+<!---
 available on [CRAN](https://cran.r-project.org/package=icesSAG).
+--->
 
 ### Installation
 
 icesSAG can be installed from CRAN using the `install.packages` command:
 
 ``` r
-install.packages("icesSAG")
+install.packages("icesSAG", repos = c("https://ices-tools-prod.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 ### Usage
@@ -181,6 +187,10 @@ sag_use_token(TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
 
+    ## using system username: colin
+    ## Consider adding a default username using:
+    ##  icesConnect::set_username(<add username here>)
+
     ##   AssessmentKey StockKeyLabel    Purpose StockDatabaseID StockKey
     ## 1          9331      whb-comb InitAdvice              NA   136737
     ## 2          9344      whb-comb      Bench              NA   136737
@@ -240,5 +250,5 @@ The current development version can be installed using:
 
 ``` r
 library(devtools)
-install_github("ices-tools-prod/icesSAG")
+install_github("ices-tools-prod/icesSAG@development")
 ```
