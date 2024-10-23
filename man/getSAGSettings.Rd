@@ -11,6 +11,8 @@ getSAGTypeGraphs(...)
 getSAGTypeSettings(SAGChartKey, ...)
 }
 \arguments{
+\item{...}{arguments passed to \code{\link{ices_get}}.}
+
 \item{SAGChartKey}{the type identifier of the SAG chart, e.g. 0, 1, 2, ...}
 }
 \value{
