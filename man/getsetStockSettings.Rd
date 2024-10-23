@@ -6,18 +6,21 @@
 \alias{setSAGSettingForAStock}
 \title{Get and Set SAG Chart Settings}
 \usage{
-getSAGSettingsForAStock(assessmentKey)
+getSAGSettingsForAStock(assessmentKey, ...)
 
 setSAGSettingForAStock(
   assessmentKey,
   chartKey,
   settingKey,
   settingValue,
-  copyNextYear
+  copyNextYear,
+  ...
 )
 }
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
+
+\item{...}{arguments passed to \code{\link{ices_get}}.}
 
 \item{chartKey}{the type identifier of the SAG chart, e.g. 0, 1, 2, ...}
 

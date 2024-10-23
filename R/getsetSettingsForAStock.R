@@ -7,6 +7,7 @@
 #' @param settingKey the type identifier of the SAG chart setting, e.g. 0, 1, 2, ...
 #' @param settingValue the vale of the setting
 #' @param copyNextYear should the settings be copied to next year (TRUE) or not (FALSE)
+#' @param ... arguments passed to \code{\link{ices_get}}.
 #'
 #' @return A data frame with SAG chart type IDs, settings IDs and setting values.
 #'
@@ -35,24 +36,38 @@ NULL
 
 #' @rdname getsetStockSettings
 #' @export
-getSAGSettingsForAStock <- function(assessmentKey) {
-  .Deprecated("StockSettings")
+getSAGSettingsForAStock <- function(assessmentKey, ...) {
   # call webservice
-  out <- sag_webservice("getSAGSettingsForAStock", assessmentKey = assessmentKey)
+  out <-
+    lapply(
+      assessmentKey,
+      function(i) {
+        ices_get(
+          sag_api("StockSettings", assessmentKey = i), ...
+        )
+      }
+    )
 
-  # parse output
-  sag_parse(out)
+  # rbind output
+  do.call(rbind, out)
 }
 
 #' @rdname getsetStockSettings
 #' @export
-setSAGSettingForAStock <- function(assessmentKey, chartKey, settingKey, settingValue, copyNextYear) {
-  .Deprecated("setStockSettings")
+setSAGSettingForAStock <- function(assessmentKey, chartKey, settingKey, settingValue, copyNextYear, ...) {
   # call webservice
-  out <- sag_webservice("setSAGSettingForAStock",
-                        assessmentKey = assessmentKey,
-                        chartKey = chartKey, settingKey = settingKey,
-                        settingValue = settingValue, copyNextYear = copyNextYear)
+  old_value <- sag_use_token(TRUE)
+  out <-
+    ices_get(
+      sag_api("setSAGSettingForAStock",
+        assessmentKey = assessmentKey,
+        chartKey = chartKey, settingKey = settingKey,
+        settingValue = settingValue, copyNextYear = copyNextYear
+      ),
+      ...
+    )
+
+  sag_use_token(old_value)
 
   # parse and return
   invisible(simplify(unlist(out)))
