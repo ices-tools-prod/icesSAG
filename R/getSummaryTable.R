@@ -49,5 +49,39 @@ getSummaryTable <- function(assessmentKey, ...) {
   # rbind output
   out <- do.call(rbind, out)
 
+  # temporary fix, untill webservice is reverted
+  new_names <-
+    c(
+      "Year", "Recruitment", "High_Recruitment", "Low_Recruitment",
+      "Low_SSB", "SSB", "High_SSB",
+      "Low_F", "F", "High_F",
+      "Catches", "Landings", "Discards",
+      "IBC", "Unallocated_Removals",
+      "LandingsBMS", "TBiomass", "LogbookRegisteredDiscards",
+      "StockPublishNote", "Purpose", "FAge",
+      "FishStock", "RecruitmentAge", "AssessmentYear",
+      "Units", "StockSizeDescription", "StockSizeUnits",
+      "FishingPressureDescription", "FishingPressureUnits",
+      "AssessmentKey", "AssessmentComponent"
+    )
+
+  old_names <-
+    c(
+      "Year", "recruitment", "high_recruitment", "low_recruitment",
+      "low_SSB", "SSB", "high_SSB",
+      "low_F", "F", "high_F",
+      "catches", "landings", "discards",
+      "IBC", "Unallocated_Removals",
+      "LandingsBMS", "TBiomass", "LogbookRegisteredDiscards",
+      "StockPublishNote", "Purpose", "Fage",
+      "fishstock", "recruitment_age", "AssessmentYear",
+      "units", "stockSizeDescription", "stockSizeUnits",
+      "fishingPressureDescription", "fishingPressureUnits",
+      "AssessmentKey", "AssessmentComponent"
+    )
+
+  out <- out[new_names]
+  names(out) <- old_names
+
   sag_clean(out)
 }
