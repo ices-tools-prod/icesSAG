@@ -1,12 +1,12 @@
 Package: icesSAG
-Version: 1.4.9.001
+Version: 1.4.9.002
 Title: Stock Assessment Graphs Database Web Services
 Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@ices.dk"),
              person("Scott", "Large", role="aut"),
              person("Arni", "Magnusson", role="aut"),
              person("Carlos", "Pinto", role="aut"),
              person("Laura Andreea", "Petre", role = "aut"))
-Depends: R (>= 2.10)
+Depends: R (>= 4.3)
 Imports: png,
          httr,
          xml2,
