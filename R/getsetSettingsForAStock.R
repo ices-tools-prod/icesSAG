@@ -70,5 +70,5 @@ setSAGSettingForAStock <- function(assessmentKey, chartKey, settingKey, settingV
   sag_use_token(old_value)
 
   # parse and return
-  invisible(simplify(unlist(out)))
+  invisible(type.convert(unlist(out), as.is = TRUE))
 }

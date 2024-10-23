@@ -7,8 +7,7 @@ Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@
              person("Carlos", "Pinto", role="aut"),
              person("Laura Andreea", "Petre", role = "aut"))
 Depends: R (>= 4.3)
-Imports: png,
-         httr,
+Imports: httr,
          xml2,
          icesVocab,
          icesConnect,

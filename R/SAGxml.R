@@ -79,22 +79,8 @@ readSAGxml <- function(file) {
   # read in xml file, and convert to list
   out <- xml2::as_list(xml2::read_xml(file))
 
-  sag_parse(out, type = "upload")
+  sag_parseUpload(out[[1]])
 }
-
-
-sag_parseUpload <- function(x) {
-  # parse header information
-  info <- sag_parseTable(list(x[names(x) != "Fish_Data"]))
-  info <- do.call(stockInfo, info)
-
-  # tidy fish data
-  fishdata <- sag_parseTable(unname(x[names(x) == "Fish_Data"]))
-  fishdata <- do.call(stockFishdata, fishdata)
-
-  list(info = info, fishdata = fishdata)
-}
-
 
 
 #' Create a list of fish stock information
