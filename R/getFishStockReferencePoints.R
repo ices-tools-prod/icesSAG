@@ -11,7 +11,7 @@
 #' \code{\link{getSAG}} supports querying many years and quarters in one
 #'   function call.
 #'
-#' \code{\link{StockList}} and \code{\link{SummaryTable}} get a list of
+#' \code{\link{getListStocks}} and \code{\link{getSummaryTable}} get a list of
 #'   stocks and summary results.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.

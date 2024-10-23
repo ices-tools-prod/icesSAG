@@ -38,7 +38,7 @@ findAssessmentKey("had.27.46a20", 2023, full = TRUE)
 }
 }
 \seealso{
-\code{\link{StockList}} gets a list of stocks.
+\code{\link{getListStocks}} gets a list of stocks.
 
 \code{\link{icesSAG-package}} gives an overview of the package.
 }

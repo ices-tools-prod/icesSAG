@@ -197,6 +197,7 @@ sag_parseStockStatusLine <- function(x) {
 }
 
 
+#' @importFrom utils type.convert
 sag_clean <- function(x, keep_html = FALSE) {
   x <- as.matrix(x)
   mode(x) <- "character"

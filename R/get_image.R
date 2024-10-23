@@ -13,9 +13,9 @@
 #' @return An array representing a bitmap.
 #'
 #' @seealso
-#' \code{\link{StockList}} gets a list of stocks.
+#' \code{\link{getListStocks}} gets a list of stocks.
 #'
-#' \code{\link{FishStockReferencePoints}} gets biological reference points.
+#' \code{\link{getFishStockReferencePoints}} gets biological reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
@@ -51,9 +51,9 @@ get_image <- function(assessmentKey, type = c("landings", "recruitment", "ssb", 
 #' @return An array representing a bitmap.
 #'
 #' @seealso
-#' \code{\link{StockList}} gets a list of stocks.
+#' \code{\link{getListStocks}} gets a list of stocks.
 #'
-#' \code{\link{FishStockReferencePoints}} gets biological reference points.
+#' \code{\link{getFishStockReferencePoints}} gets biological reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'

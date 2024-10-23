@@ -14,7 +14,7 @@
 #' @return A vector of keys (default) or a data frame if full is TRUE.
 #'
 #' @seealso
-#' \code{\link{StockList}} gets a list of stocks.
+#' \code{\link{getListStocks}} gets a list of stocks.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'

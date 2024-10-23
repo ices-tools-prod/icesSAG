@@ -30,7 +30,7 @@ status
 \code{\link{getSAG}} supports querying many years and quarters in one
   function call.
 
-\code{\link{StockList}} and \code{\link{FishStockReferencePoints}} get
+\code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
   a list of stocks and reference points.
 
 \code{\link{icesSAG-package}} gives an overview of the package.

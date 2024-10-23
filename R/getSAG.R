@@ -17,8 +17,8 @@
 #' @return A data frame (default) or a list if \code{combine} is \code{TRUE}.
 #'
 #' @seealso
-#' \code{\link{StockList}}, \code{\link{SummaryTable}}, and
-#'   \code{\link{FishStockReferencePoints}} get a list of stocks, summary
+#' \code{\link{getListStocks}}, \code{\link{getSummaryTable}}, and
+#'   \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
 #'   results, and reference points.
 #'
 #' \code{\link{findAssessmentKey}} finds lookup keys.
