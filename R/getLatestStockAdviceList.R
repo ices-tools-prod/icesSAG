@@ -22,5 +22,7 @@
 #' @export
 
 getLatestStockAdviceList <- function(...) {
-  ices_get_cached(sag_api("LatestStockAdviceList"), ...)
+  out <- ices_get_cached(sag_api("LatestStockAdviceList"), ...)
+
+  sag_clean(out)
 }

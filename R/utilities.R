@@ -196,6 +196,29 @@ sag_parseStockStatusLine <- function(x) {
   cbind(line, years)
 }
 
+
+sag_clean <- function(x, keep_html = FALSE) {
+  x <- as.matrix(x)
+  mode(x) <- "character"
+
+  if (!keep_html) {
+    # remove any html tags - this can happen in the SAG graph settings entries!
+    x[] <- gsub("<.*?>", "", x)
+  }
+
+  # trim white space
+  x[] <- trimws(x)
+
+  # SAG uses "" and "NA" to indicate NA
+  x[x %in% c("", "NA", "na")] <- NA
+
+  # make into a data.frame
+  x <- as.data.frame(x, stringsAsFactors = FALSE)
+
+  type.convert(x, as.is = TRUE)
+}
+
+
 simplify <- function(x) {
   # from Arni's toolbox
   # coerce object to simplest storage mode: factor > character > numeric > integer

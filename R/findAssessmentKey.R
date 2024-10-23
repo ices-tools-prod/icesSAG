@@ -34,7 +34,7 @@ findAssessmentKey <- function(stock = NULL, year = 0, published = TRUE, regex = 
   }
 
   # get list of all stocks for all supplied years
-  out <- do.call(rbind, lapply(year, StockList))
+  out <- do.call(rbind, lapply(year, getListStocks))
 
   # apply filters
   if (published && !getOption("icesSAG.use_token")) {

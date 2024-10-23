@@ -4,7 +4,7 @@
 #' pressure.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... to allow scope for back compatibility
+#' @param ... arguments passed to \code{\link{ices_get}}.
 #'
 #' @return A data frame.
 #'
@@ -12,29 +12,42 @@
 #' \code{\link{getSAG}} supports querying many years and quarters in one
 #'   function call.
 #'
-#' \code{\link{getListStocks}} and \code{\link{getFishStockReferencePoints}} get
+#' \code{\link{StockList}} and \code{\link{FishStockReferencePoints}} get
 #'   a list of stocks and reference points.
 #'
 #' \code{\link{icesSAG-package}} gives an overview of the package.
 #'
-#' @author Colin Millar and Scott Large.
+#' @author Colin Millar.
 #'
 #' @examples
 #' \dontrun{
-#' assessmentKey <- findAssessmentKey("cod-2224", year = 2016)
+#' assessmentKey <- findAssessmentKey("had.27.46a20", year = 2022)
 #' sumtab <- getSummaryTable(assessmentKey)
 #' head(sumtab)
-#' attributes(sumtab)$notes
 #' }
 #' @export
 
 getSummaryTable <- function(assessmentKey, ...) {
-  .Deprecated("SummaryTable")
-  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
-
   # call webservice for all supplied keys
-  out <- lapply(assessmentKey, function(i) sag_webservice("getSummaryTable", assessmentKey = i))
 
-  # parse output
-  lapply(out, sag_parse, type = "summary")
+  out <-
+    lapply(
+      assessmentKey,
+      function(i) {
+        x <-
+          ices_get(
+            sag_api("SummaryTable", assessmentKey = i), ...
+          )
+        # format into a data.frame
+        cbind(
+          lapply(x[names(x) != "Lines"], function(y) if (is.null(y)) NA else y),
+          x$Lines
+          )
+      }
+    )
+
+  # rbind output
+  out <- do.call(rbind, out)
+
+  sag_clean(out)
 }

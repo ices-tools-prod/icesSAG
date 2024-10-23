@@ -29,7 +29,7 @@
 
 getCustomColumns <- function(assessmentKey, ...) {
 
-  df <- StockDownload(assessmentKey, ...)
+  df <- getStockDownloadData(assessmentKey, ...)
   df <- by(df, df$AssessmentKey, function(x) x)
 
   out <-
@@ -38,7 +38,7 @@ getCustomColumns <- function(assessmentKey, ...) {
         function(x) {
           id <- grep("CustomName*", names(x))
 
-          id <- id[apply(x[, id], 2, function(y) all(y != ""))]
+          id <- id[apply(x[, id], 2, function(y) all(!is.na(y)))]
           if (!length(id)) {
             return(NULL)
           }
@@ -74,5 +74,5 @@ getCustomColumns <- function(assessmentKey, ...) {
     )
   rownames(out) <- NULL
 
-  out
+  sag_clean(out)
 }

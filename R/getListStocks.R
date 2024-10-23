@@ -41,9 +41,8 @@ getListStocks <- function(year, stock = NULL, modifiedAfter = NULL, ...) {
       }
     )
 
-  # remove white space from status
-  out$Status <- trimws(out$Status)
+  # prepare output
+  out <- do.call(rbind, out)
 
-  # parse output
-  do.call(rbind, out)
+  sag_clean(out)
 }

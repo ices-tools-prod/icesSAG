@@ -45,7 +45,9 @@ getStockDownloadData <- function(assessmentKey, ...) {
     )
 
   # rbind output
-  do.call(rbind, out)
+  out <- do.call(rbind, out)
+
+  sag_clean(out)
 }
 
 #' @rdname getStockDownloadData
