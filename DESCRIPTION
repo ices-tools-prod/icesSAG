@@ -10,7 +10,6 @@ Depends: R (>= 4.3)
 Imports: png,
          httr,
          xml2,
-         openssl,
          icesVocab,
          icesConnect,
          memoise,
