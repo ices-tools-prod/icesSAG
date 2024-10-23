@@ -44,7 +44,7 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE, purpose = "Adv
   service <- switch(data,
                     summary = "getSummaryTable",
                     refpts = "getFishStockReferencePoints",
-                    `source-data` = "getStockDownload")
+                    `source-data` = "getStockDownloadData")
 
   # find lookup key
   assessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = TRUE)
