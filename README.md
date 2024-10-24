@@ -26,20 +26,23 @@ Graphs](https://sg.ices.dk) database.
 
 icesSAG is implemented as an [R](https://www.r-project.org) package and
 is currently hosted on
-[r-universe](https://ices-tools-prod.r-universe.dev)
-
-We plan to submit icesSAG to CRAN in the near future.
-
-<!---
-available on [CRAN](https://cran.r-project.org/package=icesSAG).
---->
+[r-universe](https://ices-tools-prod.r-universe.dev) and available on
+[CRAN](https://cran.r-project.org/package=icesSAG).
 
 ### Installation
 
-icesSAG can be installed from CRAN using the `install.packages` command:
+The stable version of icesSAG can be installed from CRAN using the
+`install.packages` command:
 
 ``` r
-install.packages("icesSAG", repos = c("https://ices-tools-prod.r-universe.dev", "https://cloud.r-project.org"))
+install.packages("icesSAG", repos = "https://cloud.r-project.org")
+```
+
+or a potentially more recent, but less stable version installed from
+r-universe:
+
+``` r
+install.packages("icesSAG", repos = "https://ices-tools-prod.r-universe.dev")
 ```
 
 ### Usage
@@ -191,6 +194,10 @@ TRUE
 sag_use_token(TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
+
+    ## using system username: colin
+    ## Consider adding a default username using:
+    ##  icesConnect::set_username(<add username here>)
 
     ##   AssessmentKey StockKeyLabel    Purpose StockDatabaseID StockKey
     ## 1          9331      whb-comb InitAdvice              NA   136737
