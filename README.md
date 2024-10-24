@@ -8,12 +8,15 @@ number](https://img.shields.io/badge/branch_version-1.5.0-blue)
 [![GitHub
 release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=6000)]()
 [![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-[![CRAN
-Status](http://r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)
-[![CRAN
-Monthly](http://cranlogs.r-pkg.org/badges/icesSAG)](https://cran.r-project.org/package=icesSAG)
-[![CRAN
-Total](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)](https://cran.r-project.org/package=icesSAG)
+
+CRAN status:
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)
+![CRAN RStudio mirror
+downloads](http://cranlogs.r-pkg.org/badges/icesSAG) ![CRAN RStudio
+mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)
+![CRAN Status](http://r-pkg.org/badges/version/icesSAG) ![CRAN
+Monthly](http://cranlogs.r-pkg.org/badges/icesSAG) ![CRAN
+Total](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)
 
 [<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
 
@@ -112,12 +115,6 @@ The result will be
 codKeys <- findAssessmentKey("cod", year = 2017)
 ```
 
-    ## GETing ... https://sag.ices.dk/SAG_API/api/StockList?year=2017
-
-    ## no token used
-
-    ## OK (HTTP 200).
-
 which allows you to investigate the actual web service data if you are
 interested: <https://sag.ices.dk/SAG_API/api/StockList?year=2017>
 
@@ -191,10 +188,6 @@ TRUE
 sag_use_token(TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
-
-    ## using system username: colin
-    ## Consider adding a default username using:
-    ##  icesConnect::set_username(<add username here>)
 
     ##   AssessmentKey StockKeyLabel    Purpose StockDatabaseID StockKey
     ## 1          9331      whb-comb InitAdvice              NA   136737
