@@ -14,9 +14,6 @@ CRAN status:
 ![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/icesSAG) ![CRAN RStudio
 mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/icesSAG)
-![CRAN Status](https://r-pkg.org/badges/version/icesSAG) ![CRAN
-Monthly](https://cranlogs.r-pkg.org/badges/icesSAG) ![CRAN
-Total](https://cranlogs.r-pkg.org/badges/grand-total/icesSAG)
 
 [<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
 
