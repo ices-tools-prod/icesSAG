@@ -1,7 +1,8 @@
 #' Get Any SAG Data
 #'
-#' This function combines the functionality of getListStocks,
-#' getFishStockReferencePoints, and getSummaryTable.
+#' This function combines the functionality of \code{\link{getListStocks}},
+#' \code{\link{getFishStockReferencePoints}}, \code{\link{getSummaryTable}}
+#' and \code{\link{getStockDownloadData}}.
 #' It supports querying many stocks and years in one function call.
 #'
 #' @param stock a stock name, e.g. cod-347d, or cod to find all cod stocks, or
@@ -17,9 +18,10 @@
 #' @return A data frame (default) or a list if \code{combine} is \code{TRUE}.
 #'
 #' @seealso
-#' \code{\link{getListStocks}}, \code{\link{getSummaryTable}}, and
-#'   \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
-#'   results, and reference points.
+#' \code{\link{getListStocks}}, \code{\link{getSummaryTable}},
+#'   \code{\link{getFishStockReferencePoints}}, and
+#'   \code{\link{getStockDownloadData}} get a list of stocks, summary
+#'   results, reference points, and all data including custom columns.
 #'
 #' \code{\link{findAssessmentKey}} finds lookup keys.
 #'
@@ -48,7 +50,7 @@ getSAG <- function(stock, year, data = "summary", combine = TRUE, purpose = "Adv
 
   # find lookup key
   assessmentKey <- findAssessmentKey(stock, year, regex = TRUE, full = TRUE)
-  assessmentKey <- assessmentKey[assessmentKey$Purpose == purpose,"AssessmentKey"]
+  assessmentKey <- assessmentKey[assessmentKey$Purpose == purpose, "AssessmentKey"]
 
   # get data requested by user
   do.call(service, list(assessmentKey = assessmentKey))

@@ -8,7 +8,7 @@
 #' @param quiet should all messages be suppressed, default FALSE.
 #' @param verbose should verbose output form the http request be
 #'   returned? default FALSE.
-#' @param content should content be returned, or the full http reponse?
+#' @param content should content be returned, or the full http response?
 #'   default TRUE, i.e. content is returned by default.
 #' @param use_token should an authentication token be sent with the
 #'   request? default is the value of the option icesSAG.use_token.

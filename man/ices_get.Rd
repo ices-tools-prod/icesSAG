@@ -34,7 +34,7 @@ fails? default TRUE.}
 \item{verbose}{should verbose output form the http request be
 returned? default FALSE.}
 
-\item{content}{should content be returned, or the full http reponse?
+\item{content}{should content be returned, or the full http response?
 default TRUE, i.e. content is returned by default.}
 
 \item{use_token}{should an authentication token be sent with the

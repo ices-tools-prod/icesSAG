@@ -19,7 +19,7 @@ getSAGTypeSettings(SAGChartKey, ...)
 a data frame with SAG chart type IDs and settings IDs.
 }
 \description{
-List all possible chart settings for each chart type (0 = general, 1 = Landings etc.).
+List all possible chart settings for each chart type (0 = general, 1 = Landings, ...).
 }
 \examples{
 \dontrun{

@@ -23,8 +23,9 @@ NULL to process all stocks.}
 A data frame (default) or a list if \code{combine} is \code{TRUE}.
 }
 \description{
-This function combines the functionality of getListStocks,
-getFishStockReferencePoints, and getSummaryTable.
+This function combines the functionality of \code{\link{getListStocks}},
+\code{\link{getFishStockReferencePoints}}, \code{\link{getSummaryTable}}
+and \code{\link{getStockDownloadData}}.
 It supports querying many stocks and years in one function call.
 }
 \note{
@@ -41,9 +42,10 @@ cod_data <- getSAG("cod", 2017, "source-data")
 }
 }
 \seealso{
-\code{\link{getListStocks}}, \code{\link{getSummaryTable}}, and
-  \code{\link{getFishStockReferencePoints}} get a list of stocks, summary
-  results, and reference points.
+\code{\link{getListStocks}}, \code{\link{getSummaryTable}},
+  \code{\link{getFishStockReferencePoints}}, and
+  \code{\link{getStockDownloadData}} get a list of stocks, summary
+  results, reference points, and all data including custom columns.
 
 \code{\link{findAssessmentKey}} finds lookup keys.
 

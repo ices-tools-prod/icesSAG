@@ -1,6 +1,6 @@
 #' Get Details on SAG Charts and Settings
 #'
-#' List all possible chart settings for each chart type (0 = general, 1 = Landings etc.).
+#' List all possible chart settings for each chart type (0 = general, 1 = Landings, ...).
 #'
 #' @param SAGChartKey the type identifier of the SAG chart, e.g. 0, 1, 2, ...
 #' @param ... arguments passed to \code{\link{ices_get}}.

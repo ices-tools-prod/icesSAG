@@ -1,5 +1,5 @@
 Package: icesSAG
-Version: 1.4.9.003
+Version: 1.5.0
 Title: Stock Assessment Graphs Database Web Services
 Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@ices.dk"),
              person("Scott", "Large", role="aut"),
@@ -22,3 +22,4 @@ URL: https://sg.ices.dk, https://github.com/ices-tools-prod/icesSAG
 BugReports: https://github.com/ices-tools-prod/icesSAG/issues
 RoxygenNote: 7.3.2
 Encoding: UTF-8
+Language: en-GB
