@@ -20,9 +20,9 @@ mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/icesSAG)
 ### icesSAG
 
 icesSAG provides R functions that access the [web
-services](http://sg.ices.dk/webservices.aspx) of the
-[ICES](http://ices.dk) [Stock Assessment Graphs](http://sg.ices.dk)
-database.
+services](https://sg.ices.dk/webservices.aspx) of the
+[ICES](https://www.ices.dk) [Stock Assessment
+Graphs](https://sg.ices.dk) database.
 
 icesSAG is implemented as an [R](https://www.r-project.org) package and
 is currently hosted on
@@ -111,6 +111,12 @@ The result will be
 ``` r
 codKeys <- findAssessmentKey("cod", year = 2017)
 ```
+
+    ## GETing ... https://sag.ices.dk/SAG_API/api/StockList?year=2017
+
+    ## no token used
+
+    ## OK (HTTP 200).
 
 which allows you to investigate the actual web service data if you are
 interested: <https://sag.ices.dk/SAG_API/api/StockList?year=2017>

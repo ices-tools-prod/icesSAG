@@ -21,8 +21,8 @@ CRAN status:
 ### icesSAG
 
 icesSAG provides R functions that access the
-[web services](http://sg.ices.dk/webservices.aspx) of the [ICES](http://ices.dk)
-[Stock Assessment Graphs](http://sg.ices.dk) database.
+[web services](https://sg.ices.dk/webservices.aspx) of the [ICES](https://www.ices.dk)
+[Stock Assessment Graphs](https://sg.ices.dk) database.
 
 icesSAG is implemented as an [R](https://www.r-project.org) package and
 is currently hosted on [r-universe](https://ices-tools-prod.r-universe.dev)
