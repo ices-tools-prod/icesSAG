@@ -4,16 +4,16 @@ name](https://ices-tools-prod.r-universe.dev/badges/:name)](https://ices-tools-p
 [![version
 number](https://ices-tools-prod.r-universe.dev/badges/icesSAG)](https://ices-tools-prod.r-universe.dev/icesSAG)
 ![branch version
-number](https://img.shields.io/badge/branch_version-1.4.9.003-blue)
+number](https://img.shields.io/badge/branch_version-1.5.0-blue)
 [![GitHub
 release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=6000)]()
 [![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-
-<!---
-[![CRAN Status](http://r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)
-[![CRAN Monthly](http://cranlogs.r-pkg.org/badges/icesSAG)](https://cran.r-project.org/package=icesSAG)
-[![CRAN Total](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)](https://cran.r-project.org/package=icesSAG)
---->
+[![CRAN
+Status](http://r-pkg.org/badges/version/icesSAG)](https://cran.r-project.org/package=icesSAG)
+[![CRAN
+Monthly](http://cranlogs.r-pkg.org/badges/icesSAG)](https://cran.r-project.org/package=icesSAG)
+[![CRAN
+Total](http://cranlogs.r-pkg.org/badges/grand-total/icesSAG)](https://cran.r-project.org/package=icesSAG)
 
 [<img align="right" alt="ICES Logo" width="17%" height="17%" src="http://ices.dk/_layouts/15/1033/images/icesimg/iceslogo.png">](http://ices.dk)
 
@@ -191,6 +191,10 @@ TRUE
 sag_use_token(TRUE)
 findAssessmentKey('whb-comb', 1996, full = TRUE)
 ```
+
+    ## using system username: colin
+    ## Consider adding a default username using:
+    ##  icesConnect::set_username(<add username here>)
 
     ##   AssessmentKey StockKeyLabel    Purpose StockDatabaseID StockKey
     ## 1          9331      whb-comb InitAdvice              NA   136737
