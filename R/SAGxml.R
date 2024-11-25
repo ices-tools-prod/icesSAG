@@ -83,6 +83,14 @@ readSAGxml <- function(file) {
 }
 
 
+#' @rdname readCreateSAGxml
+#' @export
+writeSAGxml <- function(info, fishdata, file) {
+  xml <- createSAGxml(info, fishdata)
+  cat(gsub("\\r", "", xml), file = file)
+}
+
+
 #' Create a list of fish stock information
 #'
 #' This function is a wrapper to \code{list(...)} in which the names are forced to match with
