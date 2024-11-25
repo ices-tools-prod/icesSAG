@@ -125,15 +125,15 @@ sag_messages(FALSE)
 ```{r}
 info <-
   stockInfo(
-    StockCode = "whb-comb",
-    AssessmentYear = 1996,
+    StockCode = "whg.27.7a",
+    AssessmentYear = 2020,
     ContactPerson = "its_me@somewhere.gov",
     StockCategory = 3,
-    Purpose = "",
+    Purpose = "Unofficial",
     ModelType = "A",
     ModelName = "XSA"
   )
-fishdata <- stockFishdata(1950:1996)
+fishdata <- stockFishdata(1950:2020)
 
 # simulate some landings for something a bit intesting
 set.seed(1232)
@@ -141,6 +141,43 @@ fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
 
 # you can create an XML file to upload yourself
 xml <- createSAGxml(info, fishdata)
+
+# this file can be checked using the icesDatsu package
+library(icesDatsu)
+
+tempfile <- tempfile(fileext = ".xml")
+cat(xml, file = tempfile)
+id <- uploadDatsuFileFireAndForget(tempfile, 126)
+
+getDataFieldsDescription(126)
+
+icesVocab::getCodeList("AssessmentPurpose")$Key
+
+
+errs <- getScreeningSessionMessages(id)
+
+if (!identical(errs, list( "Session has no messages!"))) {
+  stop("There were errors in the screening session, please correct and try again")
+}
+
+x <- sag_post(sag_api("uploadStock"), body = list(sessionId = id), )
+
+id <- 45896
+
+  out <-
+    POST(
+      sag_api("uploadStock"),
+      body = as.character(id),
+      encode = "json",
+  #    content_type("application/json-patch+json"),
+      add_headers(Authorization = paste("Bearer", ices_token())),
+      verbose()
+    )
+
+
+sag_use_token(TRUE)
+getListStocks("whg.27.7a", year = 2020)
+
 
 # or upload directly - not currently working...
 # key <- uploadStock(info, fishdata)
@@ -176,10 +213,10 @@ plot(graphs)
 ### References
 
 ICES Stock Assessment Graphs database:
-http://sg.ices.dk
+https://sg.ices.dk
 
 ICES Stock Assessment Graphs web services:
-http://sg.ices.dk/webservices.aspx
+https://sg.ices.dk/webservices.aspx
 
 ### Development
 
