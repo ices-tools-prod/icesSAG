@@ -11,7 +11,7 @@ getStockDownloadData(assessmentKey, ...)
 \item{assessmentKey}{the unique identifier of the stock assessment,
 can be a vector}
 
-\item{...}{arguments passed to \code{\link{ices_get}}.}
+\item{...}{arguments passed to \code{\link{sag_get}}.}
 }
 \value{
 A data frame.

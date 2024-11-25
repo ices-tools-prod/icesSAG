@@ -4,7 +4,7 @@
 #' pressure.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... arguments passed to \code{\link{ices_get}}.
+#' @param ... arguments passed to \code{\link{sag_get}}.
 #'
 #' @return A data frame.
 #'
@@ -35,7 +35,7 @@ getStockStatusValues <- function(assessmentKey, ...) {
     lapply(
       assessmentKey,
       function(i) {
-        x <- ices_get(
+        x <- sag_get(
           sag_api("StockStatusValues", assessmentKey = i), ...
         )
         # as.list removes warning about rownames

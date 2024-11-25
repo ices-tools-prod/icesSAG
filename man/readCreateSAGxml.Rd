@@ -4,11 +4,14 @@
 \alias{convertSAGxml}
 \alias{createSAGxml}
 \alias{readSAGxml}
+\alias{writeSAGxml}
 \title{Create and read the SAG XML data transfer file}
 \usage{
 createSAGxml(info, fishdata)
 
 readSAGxml(file)
+
+writeSAGxml(info, fishdata, file)
 }
 \arguments{
 \item{info}{a list of stock information}

@@ -7,7 +7,7 @@
 getLatestStockAdviceList(...)
 }
 \arguments{
-\item{...}{arguments passed to \code{\link{ices_get}}.}
+\item{...}{arguments passed to \code{\link{sag_get}}.}
 }
 \value{
 A data frame.

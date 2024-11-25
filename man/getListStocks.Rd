@@ -14,7 +14,7 @@ getListStocks(year, stock = NULL, modifiedAfter = NULL, ...)
 \item{modifiedAfter}{date-time parameter in the format "YYYY/MM/DD". If set
 will only return stocks assessments modified after the provided date.}
 
-\item{...}{arguments passed to \code{\link{ices_get}}.}
+\item{...}{arguments passed to \code{\link{sag_get}}.}
 }
 \value{
 A data frame.

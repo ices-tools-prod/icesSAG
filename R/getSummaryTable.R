@@ -4,7 +4,7 @@
 #' pressure.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... arguments passed to \code{\link{ices_get}}.
+#' @param ... arguments passed to \code{\link{sag_get}}.
 #'
 #' @return A data frame.
 #'
@@ -35,7 +35,7 @@ getSummaryTable <- function(assessmentKey, ...) {
       assessmentKey,
       function(i) {
         x <-
-          ices_get(
+          sag_get(
             sag_api("SummaryTable", assessmentKey = i), ...
           )
         # format into a data.frame

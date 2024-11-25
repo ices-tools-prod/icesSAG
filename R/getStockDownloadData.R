@@ -4,7 +4,7 @@
 #'
 #' @param assessmentKey the unique identifier of the stock assessment,
 #' can be a vector
-#' @param ... arguments passed to \code{\link{ices_get}}.
+#' @param ... arguments passed to \code{\link{sag_get}}.
 #'
 #' @return A data frame.
 #'
@@ -38,7 +38,7 @@ getStockDownloadData <- function(assessmentKey, ...) {
     lapply(
       assessmentKey,
       function(i) {
-        ices_get(
+        sag_get(
           sag_api("StockDownload", assessmentKey = i), ...
         )
       }

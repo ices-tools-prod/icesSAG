@@ -2,7 +2,7 @@
 #'
 #' Get a list of the most recent advice for all fish stocks.
 #'
-#' @param ... arguments passed to \code{\link{ices_get}}.
+#' @param ... arguments passed to \code{\link{sag_get}}.
 #'
 #' @return A data frame.
 #'
@@ -22,7 +22,7 @@
 #' @export
 
 getLatestStockAdviceList <- function(...) {
-  out <- ices_get_cached(sag_api("LatestStockAdviceList"), ...)
+  out <- sag_get_cached(sag_api("LatestStockAdviceList"), ...)
 
   sag_clean(out)
 }

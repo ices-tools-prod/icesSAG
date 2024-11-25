@@ -22,26 +22,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' ices_get(sag_api("StockList", year = 2022))
+#' sag_get(sag_api("StockList", year = 2022))
 #' }
 #' @export
 #'
-#' @importFrom icesConnect ices_get_jwt
+#' @importFrom icesConnect ices_get
 #' @importFrom httr content
-ices_get <- function(url, retry = TRUE, quiet = !getOption("icesSAG.messages"), verbose = FALSE, content = TRUE, use_token = getOption("icesSAG.use_token")) {
-  resp <-
-    ices_get_jwt(
-      url,
-      retry = retry, quiet = quiet, verbose = verbose,
-      jwt = if (use_token) NULL else ""
-    )
-
-  if (content) {
-    content(resp, simplifyVector = TRUE)
-  } else {
-    resp
-  }
+sag_get <- function(url, retry = TRUE, quiet = !getOption("icesSAG.messages"), verbose = FALSE, content = TRUE, use_token = getOption("icesSAG.use_token")) {
+  ices_get(url, retry, quiet, verbose, content, use_token)
 }
 
-#' @describeIn ices_get cached version of ices_get
-ices_get_cached <- ices_get
+#' @describeIn sag_get cached version of sag_get
+sag_get_cached <- sag_get

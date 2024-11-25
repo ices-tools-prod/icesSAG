@@ -3,7 +3,7 @@
 #' Get biological reference points for all stocks in a given assessment year.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... arguments passed to \code{\link{ices_get}}.
+#' @param ... arguments passed to \code{\link{sag_get}}.
 #'
 #' @return A data frame.
 #'
@@ -38,7 +38,7 @@ getFishStockReferencePoints <- function(assessmentKey, ...) {
     lapply(
       assessmentKey,
       function(i) {
-        ices_get(
+        sag_get(
           sag_api("FishStockReferencePoints", assessmentKey = i), ...
         )
       }

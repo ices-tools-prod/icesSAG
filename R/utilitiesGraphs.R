@@ -5,7 +5,7 @@ get_plot_path <- function(assessmentKey, type = 1, ...) {
       sapply(
         assessmentKey,
         function(i) {
-          ices_get(
+          sag_get(
             sag_api("get_plot_path", assessmentKey = i, sgKey = type), ...
           )
         }
@@ -19,7 +19,7 @@ get_image_internal <- function(paths, ...) {
 
   # call webservice for all supplied keys
   old_value <- sag_use_token(TRUE)
-  out <- lapply(paths, ices_get, ...)
+  out <- lapply(paths, sag_get, ...)
   sag_use_token(old_value)
 
   # set class

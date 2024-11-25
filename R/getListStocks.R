@@ -6,7 +6,7 @@
 #' @param stock a stock name, e.g. lin.27.5a.
 #' @param modifiedAfter date-time parameter in the format "YYYY/MM/DD". If set
 #'   will only return stocks assessments modified after the provided date.
-#' @param ... arguments passed to \code{\link{ices_get}}.
+#' @param ... arguments passed to \code{\link{sag_get}}.
 #'
 #' @return A data frame.
 #'
@@ -35,7 +35,7 @@ getListStocks <- function(year, stock = NULL, modifiedAfter = NULL, ...) {
     lapply(
       year,
       function(i) {
-        ices_get_cached(
+        sag_get_cached(
           sag_api("StockList", year = i, fishStock = stock, modifiedAfter = modifiedAfter), ...
         )
       }

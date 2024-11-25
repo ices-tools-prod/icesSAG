@@ -20,7 +20,7 @@ setSAGSettingForAStock(
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
 
-\item{...}{arguments passed to \code{\link{ices_get}}.}
+\item{...}{arguments passed to \code{\link{sag_get}}.}
 
 \item{chartKey}{the type identifier of the SAG chart, e.g. 0, 1, 2, ...}
 

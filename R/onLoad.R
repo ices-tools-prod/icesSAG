@@ -9,9 +9,9 @@ getcache <- cachem::cache_mem(max_age = 15 * 60)
 .onLoad <- function(libname, pkgname) {
 
   # set functions to use caching
-  ices_get_cached <<-
+  sag_get_cached <<-
     memoise::memoise(
-      ices_get_cached,
+      sag_get_cached,
       cache = getcache,
       hash = function(x) hash(paste0(x$url, getOption("icesSAG.use_token")))
     )

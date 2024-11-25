@@ -4,7 +4,7 @@
 #'   reference points for records in the SAG database.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... arguments passed to \code{\link{ices_get}}.
+#' @param ... arguments passed to \code{\link{sag_get}}.
 #'
 #' @return A data frame.
 #'
