@@ -17,5 +17,5 @@ sag_clean <- function(x, keep_html = FALSE) {
   # make into a data.frame
   x <- as.data.frame(x, stringsAsFactors = FALSE)
 
-  x <- type.convert(x, as.is = TRUE, tryLogical = FALSE)
+  type.convert(x, as.is = TRUE, tryLogical = FALSE)
 }
