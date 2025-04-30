@@ -63,13 +63,13 @@ uploadStock <- function(file, upload = FALSE, verbose = FALSE) {
   sagmessage("Screening file           ... ")
   datsu_resp <- suppressMessages(uploadDatsuFile(file, 126))
 
-  xml <- readSAGxml(file)
-
   errors <- suppressMessages(getScreeningSessionMessages(datsu_resp))
 
   if (is.data.frame(errors)) {
     warning(" Errors were found in the upload.  See\n\t https://datsu.ices.dk/web/ScreenResult.aspx?sessionid=", datsu_resp, "\n\tfor details")
     return(errors)
+  } else {
+    sagmessage(" No errors found :)")
   }
 
   if (upload) {
@@ -77,8 +77,7 @@ uploadStock <- function(file, upload = FALSE, verbose = FALSE) {
     message("Importing to database    ... ", appendLF = getOption("icesSAG.messages"))
 
     out <- sag_post(
-      sag_api("uploadStock"),
-      body = list(strSessionID = datsu_resp)
+      sag_api("uploadStock", sessionId = datsu_resp)
     )
 
     if (getOption("icesSAG.messages")) {
@@ -87,6 +86,7 @@ uploadStock <- function(file, upload = FALSE, verbose = FALSE) {
       done()
     }
 
+    xml <- readSAGxml(file)
     assessmentKey <- type.convert(unlist(out), as.is = TRUE)
     message("Upload complete! New assessmentKey is: ", assessmentKey)
     message(
@@ -94,6 +94,14 @@ uploadStock <- function(file, upload = FALSE, verbose = FALSE) {
         "To check upload run (with 'options(icesSAG.use_token = TRUE)'): \n  findAssessmentKey('%s', %s, full = TRUE)",
         xml$info$StockCode,
         xml$info$AssessmentYear
+      )
+    )
+
+    message(
+      "To view on sag.ices.dk:\n",
+      sprintf(
+        "browseURL('https://standardgraphs.ices.dk/manage/ViewGraphsAndTables.aspx?key=%s')",
+        assessmentKey
       )
     )
 

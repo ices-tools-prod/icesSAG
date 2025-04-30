@@ -262,6 +262,7 @@ validNames <- function(type = c("stockInfo", "stockFishdata")) {
     stockInfo =
       c("StockCode",
       "AssessmentYear",
+      "AssessmentComponent",
       "StockCategory",
       "BMGT_lower",
       "BMGT",
