@@ -1,3 +1,9 @@
+# icesSAG 1.6.2 (2025-04-30)
+
+* Upload stock function updated and working.
+* icesDatsu is used in uploadStock() to check file format and validate the
+  data before upload.
+
 # icesSAG 1.5.0 (2024-10-24)
 
 * Update all functions to point to new API.
