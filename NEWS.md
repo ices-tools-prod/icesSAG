@@ -4,7 +4,7 @@
 * icesDatsu is used in uploadStock() to check file format and validate the
   data before upload.
 
-# icesSAG 1.5.0 (2024-10-24)
+## icesSAG 1.5.0 (2024-10-24)
 
 * Update all functions to point to new API.
 * Remove token authentication, and move to JWT tokens via icesConnect.
@@ -17,11 +17,11 @@
  for additional server side filtering.
 * Remove file upload capability.
 
-# icesSAG 1.4.1 (2023-05-11)
+## icesSAG 1.4.1 (2023-05-11)
 
 * bug fix for stockInfo() and documentation.
 
-# icesSAG 1.4.0 (2022-02-17)
+## icesSAG 1.4.0 (2022-02-17)
 
 * add new function getCustomColumns().
 
