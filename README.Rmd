@@ -122,11 +122,11 @@ A simple (almost) minimal example is:
 sag_messages(FALSE)
 ```
 
-```{r}
+```{r, eval=FALSE}
 info <-
   stockInfo(
     StockCode = "whg.27.7a",
-    AssessmentYear = 2020,
+    AssessmentYear = 2021,
     ContactPerson = "its_me@somewhere.gov",
     StockCategory = 3,
     Purpose = "Unofficial",
@@ -156,20 +156,20 @@ You can check that the data was uploaded by searching for our stock. Note you wi
 
 ```{r}
 sag_use_token(TRUE)
-findAssessmentKey('wh.27.7a', 2020, full = TRUE)
+findAssessmentKey('whg.27.7a', 2020, full = TRUE)
 ```
 
 ### Displaying graphs
 
-We can also look at the landings graph created from the data that were uploaded
+We can also look at the landings graph created from the data that were uploaded, NOTE you may need to modify the settings at sag.ices.dk.
 
-```{r, landings-plot}
+```{r, landings-plot, eval=FALSE}
 plot(getLandingsGraph(key))
 ```
 
 or download all four summary graphs and display them in a 2x2 grid.
 
-```{r, summary-plot}
+```{r, summary-plot, eval=FALSE}
 graphs <- getSAGGraphs(key)
 plot(graphs)
 ```

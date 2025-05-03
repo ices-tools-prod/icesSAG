@@ -64,34 +64,41 @@ summary_data <- getSAG(stock = "sandeel", year = 2023)
 head(summary_data)
 ```
 
-    ##   Year recruitment high_recruitment low_recruitment low_SSB    SSB high_SSB low_F
-    ## 1 1983   285000075        404690458       200709063  307520 452254   665108 0.478
-    ## 2 1984    75526942        108094090        52771793  136696 194269   276092 0.540
-    ## 3 1985   518266424        723794791       371099778  307364 431059   604534 0.577
-    ## 4 1986    75376039        107979318        52616996  202400 265402   348014 0.389
-    ## 5 1987    49081856         72043445        33438554  708828 977741  1348673 0.302
-    ## 6 1988   201037095        284748295       141935577  420971 577810   793081 0.421
-    ##       F high_F catches landings discards IBC Unallocated_Removals LandingsBMS TBiomass
-    ## 1 0.596  0.744  382629       NA       NA  NA                   NA          NA       NA
-    ## 2 0.674  0.840  498671       NA       NA  NA                   NA          NA       NA
-    ## 3 0.720  0.898  460057       NA       NA  NA                   NA          NA       NA
-    ## 4 0.484  0.602  382844       NA       NA  NA                   NA          NA       NA
-    ## 5 0.377  0.471  373021       NA       NA  NA                   NA          NA       NA
-    ## 6 0.523  0.651  422805       NA       NA  NA                   NA          NA       NA
-    ##   LogbookRegisteredDiscards StockPublishNote Purpose Fage fishstock recruitment_age
-    ## 1                        NA  Stock published  Advice  1-2 san.sa.1r               0
-    ## 2                        NA  Stock published  Advice  1-2 san.sa.1r               0
-    ## 3                        NA  Stock published  Advice  1-2 san.sa.1r               0
-    ## 4                        NA  Stock published  Advice  1-2 san.sa.1r               0
-    ## 5                        NA  Stock published  Advice  1-2 san.sa.1r               0
-    ## 6                        NA  Stock published  Advice  1-2 san.sa.1r               0
-    ##   AssessmentYear  units stockSizeDescription stockSizeUnits fishingPressureDescription
-    ## 1           2023 tonnes                  SSB         tonnes                          F
-    ## 2           2023 tonnes                  SSB         tonnes                          F
-    ## 3           2023 tonnes                  SSB         tonnes                          F
-    ## 4           2023 tonnes                  SSB         tonnes                          F
-    ## 5           2023 tonnes                  SSB         tonnes                          F
-    ## 6           2023 tonnes                  SSB         tonnes                          F
+    ##   Year recruitment high_recruitment low_recruitment low_SSB    SSB
+    ## 1 1983   285000075        404690458       200709063  307520 452254
+    ## 2 1984    75526942        108094090        52771793  136696 194269
+    ## 3 1985   518266424        723794791       371099778  307364 431059
+    ## 4 1986    75376039        107979318        52616996  202400 265402
+    ## 5 1987    49081856         72043445        33438554  708828 977741
+    ## 6 1988   201037095        284748295       141935577  420971 577810
+    ##   high_SSB low_F     F high_F catches landings discards IBC
+    ## 1   665108 0.478 0.596  0.744  382629       NA       NA  NA
+    ## 2   276092 0.540 0.674  0.840  498671       NA       NA  NA
+    ## 3   604534 0.577 0.720  0.898  460057       NA       NA  NA
+    ## 4   348014 0.389 0.484  0.602  382844       NA       NA  NA
+    ## 5  1348673 0.302 0.377  0.471  373021       NA       NA  NA
+    ## 6   793081 0.421 0.523  0.651  422805       NA       NA  NA
+    ##   Unallocated_Removals LandingsBMS TBiomass LogbookRegisteredDiscards
+    ## 1                   NA          NA       NA                        NA
+    ## 2                   NA          NA       NA                        NA
+    ## 3                   NA          NA       NA                        NA
+    ## 4                   NA          NA       NA                        NA
+    ## 5                   NA          NA       NA                        NA
+    ## 6                   NA          NA       NA                        NA
+    ##   StockPublishNote Purpose Fage fishstock recruitment_age AssessmentYear
+    ## 1  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 2  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 3  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 4  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 5  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ## 6  Stock published  Advice  1-2 san.sa.1r               0           2023
+    ##    units stockSizeDescription stockSizeUnits fishingPressureDescription
+    ## 1 tonnes                  SSB         tonnes                          F
+    ## 2 tonnes                  SSB         tonnes                          F
+    ## 3 tonnes                  SSB         tonnes                          F
+    ## 4 tonnes                  SSB         tonnes                          F
+    ## 5 tonnes                  SSB         tonnes                          F
+    ## 6 tonnes                  SSB         tonnes                          F
     ##   fishingPressureUnits AssessmentKey AssessmentComponent
     ## 1                   NA         17718                  NA
     ## 2                   NA         17718                  NA
@@ -167,7 +174,7 @@ A simple (almost) minimal example is:
 info <-
   stockInfo(
     StockCode = "whg.27.7a",
-    AssessmentYear = 2020,
+    AssessmentYear = 2021,
     ContactPerson = "its_me@somewhere.gov",
     StockCategory = 3,
     Purpose = "Unofficial",
@@ -188,25 +195,10 @@ cat(xml, file = tempfile)
 
 # this file can then be uploaded using the SAG webservices
 key <- uploadStock(tempfile, upload = TRUE)
-```
 
-    ## Screening file           ...  No errors found :)Importing to database    ... POSTing ... https://sag.ices.dk/SAG_API/api/uploadStock?sessionId=55742
-    ## using token for user ICES\colin
-    ## OK (HTTP 200).
-    ## 
-    ## Done
-    ## Upload complete! New assessmentKey is: 19697
-    ## To check upload run (with 'options(icesSAG.use_token = TRUE)'): 
-    ##   findAssessmentKey('whg.27.7a', 2020, full = TRUE)
-    ## To view on sag.ices.dk:
-    ## browseURL('https://standardgraphs.ices.dk/manage/ViewGraphsAndTables.aspx?key=19697')
-
-``` r
 # if you want to just check the file and not upload:
 uploadStock(tempfile, upload = FALSE)
 ```
-
-    ## Screening file ...  No errors found :)
 
 You can check that the data was uploaded by searching for our stock.
 Note you will need to make sure the icesSAG.use_token option is set to
@@ -214,44 +206,26 @@ TRUE
 
 ``` r
 sag_use_token(TRUE)
-findAssessmentKey('whb-comb', 1996, full = TRUE)
+findAssessmentKey('whg.27.7a', 2020, full = TRUE)
 ```
 
     ##   AssessmentKey StockKeyLabel    Purpose StockDatabaseID StockKey
-    ## 1          9331      whb-comb InitAdvice              NA   136737
-    ## 2          9344      whb-comb      Bench              NA   136737
-    ## 3         11559      whb-comb       <NA>              NA   136737
-    ## 4         11560      whb-comb       <NA>              NA   136737
-    ## 5         11561      whb-comb       <NA>              NA   136737
-    ##                                              StockDescription        Status
-    ## 1 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
-    ## 2 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
-    ## 3 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
-    ## 4 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
-    ## 5 Blue whiting in Subareas I-IX, XII and XIV (Combined stock) Not Published
-    ##   AssessmentYear              SpeciesName        ModifiedDate
-    ## 1           1996 Micromesistius poutassou 31-05-2024 11:13:05
-    ## 2           1996 Micromesistius poutassou 31-05-2024 11:13:05
-    ## 3           1996 Micromesistius poutassou 31-05-2024 11:13:05
-    ## 4           1996 Micromesistius poutassou 31-05-2024 11:13:05
-    ## 5           1996 Micromesistius poutassou 31-05-2024 11:13:05
+    ## 1         19700     whg.27.7a Unofficial              NA   169305
+    ##                                             StockDescription
+    ## 1 Whiting (Merlangius merlangus) in Division 7.a (Irish Sea)
+    ##          Status AssessmentYear          SpeciesName        ModifiedDate
+    ## 1 Not Published           2020 Merlangius merlangus 03-05-2025 13:44:02
     ##                            SAGStamp LinkToAdvice AssessmentComponent
-    ## 1  whb-comb_1996_9331_2024531111305           NA                  NA
-    ## 2  whb-comb_1996_9344_2024531111305           NA                  NA
-    ## 3 whb-comb_1996_11559_2024531111305           NA                  NA
-    ## 4 whb-comb_1996_11560_2024531111305           NA                  NA
-    ## 5 whb-comb_1996_11561_2024531111305           NA                  NA
+    ## 1 whg.27.7a_2020_19700_202553134402         <NA>                  NA
 
 ### Displaying graphs
 
 We can also look at the landings graph created from the data that were
-uploaded
+uploaded, NOTE you may need to modify the settings at sag.ices.dk.
 
 ``` r
 plot(getLandingsGraph(key))
 ```
-
-![](README_files/figure-gfm/landings-plot-1.png)<!-- -->
 
 or download all four summary graphs and display them in a 2x2 grid.
 
@@ -259,8 +233,6 @@ or download all four summary graphs and display them in a 2x2 grid.
 graphs <- getSAGGraphs(key)
 plot(graphs)
 ```
-
-![](README_files/figure-gfm/summary-plot-1.png)<!-- -->
 
 ### References
 
