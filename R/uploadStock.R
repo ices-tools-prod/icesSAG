@@ -50,6 +50,14 @@
 #' @export
 uploadStock <- function(file, upload = FALSE, verbose = FALSE) {
 
+  if (!is.character(file) || length(file) != 1) {
+    stop("file must be a single character string")
+  }
+
+  if (!file.exists(file)) {
+    stop("File does not exist: ", file)
+  }
+
   sagmessage <- function(...) {
     message(..., appendLF = FALSE)
   }
