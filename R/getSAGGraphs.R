@@ -37,17 +37,23 @@ getSAGGraphs <- function(assessmentKey, ...) {
   }
 
   # which graph types to get
-  types <- c("Landings",
-             "Recruitment",
-             "FishingMortality",
-             "SpawningStockBiomass")
+  types <- c(
+    "Landings",
+    "Recruitment",
+    "FishingMortality",
+    "SpawningStockBiomass"
+  )
 
   # call webservices, built as: get<types>Graph
   out <-
-    sapply(types,
-           function(x)
-               do.call(sprintf("get%sGraph", x),
-                     args = list(assessmentKey = assessmentKey)))
+    sapply(
+      types,
+      function(x) {
+        do.call(sprintf("get%sGraph", x),
+          args = list(assessmentKey = assessmentKey)
+        )
+      }
+    )
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))

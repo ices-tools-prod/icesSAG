@@ -1,3 +1,7 @@
+# icesSAG 1.6.3 (2025-05-03)
+
+* fixed bug in getSAGGraphs
+
 # icesSAG 1.6.2 (2025-04-30)
 
 * Upload stock function updated and working.

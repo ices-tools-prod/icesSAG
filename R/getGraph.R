@@ -19,10 +19,10 @@
 #' \dontrun{
 #' assessmentKeys <- findAssessmentKey("had", 2015)
 #' landings_img <- getLandingsGraph(assessmentKeys[1])
-#' plot(landings_img)
+#' landings_img
 #'
 #' landings_plots <- getLandingsGraph(assessmentKeys)
-#' plot(landings_plots)
+#' landings_plots
 #'}
 #'
 #' @rdname getGraphs
@@ -57,7 +57,11 @@ getLandingsGraph <- function(assessmentKey, ...) {
   paths <- get_plot_path(assessmentKey, type)
 
   # download pngs
-  out <- get_image_internal(paths)
+  out <- vector("list", length = length(paths))
+  out[nzchar(paths)] <- get_image_internal(paths[nzchar(paths)])
+
+  # set class
+  class(out) <- c("ices_standardgraph_list", class(out))
 
   # return
   out
