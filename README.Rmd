@@ -141,57 +141,22 @@ fishdata$Landings <- 10^6 * exp(cumsum(cumsum(rnorm(nrow(fishdata), 0, 0.1))))
 
 # you can create an XML file to upload yourself
 xml <- createSAGxml(info, fishdata)
-
-# this file can be checked using the icesDatsu package
-library(icesDatsu)
-
+# here we use a temporary file to store the XML, but you can safe this to your output or report folder
 tempfile <- tempfile(fileext = ".xml")
 cat(xml, file = tempfile)
-id <- uploadDatsuFileFireAndForget(tempfile, 126)
 
-getDataFieldsDescription(126)
+# this file can then be uploaded using the SAG webservices
+key <- uploadStock(tempfile, upload = TRUE)
 
-icesVocab::getCodeList("AssessmentPurpose")$Key
-
-
-errs <- getScreeningSessionMessages(id)
-
-if (!identical(errs, list( "Session has no messages!"))) {
-  stop("There were errors in the screening session, please correct and try again")
-}
-
-x <- sag_post(sag_api("uploadStock"), body = list(sessionId = id), )
-
-id <- 45896
-
-  out <-
-    POST(
-      sag_api("uploadStock"),
-      body = as.character(id),
-      encode = "json",
-  #    content_type("application/json-patch+json"),
-      add_headers(Authorization = paste("Bearer", ices_token())),
-      verbose()
-    )
-
-
-sag_use_token(TRUE)
-getListStocks("whg.27.7a", year = 2020)
-
-
-# or upload directly - not currently working...
-# key <- uploadStock(info, fishdata)
-```
-
-```{r echo = FALSE}
-key <- 19014
+# if you want to just check the file and not upload:
+uploadStock(tempfile, upload = FALSE)
 ```
 
 You can check that the data was uploaded by searching for our stock. Note you will need to make sure the icesSAG.use_token option is set to TRUE
 
 ```{r}
 sag_use_token(TRUE)
-findAssessmentKey('whb-comb', 1996, full = TRUE)
+findAssessmentKey('wh.27.7a', 2020, full = TRUE)
 ```
 
 ### Displaying graphs
