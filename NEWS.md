@@ -2,12 +2,12 @@
 
 * added custom plot capability to getSAGGraphs
 
-# icesSAG 1.6.3 (2025-05-03)
+## icesSAG 1.6.3 (2025-05-03)
 
 * fixed bug in getSAGGraphs
 * remove dependency on icesVocab
 
-# icesSAG 1.6.2 (2025-04-30)
+## icesSAG 1.6.2 (2025-04-30)
 
 * Upload stock function updated and working.
 * icesDatsu is used in uploadStock() to check file format and validate the
