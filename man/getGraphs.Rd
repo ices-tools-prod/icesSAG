@@ -43,7 +43,7 @@ getCustomGraph(assessmentKey, ...)
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
 
-\item{...}{to allow scope for back compatibility}
+\item{...}{if using getCustomGraph, the custom_graph argument can be used to specify which custom graph to retrieve (see details)s).}
 }
 \value{
 An array representing a bitmap.
@@ -54,7 +54,8 @@ recruitment, and fishing pressure.
 }
 \details{
 Some stocks have custom graphs, to access these use the function
-\code{getCustomGraph(assessmentKey, custom_graph = <number>)} #' where the number is 1, 2, 3, or 4.
+\code{getCustomGraph(assessmentKey, custom_graph)}
+where custom_graph is an integer: 1, 2, 3, or 4.
 }
 \examples{
 \dontrun{

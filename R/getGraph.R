@@ -4,14 +4,15 @@
 #' recruitment, and fishing pressure.
 #'
 #' @param assessmentKey the unique identifier of the stock assessment
-#' @param ... to allow scope for back compatibility
+#' @param ... if using getCustomGraph, the custom_graph argument can be used to specify which custom graph to retrieve (see details)s).
 #'
 #' @return An array representing a bitmap.
 #'
 #' @details
 #'
 #' Some stocks have custom graphs, to access these use the function
-#' \code{getCustomGraph(assessmentKey, custom_graph = <number>)} #' where the number is 1, 2, 3, or 4.
+#' \code{getCustomGraph(assessmentKey, custom_graph)}
+#' where custom_graph is an integer: 1, 2, 3, or 4.
 #'
 #' @seealso
 #' \code{\link{getListStocks}} gets a list of stocks.
