@@ -1,3 +1,7 @@
+# icesSAG 1.6.4 (2025-06-19)
+
+* added custom plot capability to getSAGGraphs
+
 # icesSAG 1.6.3 (2025-05-03)
 
 * fixed bug in getSAGGraphs

@@ -8,6 +8,11 @@
 #'
 #' @return An array representing a bitmap.
 #'
+#' @details
+#'
+#' Some stocks have custom graphs, to access these use the function
+#' \code{getCustomGraph(assessmentKey, custom_graph = <number>)} #' where the number is 1, 2, 3, or 4.
+#'
 #' @seealso
 #' \code{\link{getListStocks}} gets a list of stocks.
 #'
@@ -37,13 +42,16 @@ getLandingsGraph <- function(assessmentKey, ...) {
   # get function name as a character
   # NOTE need tail(x, 1) here for when calling as icesSAG::get____(assessmentKey)
   operation <- utils::tail(as.character(match.call()[[1]]), 1)
-  #type_char <- gsub("get([a-zA-Z]+)Graph", "\\1", operation)
+  # type_char <- gsub("get([a-zA-Z]+)Graph", "\\1", operation)
+
+  custom_graph <- list(...)$custom_graph
 
   types <- c(
     getLandingsGraph = 1, getRecruitmentGraph = 2,
     getFishingMortalityGraph = 3, getSpawningStockBiomassGraph = 4,
     getSSBHistoricalPerformance = 10, getFishingMortalityHistoricalPerformance = 11,
-    getRecruitmentHistoricalPerformance = 12
+    getRecruitmentHistoricalPerformance = 12,
+    getCustomGraph = custom_graph + 14 # custom graph types are 15, 16, 17, and 18
   )
 
   type <- types[operation]
@@ -55,6 +63,10 @@ getLandingsGraph <- function(assessmentKey, ...) {
 
   # get file paths for all assessmentKeys
   paths <- get_plot_path(assessmentKey, type)
+  if (!nzchar(paths)) {
+    message("No graph available for this assessmentKey and type.")
+    return(NULL)
+  }
 
   # download pngs
   out <- vector("list", length = length(paths))
@@ -106,3 +118,7 @@ getRecruitmentHistoricalPerformance <- getLandingsGraph
 #' @rdname getGraphs
 #' @export
 getStockStatusTable <- getLandingsGraph
+
+#' @rdname getGraphs
+#' @export
+getCustomGraph <- getLandingsGraph

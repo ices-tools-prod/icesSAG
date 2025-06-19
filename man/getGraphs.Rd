@@ -13,6 +13,7 @@
 \alias{getFishingMortalityHistoricalPerformance}
 \alias{getRecruitmentHistoricalPerformance}
 \alias{getStockStatusTable}
+\alias{getCustomGraph}
 \title{Get a Graph of Stock Assessment Output}
 \usage{
 getLandingsGraph(assessmentKey, ...)
@@ -36,6 +37,8 @@ getFishingMortalityHistoricalPerformance(assessmentKey, ...)
 getRecruitmentHistoricalPerformance(assessmentKey, ...)
 
 getStockStatusTable(assessmentKey, ...)
+
+getCustomGraph(assessmentKey, ...)
 }
 \arguments{
 \item{assessmentKey}{the unique identifier of the stock assessment}
@@ -48,6 +51,10 @@ An array representing a bitmap.
 \description{
 Get a graph of stock assessment output, e.g., historical stock size,
 recruitment, and fishing pressure.
+}
+\details{
+Some stocks have custom graphs, to access these use the function
+\code{getCustomGraph(assessmentKey, custom_graph = <number>)} #' where the number is 1, 2, 3, or 4.
 }
 \examples{
 \dontrun{
