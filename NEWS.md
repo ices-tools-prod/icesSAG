@@ -1,4 +1,9 @@
-# icesSAG 1.6.4 (2025-06-19)
+# icesSAG 1.6.5 (2025-06-25)
+
+* Fixed bugs in getSAGGraphs
+* Added new argument assessmentKey to getListStocks()
+
+## icesSAG 1.6.4 (2025-06-19)
 
 * added custom plot capability to getSAGGraphs
 

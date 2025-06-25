@@ -4,12 +4,20 @@
 \alias{getListStocks}
 \title{Get a List of Fish Stocks}
 \usage{
-getListStocks(year, stock = NULL, modifiedAfter = NULL, ...)
+getListStocks(
+  year,
+  stock = NULL,
+  assessmentKey = NULL,
+  modifiedAfter = NULL,
+  ...
+)
 }
 \arguments{
 \item{year}{the assessment year, e.g. 2015, or 0 to process all years.}
 
 \item{stock}{a stock name, e.g. lin.27.5a.}
+
+\item{assessmentKey}{the unique identifier of the stock assessment}
 
 \item{modifiedAfter}{date-time parameter in the format "YYYY/MM/DD". If set
 will only return stocks assessments modified after the provided date.}

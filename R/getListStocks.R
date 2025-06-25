@@ -4,6 +4,7 @@
 #'
 #' @param year the assessment year, e.g. 2015, or 0 to process all years.
 #' @param stock a stock name, e.g. lin.27.5a.
+#' @param assessmentKey the unique identifier of the stock assessment
 #' @param modifiedAfter date-time parameter in the format "YYYY/MM/DD". If set
 #'   will only return stocks assessments modified after the provided date.
 #' @param ... arguments passed to \code{\link{sag_get}}.
@@ -26,7 +27,7 @@
 #' }
 #' @export
 
-getListStocks <- function(year, stock = NULL, modifiedAfter = NULL, ...) {
+getListStocks <- function(year, stock = NULL, assessmentKey = NULL, modifiedAfter = NULL, ...) {
   # call webservice for all supplied years
   if (missing(year) || identical(year, 0)) {
     year <- 2015:as.numeric(format(Sys.Date(), "%Y"))
