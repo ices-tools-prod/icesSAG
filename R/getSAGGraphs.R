@@ -52,8 +52,17 @@ getSAGGraphs <- function(assessmentKey, ...) {
         do.call(sprintf("get%sGraph", x),
           args = list(assessmentKey = assessmentKey)
         )
-      }
+      },
+      simplify = FALSE
     )
+
+  nulls <- which(sapply(out, is.null))
+  empty <- list(array(0, c(641, 1152, 4)))
+  class(empty) <- "ices_standardgraph_list"
+  for (i in nulls) {
+    out[[i]] <- empty
+  }
+  out <- simplify2array(out)
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))
