@@ -37,7 +37,7 @@ getListStocks <- function(year, stock = NULL, assessmentKey = NULL, modifiedAfte
       year,
       function(i) {
         sag_get_cached(
-          sag_api("StockList", year = i, fishStock = stock, modifiedAfter = modifiedAfter), ...
+          sag_api("StockList", year = i, fishStock = stock, assessmentKey = assessmentKey, modifiedAfter = modifiedAfter), ...
         )
       }
     )
