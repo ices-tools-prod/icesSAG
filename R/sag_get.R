@@ -26,10 +26,17 @@
 #' }
 #' @export
 #'
-#' @importFrom icesConnect ices_get
-#' @importFrom httr content
+#' @importFrom curl curl_fetch_memory
+#' @importFrom jsonlite parse_json
 sag_get <- function(url, retry = TRUE, quiet = !getOption("icesSAG.messages"), verbose = FALSE, content = TRUE, use_token = getOption("icesSAG.use_token")) {
-  ices_get(url, retry, quiet, verbose, content, use_token)
+
+  req <- curl_fetch_memory(url)
+
+  if (content) {
+    parse_json(rawToChar(req$content), simplifyVector = TRUE)
+  } else {
+    req
+  }
 }
 
 #' @describeIn sag_get cached version of sag_get

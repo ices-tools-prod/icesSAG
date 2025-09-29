@@ -6,3 +6,7 @@
 *.sln
 *.rxproj
 *.suo
+docs
+inst/doc
+worksheet.R
+_pkgdown.yml

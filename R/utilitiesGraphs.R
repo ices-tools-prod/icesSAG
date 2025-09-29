@@ -29,10 +29,13 @@ get_plot_path <- function(assessmentKey, type = 1, ...) {
   out
 }
 
+#' @importFrom png readPNG
 get_image_internal <- function(paths, ...) {
 
   # call webservice for all supplied keys
-  out <- lapply(paths, sag_get, ...)
+  out <- lapply(paths, sag_get, content = FALSE, ...)
+
+  out <- lapply(out, function(x) readPNG(x$content))
 
   # set class
   class(out) <- c("ices_standardgraph_list", class(out))
@@ -41,6 +44,7 @@ get_image_internal <- function(paths, ...) {
   out
 }
 
+#' @importFrom grid grid.newpage grid.raster
 #' @export
 plot.ices_standardgraph_list <- function(x, y = NULL, ...) {
   # clear the page

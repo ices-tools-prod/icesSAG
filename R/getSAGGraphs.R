@@ -28,7 +28,6 @@
 #' @export
 
 getSAGGraphs <- function(assessmentKey, ...) {
-  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # only 1 key can be used
   if (length(assessmentKey) > 1) {

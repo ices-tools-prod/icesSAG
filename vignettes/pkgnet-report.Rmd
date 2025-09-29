@@ -1,0 +1,126 @@
+---
+title: "icesSAG Package Dependency Report"
+output:
+    rmarkdown::html_vignette:
+        toc: true
+vignette: >
+    %\VignetteIndexEntry{icesSAG Package Dependency Report}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE
+    , warning=FALSE
+    , out.width='100%'
+)
+pkgnet:::silence_logger()
+
+pkg <- "icesSAG"
+base <- TRUE
+
+pkgs_all <- installed.packages()
+pkgs_avail <- available.packages(repos = "https://cloud.r-project.org")
+rm(reporter)
+
+reporter <- pkgnet::DependencyReporter$new(installed = TRUE) # has to be true, as we need non-cran packages
+reporter$set_package(pkg_name = pkg)
+```
+
+## Dependency Network
+
+This section analyzes the recursive package dependencies of **`r reporter$pkg_name`**.
+
+```{r echo = FALSE, error = TRUE}
+reporter$calculate_default_measures()
+```
+
+### Visualization
+
+Nodes are packages. Edges point in the direction of dependence.
+
+```{r echo = FALSE, error = TRUE}
+
+plotDTnodes <- data.table::copy(reporter$nodes) # Don't modify original
+plotDTnodes[, id := node]
+plotDTnodes[, label := id]
+
+pkgs <- pkgs_all[plotDTnodes$node, ]
+repo <- sapply(pkgs[, "Package"], function(x) packageDescription(x)$Repository %||% NA)
+repo[pkgs[, "Priority"] == "base"] <- "Base"
+repo[pkgs[, "Priority"] == "recommended"] <- "Recommended"
+
+plotDTnodes[, Repo := repo]
+
+# colour nodes based on package type
+plotDTnodes[, color := "red"]
+plotDTnodes[Repo == "CRAN", color := "orange"]
+plotDTnodes[Repo == "Base", color := "lightgreen"]
+plotDTnodes[Repo == "Recommended", color := "lightblue"]
+plotDTnodes[node == pkg, color := "steelblue"]
+
+# colour or outline in dotted lines, nodes based on whether package is on CRAN or not
+
+
+# colour based on package build status?
+
+# extend to analyse a icesSAG analysis project, showing dependencies between packages and scripts
+
+plotDTedges <- data.table::copy(reporter$edges) # Don't modify original
+plotDTedges[, from := SOURCE]
+plotDTedges[, to := TARGET]
+plotDTedges[, color := "#848484"]
+
+
+# remove base packages
+if (!base) {
+  plotDTnodes <- plotDTnodes[Repo != "Base" | node == pkg]
+  plotDTedges <- plotDTedges[
+    SOURCE %in% plotDTnodes$node & TARGET %in% plotDTnodes$node
+  ]
+}
+
+
+g <- visNetwork::visNetwork(
+  nodes = plotDTnodes,
+  edges = plotDTedges
+) |>
+  visNetwork::visIgraphLayout(
+    layout = "layout_as_tree",
+    smooth = TRUE,
+    mode = "all",
+    flip.y = FALSE,
+    root = which(plotDTnodes$node == pkg)
+  ) |>
+  visNetwork::visEdges(arrows = "to") |>
+  visNetwork::visOptions(
+    highlightNearest = list(
+      enabled = TRUE,
+      degree = nrow(plotDTnodes), # guarantee full path
+      algorithm = "hierarchical"
+    ),
+    collapse = FALSE,
+    selectedBy = "Repo"
+  )
+
+g
+```
+
+### Table
+
+```{r error = TRUE}
+reporter$get_summary_view()
+```
+
+---
+
+```{r results="asis"}
+cat(sprintf("<sup>This report built with **pkgnet v%s**.</sup>", packageVersion('pkgnet')))
+```
+
+<sup>[**pkgnet**](https://uptakeopensource.github.io/pkgnet/) is an open-source R package, copyright &copy; 2017-2019 Uptake, made available under the 3-Clause BSD License.</sup>
+
+```{r echo = FALSE}
+pkgnet:::unsilence_logger()
+```

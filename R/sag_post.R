@@ -17,9 +17,9 @@
 #'
 #' @export
 #'
-#' @importFrom icesConnect ices_post
 sag_post <- function(url, body = list(), verbose = FALSE) {
-  out <- ices_post(url, body, retry = TRUE, verbose = verbose, content = TRUE, use_token = TRUE, encode = "json")
+  #out <- ices_post(url, body, retry = TRUE, verbose = verbose, content = TRUE, use_token = TRUE, encode = "json")
+  out <- NULL
 
   return(out)
 }

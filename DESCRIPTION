@@ -1,5 +1,5 @@
 Package: icesSAG
-Version: 1.6.5
+Version: 1.6.6
 Title: Stock Assessment Graphs Database Web Services
 Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@ices.dk"),
              person("Scott", "Large", role="aut"),
@@ -7,19 +7,27 @@ Authors@R: c(person("Colin", "Millar", role=c("aut","cre"), email="colin.millar@
              person("Carlos", "Pinto", role="aut"),
              person("Laura Andreea", "Petre", role = "aut"))
 Depends: R (>= 4.3)
-Imports: httr,
-         xml2,
-         icesConnect (>= 1.1.4),
-         icesDatsu (>= 1.2.1),
-         memoise,
-         cachem,
-         rlang
-Suggests: testthat, icesVocab
+Imports:
+    curl,
+    jsonlite,
+    png,
+    memoise,
+    cachem,
+    rlang,
+    grid
+Suggests:
+    icesVocab,
+    knitr,
+    rmarkdown,
+    data.table,
+    pkgnet,
+    visNetwork
 Description: R interface to access the web services of the ICES Stock Assessment
-             Graphs database <https://sg.ices.dk>.
+    Graphs database <https://sg.ices.dk>.
 License: GPL (>= 2)
 URL: https://sg.ices.dk, https://github.com/ices-tools-prod/icesSAG
 BugReports: https://github.com/ices-tools-prod/icesSAG/issues
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Encoding: UTF-8
 Language: en-GB
+VignetteBuilder: knitr

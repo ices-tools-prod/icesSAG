@@ -46,7 +46,6 @@
 #' }
 #'
 #'
-#' @importFrom icesDatsu getScreeningSessionMessages uploadDatsuFile
 #' @export
 uploadStock <- function(file, upload = FALSE, verbose = FALSE) {
 
@@ -69,9 +68,9 @@ uploadStock <- function(file, upload = FALSE, verbose = FALSE) {
 
   # upload to DATSU and check file is formatted correctly
   sagmessage("Screening file           ... ")
-  datsu_resp <- suppressMessages(uploadDatsuFile(file, 126))
+  datsu_resp <- NULL # suppressMessages(uploadDatsuFile(file, 126))
 
-  errors <- suppressMessages(getScreeningSessionMessages(datsu_resp))
+  errors <- NULL # suppressMessages(getScreeningSessionMessages(datsu_resp))
 
   if (is.data.frame(errors)) {
     warning(" Errors were found in the upload.  See\n\t https://datsu.ices.dk/web/ScreenResult.aspx?sessionid=", datsu_resp, "\n\tfor details")

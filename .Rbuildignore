@@ -5,3 +5,8 @@ README.Rmd
 ^CRAN-SUBMISSION$
 ^CRAN-RELEASE$
 ^R-broken$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+worksheet.R
