@@ -4,7 +4,7 @@ name](https://ices-tools-prod.r-universe.dev/badges/:name)](https://ices-tools-p
 [![version
 number](https://ices-tools-prod.r-universe.dev/badges/icesSAG)](https://ices-tools-prod.r-universe.dev/icesSAG)
 ![branch version
-number](https://img.shields.io/badge/branch_version-1.6.2-blue)
+number](https://img.shields.io/badge/branch_version-1.6.6-blue)
 [![GitHub
 release](https://img.shields.io/github/release/ices-tools-prod/icesSAG.svg?maxAge=6000)]()
 [![License](https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
@@ -64,41 +64,27 @@ summary_data <- getSAG(stock = "sandeel", year = 2023)
 head(summary_data)
 ```
 
-    ##   Year recruitment high_recruitment low_recruitment low_SSB    SSB
-    ## 1 1983   285000075        404690458       200709063  307520 452254
-    ## 2 1984    75526942        108094090        52771793  136696 194269
-    ## 3 1985   518266424        723794791       371099778  307364 431059
-    ## 4 1986    75376039        107979318        52616996  202400 265402
-    ## 5 1987    49081856         72043445        33438554  708828 977741
-    ## 6 1988   201037095        284748295       141935577  420971 577810
-    ##   high_SSB low_F     F high_F catches landings discards IBC
-    ## 1   665108 0.478 0.596  0.744  382629       NA       NA  NA
-    ## 2   276092 0.540 0.674  0.840  498671       NA       NA  NA
-    ## 3   604534 0.577 0.720  0.898  460057       NA       NA  NA
-    ## 4   348014 0.389 0.484  0.602  382844       NA       NA  NA
-    ## 5  1348673 0.302 0.377  0.471  373021       NA       NA  NA
-    ## 6   793081 0.421 0.523  0.651  422805       NA       NA  NA
-    ##   Unallocated_Removals LandingsBMS TBiomass LogbookRegisteredDiscards
-    ## 1                   NA          NA       NA                        NA
-    ## 2                   NA          NA       NA                        NA
-    ## 3                   NA          NA       NA                        NA
-    ## 4                   NA          NA       NA                        NA
-    ## 5                   NA          NA       NA                        NA
-    ## 6                   NA          NA       NA                        NA
-    ##   StockPublishNote Purpose Fage fishstock recruitment_age AssessmentYear
-    ## 1  Stock published  Advice  1-2 san.sa.1r               0           2023
-    ## 2  Stock published  Advice  1-2 san.sa.1r               0           2023
-    ## 3  Stock published  Advice  1-2 san.sa.1r               0           2023
-    ## 4  Stock published  Advice  1-2 san.sa.1r               0           2023
-    ## 5  Stock published  Advice  1-2 san.sa.1r               0           2023
-    ## 6  Stock published  Advice  1-2 san.sa.1r               0           2023
-    ##    units stockSizeDescription stockSizeUnits fishingPressureDescription
-    ## 1 tonnes                  SSB         tonnes                          F
-    ## 2 tonnes                  SSB         tonnes                          F
-    ## 3 tonnes                  SSB         tonnes                          F
-    ## 4 tonnes                  SSB         tonnes                          F
-    ## 5 tonnes                  SSB         tonnes                          F
-    ## 6 tonnes                  SSB         tonnes                          F
+    ##   Year recruitment high_recruitment low_recruitment low_SSB    SSB high_SSB low_F     F high_F catches landings
+    ## 1 1983   285000075        404690458       200709063  307520 452254   665108 0.478 0.596  0.744  382629       NA
+    ## 2 1984    75526942        108094090        52771793  136696 194269   276092 0.540 0.674  0.840  498671       NA
+    ## 3 1985   518266424        723794791       371099778  307364 431059   604534 0.577 0.720  0.898  460057       NA
+    ## 4 1986    75376039        107979318        52616996  202400 265402   348014 0.389 0.484  0.602  382844       NA
+    ## 5 1987    49081856         72043445        33438554  708828 977741  1348673 0.302 0.377  0.471  373021       NA
+    ## 6 1988   201037095        284748295       141935577  420971 577810   793081 0.421 0.523  0.651  422805       NA
+    ##   discards IBC Unallocated_Removals LandingsBMS TBiomass LogbookRegisteredDiscards StockPublishNote Purpose Fage
+    ## 1       NA  NA                   NA          NA       NA                        NA  Stock published  Advice  1-2
+    ## 2       NA  NA                   NA          NA       NA                        NA  Stock published  Advice  1-2
+    ## 3       NA  NA                   NA          NA       NA                        NA  Stock published  Advice  1-2
+    ## 4       NA  NA                   NA          NA       NA                        NA  Stock published  Advice  1-2
+    ## 5       NA  NA                   NA          NA       NA                        NA  Stock published  Advice  1-2
+    ## 6       NA  NA                   NA          NA       NA                        NA  Stock published  Advice  1-2
+    ##   fishstock recruitment_age AssessmentYear  units stockSizeDescription stockSizeUnits fishingPressureDescription
+    ## 1 san.sa.1r               0           2023 tonnes                  SSB         tonnes                          F
+    ## 2 san.sa.1r               0           2023 tonnes                  SSB         tonnes                          F
+    ## 3 san.sa.1r               0           2023 tonnes                  SSB         tonnes                          F
+    ## 4 san.sa.1r               0           2023 tonnes                  SSB         tonnes                          F
+    ## 5 san.sa.1r               0           2023 tonnes                  SSB         tonnes                          F
+    ## 6 san.sa.1r               0           2023 tonnes                  SSB         tonnes                          F
     ##   fishingPressureUnits AssessmentKey AssessmentComponent
     ## 1                   NA         17718                  NA
     ## 2                   NA         17718                  NA
@@ -209,14 +195,10 @@ sag_use_token(TRUE)
 findAssessmentKey('whg.27.7a', 2020, full = TRUE)
 ```
 
-    ##   AssessmentKey StockKeyLabel    Purpose StockDatabaseID StockKey
-    ## 1         19700     whg.27.7a Unofficial              NA   169305
-    ##                                             StockDescription
-    ## 1 Whiting (Merlangius merlangus) in Division 7.a (Irish Sea)
-    ##          Status AssessmentYear          SpeciesName        ModifiedDate
-    ## 1 Not Published           2020 Merlangius merlangus 03-05-2025 13:44:02
-    ##                            SAGStamp LinkToAdvice AssessmentComponent
-    ## 1 whg.27.7a_2020_19700_202553134402         <NA>                  NA
+    ##  [1] AssessmentKey       StockKeyLabel       Purpose             StockDatabaseID     StockKey           
+    ##  [6] StockDescription    Status              AssessmentYear      SpeciesName         ModifiedDate       
+    ## [11] SAGStamp            LinkToAdvice        AssessmentComponent
+    ## <0 rows> (or 0-length row.names)
 
 ### Displaying graphs
 
