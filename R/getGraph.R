@@ -38,7 +38,6 @@ NULL
 #' @rdname getGraphs
 #' @export
 getLandingsGraph <- function(assessmentKey, ...) {
-  assessmentKey <- checkKeyArg(assessmentKey = assessmentKey, ...)
 
   # get function name as a character
   # NOTE need tail(x, 1) here for when calling as icesSAG::get____(assessmentKey)
@@ -64,7 +63,7 @@ getLandingsGraph <- function(assessmentKey, ...) {
 
   # get file paths for all assessmentKeys
   paths <- get_plot_path(assessmentKey, type)
-  if (!nzchar(paths)) {
+  if (all(!nzchar(paths))) {
     message("No graph available for this assessmentKey and type.")
     return(NULL)
   }
