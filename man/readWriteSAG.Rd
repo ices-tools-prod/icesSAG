@@ -41,8 +41,8 @@ the file name, invisibly.
 }
 \description{
 Write stock information, yearly results and the retrospective bias record
-to the XML format required for uploading to the SAG database via DATSU
-(\url{https://datsu.ices.dk}, dataset 126).  The layout matches the file
+to the XML format required for uploading to the SAG database at
+\url{https://standardgraphs.ices.dk}.  The layout matches the file
 produced by the 2026 SAG Excel template.
 }
 \details{

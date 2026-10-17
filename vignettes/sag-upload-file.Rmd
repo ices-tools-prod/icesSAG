@@ -15,8 +15,8 @@ library(icesSAG)
 ```
 
 Results of ICES stock assessments are submitted to the Stock Assessment
-Graphs (SAG) database as an XML file, which is screened and uploaded through
-DATSU (<https://datsu.ices.dk>, dataset *Stock Assessment Graphs*).
+Graphs (SAG) database as an XML file, uploaded at
+<https://standardgraphs.ices.dk>.
 The XML file is usually made with the SAG Excel template; this vignette
 shows how to make the same file in R with **icesSAG**.
 
@@ -160,7 +160,8 @@ Error: The file was not written, please fix the following errors:
 ```
 
 The checks can be skipped with `check = FALSE`, for example if the vocabulary
-server cannot be reached, but DATSU will apply the same checks on upload.
+server cannot be reached, but the same checks are applied when the file is
+uploaded.
 
 ## The file
 
@@ -187,6 +188,5 @@ cat(xml[last:length(xml)], sep = "\n")
 
 ## Uploading
 
-Upload the file at <https://datsu.ices.dk>, choosing the
-*Stock Assessment Graphs* dataset. DATSU screens the file and reports any
-errors; a file that passes can then be submitted to the SAG database.
+Upload the file at <https://standardgraphs.ices.dk>. The file is screened
+on upload and any errors are reported.

@@ -1,7 +1,7 @@
 # icesSAG 1.7.0
 
 * Supports the 2026 SAG upload format (DATSU dataset 126).
-* New writeSAGxml() writes the XML upload file to be submitted via DATSU,
+* New writeSAGxml() writes the XML file to upload at https://standardgraphs.ices.dk,
   matching the file produced by the 2026 SAG Excel template.
   writeSAG() is deprecated.
 * New stockRetroBias() creates the assessment retro-bias record, which is
