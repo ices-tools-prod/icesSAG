@@ -1,3 +1,19 @@
+# icesSAG 1.7.0
+
+* Supports the 2026 SAG upload format (DATSU dataset 126).
+* New writeSAGxml() writes the XML upload file to be submitted via DATSU,
+  matching the file produced by the 2026 SAG Excel template.
+  writeSAG() is deprecated.
+* New stockRetroBias() creates the assessment retro-bias record, which is
+  mandatory for category 1 and 2 stocks.
+* New writeSAGxml(sameRefPoints = TRUE) option to keep the previous
+  assessment's reference points.
+* New checkSAG() checks codes against the ICES vocabularies (via icesVocab)
+  and applies the DATSU / template cross checks.  writeSAGxml() runs it
+  before writing.
+* stockInfo(): added BMSY and CustomSeriesType1-20, removed Flim (no longer an
+  ICES reference point) and a duplicated CatchesLandingsUnits entry.
+
 # icesSAG 1.6.5 (2025-06-25)
 
 * Fixed bugs in getSAGGraphs
