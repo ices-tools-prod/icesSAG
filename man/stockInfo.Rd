@@ -32,7 +32,9 @@ stockInfo(
 \item{ModelName}{the name (acronym) of the model used if available
 (see below for links to more information)}
 
-\item{...}{additional information, e.g. BMGT, FMSY, RecruitmentAge, ...}
+\item{...}{additional information, e.g. BMGT, FMSY, BMSY, RecruitmentAge,
+CustomSeriesName1, CustomSeriesType1, CustomSeriesUnits1, ...
+Flim is no longer accepted (removed from the format in 2026).}
 }
 \value{
 A named sag.list, inheriting from a list, where all names are valid column names in the

@@ -1,0 +1,192 @@
+---
+title: "Creating a SAG upload file"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Creating a SAG upload file}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(icesSAG)
+```
+
+Results of ICES stock assessments are submitted to the Stock Assessment
+Graphs (SAG) database as an XML file, uploaded at
+<https://standardgraphs.ices.dk>.
+The XML file is usually made with the SAG Excel template; this vignette
+shows how to make the same file in R with **icesSAG**.
+
+The example is the 2026 assessment of greater silver smelt (*Argentina
+silus*) in divisions 5.b and 6.a (`aru.27.5b6a`), a category 1 stock assessed
+with SAM.
+
+The file is built from three pieces:
+
+| Piece | Function | Excel template |
+|---|---|---|
+| Stock information and reference points | `stockInfo()` | top of the *FishData* sheet |
+| Yearly results | `stockFishdata()` | the data table on the *FishData* sheet |
+| Retrospective bias | `stockRetroBias()` | the *Retro-bias* sheet |
+
+## Stock information
+
+`stockInfo()` holds the stock code, assessment details, the descriptions and
+units of the standard series, and any reference points.
+
+```{r info}
+info <- stockInfo(
+  StockCode = "aru.27.5b6a",
+  AssessmentYear = 2026,
+  ContactPerson = "assessor@example.org",
+  StockCategory = 1,
+  Purpose = "Advice",
+  ModelType = "A",
+  ModelName = "SAM",
+  Fage = "6-14",
+  RecruitmentAge = 5,
+  CatchesLandingsUnits = "t",
+  RecruitmentDescription = "Recruitment",
+  RecruitmentUnits = "NE3",
+  FishingPressureDescription = "F",
+  StockSizeDescription = "SSB",
+  StockSizeUnits = "t",
+  ConfidenceIntervalDefinition = "95%"
+)
+info
+```
+
+Coded entries must be valid codes in the ICES vocabularies:
+
+| Argument | ICES vocabulary |
+|---|---|
+| `StockCode` | [ICES_StockCode](https://vocab.ices.dk/?ref=357) |
+| `StockCategory` | [StockCategory](https://vocab.ices.dk/?ref=1526) |
+| `Purpose` | [AssessmentPurpose](https://vocab.ices.dk/?ref=1516) |
+| `ModelType` | [AssessmentModelType](https://vocab.ices.dk/?ref=1524) |
+| `ModelName` | [AssessmentModelName](https://vocab.ices.dk/?ref=1525) |
+| `...Units` | [MUNIT](https://vocab.ices.dk/?ref=155) |
+| `CustomSeriesType1` to `20` | [StockDataType](https://vocab.ices.dk/?ref=1528) |
+
+### Reference points
+
+The reference points for this stock have not changed since the last
+assessment, so none are given here and the file is written with
+`sameRefPoints = TRUE` (see below). This is the same as the
+"use the same reference points as last year" option in the Excel template.
+
+If the reference points have changed, give them in `stockInfo()` and leave
+`sameRefPoints = FALSE`. `BMSY` can be left out if it is not available;
+`Flim` is no longer an ICES reference point and is not accepted.
+
+```{r refpts, eval = FALSE}
+info <- stockInfo(
+  # ... as above, plus
+  Blim = blim, Bpa = bpa, MSYBtrigger = msy_btrigger,
+  FMSY = fmsy, Fpa = fpa, BMSY = bmsy
+)
+```
+
+## Yearly results
+
+Yearly results are usually already in a table. The results for this stock are
+included in the package as a CSV file:
+
+```{r read}
+aru <- read.csv(system.file("extdata", "aru.27.5b6a_2026.csv", package = "icesSAG"))
+names(aru)
+```
+
+The column names must match the names in the upload format
+(`Recruitment`, `Low_Recruitment`, `StockSize`, `FishingPressure`, ...);
+columns with any other name are dropped with a warning. Empty cells are `NA`
+and are left out of the file.
+
+```{r fishdata}
+fishdata <- do.call(stockFishdata, aru)
+tail(fishdata[c("Year", "Recruitment", "StockSize", "Catches", "FishingPressure")])
+```
+
+The final year (2026) has only recruitment and SSB, as in the Excel template.
+
+Custom series go in `CustomSeries1` to `CustomSeries20`, with the matching
+`CustomSeriesName`, `CustomSeriesType` and `CustomSeriesUnits` given in
+`stockInfo()`.
+
+## Retrospective bias
+
+Since 2026 the retro-bias record is mandatory for category 1 and 2 stocks.
+Rho values are decimals, not percentages. `SSBrhoYear` and
+`RecruitmentrhoYear` record whether the intermediate year was used as the
+terminal year; `"Yes"`/`"No"` and `TRUE`/`FALSE` are converted to `"Y"`/`"N"`.
+
+```{r retro}
+retro <- stockRetroBias(
+  TerminalYear = 2025,
+  RetroAssessment = 5,
+  Fbarrho = -0.1877,
+  SSBrhoYear = "N",
+  SSBrho = 0.0667,
+  RecruitmentrhoYear = "N",
+  Recruitmentrho = 0.0398
+)
+retro
+```
+
+## Checking and writing the file
+
+`writeSAGxml()` checks the data and writes the file, named
+`<StockCode>_<AssessmentYear>.xml` by default:
+
+```{r write, eval = FALSE}
+writeSAGxml(info, fishdata, retro, sameRefPoints = TRUE)
+```
+
+The checks (also available on their own as `checkSAG()`) compare coded
+entries against the ICES vocabularies, which needs an internet connection,
+and apply the same cross checks as DATSU and the Excel template. If there are
+errors the file is not written and all the errors are listed together.
+For example, with a lower case model name, no stock size units and no
+retro-bias record:
+
+```
+Error: The file was not written, please fix the following errors:
+  ModelName 'sam' is not a valid code in the ICES AssessmentModelName vocabulary
+  StockSizeUnits is needed when StockSize is given
+  the retro-bias record is mandatory for category 1 and 2 stocks, see stockRetroBias()
+```
+
+The checks can be skipped with `check = FALSE`, for example if the vocabulary
+server cannot be reached, but the same checks are applied when the file is
+uploaded.
+
+## The file
+
+```{r show, echo = FALSE}
+file <- writeSAGxml(info, fishdata, retro, sameRefPoints = TRUE,
+                    file = tempfile(fileext = ".xml"), check = FALSE)
+xml <- readLines(file)
+```
+
+The start of the file holds the stock information:
+
+```{r head, echo = FALSE, comment = ""}
+first <- grep("<Fish_Data>", xml)[1]
+cat(xml[1:(first - 1)], sep = "\n")
+```
+
+followed by one `Fish_Data` record per year, and at the end the retro-bias
+record and the reference point setting:
+
+```{r tail, echo = FALSE, comment = ""}
+last <- max(grep("<Fish_Data>", xml))
+cat(xml[last:length(xml)], sep = "\n")
+```
+
+## Uploading
+
+Upload the file at <https://standardgraphs.ices.dk>. The file is screened
+on upload and any errors are reported.
