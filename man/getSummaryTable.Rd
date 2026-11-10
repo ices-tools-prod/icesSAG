@@ -12,7 +12,32 @@ getSummaryTable(assessmentKey, ...)
 \item{...}{arguments passed to \code{\link{sag_get}}.}
 }
 \value{
-A data frame.
+A data frame with one row per year and assessment, containing the time
+series used in ICES advice:
+\describe{
+\item{Year}{the data year.}
+\item{recruitment, low_recruitment, high_recruitment}{estimated
+recruitment and its lower and upper confidence bounds.}
+\item{SSB, Low_SSB, High_SSB}{spawning stock biomass and its confidence
+bounds, in units given by \code{stockSizeUnits}.}
+\item{F, Low_F, High_F}{fishing mortality and its confidence bounds, in
+units given by \code{fishingPressureUnits}.}
+\item{catches, landings, discards, IBC, Unallocated_Removals,
+LandingsBMS}{catch, landing and discard quantities, in units given by
+\code{units}.}
+\item{TBiomass}{total stock biomass.}
+\item{LogbookRegisteredDiscards}{discards registered in logbooks, where
+reported.}
+\item{fishstock}{the stock code label, e.g. \code{"had.27.46a20"}.}
+\item{AssessmentYear}{the year the assessment was performed.}
+\item{AssessmentKey}{the unique identifier of the assessment.}
+\item{Purpose, StockPublishNote, Fage, recruitment_age, units,
+stockSizeDescription, stockSizeUnits, fishingPressureDescription,
+fishingPressureUnits, AssessmentComponent}{assessment metadata
+describing units, settings and scope of the assessment.}
+}
+Fields not populated for a given assessment are returned filled with
+\code{NA}.
 }
 \description{
 Get summary results of historical stock size, recruitment, and fishing
