@@ -43,8 +43,11 @@ writeSAG <- function(info, fishdata, file = NULL) {
   }
 
   # Write the info and fishdata to a CSV file
-  write.table(cbind("AA", info), file = file, sep = ",", col.names = FALSE)
-  write.table(cbind("AF", fishdata), file = file, sep = ",", col.names = FALSE)
+  # one AA record, then the AF records, with no row names and NA as empty
+  write.table(cbind("AA", as.data.frame(info)), file = file, sep = ",", col.names = FALSE,
+              row.names = FALSE, na = "")
+  write.table(cbind("AF", fishdata), file = file, sep = ",", col.names = FALSE,
+              row.names = FALSE, na = "", append = TRUE)
 
   # Return the file name
   invisible(file)
